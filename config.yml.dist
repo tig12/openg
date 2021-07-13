@@ -1,0 +1,16 @@
+#
+# Configuration for openg
+#
+
+# Directories where data files are stored
+# Absolute paths or paths relative to gauquelin5 root directory
+#dirs:
+#  tmp:    data/tmp
+
+database:
+  dbhost: localhost
+  dbport: 5432
+  dbuser: pg_username
+  dbpassword: pg_password
+  dbname: pg_dbname
+

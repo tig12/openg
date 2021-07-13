@@ -1,0 +1,17 @@
+
+</div><!-- end content -->
+
+{{/*
+{{with .Footer.JSString}}
+    <script>
+    {{.}}
+    </script>
+{{end}}
+*/}}
+
+{{range .Footer.JSFiles}}
+    <script type="text/javascript" src="{{.}}"></script>
+{{end}}
+
+</body>
+</html>

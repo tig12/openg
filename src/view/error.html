@@ -1,0 +1,18 @@
+
+<h1>Erreur</h1>
+
+<div class="margin-left2">
+
+    Une anomalie est survenue.
+    <br>
+    <br>Contactez l'administrateur de l'application en lui recopiant le message suivant.
+    <br>Décrivez aussi les actions que vous avez effectuées pour générer cette erreur.
+    
+    <div><div class="error">
+        <div class="big3 bold">URL</div>
+        {{.Details.URL}}
+        <div class="big3 bold margin-top">Détails</div>
+        {{.Details.Details | safeHTML}}
+    </div></div>
+
+</div>
