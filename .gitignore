@@ -1,6 +1,7 @@
 
 config.yml
 1.local
+1.build
 
 # files marked for deletion
 z.*

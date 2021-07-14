@@ -1,0 +1,43 @@
+/******************************************************************************
+    Style for Open Gauquelin web application
+    
+    @license    GPL
+    @history    2021-07-14 09:55:28+01:00, Thierry Graff : Creation
+********************************************************************************/
+
+@import "style.css";
+
+/* ================ General styles ================ */                                               
+body{
+    font-family:Verdana, Geneva, sans-serif;
+    background: linear-gradient(to right, #5d9cba, #6ebce2);
+}
+
+a{text-decoration:none;}
+
+/* ================ Particular styles ================ */
+h1{
+    margin-left: auto;
+    margin-right: auto;
+    text-align:center;
+}
+h1 .subtitle{font-size:.8em;}
+
+.content{
+    margin-top:4em;
+}
+
+.top-header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background: linear-gradient(to right, #5d9cba, #6ebce2);
+    border-bottom:1px solid grey;
+}
+.search{
+    position:fixed;
+    top:3px;
+    right:3px;
+}
+
+

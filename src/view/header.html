@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Open Gauquelin | {{.Header.Title}}</title>
     <link rel="icon" type="image/png" href="/static/logo-bdl-32.png">
-    <link href="/static/css/style.css" rel="stylesheet" type="text/css">
+    <link href="/static/css/openg.css" rel="stylesheet" type="text/css">
     {{range .Header.CSSFiles}}<link href="{{.}}" rel="stylesheet" type="text/css">
     {{end}}
     {{range .Header.JSFiles}}
@@ -13,4 +13,23 @@
 </head>
 
 <body>
+<header class="top-header">
+<a name="pagetop"></a>
+<a href="/" class="bold">
+    <img class="vertical-align-middle" src="static/img/open-gauquelin.png" alt="Open Gauquelin Home">
+    Open Gauquelin
+</a>
+<div class="search">
+    Search
+    <input
+        type="text"
+        size="40"
+    />
+    <input
+        type="button"
+        value="Go"
+    />
+    
+</div>
+</header>
 <div class="content">
