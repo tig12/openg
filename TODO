@@ -1,0 +1,5 @@
+
+
+Change in database (todos for gauquelin5 software)
+- store lg, lat as doubles
+- store nobiliary particle as string (not boolean)

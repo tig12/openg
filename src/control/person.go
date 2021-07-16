@@ -19,10 +19,14 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	if err != nil {
 		return err
 	}
+//person.Name.Official.Family = "test official family"
+//person.Name.Official.Given = "test official given"
+//person.Name.NobiliaryParticle = "von"
+
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "Person",
+			Title: person.GetName() + " " + person.GetBirthDay(),
 		},
 		Details: detailsPerson{
 		    Person: person,

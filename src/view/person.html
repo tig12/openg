@@ -1,5 +1,160 @@
 
+{{with .Details.Person}}
 <h1>
-    Person
+    {{.GetName}}
+    <div class="subtitle">{{.GetBirthDay}}</div>
 </h1>
 
+
+<table class="table-pres">
+
+<!-- ***************** Name details ******************** -->
+    {{/* ============ General ============ */}}
+    <tr>
+        <td>Name</td>
+        <td>{{.GetName}}</td>
+    </tr>
+    {{if .Name.Fame}}
+    <tr>
+        <td>Public name</td>
+        <td>{{.Name.Fame}}</td>
+    </tr>
+    {{end}}
+    {{if .Sex}}
+    <tr>
+        <td>Sex</td>
+        <td>{{.Sex}}</td>
+    </tr>
+    {{end}}
+    {{if .Birth.Date}}
+    <tr>
+        <td>Birth</td>
+        <td>{{.Birth.Date}}</td>
+    </tr>
+    {{end}}
+    {{if .Birth.DateUT}}
+    <tr>
+        <td>Birth (UTC)</td>
+        <td>{{.Birth.DateUT}}, {{.Birth.Place.String}}</td>
+    </tr>
+    {{end}}
+    
+    <tr>
+        <td>Trust level</td>
+        <td>{{.Trust}}</td>
+    </tr>
+</table>
+
+<!-- ***************** Name details ******************** -->
+<h3>Name details</h3>
+<table class="table-pres">
+    {{if .Name.Family}}
+    <tr>
+        <td>Family name</td>
+        <td>{{.Name.Family}}</td>
+    </tr>
+    {{end}}
+    {{if .Name.Given}}
+    <tr>
+        <td>Given name</td>
+        <td>{{.Name.Given}}</td>
+    </tr>
+    {{end}}
+    {{if .Name.Spouse}}
+    <tr>
+        <td>Spouse name</td>
+        <td>{{.Name.Spouse}}</td>
+    </tr>
+    {{end}}
+    {{if or .Name.Official.Family .Name.Official.Given}}
+        <tr>
+            <td>Official name</td>
+            <td></td>
+        </tr>
+        {{if .Name.Official.Family}}
+            <tr>
+                <td class="left-pad">Family name</td>
+                <td class="left-pad">{{.Name.Official.Family}}</td>
+            </tr>
+        {{end}}
+        {{if .Name.Official.Given}}
+            <tr>
+                <td class="left-pad">Given name</td>
+                <td class="left-pad">{{.Name.Official.Given}}</td>
+            </tr>
+        {{end}}
+    {{end}}
+    {{if .Name.NobiliaryParticle}}
+    <tr>
+        <td>Nobiliary particle</td>
+        <td>{{.Name.NobiliaryParticle}}</td>
+    </tr>
+    {{end}}
+</table>
+    
+<!-- ***************** Birth place details ******************** -->
+<h3>Birth place</h3>
+<table class="table-pres">
+    {{if .Birth.Place.Name}}
+    <tr>
+        <td>Name</td>
+        <td>{{.Birth.Place.Name}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.Cy}}
+    <tr>
+        <td>Country</td>
+        <td>{{.Birth.Place.Cy}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.C2}}
+    <tr>
+        <td>Admin level 2</td>
+        <td>{{.Birth.Place.C2}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.Lg}}
+    <tr>
+        <td>Longitude</td>
+        <td>{{.Birth.Place.Lg}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.Lg}}
+    <tr>
+        <td>Latitude</td>
+        <td>{{.Birth.Place.Lat}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.Geoid}}
+    <tr>
+        <td>Geonames ID</td>
+        <td><a href="http://www.geonames.org/{{.Birth.Place.Geoid}}">{{.Birth.Place.Geoid}}</a></td>  
+    </tr>
+    {{end}}
+</table>
+    
+<!-- ***************** Information sources ******************** -->
+<h3>Identifiers</h3>
+<table class="table-pres">
+    <tr>
+        <td><a href="/source/g5">g5 database</a></td>
+        <td>{{.Slug}}</td>
+    </tr>
+    {{range $key, $value := .Ids_in_sources}}    
+    <tr>
+        <td><a href="/source/{{$key}}">{{$key}}</a></td>
+        <td>{{$value}}</td>
+    </tr>
+    {{end}}
+</table>
+
+    <!-- 
+    {{if .}}
+    <tr>
+        <td></td>
+        <td>{{.}}</td>
+    </tr>
+    {{end}}
+    -->
+
+{{end}} {{/* with .Details.Person */}}

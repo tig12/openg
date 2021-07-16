@@ -10,15 +10,17 @@
 /* ================ General styles ================ */                                               
 body{
     font-family:Verdana, Geneva, sans-serif;
-    background: linear-gradient(to right, #5d9cba, #6ebce2);
+    background: linear-gradient(to right, #5d9cba, #aadff7);
 }
 
 a{text-decoration:none;}
 
+h3{margin-top:0.5rem; margin-bottom:0.5rem;}
+
 /* ================ Particular styles ================ */
 h1{
-    margin-left: auto;
-    margin-right: auto;
+    margin-left:auto;
+    margin-right:auto;
     text-align:center;
 }
 h1 .subtitle{font-size:.8em;}
@@ -31,7 +33,7 @@ h1 .subtitle{font-size:.8em;}
     position:fixed;
     top:0;
     width:100%;
-    background: linear-gradient(to right, #5d9cba, #6ebce2);
+    background: linear-gradient(to left, #5d9cba, #aadff7);
     border-bottom:1px solid grey;
 }
 .search{
@@ -41,3 +43,16 @@ h1 .subtitle{font-size:.8em;}
 }
 
 
+/* 2 columns, to present results */
+.table-pres td:nth-child(1){
+    text-align:right;
+    padding-right:1rem;
+}
+.table-pres td:nth-child(2){
+    font-weight:bold;
+}
+.table-pres td.paragraph{
+    font-weight:bold;
+    text-align:left;
+    padding-top:1rem;
+}

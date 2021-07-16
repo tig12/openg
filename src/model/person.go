@@ -7,10 +7,11 @@
 package model
 
 import (
-	"openg.local/openg/generic/wilk/werr"
+    "reflect"
     "net/http"
     "io/ioutil"
 	"encoding/json"
+	"openg.local/openg/generic/wilk/werr"
 "fmt"
 )
 
@@ -42,8 +43,7 @@ type PersonName struct{
     Official        OfficialName
     Nicknames       []string
     Alternative     []string
-    NobiliaryParticle   bool
-    
+    NobiliaryParticle   bool `json:"nobiliary-particle"`
 }
 
 type OfficialName struct{
@@ -52,30 +52,15 @@ type OfficialName struct{
 }
 
 type Event struct{
-    tzo             string
-    date            string
-    note            string
-    place           Place
-    dateUt          string
-}
-
-type Place struct{
-    c2              string
-    c3              string
-    cy              string
-    lg              float64
-    lat             float64
-    name            string
-    geoid           string
+    Tzo             string
+    Date            string
+    Note            string
+    Place           Place
+    DateUT          string `json:"date-ut"`
 }
 
 type HistoryEntry struct{
-	Details interface{}
-}
-// ************************** Nom *******************************
-
-func (p *Person) String() string {
-	return p.Slug
+	Details interface{} // TODO 
 }
 
 // ************************** Get one *******************************
@@ -92,9 +77,55 @@ func GetPerson(slug string) (p *Person, err error) {
     }
     persons := []Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-fmt.Printf("%+v\n", p)
 		return nil, werr.Wrapf(err, "Error json Unmarshal person data " + slug)
 	}
-	return p, nil
+	if len(persons) > 1 {
+		return nil, werr.Wrapf(err, "Several persons with identical slug: " + slug)
+	}
+	return &persons[0], nil
 }
+
+
+// ************************** Get fields *******************************
+
+func (p *Person) String() string {
+	return p.Slug
+}
+
+/** 
+    Returns field UsualName if it exists.
+    Otherwise, returns a concatenation of given and family name.
+**/
+func (p *Person) GetName() string {
+    if reflect.DeepEqual(p.Name, PersonName{}){
+	    return "XXX" // TODO 
+	}
+	if p.Name.Usual != "" {
+	    return p.Name.Usual
+	}
+	return p.Name.Given + " " + p.Name.Family
+}
+
+
+/** 
+    Returns a person's birth day, format YYYY-MM-DD
+    If Birth.Date exists, uses it.
+    Otherwise uses field Birth.DateUT
+**/
+func (p *Person) GetBirthDay() string {
+fmt.Printf("%+v\n",p.Birth.Date)
+    if reflect.DeepEqual(p.Birth, Event{}){
+//	    return "XXXX-XX-XX" // TODO 
+	}
+	var date string
+	if p.Birth.Date != "" {
+	    date = p.Birth.Date
+	} else if p.Birth.DateUT != "" {
+	    date = p.Birth.DateUT
+	} else {
+	    return "XXXX-XX-XX"
+	}
+	return date[:10]
+}
+
 
