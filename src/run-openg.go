@@ -34,6 +34,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", H(control.Home))
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
+	r.HandleFunc("/persons", H(control.ShowPersons))
 	
     // r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
     r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))

@@ -1,0 +1,31 @@
+<script>
+$(document).ready(function() {
+    $('#persons').DataTable();                                                     
+} );
+</script>
+
+
+<h1>Person list</h1>
+
+<table id="persons" class="display" style="width:100%">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Birth date</th>
+        <th>Birth place</th>
+        <th>Country</th>
+    </tr>
+</thead>
+<tbody>
+
+{{range .Details.Persons}}
+<tr>
+    <td><a href="/person/{{.Slug}}">{{.GetName}}</a></td>
+    <td>{{.GetBirthDate}}</td>
+    <td>{{.Birth.Place.Name}}</td>
+    <td>{{.Birth.Place.Cy}}</td>
+</tr>
+{{end}} {{/* range .Details.Persons */}}
+
+</tbody>
+</table>    

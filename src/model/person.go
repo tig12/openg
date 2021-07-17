@@ -7,12 +7,10 @@
 package model
 
 import (
-    "reflect"
     "net/http"
     "io/ioutil"
 	"encoding/json"
 	"openg.local/openg/generic/wilk/werr"
-"fmt"
 )
 
 
@@ -63,7 +61,7 @@ type HistoryEntry struct{
 	Details interface{} // TODO 
 }
 
-// ************************** Get one *******************************
+// ************************** Get one *******************************     
 
 func GetPerson(slug string) (p *Person, err error) {
     url := "http://localhost:1960/person?slug=eq." + slug
@@ -85,6 +83,24 @@ func GetPerson(slug string) (p *Person, err error) {
 	return &persons[0], nil
 }
 
+// ************************** Get one *******************************
+
+func GetPersons() (p []*Person, err error) {
+    url := "http://localhost:1960/person?limit=100&offset=0"
+    response, err := http.Get(url)
+    if err != nil {
+		return nil, werr.Wrapf(err, "Error calling " + url)
+    }    
+    responseData, err := ioutil.ReadAll(response.Body)
+    if err != nil {
+		return nil, werr.Wrapf(err, "Error decoding persons data")
+    }
+    persons := []*Person{}
+	if err = json.Unmarshal(responseData, &persons); err != nil {
+		return nil, werr.Wrapf(err, "Error json Unmarshal persons data")
+	}
+	return persons, nil
+}
 
 // ************************** Get fields *******************************
 
@@ -97,13 +113,28 @@ func (p *Person) String() string {
     Otherwise, returns a concatenation of given and family name.
 **/
 func (p *Person) GetName() string {
-    if reflect.DeepEqual(p.Name, PersonName{}){
-	    return "XXX" // TODO 
-	}
 	if p.Name.Usual != "" {
 	    return p.Name.Usual
 	}
 	return p.Name.Given + " " + p.Name.Family
+}
+
+
+/** 
+    Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
+    If Birth.Date exists, uses it.
+    Otherwise uses field Birth.DateUT
+**/
+func (p *Person) GetBirthDate() string {
+	var date string
+	if p.Birth.Date != "" {
+	    date = p.Birth.Date
+	} else if p.Birth.DateUT != "" {
+	    date = p.Birth.DateUT
+	} else {
+	    return "XXXX-XX-XX XX:XX:XX"
+	}
+	return date
 }
 
 
@@ -113,19 +144,7 @@ func (p *Person) GetName() string {
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDay() string {
-fmt.Printf("%+v\n",p.Birth.Date)
-    if reflect.DeepEqual(p.Birth, Event{}){
-//	    return "XXXX-XX-XX" // TODO 
-	}
-	var date string
-	if p.Birth.Date != "" {
-	    date = p.Birth.Date
-	} else if p.Birth.DateUT != "" {
-	    date = p.Birth.DateUT
-	} else {
-	    return "XXXX-XX-XX"
-	}
-	return date[:10]
+    return p.GetBirthDate()[:10]
 }
 
 
