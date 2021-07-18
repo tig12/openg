@@ -2,7 +2,7 @@
     Context, contains variables usable by all pages pages
 
     @license    GPL
-    @history    2021-07-13 23:37:37+01:00, Thierry Graff : Creation
+    @history    2021-07-13 23:37:37+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package ctxt
 

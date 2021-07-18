@@ -2,7 +2,7 @@
     Style for Open Gauquelin web application
     
     @license    GPL
-    @history    2021-07-14 09:55:28+01:00, Thierry Graff : Creation
+    @history    2021-07-14 09:55:28+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
 @import "style.css";
@@ -55,4 +55,27 @@ h1 .subtitle{font-size:.8em;}
     font-weight:bold;
     text-align:left;
     padding-top:1rem;
+}
+
+table.wikitable{
+    border-collapse:collapse;
+}
+table.wikitable > tr > th, table.wikitable > * > tr > th {
+    /* #f1f8ff #eaecf0; */
+    background-color:lightyellow;
+    text-align:center;
+    vertical-align:top;
+}
+table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr > th, table.wikitable > * > tr > td {
+    border:1px solid black;
+    padding:0.2rem 0.4rem;
+    vertical-align:top;
+}
+table.wikitable tr td code{
+    background:none;
+}
+
+/**  **/
+table.alternate tbody tr:nth-child(odd){
+    background: linear-gradient(to left, #5d9cba, #aadff7);
 }

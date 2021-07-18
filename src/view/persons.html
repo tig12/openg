@@ -1,6 +1,9 @@
 <script>
 $(document).ready(function() {
-    $('#persons').DataTable();                                                     
+    $('#persons').DataTable({
+        "order": [[ 1, 'asc' ]],
+        "pageLength": 50
+    });
 } );
 </script>
 
@@ -10,7 +13,8 @@ $(document).ready(function() {
 <table id="persons" class="display" style="width:100%">
 <thead>
     <tr>
-        <th>Name</th>
+        <th>Given name</th>
+        <th>Family name</th>
         <th>Birth date</th>
         <th>Birth place</th>
         <th>Country</th>
@@ -20,9 +24,13 @@ $(document).ready(function() {
 
 {{range .Details.Persons}}
 <tr>
-    <td><a href="/person/{{.Slug}}">{{.GetName}}</a></td>
+    <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
+    <td><a href="/person/{{.Slug}}">{{.Name.Family}}</a></td>
     <td>{{.GetBirthDate}}</td>
-    <td>{{.Birth.Place.Name}}</td>
+    <td>
+        {{.Birth.Place.Name}}
+        {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
+    </td>
     <td>{{.Birth.Place.Cy}}</td>
 </tr>
 {{end}} {{/* range .Details.Persons */}}

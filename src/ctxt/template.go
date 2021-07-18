@@ -1,8 +1,10 @@
 /******************************************************************************
     Templates
 
+    TODO - fix nl2br2 and sources.html {{url2href .Description | nl2br2 | safeHTML}}
+    
     @license    GPL
-    @history    2021-07-13 23:55:41+01:00, Thierry Graff : Creation
+    @history    2021-07-13 23:55:41+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package ctxt
 
@@ -13,6 +15,7 @@ import (
 	"strings"
 	"time"
 	"unicode"
+	"regexp"
 )
 
 // used to fill Context.Template
@@ -23,8 +26,11 @@ func init() {
 		"dateIso":                      dateIso,
 		"modulo":                       modulo,
 		"nl2br":                        nl2br,
+		// TODO hack to remove
+		"nl2br2":                       nl2br2,
 		"safeHTML":                     safeHTML,
 		"ucFirst":                      ucFirst,
+		"url2href":                     url2href,
 	}
 	tmpl = template.
 		Must(template.
@@ -44,6 +50,10 @@ func modulo(i, mod int) int {
 func nl2br(t string) template.HTML {
 	return template.HTML(strings.Replace(template.HTMLEscapeString(t), "\n", "<br>", -1))
 }
+// TODO hack to remove
+func nl2br2(t string) string {
+	return strings.Replace(t, "\n", "<br>", -1)
+}
 
 // Returns a date YYYY-MM-DD
 func dateIso(t time.Time) template.HTML {
@@ -61,4 +71,14 @@ func ucFirst(str string) template.HTML {
 
 func safeHTML(str string) template.HTML {
 	return template.HTML(str)
+}
+
+// TODO fix to return a template.HTML
+// Adds a href links around words starting by http
+func url2href(str string) template.HTML {
+//func url2href(str string) string {
+    var re = regexp.MustCompile(`\b(https?\:\/\/.*?)\s`)
+    res := re.ReplaceAllString(str, `<a href="$1">$1</a>`)
+	return template.HTML(res)
+//	return res
 }

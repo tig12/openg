@@ -3,7 +3,7 @@
     Loads config.yml
 
     @license    GPL
-    @history    2021-07-13 23:49:03+01:00, Thierry Graff : Creation
+    @history    2021-07-13 23:49:03+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package ctxt
 

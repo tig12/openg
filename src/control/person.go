@@ -60,13 +60,12 @@ func ShowPersons(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: "Person list",
-//			CSSFiles: []string{
-//				"/static/lib/datatables/datatables.min.css"},
+			CSSFiles: []string{
+				"/static/lib/datatables/datatables.min.css"},
+			JSFiles: []string{
+			    "/static/lib/datatables/jquery-3.3.1.min.js",
+                "/static/lib/datatables/datatables.min.js"},
 		},
-//		Footer: ctxt.Footer{
-//			JSFiles: []string{
-//			    "/static/lib/datatables/datatables.min.js"},
-//		},
 		Details: detailsPersons{
 		    Persons: persons,
 		},

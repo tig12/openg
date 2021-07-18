@@ -3,7 +3,7 @@
     Structures used to display a page
 
     @license    GPL
-    @history    2021-07-13 23:51:51+01:00, Thierry Graff : Creation
+    @history    2021-07-13 23:51:51+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package ctxt
 

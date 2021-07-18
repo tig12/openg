@@ -1,0 +1,36 @@
+
+<h1>Information sources</h1>
+
+<div class="margin big2">
+    This page shows the different sources used to build this database.
+</div>
+
+
+<table class="wikitable margin alternate">
+<thead>
+    <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Author(s)</th>
+        <th>Description</th>
+        <th>Parent sources</th>
+    </tr>
+</thead>
+<tbody>
+{{range .Details.Sources}}
+    <tr><a name="{{.Slug}}"></a>
+        <td>{{.Type}}</td>
+        <td>{{.Name}}</td>
+        <td>
+            {{range .Authors}}<div>{{.}}</div>{{end}}
+        </td>
+        <td>{{nl2br .Description}}</td>
+        <td>
+            {{range .Parents}}
+                <div><a href="#{{.}}">{{index $.Details.Slug_Name .}}</a></div>
+            {{end}}
+        </td>
+    </tr>
+{{end}} {{/* range .Details.Sources */}}
+</tbody>
+</table>    

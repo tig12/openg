@@ -2,7 +2,7 @@
     Person
 
     @license    GPL
-    @history    2021-07-14 15:48:55+01:00, Thierry Graff : Creation
+    @history    2021-07-14 15:48:55+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package model
 
@@ -11,6 +11,7 @@ import (
     "io/ioutil"
 	"encoding/json"
 	"openg.local/openg/generic/wilk/werr"
+//"fmt"
 )
 
 
@@ -63,7 +64,7 @@ type HistoryEntry struct{
 
 // ************************** Get one *******************************     
 
-func GetPerson(slug string) (p *Person, err error) {
+func GetPerson(slug string) (person *Person, err error) {
     url := "http://localhost:1960/person?slug=eq." + slug
     response, err := http.Get(url)
     if err != nil {
@@ -83,10 +84,10 @@ func GetPerson(slug string) (p *Person, err error) {
 	return &persons[0], nil
 }
 
-// ************************** Get one *******************************
+// ************************** Get many *******************************
 
 func GetPersons() (p []*Person, err error) {
-    url := "http://localhost:1960/person?limit=100&offset=0"
+    url := "http://localhost:1960/person?limit=10&offset=0"
     response, err := http.Get(url)
     if err != nil {
 		return nil, werr.Wrapf(err, "Error calling " + url)
@@ -116,7 +117,11 @@ func (p *Person) GetName() string {
 	if p.Name.Usual != "" {
 	    return p.Name.Usual
 	}
-	return p.Name.Given + " " + p.Name.Family
+	if p.Name.Given == "" {
+        return p.Name.Family
+	}
+    return p.Name.Given + " " + p.Name.Family
+	
 }
 
 

@@ -2,7 +2,7 @@
    Entry point of the web application
 
     @license    GPL
-    @history    2021-07-13 22:43:33+01:00, Thierry Graff : Creation
+    @history    2021-07-13 22:43:33+02:00, Thierry Graff : Creation
 ********************************************************************************/
 package main
 
@@ -35,6 +35,7 @@ func main() {
 	r.HandleFunc("/", H(control.Home))
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 	r.HandleFunc("/persons", H(control.ShowPersons))
+	r.HandleFunc("/sources", H(control.ShowSources))
 	
     // r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
     r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
