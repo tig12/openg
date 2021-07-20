@@ -15,7 +15,10 @@ import (
 
 type detailsSources struct {
 	Sources    []*model.Source
-	Slug_Name  map[string]string // association slug => name
+	Slug_Name  map[string]string // slug => name
+	// source slug => paragraph name
+	// a paragraph is diaplayed before the current source
+	Paragraphs map[string]string
 }
 
 /** 
@@ -24,9 +27,17 @@ type detailsSources struct {
 func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	sources, err := model.GetSources()
 	
+	// maybe put this code in the model
 	slug_Name := make(map[string]string)
 	for _, source := range(sources){
 	    slug_Name[source.Slug] = source.Name
+	}
+	
+	var paragraphs = map[string]string {
+	    "g5": "Main sources",
+	    "a1-booklet": "Michel and Françoise Gauquelin",
+	    "afd": "Arno Müller",
+	    "csicop-committee": "CSICOP",
 	}
 	
 	if err != nil {
@@ -40,6 +51,7 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 		Details: detailsSources{
 		    Sources: sources,
 		    Slug_Name: slug_Name,
+		    Paragraphs: paragraphs,
 		},
 	}
 	return nil

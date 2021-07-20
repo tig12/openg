@@ -42,7 +42,52 @@ func GetSources() (sources []*Source, err error) {
 	if err = json.Unmarshal(responseData, &sources); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal sources data")
 	}
-	return sources, nil
+	
+	// return the sources in an arbitrary order
+	order := []string{
+        "g5",
+        "cura5",
+        "newalch",
+        "a1-booklet",
+        "a1",
+        "a2-booklet",
+        "a2",
+        "a3-booklet",
+        "a3",
+        "a4-booklet",
+        "a4",
+        "a5-booklet",
+        "a5",
+        "a6-booklet",
+        "a6",
+        "d6-booklet",
+        "d6",
+        "d10-booklet",
+        "d10",
+        "e1-booklet",
+        "e1",
+        "e3-booklet",
+        "e3",
+        "afd",
+        "afd1-booklet",
+        "afd1",
+        "afd1-100",
+        "afd5-booklet",
+        "afd5",
+        "csicop-committee",
+        "csi",
+        "si42",
+	}
+	var res = []*Source{}
+	for _, slug := range(order){
+	    for _, s := range(sources){
+	        if s.Slug == slug {
+	            res = append(res, s)
+	            break
+	        }
+	    }
+	}
+	return res, nil
 }
 
 // ************************** Get fields *******************************

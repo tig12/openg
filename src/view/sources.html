@@ -5,8 +5,18 @@
     This page shows the different sources used to build this database.
 </div>
 
+<style>
+    #source-list td:nth-child(3){
+        white-space:pre;
+    }
+    #source-list td.paragraph{
+        font-size:1.3em;
+        font-weight:bold;
+        background:#bac1c4;
+    }
+</style>
 
-<table class="wikitable margin alternate">
+<table id="source-list" class="wikitable margin alternate">
 <thead>
     <tr>
         <th>Type</th>
@@ -18,12 +28,16 @@
 </thead>
 <tbody>
 {{range .Details.Sources}}
+    {{$slug := .Slug}}
+    {{with index $.Details.Paragraphs .Slug}}
+    <tr><td colspan="5" class="paragraph">
+        {{index $.Details.Paragraphs $slug}}
+    </td></tr>
+    {{end}}
     <tr><a name="{{.Slug}}"></a>
         <td>{{.Type}}</td>
         <td>{{.Name}}</td>
-        <td>
-            {{range .Authors}}<div>{{.}}</div>{{end}}
-        </td>
+        <td>{{range .Authors}}<div>{{.}}</div>{{end}}</td>
         <td>{{nl2br .Description}}</td>
         <td>
             {{range .Parents}}
