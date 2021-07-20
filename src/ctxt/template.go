@@ -10,6 +10,7 @@ package ctxt
 
 import (
 	"openg.local/openg/generic/tiglib"
+	"openg.local/openg/model"
 	"html/template"
 	"path/filepath"
 	"strings"
@@ -23,14 +24,18 @@ var tmpl *template.Template
 
 func init() {
 	var fmap = template.FuncMap{
+	    // Generic pipelines
 		"dateIso":                      dateIso,
 		"modulo":                       modulo,
 		"nl2br":                        nl2br,
-		// TODO hack to remove
+// TODO hack to remove
 		"nl2br2":                       nl2br2,
 		"safeHTML":                     safeHTML,
 		"ucFirst":                      ucFirst,
 		"url2href":                     url2href,
+		// Pipelines related to current program
+		"sourceNameFromSlug":           sourceNameFromSlug,
+		"rawPersonSortedFields":        rawPersonSortedFields,
 	}
 	tmpl = template.
 		Must(template.
@@ -41,7 +46,7 @@ func init() {
 //	tmpl.New("listeActeurs").Funcs(fmap).ParseFiles(filepath.Join("view", "common", "listeActeurs.html"))
 }
 
-// ************************* pipelines ********************************
+// ************************* Generic pipelines ********************************
 
 func modulo(i, mod int) int {
     return i % mod;
@@ -73,12 +78,29 @@ func safeHTML(str string) template.HTML {
 	return template.HTML(str)
 }
 
-// TODO fix to return a template.HTML
 // Adds a href links around words starting by http
+// TODO fix to return a template.HTML
 func url2href(str string) template.HTML {
 //func url2href(str string) string {
     var re = regexp.MustCompile(`\b(https?\:\/\/.*?)\s`)
     res := re.ReplaceAllString(str, `<a href="$1">$1</a>`)
 	return template.HTML(res)
 //	return res
+}
+
+// ************************* Pipelines related to current program ********************************
+
+/** 
+    Returns the name of an information source from its slug
+**/
+func sourceNameFromSlug(slug string) template.HTML {
+    name, _ := model.GetSourceNameFromSlug(slug)
+	return template.HTML(name)
+}
+
+/** 
+    Returns the fields of a person for a given source
+**/
+func rawPersonSortedFields(sourceSlug string) []string {
+    return model.GetRawPersonSortedFields(sourceSlug)
 }

@@ -26,6 +26,31 @@ type Source struct{
     Parents     []string
 }
 
+// map source slug => source name
+var sourceSlugNames = make(map[string]string)
+
+func GetSourceSlugNames() (map[string]string, error) {
+    // lazy loading
+    if len(sourceSlugNames) == 0 {
+    	sources, err := GetSources()
+        if err != nil {
+            return nil, werr.Wrapf(err, "Error calling GetSources()")
+        }
+        for _, source := range(sources){
+            sourceSlugNames[source.Slug] = source.Name
+        }
+    }
+    return sourceSlugNames, nil
+}
+
+func GetSourceNameFromSlug(slug string) (string, error) {
+    tmp, err := GetSourceSlugNames()
+    if err != nil {
+        return "", werr.Wrapf(err, "Error calling GetSourceSlugNames()")
+    }
+    return tmp[slug], nil
+}
+
 // ************************** Get many *******************************
 
 func GetSources() (sources []*Source, err error) {

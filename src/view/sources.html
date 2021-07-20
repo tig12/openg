@@ -34,7 +34,7 @@
         {{index $.Details.Paragraphs $slug}}
     </td></tr>
     {{end}}
-    <tr><a name="{{.Slug}}"></a>
+    <tr id="{{.Slug}}">
         <td>{{.Type}}</td>
         <td>{{.Name}}</td>
         <td>{{range .Authors}}<div>{{.}}</div>{{end}}</td>

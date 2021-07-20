@@ -26,11 +26,12 @@ type detailsSources struct {
 **/
 func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	sources, err := model.GetSources()
-	
-	// maybe put this code in the model
-	slug_Name := make(map[string]string)
-	for _, source := range(sources){
-	    slug_Name[source.Slug] = source.Name
+	if err != nil {
+		return err
+	}
+	slug_Name, err := model.GetSourceSlugNames()
+	if err != nil {
+		return err
 	}
 	
 	var paragraphs = map[string]string {
@@ -40,9 +41,6 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	    "csicop-committee": "CSICOP",
 	}
 	
-	if err != nil {
-		return err
-	}
 	ctx.TemplateName = "sources.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{

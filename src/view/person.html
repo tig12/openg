@@ -8,8 +8,7 @@
 
 <table class="table-pres">
 
-<!-- ***************** Name details ******************** -->
-    {{/* ============ General ============ */}}
+<!-- ***************** General ******************** -->
     <tr>
         <td>Name</td>
         <td>{{.GetName}}</td>
@@ -137,24 +136,33 @@
 <h3>Identifiers</h3>
 <table class="table-pres">
     <tr>
-        <td><a href="/source/g5">g5 database</a></td>
+        <td><a href="/sources#g5">g5 database</a></td>
         <td>{{.Slug}}</td>
     </tr>
     {{range $key, $value := .Ids_in_sources}}    
     <tr>
-        <td><a href="/source/{{$key}}">{{$key}}</a></td>
+        <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
         <td>{{$value}}</td>
     </tr>
     {{end}}
 </table>
 
-    <!-- 
-    {{if .}}
-    <tr>
-        <td></td>
-        <td>{{.}}</td>
-    </tr>
-    {{end}}
-    -->
+<!-- ********************************************************************************* -->
+<h2>Raw data</h2>
+Original values of the fields used to build the person in Open Gauquelin database.
+
+<br class="clear-left">
+{{range $sourceSlug, $value := .Raw}}
+    <div class="float-left margin-right">
+    <h3>{{$sourceSlug | sourceNameFromSlug}}</h3>
+    <table class="raw margin">
+        {{range $sourceSlug | rawPersonSortedFields}}
+        <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+        {{end}}
+    </table>
+    </div>
+{{end}}
+<br class="clear-left">
+
 
 {{end}} {{/* with .Details.Person */}}

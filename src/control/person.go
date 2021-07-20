@@ -12,11 +12,14 @@ import (
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
 	"github.com/gorilla/mux"
+	"fmt"
 )
 
 type detailsPerson struct {
 	Person    *model.Person
+	RawFields  map[string][]string
 }
+
 type detailsPersons struct {
 	Persons    []*model.Person
 }
@@ -32,6 +35,8 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	if err != nil {
 		return err
 	}
+	
+fmt.Printf("%+v\n", model.RawPersonSortedFields)
 //person.Name.Official.Family = "test official family"
 //person.Name.Official.Given = "test official given"
 //person.Name.NobiliaryParticle = "von"
@@ -43,6 +48,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		},
 		Details: detailsPerson{
 		    Person: person,
+		    RawFields: model.RawPersonSortedFields,
 		},
 	}
 	return nil

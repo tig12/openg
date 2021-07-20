@@ -38,10 +38,12 @@ h1 .subtitle{font-size:.8em;}
 }
 .search{
     position:fixed;
-    top:3px;
-    right:3px;
+    top:10px;
+    right:1rem;
 }
-
+.search input[type=text]{
+    border-radius:10px;
+}
 
 /* 2 columns, to present results */
 .table-pres td:nth-child(1){
@@ -78,4 +80,16 @@ table.wikitable tr td code{
 /**  **/
 table.alternate tbody tr:nth-child(odd){
     background: linear-gradient(to left, #5d9cba, #aadff7);
+}
+
+/* Showing row values */
+table.raw{
+    border-collapse:collapse;
+    background:#dce2e5;
+    font-family:"Courier New",Courier,monospace;
+}
+table.raw > tr > th, table.raw > tr > td, table.raw > * > tr > th, table.raw > * > tr > td {
+    border:1px solid black;
+    padding:0.2rem 0.4rem;
+    vertical-align:top;
 }

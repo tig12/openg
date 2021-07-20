@@ -14,6 +14,7 @@ import (
 //"fmt"
 )
 
+// see init function at the end
 
 type Person struct {
     Id              int
@@ -153,3 +154,171 @@ func (p *Person) GetBirthDay() string {
 }
 
 
+// ************************** Raw ordering *******************************
+// Auxiliary structures to sort the raw fileds of a person
+
+// map source slug => array of keys.
+var RawPersonSortedFields map[string][]string
+
+// Executed once at package loading
+func init(){
+    RawPersonSortedFields = map[string][]string {
+        "a": {
+            "YEA",
+            "MON",
+            "DAY",
+            "PRO",
+            "NUM",
+            "COU",        
+            "H",
+            "MN",
+            "SEC",
+            "TZ",
+            "LAT",
+            "LON",
+            "COD",
+            "CITY",
+        },
+        "d6": {
+            "NUM",
+            "DAY",
+            "MON",
+            "YEA",
+            "H",
+            "MN",
+            "SEC",
+            "LAT",
+            "LON",
+            "NAME",
+       },
+       "d10": {
+           "NUM",
+           "NAME",
+           "PRO",
+           "DAY",
+           "MON",
+           "YEA",
+           "H",
+           "TZ",
+           "LAT",
+           "LON",
+           "CICO",
+       },
+       "e": {
+            "NUM",
+            "PRO",
+            "NAME",
+            "NOTE",
+            "DAY",
+            "MON",
+            "YEA",
+            "H",
+            "CITY",
+            "COD",
+       },
+        "afd5": {
+            "NR",
+            "SAMPLE",
+            "GNR",
+            "CODE",
+            "NAME",
+            "GEBDATUM",
+            "JAHR",
+            "GEBZEIT",
+            "GEBORT",
+            "LAENGE",
+            "BREITE",
+            "MODE",
+            "KORR",
+            "ELECTDAT",
+            "ELECTAGE",
+            "STBDATUM",
+            "SONNE",
+            "MOND",
+            "VENUS",
+            "MARS",
+            "JUPITER",
+            "SATURN",
+            "SO_",
+            "MO_",
+            "VE_",
+            "MA_",
+            "JU_",
+            "SA_",
+            "PHAS_",
+            "AUFAB",
+            "NIENMO",
+            "NIENVE",
+            "NIENMA",
+            "NIENJU",
+            "NIENSA",
+        },
+        "afd1": {
+            "NAME",
+            "YEAR",
+            "MONTH",
+            "DAY",
+            "HOUR",
+            "MIN",
+            "TZO",
+            "PLACE",
+            "LAT",
+            "LG",
+        },
+        "afd1-100": {
+            "MUID",
+            "FNAME",
+            "GNAME",
+            "SEX",
+            "DATE",
+            "TZO",
+            "PLACE",
+            "C2",
+            "LG",
+            "LAT",
+            "OCCU",
+            "OPUS",
+            "LEN",
+        },
+        "csi": {
+            "Satz#",
+            "NAME",
+            "VORNAME",
+            "GEBDAT",
+            "GEBZEIT",
+            "AMPM",
+            "ZEITZONE",
+            "GEBORT",
+            "LO1",
+            "LO2",
+            "LA1",
+            "LA2",
+            "SPORTART",
+            "MARS",
+            "BATCH",
+        },
+    }
+}
+
+func GetRawPersonSortedFields(source string) (res []string) {
+    switch source {
+        case "a1", "a2", "a3", "a4", "a5", "a6":
+            return RawPersonSortedFields["a"]
+        case "d6":
+            return RawPersonSortedFields["d6"]
+        case "d10":
+            return RawPersonSortedFields["d10"]
+        case "e1", "e3":
+            return RawPersonSortedFields["e"]
+        case "afd5":
+            return RawPersonSortedFields["afd5"]
+        case "afd1":
+            return RawPersonSortedFields["afd1"]
+        case "afd1-100":
+            return RawPersonSortedFields["afd1-100"]
+        case "csi":
+            return RawPersonSortedFields["csi"]
+        default:
+            panic("ERROR IN THE CODE - undefined RawPersonSortedFields for source '" + source + "'")
+    }
+}
