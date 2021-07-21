@@ -7,97 +7,92 @@
 package model
 
 import (
-    "net/http"
-    "io/ioutil"
 	"encoding/json"
+	"io/ioutil"
+	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-//"fmt"
+	//"fmt"
 )
 
 // see init function at the end
 
 type Person struct {
-    Id              int
-    Slug            string
-    To_check        bool
-    Sources         []string
-    Ids_in_sources  map[string]string
-    Trust           string
-    Trust_details   []string
-    Sex             string
-    Name            PersonName
-    Occus           []string
-    Birth           Event
-    Death           Event
-    Raw             map[string]map[string]string
-    History         []HistoryEntry
-    Notes           []string
+	Id             int
+	Slug           string
+	To_check       bool
+	Sources        []string
+	Ids_in_sources map[string]string
+	Trust          string
+	Trust_details  []string
+	Sex            string
+	Name           PersonName
+	Occus          []string
+	Birth          Event
+	Death          Event
+	Raw            map[string]map[string]string
+	History        []HistoryEntry
+	Notes          []string
 }
 
-type PersonName struct{
-    Fame            string
-    Given           string
-    Usual           string
-    Family          string
-    Spouse          string
-    Official        OfficialName
-    Nicknames       []string
-    Alternative     []string
-    NobiliaryParticle   bool `json:"nobiliary-particle"`
+type PersonName struct {
+	Fame              string
+	Given             string
+	Usual             string
+	Family            string
+	Spouse            string
+	Official          OfficialName
+	Nicknames         []string
+	Alternative       []string
+	NobiliaryParticle bool `json:"nobiliary-particle"`
 }
 
-type OfficialName struct{
-    Given           string
-    Family          string
+type OfficialName struct {
+	Given  string
+	Family string
 }
 
-type Event struct{
-    Tzo             string
-    Date            string
-    Note            string
-    Place           Place
-    DateUT          string `json:"date-ut"`
+type HistoryEntry struct {
+	Details interface{} // TODO
 }
 
-type HistoryEntry struct{
-	Details interface{} // TODO 
-}
+// ************************** Get one *******************************
 
-// ************************** Get one *******************************     
-
-func GetPerson(slug string) (person *Person, err error) {
-    url := "http://localhost:1960/person?slug=eq." + slug
-    response, err := http.Get(url)
-    if err != nil {
-		return nil, werr.Wrapf(err, "Error calling " + url)
-    }    
-    responseData, err := ioutil.ReadAll(response.Body)
-    if err != nil {
-		return nil, werr.Wrapf(err, "Error decoding person data " + slug)
-    }
-    persons := []Person{}
+/** 
+    Loads a person from database
+**/
+func GetPerson(restURL, slug string) (person *Person, err error) {
+	url := restURL + "/person?slug=eq." + slug
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error calling "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error decoding person data "+slug)
+	}
+	persons := []Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal person data " + slug)
+		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug)
 	}
 	if len(persons) > 1 {
-		return nil, werr.Wrapf(err, "Several persons with identical slug: " + slug)
+		return nil, werr.Wrapf(err, "Several persons with identical slug: "+slug)
 	}
 	return &persons[0], nil
 }
 
 // ************************** Get many *******************************
 
-func GetPersons() (p []*Person, err error) {
-    url := "http://localhost:1960/person?limit=10&offset=0"
-    response, err := http.Get(url)
-    if err != nil {
-		return nil, werr.Wrapf(err, "Error calling " + url)
-    }    
-    responseData, err := ioutil.ReadAll(response.Body)
-    if err != nil {
+func GetPersons(restURL string) (p []*Person, err error) {
+	url := restURL + "/person?limit=10&offset=0"
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error calling "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
 		return nil, werr.Wrapf(err, "Error decoding persons data")
-    }
-    persons := []*Person{}
+	}
+	persons := []*Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal persons data")
 	}
@@ -110,23 +105,22 @@ func (p *Person) String() string {
 	return p.Slug
 }
 
-/** 
+/**
     Returns field UsualName if it exists.
     Otherwise, returns a concatenation of given and family name.
 **/
 func (p *Person) GetName() string {
 	if p.Name.Usual != "" {
-	    return p.Name.Usual
+		return p.Name.Usual
 	}
 	if p.Name.Given == "" {
-        return p.Name.Family
+		return p.Name.Family
 	}
-    return p.Name.Given + " " + p.Name.Family
-	
+	return p.Name.Given + " " + p.Name.Family
+
 }
 
-
-/** 
+/**
     Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
     If Birth.Date exists, uses it.
     Otherwise uses field Birth.DateUT
@@ -134,25 +128,23 @@ func (p *Person) GetName() string {
 func (p *Person) GetBirthDate() string {
 	var date string
 	if p.Birth.Date != "" {
-	    date = p.Birth.Date
+		date = p.Birth.Date
 	} else if p.Birth.DateUT != "" {
-	    date = p.Birth.DateUT
+		date = p.Birth.DateUT
 	} else {
-	    return "XXXX-XX-XX XX:XX:XX"
+		return "XXXX-XX-XX XX:XX:XX"
 	}
 	return date
 }
 
-
-/** 
+/**
     Returns a person's birth day, format YYYY-MM-DD
     If Birth.Date exists, uses it.
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDay() string {
-    return p.GetBirthDate()[:10]
+	return p.GetBirthDate()[:10]
 }
-
 
 // ************************** Raw ordering *******************************
 // Auxiliary structures to sort the raw fileds of a person
@@ -161,164 +153,164 @@ func (p *Person) GetBirthDay() string {
 var RawPersonSortedFields map[string][]string
 
 // Executed once at package loading
-func init(){
-    RawPersonSortedFields = map[string][]string {
-        "a": {
-            "YEA",
-            "MON",
-            "DAY",
-            "PRO",
-            "NUM",
-            "COU",        
-            "H",
-            "MN",
-            "SEC",
-            "TZ",
-            "LAT",
-            "LON",
-            "COD",
-            "CITY",
-        },
-        "d6": {
-            "NUM",
-            "DAY",
-            "MON",
-            "YEA",
-            "H",
-            "MN",
-            "SEC",
-            "LAT",
-            "LON",
-            "NAME",
-       },
-       "d10": {
-           "NUM",
-           "NAME",
-           "PRO",
-           "DAY",
-           "MON",
-           "YEA",
-           "H",
-           "TZ",
-           "LAT",
-           "LON",
-           "CICO",
-       },
-       "e": {
-            "NUM",
-            "PRO",
-            "NAME",
-            "NOTE",
-            "DAY",
-            "MON",
-            "YEA",
-            "H",
-            "CITY",
-            "COD",
-       },
-        "afd5": {
-            "NR",
-            "SAMPLE",
-            "GNR",
-            "CODE",
-            "NAME",
-            "GEBDATUM",
-            "JAHR",
-            "GEBZEIT",
-            "GEBORT",
-            "LAENGE",
-            "BREITE",
-            "MODE",
-            "KORR",
-            "ELECTDAT",
-            "ELECTAGE",
-            "STBDATUM",
-            "SONNE",
-            "MOND",
-            "VENUS",
-            "MARS",
-            "JUPITER",
-            "SATURN",
-            "SO_",
-            "MO_",
-            "VE_",
-            "MA_",
-            "JU_",
-            "SA_",
-            "PHAS_",
-            "AUFAB",
-            "NIENMO",
-            "NIENVE",
-            "NIENMA",
-            "NIENJU",
-            "NIENSA",
-        },
-        "afd1": {
-            "NAME",
-            "YEAR",
-            "MONTH",
-            "DAY",
-            "HOUR",
-            "MIN",
-            "TZO",
-            "PLACE",
-            "LAT",
-            "LG",
-        },
-        "afd1-100": {
-            "MUID",
-            "FNAME",
-            "GNAME",
-            "SEX",
-            "DATE",
-            "TZO",
-            "PLACE",
-            "C2",
-            "LG",
-            "LAT",
-            "OCCU",
-            "OPUS",
-            "LEN",
-        },
-        "csi": {
-            "Satz#",
-            "NAME",
-            "VORNAME",
-            "GEBDAT",
-            "GEBZEIT",
-            "AMPM",
-            "ZEITZONE",
-            "GEBORT",
-            "LO1",
-            "LO2",
-            "LA1",
-            "LA2",
-            "SPORTART",
-            "MARS",
-            "BATCH",
-        },
-    }
+func init() {
+	RawPersonSortedFields = map[string][]string{
+		"a": {
+			"YEA",
+			"MON",
+			"DAY",
+			"PRO",
+			"NUM",
+			"COU",
+			"H",
+			"MN",
+			"SEC",
+			"TZ",
+			"LAT",
+			"LON",
+			"COD",
+			"CITY",
+		},
+		"d6": {
+			"NUM",
+			"DAY",
+			"MON",
+			"YEA",
+			"H",
+			"MN",
+			"SEC",
+			"LAT",
+			"LON",
+			"NAME",
+		},
+		"d10": {
+			"NUM",
+			"NAME",
+			"PRO",
+			"DAY",
+			"MON",
+			"YEA",
+			"H",
+			"TZ",
+			"LAT",
+			"LON",
+			"CICO",
+		},
+		"e": {
+			"NUM",
+			"PRO",
+			"NAME",
+			"NOTE",
+			"DAY",
+			"MON",
+			"YEA",
+			"H",
+			"CITY",
+			"COD",
+		},
+		"afd5": {
+			"NR",
+			"SAMPLE",
+			"GNR",
+			"CODE",
+			"NAME",
+			"GEBDATUM",
+			"JAHR",
+			"GEBZEIT",
+			"GEBORT",
+			"LAENGE",
+			"BREITE",
+			"MODE",
+			"KORR",
+			"ELECTDAT",
+			"ELECTAGE",
+			"STBDATUM",
+			"SONNE",
+			"MOND",
+			"VENUS",
+			"MARS",
+			"JUPITER",
+			"SATURN",
+			"SO_",
+			"MO_",
+			"VE_",
+			"MA_",
+			"JU_",
+			"SA_",
+			"PHAS_",
+			"AUFAB",
+			"NIENMO",
+			"NIENVE",
+			"NIENMA",
+			"NIENJU",
+			"NIENSA",
+		},
+		"afd1": {
+			"NAME",
+			"YEAR",
+			"MONTH",
+			"DAY",
+			"HOUR",
+			"MIN",
+			"TZO",
+			"PLACE",
+			"LAT",
+			"LG",
+		},
+		"afd1-100": {
+			"MUID",
+			"FNAME",
+			"GNAME",
+			"SEX",
+			"DATE",
+			"TZO",
+			"PLACE",
+			"C2",
+			"LG",
+			"LAT",
+			"OCCU",
+			"OPUS",
+			"LEN",
+		},
+		"csi": {
+			"Satz#",
+			"NAME",
+			"VORNAME",
+			"GEBDAT",
+			"GEBZEIT",
+			"AMPM",
+			"ZEITZONE",
+			"GEBORT",
+			"LO1",
+			"LO2",
+			"LA1",
+			"LA2",
+			"SPORTART",
+			"MARS",
+			"BATCH",
+		},
+	}
 }
 
 func GetRawPersonSortedFields(source string) (res []string) {
-    switch source {
-        case "a1", "a2", "a3", "a4", "a5", "a6":
-            return RawPersonSortedFields["a"]
-        case "d6":
-            return RawPersonSortedFields["d6"]
-        case "d10":
-            return RawPersonSortedFields["d10"]
-        case "e1", "e3":
-            return RawPersonSortedFields["e"]
-        case "afd5":
-            return RawPersonSortedFields["afd5"]
-        case "afd1":
-            return RawPersonSortedFields["afd1"]
-        case "afd1-100":
-            return RawPersonSortedFields["afd1-100"]
-        case "csi":
-            return RawPersonSortedFields["csi"]
-        default:
-            panic("ERROR IN THE CODE - undefined RawPersonSortedFields for source '" + source + "'")
-    }
+	switch source {
+	case "a1", "a2", "a3", "a4", "a5", "a6":
+		return RawPersonSortedFields["a"]
+	case "d6":
+		return RawPersonSortedFields["d6"]
+	case "d10":
+		return RawPersonSortedFields["d10"]
+	case "e1", "e3":
+		return RawPersonSortedFields["e"]
+	case "afd5":
+		return RawPersonSortedFields["afd5"]
+	case "afd1":
+		return RawPersonSortedFields["afd1"]
+	case "afd1-100":
+		return RawPersonSortedFields["afd1-100"]
+	case "csi":
+		return RawPersonSortedFields["csi"]
+	default:
+		panic("ERROR IN THE CODE - undefined RawPersonSortedFields for source '" + source + "'")
+	}
 }

@@ -7,7 +7,7 @@
 package static
 
 import (
-    "embed"
+	"embed"
 )
 
 //go:embed *

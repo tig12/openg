@@ -7,7 +7,7 @@
 package view
 
 import (
-    "embed"
+	"embed"
 )
 
 //go:embed *

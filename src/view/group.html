@@ -1,0 +1,44 @@
+<script>
+$(document).ready(function() {
+    $('#persons').DataTable({
+        "order": [[ 1, 'asc' ]],
+        "pageLength": 50
+    });
+} );
+</script>
+
+{{with .Details.Group}}
+
+<h1>{{.Name}}</h1>
+
+<div class="">{{.Description}}</div>
+
+<table id="persons" class="display" style="width:100%">
+<thead>
+    <tr>
+        <th>Given name</th>
+        <th>Family name</th>
+        <th>Birth date</th>
+        <th>Birth place</th>
+        <th>Country</th>
+    </tr>
+</thead>
+<tbody>
+
+{{range .Members}}
+<tr>
+    <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
+    <td><a href="/person/{{.Slug}}">{{.Name.Family}}</a></td>
+    <td>{{.GetBirthDate}}</td>
+    <td>
+        {{.Birth.Place.Name}}
+        {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
+    </td>
+    <td>{{.Birth.Place.Cy}}</td>
+</tr>
+{{end}} {{/* range .Details.Persons */}}
+
+</tbody>
+</table>    
+
+{{end}} {{/* with .Details.Group */}}

@@ -1,5 +1,5 @@
 
 
 Change in database (todos for gauquelin5 software)
-- store lg, lat as doubles
+- store lg, lat as doubles in json structure
 - store nobiliary particle as string (not boolean)

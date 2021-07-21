@@ -1,5 +1,5 @@
 /******************************************************************************
-    
+
     Loads config.yml
 
     @license    GPL
@@ -8,9 +8,9 @@
 package ctxt
 
 import (
-	"openg.local/openg/model"
 	"gopkg.in/yaml.v3"
 	"io/ioutil"
+	"openg.local/openg/model"
 )
 
 var config *model.Config

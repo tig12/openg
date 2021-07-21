@@ -12,8 +12,8 @@ import (
 )
 
 type Context struct {
-	Page         *Page
-//	Redirect     string
+	Page *Page
+	//	Redirect     string
 	TemplateName string
 	Template     *template.Template
 	Config       *model.Config
@@ -21,7 +21,7 @@ type Context struct {
 
 func NewContext() *Context {
 	ctx := &Context{}
-	ctx.Template = tmpl // déclared in template.go
-	ctx.Config = config // déclared in config.go
+	ctx.Template = tmpl // declared in template.go
+	ctx.Config = config // declared in config.go
 	return ctx
 }

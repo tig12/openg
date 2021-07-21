@@ -1,16 +1,14 @@
 #
-# Configuration for openg
+# Configuration for Open Gauquelin database frontend
 #
 
-# Directories where data files are stored
-# Absolute paths or paths relative to gauquelin5 root directory
-#dirs:
-#  tmp:    data/tmp
+# go web server parameters
+run:
+  url: 127.0.0.1
+  port: 2468
 
-database:
-  dbhost: localhost
-  dbport: 5432
-  dbuser: pg_username
-  dbpassword: pg_password
-  dbname: pg_dbname
-
+# Url to connect to postgrest api
+rest-url: http://localhost:3579
+  
+paths:
+  acts: /path/to/acts

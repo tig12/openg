@@ -13,8 +13,8 @@ $(document).ready(function() {
 <table id="persons" class="display" style="width:100%">
 <thead>
     <tr>
-        <th>Given name</th>
         <th>Family name</th>
+        <th>Given name</th>
         <th>Birth date</th>
         <th>Birth place</th>
         <th>Country</th>
@@ -24,8 +24,8 @@ $(document).ready(function() {
 
 {{range .Details.Persons}}
 <tr>
-    <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
     <td><a href="/person/{{.Slug}}">{{.Name.Family}}</a></td>
+    <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
     <td>{{.GetBirthDate}}</td>
     <td>
         {{.Birth.Place.Name}}
