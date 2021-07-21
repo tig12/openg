@@ -2,6 +2,7 @@
 config.yml
 1.local
 1.build
+gin-bin
 
 # files marked for deletion
 z.*
