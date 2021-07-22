@@ -3,23 +3,24 @@
 
 {{with .Details.Stats}}
 
+<style>
+    table#global-stats td:nth-child(2){font-size:1.2rem;}
+</style>
 
-<table class="table-pres">
+<table id="global-stats" class="table-pres">
     <tr>
-        <td>Nb of persons</td>
+        <td>Total number of persons</td>
         <td>{{.N}}</td>
     </tr>
     <tr>
         <td>
-            Nb of persons
-            <br>with birth time
+            with birth time
         </td>
         <td>{{.N_time}}</td>
     </tr>
     <tr>
         <td>
-            Nb of persons
-            <br>without birth time
+            without birth time
         </td>
         <td>{{.N_day}}</td>
     </tr>

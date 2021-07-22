@@ -32,13 +32,23 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
+	// routes handled in controls/home.go
 	r.HandleFunc("/", H(control.ShowHome))
-	r.HandleFunc("/stats", H(control.ShowStats))
-	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
-	r.HandleFunc("/persons", H(control.ShowPersons))
-	r.HandleFunc("/sources", H(control.ShowSources))
+	r.HandleFunc("/about", H(control.ShowAbout))
+	r.HandleFunc("/downloads", H(control.ShowDownloads))
+	
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 
+	r.HandleFunc("/stats", H(control.ShowStats))
+	r.HandleFunc("/sources", H(control.ShowSources))
+	
+    r.HandleFunc("/occupations", H(control.ShowOccupations))
+    r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowOccupation))
+
+    // remove ???
+    r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
+	r.HandleFunc("/persons", H(control.ShowPersons))
+	
 	// r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
 

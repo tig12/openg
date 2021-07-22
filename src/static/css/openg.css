@@ -48,9 +48,35 @@ h1 .subtitle{font-size:.8em;}
 }
 
 /* home page */
-.home-menu>div{
+.home #sitelinks>ul{
+    margin-top:0;
+    float:right;
+    padding:1rem;
     font-size:1.2rem;
     font-weight:bold;
+    border:1px solid grey;
+    border-radius:10px;
+    background:#bac1c4;
+}
+.home #sitelinks li{
+    list-style-type:none;
+    padding-left:0;
+}
+
+table.alternate tbody tr:nth-child(odd){
+    background: linear-gradient(to left, #5d9cba, #aadff7);
+}
+
+/* Table showing raw values of a person */
+table.raw{
+    border-collapse:collapse;
+    background:#dce2e5;
+    font-family:"Courier New",Courier,monospace;
+}
+table.raw > tr > th, table.raw > tr > td, table.raw > * > tr > th, table.raw > * > tr > td {
+    border:1px solid black;
+    padding:0.2rem 0.4rem;
+    vertical-align:top;
 }
 
 /* 2 columns, to present results */
@@ -67,6 +93,7 @@ h1 .subtitle{font-size:.8em;}
     padding-top:1rem;
 }
 
+/* Wikitable */
 table.wikitable{
     border-collapse:collapse;
 }
@@ -84,20 +111,9 @@ table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr >
 table.wikitable tr td code{
     background:none;
 }
-
-/**  **/
-table.alternate tbody tr:nth-child(odd){
-    background: linear-gradient(to left, #5d9cba, #aadff7);
+table.wikitable td.paragraph{
+    font-size:1.3em;
+    font-weight:bold;
+    background:#bac1c4;
 }
 
-/* Table showing raw values of a person */
-table.raw{
-    border-collapse:collapse;
-    background:#dce2e5;
-    font-family:"Courier New",Courier,monospace;
-}
-table.raw > tr > th, table.raw > tr > td, table.raw > * > tr > th, table.raw > * > tr > td {
-    border:1px solid black;
-    padding:0.2rem 0.4rem;
-    vertical-align:top;
-}
