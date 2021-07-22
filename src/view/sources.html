@@ -6,10 +6,10 @@
 </div>
 
 <style>
-    #source-list td:nth-child(3){
+    table#source-list td:nth-child(2){
         white-space:pre;
     }
-    #source-list td.paragraph{
+    table#source-list td.paragraph{
         font-size:1.3em;
         font-weight:bold;
         background:#bac1c4;
@@ -19,7 +19,6 @@
 <table id="source-list" class="wikitable margin alternate">
 <thead>
     <tr>
-        <th>Type</th>
         <th>Name</th>
         <th>Author(s)</th>
         <th>Description</th>
@@ -35,8 +34,10 @@
     </td></tr>
     {{end}}
     <tr id="{{.Slug}}">
-        <td>{{.Type}}</td>
-        <td>{{.Name}}</td>
+        <td>
+            {{.Name}}
+            <div>({{.Type}})</div>
+        </td>
         <td>{{range .Authors}}<div>{{.}}</div>{{end}}</td>
         <td>{{nl2br .Description}}</td>
         <td>

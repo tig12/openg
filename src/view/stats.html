@@ -1,0 +1,58 @@
+
+<h1>Open Gauquelin Database statistics</h1>
+
+{{with .Details.Stats}}
+
+
+<table class="table-pres">
+    <tr>
+        <td>Nb of persons</td>
+        <td>{{.N}}</td>
+    </tr>
+    <tr>
+        <td>
+            Nb of persons
+            <br>with birth time
+        </td>
+        <td>{{.N_time}}</td>
+    </tr>
+    <tr>
+        <td>
+            Nb of persons
+            <br>without birth time
+        </td>
+        <td>{{.N_day}}</td>
+    </tr>
+</table>
+
+<!-- ********************************************************************************* -->
+<h2>Repartition by country</h2>
+<table class="wikitable">
+<thead>
+    <tr><th colspan="2">Country</th><th>N</th></tr>
+</thead>
+<tbody>
+{{range $cy, $n := .Countries}}
+    <tr>
+        <td>{{$cy}}
+        <td>{{index $.Details.CountryNames $cy}}</td>
+        <td>{{$n}}</td>
+    </tr>    
+{{end}}
+</tbody>
+</table>
+
+<!-- ********************************************************************************* -->
+<h2>Repartition by year</h2>
+<table class="wikitable">
+<thead>
+    <tr><th>Year</th><th>N</th></tr>
+</thead>
+<tbody>
+{{range $year, $n := .Years}}
+    <tr><td>{{$year}}</td><td>{{$n}}</td></tr>    
+{{end}}
+</tbody>
+</table>
+
+{{end}} {{/* with .Details.Stats */}}

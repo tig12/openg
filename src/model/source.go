@@ -11,7 +11,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	//"fmt"
 )
 
 type Source struct {

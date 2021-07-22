@@ -45,6 +45,12 @@ h1 .subtitle{font-size:.8em;}
     border-radius:10px;
 }
 
+/* home page */
+.home-menu>div{
+    font-size:1.2rem;
+    font-weight:bold;
+}
+
 /* 2 columns, to present results */
 .table-pres td:nth-child(1){
     text-align:right;
@@ -82,7 +88,7 @@ table.alternate tbody tr:nth-child(odd){
     background: linear-gradient(to left, #5d9cba, #aadff7);
 }
 
-/* Showing row values */
+/* Table showing raw values of a person */
 table.raw{
     border-collapse:collapse;
     background:#dce2e5;

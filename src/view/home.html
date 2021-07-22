@@ -1,6 +1,7 @@
+<div class="home">
 
 <h1>
-    Open Gauquelin
+    Open Gauquelin Database
     <div class="subtitle">
         Browse and download
         <br>timed birth dates of famous persons
@@ -8,8 +9,26 @@
 </h1>
 
 <!-- ************************************* -->
+<div class="home-menu float-right padding-right">
+    <div><a href="/persons">All persons</a></div>
+    <div><a href="/occupations">Lists by occupation</a></div>
+    <div><a href="/sources">Information sources</a></div>
+    <div><a href="/stats">Database statistics</a></div>
+    <div><a href="/about">About</a></div>
+</div>
+
+<!-- ************************************* -->
 <div class="float-left padding-left">
-<h2><a href="">Historical datasets</a></h2>
+
+<div class="big2">
+{{with .Details.Stats}}
+This database contains <b>{{.N}} persons</b>
+born between {{.YearMin}} and {{.YearMax}}
+<br><a href="/stats">See more statistics</a>
+{{end}}
+</div>
+
+<h2>Historical datasets</h2>
 <ul>
     <li>
         <b>Michel &amp; Françoise Gauquelin</b>
@@ -30,6 +49,7 @@
         <b>Arno Müller</b>
         <ul>
             <li><a href="/group/muller-afd1-writers">Astro-Forschungs-Daten 1, 402 Italian writers</a></li>
+            <li><a href="/group/muller-afd1-100writers">Astro-Forschungs-Daten 1, 100 Italian writers without birth time</a></li>
             <li><a href="/group/muller-afd5-medics">Astro-Forschungs-Daten 5, 1083 members of the French Académie de Médecine</a></li>
         </ul>
     </li>
@@ -45,29 +65,6 @@
 </ul>
 </div><!-- end float-left -->
 
-<!-- ************************************* -->
-<div class="float-left padding-right">
-<h2><a href="/persons">All persons</a></h2>
-</div><!-- end float-left -->
+<br class="clear-both">
 
-<!-- ************************************* -->
-<div class="float-left padding-left padding-right">
-<h2><a href="/occupations">Lists by occupation</a></h2>
-</div><!-- end float-left -->
-
-<!-- ************************************* -->
-<div class="float-left padding-left padding-right">
-<h2><a href="/sources">Information sources</a></h2>
-</div><!-- end float-left -->
-
-
-<br class="clear-left">
-
-
-<!-- ************************************* -->
-<h2>Database statistics</h2>
-
-
-<!-- ************************************* -->
-<h2>About this data</h2>
-
+</div><!-- end class="home" -->

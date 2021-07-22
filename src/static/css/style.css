@@ -28,10 +28,11 @@ ul.simple{list-style-type: '- ';}
 .whitespace-nowrap{white-space:nowrap;}
 .whitespace-pre{white-space:pre;}
 
-.clear-left{clear:left;}
 .float-left{float:left;}
-.clear-right{clear:right;}
 .float-right{float:right;}
+.clear-left{clear:left;}
+.clear-right{clear:right;}
+.clear-both{clear:both;}
 
 .inline{display:inline;}
 .inline-block{display:inline-block;}

@@ -32,7 +32,8 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", H(control.Home))
+	r.HandleFunc("/", H(control.ShowHome))
+	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 	r.HandleFunc("/persons", H(control.ShowPersons))
 	r.HandleFunc("/sources", H(control.ShowSources))
