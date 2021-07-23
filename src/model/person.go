@@ -126,15 +126,21 @@ func (p *Person) GetName() string {
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDate() string {
-	var date string
-	if p.Birth.Date != "" {
-		date = p.Birth.Date
-	} else if p.Birth.DateUT != "" {
-		date = p.Birth.DateUT
+	return GetBirthDate(p.Birth.Date, p.Birth.DateUT)
+}
+
+/** 
+    Function used by Person and GroupMember
+**/
+func GetBirthDate(date, dateUT string) (res string) {
+	if date != "" {
+		res = date
+	} else if dateUT != "" {
+		res = dateUT
 	} else {
 		return "XXXX-XX-XX XX:XX:XX"
 	}
-	return date
+	return res
 }
 
 /**

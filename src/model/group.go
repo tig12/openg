@@ -26,7 +26,17 @@ type Group struct {
 	// not stored in database
 	Sources     []*Source
 	Parents     []*Group
-	Members     []*Person
+	Members     []*GroupMember
+}
+
+/** Simplified representation of a person **/
+type GroupMember struct {
+	Slug           string `json:"person_slug"`
+	Ids_in_sources map[string]string
+	Sex            string
+	Name           PersonName
+	Occus          []string
+	Birth          Event
 }
 
 // ************************** Get one *******************************
@@ -73,4 +83,13 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 
 func (g *Group) String() string {
 	return g.Name
+}
+
+/**
+    Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
+    If Birth.Date exists, uses it.
+    Otherwise uses field Birth.DateUT
+**/
+func (p *GroupMember) GetBirthDate() string {
+	return GetBirthDate(p.Birth.Date, p.Birth.DateUT)
 }

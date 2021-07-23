@@ -35,6 +35,7 @@ h1 .subtitle{font-size:.8em;}
     width:100%;
     background: linear-gradient(to left, #5d9cba, #aadff7);
     border-bottom:1px solid grey;
+    z-index:1000;
 }
 .top-right{
     float:right;
