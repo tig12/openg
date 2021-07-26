@@ -152,7 +152,7 @@ func HPDF(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(
 }
 
 // *********************** Gestion d'erreur **********************************
-// A mettre ailleurs, mais où ?
+// TODO put somewhere else, but where ?
 
 func notFound(w http.ResponseWriter, r *http.Request) {
 	ctx := ctxt.NewContext()

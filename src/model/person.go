@@ -43,7 +43,7 @@ type PersonName struct {
 	Official          OfficialName
 	Nicknames         []string
 	Alternative       []string
-	NobiliaryParticle bool `json:"nobiliary-particle"`
+	NobiliaryParticle string `json:"nobiliary-particle"`
 }
 
 type OfficialName struct {
