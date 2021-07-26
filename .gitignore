@@ -1,5 +1,6 @@
 
 config.yml
+postgrest.conf
 1.local
 1.build
 gin-bin

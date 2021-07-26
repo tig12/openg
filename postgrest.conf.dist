@@ -1,0 +1,7 @@
+
+# replace dbname, public, web_anon and 12345 with values corresponding to your database
+
+db-uri = "postgres://authenticator:testapipassword@localhost:5432/dbname"
+db-schema = "public"
+db-anon-role = "web_anon"
+server-port = 12345
