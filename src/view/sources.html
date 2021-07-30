@@ -6,15 +6,15 @@
 </div>
 
 <style>
-table#source-list td:nth-child(2){
-    white-space:pre;
-}
+table#source-list td:nth-child(2){font-weight:bold;}
+table#source-list td:nth-child(3){white-space:pre;}
 </style>
 
 <table id="source-list" class="wikitable margin alternate">
 <thead>
     <tr>
         <th>Name</th>
+        <th>Id</th>
         <th>Author(s)</th>
         <th>Description</th>
         <th>Parent sources</th>
@@ -30,14 +30,15 @@ table#source-list td:nth-child(2){
     {{end}}
     <tr id="{{.Slug}}">
         <td>
-            {{.Name}}
+            <div class="whitespace-pre">{{.Name}}</div>
             <div>({{.Type}})</div>
         </td>
+        <td>{{.Slug}}</td>
         <td>{{range .Authors}}<div>{{.}}</div>{{end}}</td>
         <td>{{nl2br .Description}}</td>
         <td>
             {{range .Parents}}
-                <div><a href="#{{.}}">{{index $.Details.Slug_Name .}}</a></div>
+                <div><a href="#{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>
             {{end}}
         </td>
     </tr>

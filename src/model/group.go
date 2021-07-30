@@ -60,6 +60,10 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal Group")
 	}
+    if len(tmp) == 0 {
+        var group = Group{}
+		return &stats, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
+    }
 	group = tmp[0]
 	
     // get the persons of the group

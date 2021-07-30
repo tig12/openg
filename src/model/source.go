@@ -69,9 +69,15 @@ func GetSources(restURL string) (sources []*Source, err error) {
 
 	// return the sources in an arbitrary order
 	order := []string{
-		"g5",
+	    // primary
+	    "lerrcp",
+	    "afd",
+		"csicop-committee",
+		// secondary
 		"cura5",
 		"newalch",
+		"g5",
+		// Gauquelin
 		"a1-booklet",
 		"a1",
 		"a2-booklet",
@@ -92,13 +98,13 @@ func GetSources(restURL string) (sources []*Source, err error) {
 		"e1",
 		"e3-booklet",
 		"e3",
-		"afd",
+		// Müller
 		"afd1-booklet",
 		"afd1",
 		"afd1-100",
 		"afd5-booklet",
 		"afd5",
-		"csicop-committee",
+		// csicop
 		"csi",
 		"si42",
 	}

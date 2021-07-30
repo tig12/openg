@@ -47,6 +47,10 @@ func GetStats(restURL string) (stats *Stats, err error) {
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal Stats")
 	}
+    if len(tmp) == 0 {
+        var stats = Stats{}
+		return &stats, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
+    }
 	stats = tmp[0]
 	
 	// year min, year max
