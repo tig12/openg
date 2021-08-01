@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
+	"html/template"
 )
 
 type Source struct {
@@ -21,7 +22,7 @@ type Source struct {
 	Authors     []string
 	Edition     string
 	Isbn        string
-	Description string
+	Description template.HTML
 	Parents     []string
 }
 

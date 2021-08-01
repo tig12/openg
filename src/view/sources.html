@@ -35,7 +35,7 @@ table#source-list td:nth-child(3){white-space:pre;}
         </td>
         <td>{{.Slug}}</td>
         <td>{{range .Authors}}<div>{{.}}</div>{{end}}</td>
-        <td>{{nl2br .Description}}</td>
+        <td>{{.Description}}</td>
         <td>
             {{range .Parents}}
                 <div><a href="#{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>

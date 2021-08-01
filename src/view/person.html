@@ -139,11 +139,13 @@
         <td><a href="/sources#g5">g5 database</a></td>
         <td>{{.Slug}}</td>
     </tr>
-    {{range $key, $value := .Ids_in_sources}}    
-    <tr>
-        <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
-        <td>{{$value}}</td>
-    </tr>
+    {{range $key, $value := .Ids_in_sources}}
+        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
+        <tr>
+            <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
+            <td>{{$value}}</td>
+        </tr>
+        {{end}}
     {{end}}
 </table>
 

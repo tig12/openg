@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function() {
     $('#persons').DataTable({
-        "order": [[ 1, 'asc' ]],
+        "order": [[ 2, 'asc' ]],
         "pageLength": 50
     });
 } );
@@ -11,22 +11,31 @@ $(document).ready(function() {
 
 <h1>{{.Name}}</h1>
 
-<div class="">{{.Description}}</div>
+<div class="big2 margin bold">{{.Description}}</div>
 
 <table id="persons" class="display" style="width:100%">
 <thead>
     <tr>
+        <th>Ids</th>
         <th>Given name</th>
         <th>Family name</th>
         <th>Birth date</th>
         <th>Birth place</th>
         <th>Country</th>
+        <th>Occupations</th>
     </tr>
 </thead>
 <tbody>
 
 {{range .Members}}
 <tr>
+    <td>
+    {{range $key, $value := .Ids_in_sources}}
+        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
+            <div title="{{$key | sourceNameFromSlug}}">{{$value}}</div>
+        {{end}}
+    {{end}}
+    </td>
     <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
     <td><a href="/person/{{.Slug}}">{{.Name.Family}}</a></td>
     <td>{{.GetBirthDate}}</td>
@@ -35,6 +44,11 @@ $(document).ready(function() {
         {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
     </td>
     <td>{{.Birth.Place.Cy}}</td>
+    <td>
+        {{range .Occus}}
+            <div>{{. | ucFirst}}</div>
+        {{end}}
+    </td>
 </tr>
 {{end}}
 

@@ -1,2 +1,30 @@
 
 <h1>All occupations</h1>
+
+<table class="wikitable margin alternate">
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Wikidata</th>
+        <th>Parents</th>
+        <th><span title="Nb of persons with this occupation">N</span></th>
+    </tr>
+</thead>
+<tbody>
+{{range .Details.Occus}}
+    {{$slug := .Slug}}
+    <tr>
+        <td>
+            <div class="whitespace-pre"><a href="/occupation/{{.Slug}}">{{.Name}}</a></div>
+        </td>
+        <td>{{.WD}}</td>
+        <td>
+            {{range .Parents}}
+                <div><a href="/occupation/{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>
+            {{end}}
+        </td>
+        <td>{{.N}}</td>
+    </tr>
+{{end}} {{/* range .Details.Occus */}}
+</tbody>
+</table>    

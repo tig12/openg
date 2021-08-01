@@ -62,7 +62,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	}
     if len(tmp) == 0 {
         var group = Group{}
-		return &stats, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
+		return &group, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
     }
 	group = tmp[0]
 	

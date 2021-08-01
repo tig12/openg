@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function() {
     $('#persons').DataTable({
-        "order": [[ 1, 'asc' ]],
+        "order": [[ 2, 'asc' ]],
         "pageLength": 50
     });
 } );
@@ -13,6 +13,7 @@ $(document).ready(function() {
 <table id="persons" class="display" style="width:100%">
 <thead>
     <tr>
+        <th>Ids</th>
         <th>Family name</th>
         <th>Given name</th>
         <th>Birth date</th>
@@ -24,6 +25,13 @@ $(document).ready(function() {
 
 {{range .Details.Persons}}
 <tr>
+    <td>
+    {{range $key, $value := .Ids_in_sources}}
+        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
+            <div title="{{$key | sourceNameFromSlug}}">{{$value}}</div>
+        {{end}}
+    {{end}}
+    </td>
     <td><a href="/person/{{.Slug}}">{{.Name.Family}}</a></td>
     <td><a href="/person/{{.Slug}}">{{.Name.Given}}</a></td>
     <td>{{.GetBirthDate}}</td>
