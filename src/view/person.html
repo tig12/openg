@@ -155,9 +155,9 @@ Original values of the fields used to build the person in Open Gauquelin databas
 
 <br class="clear-left">
 {{range $sourceSlug, $value := .Raw}}
-    <div class="float-left margin-right">
+    <div class="float-left margin-right margin-left">
     <h3>{{$sourceSlug | sourceNameFromSlug}}</h3>
-    <table class="raw margin">
+    <table class="raw margin margin-left0">
         {{range $sourceSlug | rawPersonSortedFields}}
         <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
         {{end}}

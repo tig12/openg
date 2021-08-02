@@ -9,10 +9,9 @@ package model
 import (
 	"encoding/json"
 	"io/ioutil"
-//"io"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-//"fmt"
+	"fmt"
 )
 
 type Group struct {
@@ -58,7 +57,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	}
 	var tmp []*Group
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal Group")
+		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s', url=%s", slug, url))
 	}
     if len(tmp) == 0 {
         var group = Group{}

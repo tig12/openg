@@ -43,7 +43,7 @@ func main() {
 	r.HandleFunc("/sources", H(control.ShowSources))
 	
     r.HandleFunc("/occupations", H(control.ShowOccupations))
-    r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowOccupation))
+    r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 
     r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
     // remove ???

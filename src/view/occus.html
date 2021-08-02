@@ -1,13 +1,47 @@
+<style>
+/* 
+    table.dataTable tr.odd .sorting_1 { background-color: #E2E4FF; }
+    table.dataTable tr.even .sorting_1 { background-color: white; }                            
+    table#example.dataTable tbody tr:hover {
+      background-color: #ffa;
+    }
+     
+    table#example.dataTable tbody tr:hover > .sorting_1 {
+      background-color: #ffa;
+    }
+    table#occupations tbody tr.odd {background: linear-gradient(to left, #5d9cba, #aadff7);}
+    table#occupations tbody tr.even {background: linear-gradient(to right, #5d9cba, #aadff7);}
+    
+    
+    table#occupations tr.odd{background-color:#5d9cba;}
+    table#occupations tr.even{background-color:#aadff7;}
+    table#occupations tbody tr:hover{background-color:lightgrey;}
+    table#occupations td{border:1px solid black;}
+*/
+    table#occupations th{text-align:left;}
+</style>
+<script>
+$(document).ready(function() {
+    $('#occupations').DataTable({
+        "order": [[ 0, 'asc' ]],
+        "pageLength": 500,
+        "paging": false,
+        "searching": false,
+        "orderClasses": false, // Highlight the columns being ordered
+        "bInfo" : false, // hide "Showing 1 of N entries"
+    });
+} );
+</script>
 
 <h1>All occupations</h1>
 
-<table class="wikitable margin alternate">
+<table id="occupations" class="display" style="width:100%">
 <thead>
     <tr>
         <th>Name</th>
-        <th>Wikidata</th>
-        <th>Parents</th>
         <th><span title="Nb of persons with this occupation">N</span></th>
+        <th>Parents</th>
+        <th>Wikidata</th>
     </tr>
 </thead>
 <tbody>
@@ -17,13 +51,13 @@
         <td>
             <div class="whitespace-pre"><a href="/occupation/{{.Slug}}">{{.Name}}</a></div>
         </td>
-        <td>{{.WD}}</td>
+        <td>{{.N}}</td>
         <td>
             {{range .Parents}}
                 <div><a href="/occupation/{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>
             {{end}}
         </td>
-        <td>{{.N}}</td>
+        <td>{{.WD}}</td>
     </tr>
 {{end}} {{/* range .Details.Occus */}}
 </tbody>

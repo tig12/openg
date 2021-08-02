@@ -21,6 +21,8 @@ type Person struct {
 	Slug           string
 	To_check       bool
 	Sources        []string
+//	SourceSlugs    []string `json:"sources"`
+//	Sources        []*Source
 	Ids_in_sources map[string]string
 	Trust          string
 	Trust_details  []string

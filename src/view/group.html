@@ -2,10 +2,16 @@
 $(document).ready(function() {
     $('#persons').DataTable({
         "order": [[ 2, 'asc' ]],
-        "pageLength": 50
+        "pageLength": 50,
+        "searching": false,
+        "orderClasses": false, // Highlight the columns being ordered
+        "bInfo" : false, // hide "Showing 1 of N entries"
     });
 } );
 </script>
+<style>
+    table#persons th{text-align:left;}
+</style>
 
 {{with .Details.Group}}
 
@@ -46,7 +52,7 @@ $(document).ready(function() {
     <td>{{.Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
-            <div>{{. | ucFirst}}</div>
+            <div><a href="/occupation/">{{. | ucFirst}}</a></div>
         {{end}}
     </td>
 </tr>

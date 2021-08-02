@@ -11,10 +11,6 @@ type detailsOccus struct {
     Occus   []*model.Occu
 }
 
-/** For the page of one particular occupation **/
-type detailsOccu struct {
-}
-                 
 /** 
     Displays a page listing all occupations
 **/
@@ -25,7 +21,14 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 	}
 	ctx.TemplateName = "occus.html"
 	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{},
+		Header:  ctxt.Header{
+		    Title: "All occupations",
+			CSSFiles: []string{
+				"/static/lib/datatables/datatables.min.css"},
+			JSFiles: []string{
+				"/static/lib/datatables/jquery-3.3.1.min.js",
+				"/static/lib/datatables/datatables.min.js"},
+		},
 		Details: detailsOccus{
 		    Occus: occus,
 		},
@@ -33,16 +36,4 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-/** 
-    Displays a page listing one occupation
-**/
-func ShowOccupation(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    
-	ctx.TemplateName = "occu.html"
-	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{},
-		Details: detailsOccu{
-		},
-	}
-	return nil
-}
+// ShowOccupation() is hadled by group
