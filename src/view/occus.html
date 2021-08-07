@@ -57,7 +57,7 @@ $(document).ready(function() {
                 <div><a href="/occupation/{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>
             {{end}}
         </td>
-        <td>{{.WD}}</td>
+        <td><a href="{{$.Details.WD_ENTITY_BASE_URL}}/{{.WD}}">{{.WD}}</a></td>
     </tr>
 {{end}} {{/* range .Details.Occus */}}
 </tbody>

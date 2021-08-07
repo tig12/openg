@@ -34,10 +34,13 @@
     {{if .Birth.DateUT}}
     <tr>
         <td>Birth (UTC)</td>
-        <td>{{.Birth.DateUT}}, {{.Birth.Place.String}}</td>
+        <td>{{.Birth.DateUT}}</td>
     </tr>
     {{end}}
-    
+    <tr>
+        <td>Birth Place</td>
+        <td>{{.Birth.Place.String}}</td>
+    </tr>
     <tr>
         <td>Trust level</td>
         <td>{{.Trust}}</td>
@@ -72,14 +75,14 @@
         </tr>
         {{if .Name.Official.Family}}
             <tr>
-                <td class="left-pad">Family name</td>
-                <td class="left-pad">{{.Name.Official.Family}}</td>
+                <td>Family name</td>
+                <td>{{.Name.Official.Family}}</td>
             </tr>
         {{end}}
         {{if .Name.Official.Given}}
             <tr>
-                <td class="left-pad">Given name</td>
-                <td class="left-pad">{{.Name.Official.Given}}</td>
+                <td>Given name</td>
+                <td>{{.Name.Official.Given}}</td>
             </tr>
         {{end}}
     {{end}}
@@ -136,7 +139,7 @@
 <h3>Identifiers</h3>
 <table class="table-pres">
     <tr>
-        <td><a href="/sources#g5">g5 database</a></td>
+        <td><a href="/sources#g5">Open Gauquelin Database</a></td>
         <td>{{.Slug}}</td>
     </tr>
     {{range $key, $value := .Ids_in_sources}}

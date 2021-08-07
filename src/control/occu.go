@@ -9,6 +9,7 @@ import (
 /** For the page with all occupations **/
 type detailsOccus struct {
     Occus   []*model.Occu
+    WD_ENTITY_BASE_URL string
 }
 
 /** 
@@ -31,9 +32,10 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 		},
 		Details: detailsOccus{
 		    Occus: occus,
+		    WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
 		},
 	}
 	return nil
 }
 
-// ShowOccupation() is hadled by group
+// ShowOccupation() is handled by group

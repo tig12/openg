@@ -1,4 +1,13 @@
 
+<style>
+div.anchor {
+    display: block;
+    position: relative;
+    top: -50px;
+    visibility: hidden;
+}
+</style>
+
 <h1>Information sources</h1>
 
 <div class="margin big2">
@@ -28,8 +37,9 @@ table#source-list td:nth-child(3){white-space:pre;}
         {{index $.Details.Paragraphs $slug}}
     </td></tr>
     {{end}}
-    <tr id="{{.Slug}}">
+    <tr>
         <td>
+            <div id="{{.Slug}}" class="anchor"></div>
             <div class="whitespace-pre">{{.Name}}</div>
             <div>({{.Type}})</div>
         </td>
