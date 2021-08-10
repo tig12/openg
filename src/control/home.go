@@ -7,21 +7,23 @@ import (
 )
 
 type detailsHome struct {
-    Stats   *model.Stats
+	Stats        *model.Stats
+	DownloadBase string
 }
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    
-    stats, err := model.GetStats(ctx.Config.RestURL)
+
+	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
-    
+
 	ctx.TemplateName = "home.html"
 	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{},
+		Header: ctxt.Header{},
 		Details: detailsHome{
-		    Stats: stats,
+			Stats:        stats,
+			DownloadBase: ctx.Config.Paths.Downloads,
 		},
 	}
 	return nil
@@ -30,7 +32,7 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "about.html"
 	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{},
+		Header: ctxt.Header{},
 	}
 	return nil
 }
@@ -38,8 +40,7 @@ func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 func ShowDownloads(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "download.html"
 	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{},
+		Header: ctxt.Header{},
 	}
 	return nil
 }
-

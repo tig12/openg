@@ -11,4 +11,5 @@ run:
 rest-url: http://localhost:3579
   
 paths:
+  download: /path/to/downloads
   acts: /path/to/acts

@@ -17,7 +17,20 @@ $(document).ready(function() {
 
 <h1>{{.Name}}</h1>
 
-<div class="big2 margin bold">{{.Description}}</div>
+<div class="big2 margin bold">
+    <div>{{.Description}}</div>
+    <div>N = {{numberFormat .N}}</div>
+</div>
+
+
+{{if .Download}}
+<div class="big2 margin bold">
+    <a href="{{$.Details.DownloadBase}}/{{.Download}}">
+        <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download group in CSV">
+        <span class="padding-right">Download CSV</span>
+    </a>
+</div>
+{{end}}
 
 <table id="persons" class="display" style="width:100%">
 <thead>
@@ -52,7 +65,7 @@ $(document).ready(function() {
     <td>{{.Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
-            <div><a href="/occupation/">{{. | ucFirst}}</a></div>
+            <div><a href="/occupation/{{.}}">{{. | ucFirst}}</a></div>
         {{end}}
     </td>
 </tr>

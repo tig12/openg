@@ -23,7 +23,7 @@
 <script>
 $(document).ready(function() {
     $('#occupations').DataTable({
-        "order": [[ 0, 'asc' ]],
+        "order": [[ 1, 'asc' ]],
         "pageLength": 500,
         "paging": false,
         "searching": false,
@@ -33,11 +33,12 @@ $(document).ready(function() {
 } );
 </script>
 
-<h1>All occupations</h1>
+<h1>Lists by occupation</h1>
 
 <table id="occupations" class="display" style="width:100%">
 <thead>
     <tr>
+        <th></th>
         <th>Name</th>
         <th><span title="Nb of persons with this occupation">N</span></th>
         <th>Parents</th>
@@ -46,19 +47,26 @@ $(document).ready(function() {
 </thead>
 <tbody>
 {{range .Details.Occus}}
+{{if ne .N 0}}
     {{$slug := .Slug}}
     <tr>
+        <td>
+            <a href="{{$.Details.DownloadBase}}/{{.Download}}" title="Download CSV file with all {{.Name}}s">
+                <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download group in CSV">
+            </a>
+        </td>
         <td>
             <div class="whitespace-pre"><a href="/occupation/{{.Slug}}">{{.Name}}</a></div>
         </td>
         <td>{{.N}}</td>
         <td>
-            {{range .Parents}}
-                <div><a href="/occupation/{{.}}">{{/* index $.Details.Slug_Name .*/}}{{.}}</a></div>
+            {{range .ParentSlugs}}
+                <div><a href="/occupation/{{.}}">{{index $.Details.Slug_Name .}}</a></div>
             {{end}}
         </td>
         <td><a href="{{$.Details.WD_ENTITY_BASE_URL}}/{{.WD}}">{{.WD}}</a></td>
     </tr>
+{{end}}
 {{end}} {{/* range .Details.Occus */}}
 </tbody>
 </table>    

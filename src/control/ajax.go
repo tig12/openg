@@ -1,5 +1,6 @@
 package control
-/* 
+
+/*
 
 import (
 	"openg.local/openg/ctxt"

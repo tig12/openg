@@ -9,7 +9,7 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-//	"io/fs"
+	//	"io/fs"
 	"log"
 	"net/http"
 	"openg.local/openg/control"
@@ -17,7 +17,7 @@ import (
 	"openg.local/openg/generic/wilk/werr"
 	"openg.local/openg/static"
 	"openg.local/openg/view"
-//	"path/filepath"
+	//	"path/filepath"
 	"time"
 )
 
@@ -36,37 +36,37 @@ func main() {
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
-	
+
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))
-	
-    r.HandleFunc("/occupations", H(control.ShowOccupations))
-    r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 
-    r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
-    // remove ???
+	r.HandleFunc("/occupations", H(control.ShowOccupations))
+	r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
+
+	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
+	// remove ???
 	r.HandleFunc("/persons", H(control.ShowPersons))
-	
+
 	// r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
 
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
-	
-	/* 
-	// r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.Dir(filepath.Join("view", "common")))))
-	serverView, err := fs.Sub(view.ViewFiles, "view")
-	if err != nil {
-		log.Fatal(err)
-	}
-	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(serverView))))
-	//
-	serverViewCommon, err := fs.Sub(view.ViewFiles, filepath.Join("view", "common"))
-	if err != nil {
-		log.Fatal(err)
-	}
-	r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.FS(serverViewCommon))))
+
+	/*
+		// r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.Dir(filepath.Join("view", "common")))))
+		serverView, err := fs.Sub(view.ViewFiles, "view")
+		if err != nil {
+			log.Fatal(err)
+		}
+		r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(serverView))))
+		//
+		serverViewCommon, err := fs.Sub(view.ViewFiles, filepath.Join("view", "common"))
+		if err != nil {
+			log.Fatal(err)
+		}
+		r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.FS(serverViewCommon))))
 	*/
 
 	r.NotFoundHandler = http.HandlerFunc(notFound)

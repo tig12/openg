@@ -8,10 +8,10 @@ package model
 
 import (
 	"encoding/json"
+	"html/template"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	"html/template"
 )
 
 type Source struct {
@@ -25,6 +25,8 @@ type Source struct {
 	Description template.HTML
 	Parents     []string
 }
+
+// ************************** slug - names *******************************
 
 // map source slug => source name
 var sourceSlugNames = make(map[string]string)
@@ -70,9 +72,9 @@ func GetSources(restURL string) (sources []*Source, err error) {
 
 	// return the sources in an arbitrary order
 	order := []string{
-	    // primary
-	    "lerrcp",
-	    "afd",
+		// primary
+		"lerrcp",
+		"afd",
 		"csicop-committee",
 		// secondary
 		"cura5",

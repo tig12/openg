@@ -16,9 +16,10 @@ type Config struct {
 	}
 
 	// postgrest
-    RestURL string `yaml:"rest-url"`
+	RestURL string `yaml:"rest-url"`
 
 	Paths struct {
-		Acts string
+		Acts      string
+		Downloads string `yaml:"download"`
 	} // `yaml:"paths"`
 }

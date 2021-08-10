@@ -22,6 +22,6 @@ type Context struct {
 func NewContext() *Context {
 	ctx := &Context{}
 	ctx.Template = tmpl // declared in template.go
-	ctx.Config = config // declared in config.go
+	ctx.Config = config // declared in config.go - see also model/1-config.go
 	return ctx
 }

@@ -35,11 +35,11 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	}
 
 	var paragraphs = map[string]string{
-		"lerrcp":           "Primary sources",
-		"cura5":            "Secondary sources",
-		"a1-booklet":       "Michel and Françoise Gauquelin",
-		"afd1-booklet":     "Arno Müller",
-		"csi":              "CSICOP",
+		"lerrcp":       "Primary sources",
+		"cura5":        "Secondary sources",
+		"a1-booklet":   "Michel and Françoise Gauquelin",
+		"afd1-booklet": "Arno Müller",
+		"csi":          "CSICOP",
 	}
 
 	ctx.TemplateName = "sources.html"

@@ -8,22 +8,29 @@ import (
 
 /** For the page with all occupations **/
 type detailsOccus struct {
-    Occus   []*model.Occu
-    WD_ENTITY_BASE_URL string
+	Occus              []*model.Group
+	DownloadBase       string
+	WD_ENTITY_BASE_URL string
+	Slug_Name          map[string]string // slug => name
 }
 
-/** 
+/**
     Displays a page listing all occupations
 **/
 func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    occus, err := model.GetOccus(ctx.Config.RestURL)
+	occus, err := model.GetOccus(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
+	slug_Name, err := model.GetGroupSlugNames(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+
 	ctx.TemplateName = "occus.html"
 	ctx.Page = &ctxt.Page{
-		Header:  ctxt.Header{
-		    Title: "All occupations",
+		Header: ctxt.Header{
+			Title: "Lists by occupation",
 			CSSFiles: []string{
 				"/static/lib/datatables/datatables.min.css"},
 			JSFiles: []string{
@@ -31,8 +38,10 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 				"/static/lib/datatables/datatables.min.js"},
 		},
 		Details: detailsOccus{
-		    Occus: occus,
-		    WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
+			Occus:              occus,
+			DownloadBase:       ctx.Config.Paths.Downloads,
+			WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
+			Slug_Name:          slug_Name,
 		},
 	}
 	return nil

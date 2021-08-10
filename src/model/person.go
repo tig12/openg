@@ -17,12 +17,12 @@ import (
 // see init function at the end
 
 type Person struct {
-	Id             int
-	Slug           string
-	To_check       bool
-	Sources        []string
-//	SourceSlugs    []string `json:"sources"`
-//	Sources        []*Source
+	Id       int
+	Slug     string
+	To_check bool
+	Sources  []string
+	//	SourceSlugs    []string `json:"sources"`
+	//	Sources        []*Source
 	Ids_in_sources map[string]string
 	Trust          string
 	Trust_details  []string
@@ -59,7 +59,7 @@ type HistoryEntry struct {
 
 // ************************** Get one *******************************
 
-/** 
+/**
     Loads a person from database
 **/
 func GetPerson(restURL, slug string) (person *Person, err error) {
@@ -131,7 +131,7 @@ func (p *Person) GetBirthDate() string {
 	return GetBirthDate(p.Birth.Date, p.Birth.DateUT)
 }
 
-/** 
+/**
     Function used by Person and GroupMember
 **/
 func GetBirthDate(date, dateUT string) (res string) {

@@ -16,7 +16,8 @@ import (
 )
 
 type detailsGroup struct {
-	Group    *model.Group
+	Group        *model.Group
+	DownloadBase string
 }
 
 /**
@@ -42,7 +43,8 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 				"/static/lib/datatables/datatables.min.js"},
 		},
 		Details: detailsGroup{
-			Group:    group,
+			Group:        group,
+			DownloadBase: ctx.Config.Paths.Downloads,
 		},
 	}
 	return nil

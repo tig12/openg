@@ -7,25 +7,21 @@
 package model
 
 import (
-    "sort"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
+	"sort"
 )
-
-type Occu struct {
-	Slug        string
-	WD          string
-	Name        string
-	N           int
-	Parents     []string `json:"parents"`
-}
 
 // ************************** Get many *******************************
 
-func GetOccus(restURL string) (occus []*Occu, err error) {
-	url := restURL + "/occu"
+/**
+    Returns all occupations, sorted by name.
+**/
+func GetOccus(restURL string) (occus []*Group, err error) {
+	url := restURL + "/groop?type=eq.occu"
+
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling "+url)
@@ -45,9 +41,10 @@ func GetOccus(restURL string) (occus []*Occu, err error) {
 	sort.Sort(sorted)
 	return sorted, nil
 }
-// Auxiliary of GetOccus() to sort by name
-type occuSlice []*Occu
-func (o occuSlice) Len() int { return len(o) }
-func (o occuSlice) Less(i, j int) bool { return o[i].Name < o[j].Name }
-func (o occuSlice) Swap(i, j int) { o[i], o[j] = o[j], o[i] }
 
+// Auxiliary of GetOccus() to sort by name
+type occuSlice []*Group
+
+func (o occuSlice) Len() int           { return len(o) }
+func (o occuSlice) Less(i, j int) bool { return o[i].Name < o[j].Name }
+func (o occuSlice) Swap(i, j int)      { o[i], o[j] = o[j], o[i] }

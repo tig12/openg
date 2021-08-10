@@ -6,7 +6,7 @@
 ********************************************************************************/
 package model
 
-/** 
+/**
     For persons and occupations
 **/
 const WD_ENTITY_BASE_URL = "https://www.wikidata.org/wiki"

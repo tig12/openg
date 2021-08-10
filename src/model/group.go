@@ -1,5 +1,5 @@
 /******************************************************************************
-    Information source
+    Group of persons
 
     @license    GPL
     @history    2021-07-17 17:29:31+02:00, Thierry Graff : Creation
@@ -8,24 +8,28 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	"fmt"
 )
 
 type Group struct {
-    Id          int
+	Id          int
 	Slug        string
 	Name        string
+	WD          string
+	N           int
+	Type        string
 	Description string
-	SourceSlugs     []string `json:"sources"`
-	ParentSlugs     []string `json:"parents"`
-	MemberSlugs     []string `json:"members"`
+	Download    string
+	SourceSlugs []string `json:"sources"`
+	ParentSlugs []string `json:"parents"`
+	MemberSlugs []string `json:"members"`
 	// not stored in database
-	Sources     []*Source
-	Parents     []*Group
-	Members     []*GroupMember
+	Sources []*Source
+	Parents []*Group
+	Members []*GroupMember
 }
 
 /** Simplified representation of a person **/
@@ -38,14 +42,40 @@ type GroupMember struct {
 	Birth          Event
 }
 
+// ************************** slug - names *******************************
+// map group slug => group name
+var groupSlugNames = make(map[string]string)
+
+func GetGroupSlugNames(restURL string) (map[string]string, error) {
+	// lazy loading
+	if len(groupSlugNames) == 0 {
+		groups, err := GetGroups(restURL)
+		if err != nil {
+			return nil, werr.Wrapf(err, "Error calling GetGroup()")
+		}
+		for _, group := range groups {
+			groupSlugNames[group.Slug] = group.Name
+		}
+	}
+	return groupSlugNames, nil
+}
+
+func GetGroupNameFromSlug(restURL, slug string) (string, error) {
+	tmp, err := GetGroupSlugNames(restURL)
+	if err != nil {
+		return "", werr.Wrapf(err, "Error calling GetGroupSlugNames()")
+	}
+	return tmp[slug], nil
+}
+
 // ************************** Get one *******************************
 
 func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
-    var url string
-    var responseData []byte
-    var response *http.Response
-    
-    // get the group
+	var url string
+	var responseData []byte
+	var response *http.Response
+
+	// get the group
 	url = restURL + "/groop?slug=eq." + slug
 	response, err = http.Get(url)
 	if err != nil {
@@ -59,13 +89,13 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
 		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s', url=%s", slug, url))
 	}
-    if len(tmp) == 0 {
-        var group = Group{}
+	if len(tmp) == 0 {
+		var group = Group{}
 		return &group, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
-    }
+	}
 	group = tmp[0]
-	
-    // get the persons of the group
+
+	// get the persons of the group
 	url = restURL + "/api_persongroop?group_slug=eq." + slug
 	response, err = http.Get(url)
 	if err != nil {
@@ -78,8 +108,31 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	if err = json.Unmarshal(responseData, &group.Members); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal Group.Members")
 	}
-	
+
 	return group, nil
+}
+
+// ************************** Get many *******************************
+
+/**
+    Returns all the groups present in database.
+    Each group only contains the fields stored in database (no computed fields like members).
+**/
+func GetGroups(restURL string) (groups []*Group, err error) {
+	url := restURL + "/groop"
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error calling "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error decoding groups data")
+	}
+	groups = []*Group{}
+	if err = json.Unmarshal(responseData, &groups); err != nil {
+		return nil, werr.Wrapf(err, "Error json Unmarshal groups data")
+	}
+	return groups, nil
 }
 
 // ************************** Get fields *******************************

@@ -10,30 +10,30 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"openg.local/openg/generic/wilk/werr"
 	"openg.local/openg/generic/tiglib"
-//"fmt"
+	"openg.local/openg/generic/wilk/werr"
+	//"fmt"
 )
 
 type Stats struct {
-    N            int
-	N_time       int
-	N_day        int
-	Countries    map[string]int
-	Years        map[string]int // `json:"years"`
+	N         int
+	N_time    int
+	N_day     int
+	Countries map[string]int
+	Years     map[string]int // `json:"years"`
 	// not in database
-	YearMin      string
-	YearMax      string
+	YearMin string
+	YearMax string
 }
 
 // ************************** Get one *******************************
 
 func GetStats(restURL string) (stats *Stats, err error) {
-    var url string
-    var responseData []byte
-    var response *http.Response
-    
-    // get the stats
+	var url string
+	var responseData []byte
+	var response *http.Response
+
+	// get the stats
 	url = restURL + "/stats"
 	response, err = http.Get(url)
 	if err != nil {
@@ -47,15 +47,15 @@ func GetStats(restURL string) (stats *Stats, err error) {
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
 		return nil, werr.Wrapf(err, "Error json Unmarshal Stats")
 	}
-    if len(tmp) == 0 {
-        var stats = Stats{}
+	if len(tmp) == 0 {
+		var stats = Stats{}
 		return &stats, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
-    }
+	}
 	stats = tmp[0]
-	
+
 	// year min, year max
 	years := tiglib.MapKeysStringInt(stats.Years)
 	stats.YearMin, stats.YearMax = tiglib.MinMaxString(years)
-	
+
 	return stats, nil
 }

@@ -51,13 +51,13 @@ h1 .subtitle{font-size:.8em;}
 /* home page */
 .home #sitelinks>ul{
     margin-top:0;
-    float:right;
-    padding:1rem;
+    float:left;
+    padding-left:1rem;
     font-size:1.2rem;
+    line-height:2rem;
     font-weight:bold;
-    border:1px solid grey;
-    border-radius:10px;
-    background:#bac1c4;
+    border-left:1px solid grey;
+    /* background:#bac1c4; */
 }
 .home #sitelinks li{
     list-style-type:none;

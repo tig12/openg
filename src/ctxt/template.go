@@ -13,8 +13,6 @@ import (
 	"openg.local/openg/generic/tiglib"
 	"openg.local/openg/model"
 	"path/filepath"
-	"regexp"
-	"strings"
 	"time"
 	"unicode"
 )
@@ -25,16 +23,14 @@ var tmpl *template.Template
 func init() {
 	var fmap = template.FuncMap{
 		// Generic pipelines
-		"dateIso": dateIso,
-		"modulo":  modulo,
-		"nl2br":   nl2br,
-		// TODO hack to remove
-		"nl2br2":   nl2br2,
-		"safeHTML": safeHTML,
-		"ucFirst":  ucFirst,
-		"url2href": url2href,
+		"dateIso":      dateIso,
+		"modulo":       modulo,
+		"safeHTML":     safeHTML,
+		"ucFirst":      ucFirst,
+		"numberFormat": numberFormat,
 		// Pipelines related to current program
 		"sourceNameFromSlug":    sourceNameFromSlug,
+		"groupNameFromSlug":     groupNameFromSlug,
 		"rawPersonSortedFields": rawPersonSortedFields,
 	}
 	tmpl = template.
@@ -50,15 +46,6 @@ func init() {
 
 func modulo(i, mod int) int {
 	return i % mod
-}
-
-func nl2br(t string) template.HTML {
-	return template.HTML(strings.Replace(template.HTMLEscapeString(t), "\n", "<br>", -1))
-}
-
-// TODO hack to remove
-func nl2br2(t string) string {
-	return strings.Replace(t, "\n", "<br>", -1)
 }
 
 // Returns a date YYYY-MM-DD
@@ -79,24 +66,25 @@ func safeHTML(str string) template.HTML {
 	return template.HTML(str)
 }
 
-// Adds a href links around words starting by http
-// TODO fix to return a template.HTML
-func url2href(str string) template.HTML {
-	//func url2href(str string) string {
-	var re = regexp.MustCompile(`\b(https?\:\/\/.*?)\s`)
-	res := re.ReplaceAllString(str, `<a href="$1">$1</a>`)
-	return template.HTML(res)
-	//	return res
+func numberFormat(n int) template.HTML {
+	return template.HTML(tiglib.NumberFormat(n, ' '))
 }
 
 // ************************* Pipelines related to current program ********************************
 
 /**
     Returns the name of an information source from its slug
-    TODO find a cleaner way to grab config ?
 **/
 func sourceNameFromSlug(slug string) template.HTML {
 	name, _ := model.GetSourceNameFromSlug(config.RestURL, slug)
+	return template.HTML(name)
+}
+
+/**
+    Returns the name of a group from its slug
+**/
+func groupNameFromSlug(slug string) template.HTML {
+	name, _ := model.GetGroupNameFromSlug(config.RestURL, slug)
 	return template.HTML(name)
 }
 
