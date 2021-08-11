@@ -32,7 +32,9 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "about.html"
 	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{},
+		Header: ctxt.Header{
+			Title: "About the Open Gauquelin Database",
+		},
 	}
 	return nil
 }

@@ -280,6 +280,22 @@ func init() {
 			"OPUS",
 			"LEN",
 		},
+		"afd3": {
+            "MUID",
+            "NAME",
+            "DATE",
+            "TIME",
+            "TZO",
+            "TIMOD",
+            "CY",
+            "PLACE",
+            "LAT",
+            "LG",
+            "OCCU",
+            "BOOKS",
+            "SOURCE",
+            "GQ",
+		},
 		"csi": {
 			"Satz#",
 			"NAME",
@@ -310,12 +326,14 @@ func GetRawPersonSortedFields(source string) (res []string) {
 		return RawPersonSortedFields["d10"]
 	case "e1", "e3":
 		return RawPersonSortedFields["e"]
-	case "afd5":
-		return RawPersonSortedFields["afd5"]
 	case "afd1":
 		return RawPersonSortedFields["afd1"]
 	case "afd1-100":
 		return RawPersonSortedFields["afd1-100"]
+	case "afd3":
+		return RawPersonSortedFields["afd3"]
+	case "afd5":
+		return RawPersonSortedFields["afd5"]
 	case "csi":
 		return RawPersonSortedFields["csi"]
 	default:

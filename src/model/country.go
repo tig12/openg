@@ -14,9 +14,11 @@ var CountryCodesNames map[string]string
 // Executed once at package loading
 func init() {
 	CountryCodesNames = map[string]string{
+		"AT": "Austria",
 		"BE": "Belgium",
 		"CH": "Switzerland",
 		"DE": "Germany",
+		"DK": "Denmark",
 		"DZ": "Algeria",
 		"ES": "Spain",
 		"FR": "France",
@@ -29,7 +31,9 @@ func init() {
 		"MC": "Monaco",
 		"MQ": "Martinique",
 		"NL": "Netherlands",
+		"PL": "Poland",
 		"TN": "Tunisia",
+		"SE": "Sweden",
 		"US": "United States",
 	}
 }

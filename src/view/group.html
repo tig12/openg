@@ -2,7 +2,7 @@
 $(document).ready(function() {
     $('#persons').DataTable({
         "order": [[ 2, 'asc' ]],
-        "pageLength": 50,
+        "pageLength": 500,
         "searching": false,
         "orderClasses": false, // Highlight the columns being ordered
         "bInfo" : false, // hide "Showing 1 of N entries"
@@ -11,6 +11,11 @@ $(document).ready(function() {
 </script>
 <style>
     table#persons th{text-align:left;}
+    table#persons tr.odd{background-color:#eee;}
+    table#persons tr.even{background-color:#ddd;}
+    table#persons.dataTable tbody tr:hover {
+      background-color: #ffa;
+    }
 </style>
 
 {{with .Details.Group}}
@@ -65,7 +70,7 @@ $(document).ready(function() {
     <td>{{.Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
-            <div><a href="/occupation/{{.}}">{{. | ucFirst}}</a></div>
+            <div><a href="/occupation/{{.}}">{{index $.Details.Slug_Name .}}</a></div>
         {{end}}
     </td>
 </tr>

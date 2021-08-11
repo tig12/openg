@@ -11,7 +11,7 @@ type detailsOccus struct {
 	Occus              []*model.Group
 	DownloadBase       string
 	WD_ENTITY_BASE_URL string
-	Slug_Name          map[string]string // slug => name
+	Slug_Name          map[string]string
 }
 
 /**

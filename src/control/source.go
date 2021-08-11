@@ -29,17 +29,19 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	if err != nil {
 		return err
 	}
+	orderedSources := orderSources(sources)
+	
 	slug_Name, err := model.GetSourceSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
 
 	var paragraphs = map[string]string{
-		"lerrcp":       "Primary sources",
-		"cura5":        "Secondary sources",
-		"a1-booklet":   "Michel and Françoise Gauquelin",
-		"afd1-booklet": "Arno Müller",
-		"csi":          "CSICOP",
+		"lerrcp":           "Primary sources",
+		"cura5":            "Secondary sources",
+		"a1-booklet":       "Michel and Françoise Gauquelin",
+		"afd1-booklet":     "Arno Müller",
+		"csicop-committee": "CSICOP (US skeptics)",
 	}
 
 	ctx.TemplateName = "sources.html"
@@ -48,10 +50,70 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 			Title: "Information sources",
 		},
 		Details: detailsSources{
-			Sources:    sources,
+			Sources:    orderedSources,
 			Slug_Name:  slug_Name,
 			Paragraphs: paragraphs,
 		},
 	}
 	return nil
 }
+
+/** 
+    Returns the sources in an arbitrary order.
+    Auxiliary of ShowSources().
+**/
+func orderSources(sources []*model.Source) []*model.Source{
+	order := []string{
+		// primary
+		"lerrcp",
+		"afd",
+		// secondary
+		"cura5",
+		"newalch",
+		"g5",
+		// Gauquelin
+		"a1-booklet",
+		"a1",
+		"a2-booklet",
+		"a2",
+		"a3-booklet",
+		"a3",
+		"a4-booklet",
+		"a4",
+		"a5-booklet",
+		"a5",
+		"a6-booklet",
+		"a6",
+		"d6-booklet",
+		"d6",
+		"d10-booklet",
+		"d10",
+		"e1-booklet",
+		"e1",
+		"e3-booklet",
+		"e3",
+		// Müller
+		"afd1-booklet",
+		"afd1",
+		"afd1-100",
+		"afd3-booklet",
+		"afd3",
+		"afd5-booklet",
+		"afd5",
+		// csicop
+		"csicop-committee",
+		"csi",
+		"si42",
+	}
+	var res = []*model.Source{}
+	for _, slug := range order {
+		for _, s := range sources {
+			if s.Slug == slug {
+				res = append(res, s)
+				break
+			}
+		}
+	}
+	return res
+}
+

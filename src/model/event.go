@@ -17,6 +17,7 @@ type Event struct {
 }
 
 type Place struct {
+	C1 string
 	C2 string
 	C3 string
 	Cy string
