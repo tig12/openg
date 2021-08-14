@@ -16,9 +16,9 @@ import (
 )
 
 type detailsGroup struct {
-	Group        *model.Group
-	DownloadBase string
-	GroupSlugNames          map[string]string
+	Group          *model.Group
+	DownloadBase   string
+	GroupSlugNames map[string]string
 }
 
 /**
@@ -37,11 +37,16 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	if err != nil {
 		return err
 	}
-	
+
+	title := group.Name
+	if group.Type == model.GROUP_TYPE_OCCU {
+		title += "s"
+	}
+
 	ctx.TemplateName = "group.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: group.Name + "s",
+			Title: title,
 			CSSFiles: []string{
 				"/static/lib/datatables/datatables.min.css"},
 			JSFiles: []string{
@@ -49,9 +54,9 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 				"/static/lib/datatables/datatables.min.js"},
 		},
 		Details: detailsGroup{
-			Group:        group,
-			DownloadBase: ctx.Config.Paths.Downloads,
-			GroupSlugNames:          groupSlugNames,
+			Group:          group,
+			DownloadBase:   ctx.Config.Paths.Downloads,
+			GroupSlugNames: groupSlugNames,
 		},
 	}
 	return nil

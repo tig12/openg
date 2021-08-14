@@ -9,13 +9,13 @@
 package ctxt
 
 import (
+	"encoding/json"
 	"html/template"
 	"openg.local/openg/generic/tiglib"
 	"openg.local/openg/model"
 	"path/filepath"
 	"time"
 	"unicode"
-	"encoding/json"
 )
 
 // used to fill Context.Template
@@ -29,7 +29,7 @@ func init() {
 		"safeHTML":     safeHTML,
 		"ucFirst":      ucFirst,
 		"numberFormat": numberFormat,
-		"prettyPrint": prettyPrint,
+		"prettyPrint":  prettyPrint,
 		// Pipelines related to current program
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"groupNameFromSlug":     groupNameFromSlug,
@@ -97,13 +97,13 @@ func rawPersonSortedFields(sourceSlug string) []string {
 	return model.GetRawPersonSortedFields(sourceSlug)
 }
 
-/** 
+/**
     From https://siongui.github.io/2016/01/30/go-pretty-print-variable/
 **/
 func prettyPrint(v interface{}) string {
-      b, err := json.MarshalIndent(v, "", "  ")
-      if err == nil {
-          return string(b)
-      }
-      return ""
+	b, err := json.MarshalIndent(v, "", "  ")
+	if err == nil {
+		return string(b)
+	}
+	return ""
 }

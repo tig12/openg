@@ -16,10 +16,10 @@ import (
 )
 
 type detailsPerson struct {
-	Person    *model.Person
-	RawFields map[string][]string
+	Person            *model.Person
+	RawFields         map[string][]string
 	WikidataEntityURL string
-	GroupSlugNames          map[string]string
+	GroupSlugNames    map[string]string
 }
 
 type detailsPersons struct {
@@ -46,17 +46,17 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	if err != nil {
 		return err
 	}
-	
+
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: person.GetName() + " " + person.GetBirthDay(),
 		},
 		Details: detailsPerson{
-			Person:    person,
-			RawFields: model.RawPersonSortedFields,
+			Person:            person,
+			RawFields:         model.RawPersonSortedFields,
 			WikidataEntityURL: model.WD_ENTITY_BASE_URL,
-			GroupSlugNames:          groupSlugNames,
+			GroupSlugNames:    groupSlugNames,
 		},
 	}
 	return nil

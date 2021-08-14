@@ -14,22 +14,27 @@ import (
 	"openg.local/openg/generic/wilk/werr"
 )
 
+const GROUP_TYPE_OCCU = "occu"
+const GROUP_TYPE_HISTORICAL = "history"
+
 type Group struct {
-	Id          int
-	Slug        string
-	Name        string
-	WD          string
-	N           int
-	Type        string
-	Description string
-	Download    string
-	SourceSlugs []string `json:"sources"`
-	ParentSlugs []string `json:"parents"`
-	MemberSlugs []string `json:"members"`
+	Id            int
+	Slug          string
+	Name          string
+	WD            string
+	N             int
+	Type          string
+	Description   string
+	Download      string
+	SourceSlugs   []string `json:"sources"`
+	ParentSlugs   []string `json:"parents"`
+	ChildrenSlugs []string `json:"children"`
+	MemberSlugs   []string `json:"members"`
 	// not stored in database
-	Sources []*Source
-	Parents []*Group
-	Members []*GroupMember
+	Sources  []*Source
+	Parents  []*Group
+	Children []*Group
+	Members  []*GroupMember
 }
 
 /** Simplified representation of a person **/

@@ -30,7 +30,7 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 		return err
 	}
 	orderedSources := orderSources(sources)
-	
+
 	slug_Name, err := model.GetSourceSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err
@@ -38,7 +38,7 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 
 	var paragraphs = map[string]string{
 		"lerrcp":           "Primary sources",
-		"g5":            "Secondary sources",
+		"g5":               "Secondary sources",
 		"a1-booklet":       "Michel and Françoise Gauquelin",
 		"afd1-booklet":     "Arno Müller",
 		"csicop-committee": "CSICOP (US skeptics)",
@@ -58,11 +58,11 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	return nil
 }
 
-/** 
+/**
     Returns the sources in an arbitrary order.
     Auxiliary of ShowSources().
 **/
-func orderSources(sources []*model.Source) []*model.Source{
+func orderSources(sources []*model.Source) []*model.Source {
 	order := []string{
 		// primary
 		"lerrcp",
@@ -117,4 +117,3 @@ func orderSources(sources []*model.Source) []*model.Source{
 	}
 	return res
 }
-

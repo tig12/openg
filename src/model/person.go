@@ -37,15 +37,15 @@ type Person struct {
 }
 
 type PersonName struct {
-	Usual             string
-	Given             string
-	Family            string
-	Spouse            string
-	Official          OfficialName
-	Fame              FameName
-	Nicknames         []string
-	Alter             []string
-	Nobl              string
+	Usual     string
+	Given     string
+	Family    string
+	Spouse    string
+	Official  OfficialName
+	Fame      FameName
+	Nicknames []string
+	Alter     []string
+	Nobl      string
 }
 
 type OfficialName struct {
@@ -60,15 +60,15 @@ type FameName struct {
 }
 
 type HistoryEntry struct {
-    Command string
-    Date string
-    Source string
-    //Values Person
-    Values interface{} // TODO 
-    //Values HistoryPerson
+	Command string
+	Date    string
+	Source  string
+	//Values Person
+	Values interface{} // TODO
+	//Values HistoryPerson
 }
 
-/** 
+/**
     Stupid struct to remove
     Quick fix for a bug:
     trust is interpretred as a string in a normal person
@@ -189,8 +189,7 @@ func (p *Person) GetBirthDay() string {
 	return p.GetBirthDate()[:10]
 }
 
-
-func GetRawPersonSortedFields(source string) ([]string) {
+func GetRawPersonSortedFields(source string) []string {
 	switch source {
 	case "a1", "a2", "a3", "a4", "a5", "a6":
 		return RawPersonSortedFields["a"]
@@ -342,20 +341,20 @@ func init() {
 			"LEN",
 		},
 		"afd3": {
-            "MUID",
-            "NAME",
-            "DATE",
-            "TIME",
-            "TZO",
-            "TIMOD",
-            "CY",
-            "PLACE",
-            "LAT",
-            "LG",
-            "OCCU",
-            "BOOKS",
-            "SOURCE",
-            "GQ",
+			"MUID",
+			"NAME",
+			"DATE",
+			"TIME",
+			"TZO",
+			"TIMOD",
+			"CY",
+			"PLACE",
+			"LAT",
+			"LG",
+			"OCCU",
+			"BOOKS",
+			"SOURCE",
+			"GQ",
 		},
 		"csi": {
 			"Satz#",

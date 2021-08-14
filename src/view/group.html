@@ -18,15 +18,31 @@ $(document).ready(function() {
     }
 </style>
 
-{{with .Details.Group}}
+<h1>{{.Header.Title}}</h1>
 
-<h1>{{.Name}}s</h1>
+{{with .Details.Group}}
 
 <div class="big2 margin bold">
     <div>{{.Description}}</div>
     <div>N = {{numberFormat .N}}</div>
+    <div class="">
+        {{if .ParentSlugs}}
+            Parent groups:
+        {{end}}
+        {{range .ParentSlugs}}
+            <span class="padding-right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
+        {{end}}
+    </div>
+    
+    <div class="">
+        {{if .ChildrenSlugs}}
+            Subgroups:
+        {{end}}
+        {{range .ChildrenSlugs}}
+            <span class="padding-right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
+        {{end}}
+    </div>
 </div>
-
 
 {{if .Download}}
 <div class="big2 margin bold">
