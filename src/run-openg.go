@@ -43,11 +43,8 @@ func main() {
 	r.HandleFunc("/sources", H(control.ShowSources))
 
 	r.HandleFunc("/occupations", H(control.ShowOccupations))
-	r.HandleFunc("/occupation/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
-	// remove ???
-	r.HandleFunc("/persons", H(control.ShowPersons))
 
 	// r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))

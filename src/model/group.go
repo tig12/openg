@@ -92,7 +92,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	}
 	var tmp []*Group
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
-		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s', url=%s", slug, url))
+		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s'", slug))
 	}
 	if len(tmp) == 0 {
 		var group = Group{}

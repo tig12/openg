@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('#persons').DataTable({
         "order": [[ 2, 'asc' ]],
         "pageLength": 500,
-        "searching": false,
+        //"searching": false,
         "orderClasses": false, // Highlight the columns being ordered
         "bInfo" : false, // hide "Showing 1 of N entries"
     });
@@ -25,6 +25,9 @@ $(document).ready(function() {
 <div class="big2 margin bold">
     <div>{{.Description}}</div>
     <div>N = {{numberFormat .N}}</div>
+</div>
+
+<div class="big1 margin bold">
     <div class="">
         {{if .ParentSlugs}}
             Parent groups:
@@ -33,7 +36,6 @@ $(document).ready(function() {
             <span class="padding-right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
         {{end}}
     </div>
-    
     <div class="">
         {{if .ChildrenSlugs}}
             Subgroups:
@@ -86,7 +88,7 @@ $(document).ready(function() {
     <td>{{.Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
-            <div><a href="/occupation/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
         {{end}}
     </td>
 </tr>

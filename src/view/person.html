@@ -39,7 +39,7 @@
         <td>Occupations</td>
         <td>
             {{range .Occus}}
-            <div><a href="/occupation/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
             {{end}}
         </td>
     </tr>
@@ -111,10 +111,22 @@
         <td>{{.Birth.Place.Cy}}</td>  
     </tr>
     {{end}}
+    {{if .Birth.Place.C1}}
+    <tr>
+        <td>Admin level 1</td>
+        <td>{{.Birth.Place.C1}}</td>  
+    </tr>
+    {{end}}
     {{if .Birth.Place.C2}}
     <tr>
         <td>Admin level 2</td>
         <td>{{.Birth.Place.C2}}</td>  
+    </tr>
+    {{end}}
+    {{if .Birth.Place.C3}}
+    <tr>
+        <td>Admin level 3</td>
+        <td>{{.Birth.Place.C3}}</td>  
     </tr>
     {{end}}
     {{if .Birth.Place.Lg}}
@@ -161,35 +173,38 @@
 </table>
 
 <!-- ********************************************************************************* -->
-<h2>Raw data</h2>
-Original values of the fields used to build the person in Open Gauquelin database.
-
-<br class="clear-left">
-{{range $sourceSlug, $value := .Raw}}
-    <div class="float-left margin-right margin-left">
-    <h3>{{$sourceSlug | sourceNameFromSlug}}</h3>
-    <table class="raw margin margin-left0">
-        {{range $sourceSlug | rawPersonSortedFields}}
-        <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
-        {{end}}
-    </table>
-    </div>
-{{end}}
-<br class="clear-left">
-
-<!-- ********************************************************************************* -->
-<h2>History</h2>
-Successive commands issued with Gauquelin5 program to build this person, and corresponding values.
+<h2>Build history</h2>
+Successive commands issued with Gauquelin5 program to build this person, and corresponding values retained to build current person.
 {{range .History}}
-    <div class="margin-right margin-left">
+    {{$sourceSlug := .Source}}
     <h3>Command: <code>php run-g5.php {{.Command}}</code></h3>
     <div>Execution date: {{.Date}}</div>
     {{if ne .Source "tweak"}}
-    <div class="margin-top05">Information source: <b><a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b></div>
+        <div class="margin-top05 margin-bottom">
+            Information source: <b>
+            <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
+        </div>
     {{end}}
-    <div class="margin-top05">Values:</div>
-    <table class="raw margin"><tr><td><pre>{{.Values | prettyPrint}}</pre></td></tr></table>
+
+    <div class="float-left margin-right margin-left">
+        Raw data:
+        {{with index $.Details.Person.Raw $sourceSlug}}
+            {{$value := .}}
+            <table class="raw margin margin-left0">
+                {{range $sourceSlug | rawPersonSortedFields}}
+                <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+                {{end}}
+            </table>
+        {{end}}
     </div>
+        
+    <div class="float-left margin-right margin-left">
+        Values:
+        <table class="raw margin-top"><tr><td>
+            <pre>{{.Values | prettyPrint}}</pre>
+        </td></tr></table>
+    </div>
+    <br class="clear-left">
 {{end}}
 
 

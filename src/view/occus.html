@@ -58,12 +58,12 @@ $(document).ready(function() {
             </a>
         </td>
         <td>
-            <div class="whitespace-pre"><a href="/occupation/{{.Slug}}">{{.Name}}</a></div>
+            <div class="whitespace-pre"><a href="/group/{{.Slug}}">{{.Name}}</a></div>
         </td>
         <td>{{.N}}</td>
         <td>
             {{range .ParentSlugs}}
-                <div><a href="/occupation/{{.}}">{{index $.Details.Slug_Name .}}</a></div>
+                <div><a href="/group/{{.}}">{{index $.Details.Slug_Name .}}</a></div>
             {{end}}
         </td>
         <td><a href="{{$.Details.WD_ENTITY_BASE_URL}}/{{.WD}}">{{.WD}}</a></td>
