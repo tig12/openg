@@ -15,6 +15,7 @@ import (
 	"path/filepath"
 	"time"
 	"unicode"
+	"encoding/json"
 )
 
 // used to fill Context.Template
@@ -28,6 +29,7 @@ func init() {
 		"safeHTML":     safeHTML,
 		"ucFirst":      ucFirst,
 		"numberFormat": numberFormat,
+		"prettyPrint": prettyPrint,
 		// Pipelines related to current program
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"groupNameFromSlug":     groupNameFromSlug,
@@ -93,4 +95,15 @@ func groupNameFromSlug(slug string) template.HTML {
 **/
 func rawPersonSortedFields(sourceSlug string) []string {
 	return model.GetRawPersonSortedFields(sourceSlug)
+}
+
+/** 
+    From https://siongui.github.io/2016/01/30/go-pretty-print-variable/
+**/
+func prettyPrint(v interface{}) string {
+      b, err := json.MarshalIndent(v, "", "  ")
+      if err == nil {
+          return string(b)
+      }
+      return ""
 }

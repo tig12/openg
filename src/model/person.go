@@ -37,15 +37,15 @@ type Person struct {
 }
 
 type PersonName struct {
-	Fame              string
-	Given             string
 	Usual             string
+	Given             string
 	Family            string
 	Spouse            string
 	Official          OfficialName
+	Fame              FameName
 	Nicknames         []string
-	Alternative       []string
-	NobiliaryParticle string `json:"nobiliary-particle"`
+	Alter             []string
+	Nobl              string
 }
 
 type OfficialName struct {
@@ -53,8 +53,43 @@ type OfficialName struct {
 	Family string
 }
 
+type FameName struct {
+	Full   string
+	Given  string
+	Family string
+}
+
 type HistoryEntry struct {
-	Details interface{} // TODO
+    Command string
+    Date string
+    Source string
+    //Values Person
+    Values interface{} // TODO 
+    //Values HistoryPerson
+}
+
+/** 
+    Stupid struct to remove
+    Quick fix for a bug:
+    trust is interpretred as a string in a normal person
+    and a float32 is necessary when a person is considered as an history entry
+**/
+type HistoryPerson struct {
+	Id       int
+	Slug     string
+	To_check bool
+	Sources  []string
+	//	SourceSlugs    []string `json:"sources"`
+	//	Sources        []*Source
+	Ids_in_sources map[string]string
+	Trust          float32
+	Trust_details  []string
+	Sex            string
+	Name           PersonName
+	Occus          []string
+	Birth          Event
+	Death          Event
+	Notes          []string
 }
 
 // ************************** Get one *******************************
@@ -152,6 +187,32 @@ func GetBirthDate(date, dateUT string) (res string) {
 **/
 func (p *Person) GetBirthDay() string {
 	return p.GetBirthDate()[:10]
+}
+
+
+func GetRawPersonSortedFields(source string) ([]string) {
+	switch source {
+	case "a1", "a2", "a3", "a4", "a5", "a6":
+		return RawPersonSortedFields["a"]
+	case "d6":
+		return RawPersonSortedFields["d6"]
+	case "d10":
+		return RawPersonSortedFields["d10"]
+	case "e1", "e3":
+		return RawPersonSortedFields["e"]
+	case "afd1":
+		return RawPersonSortedFields["afd1"]
+	case "afd1-100":
+		return RawPersonSortedFields["afd1-100"]
+	case "afd3":
+		return RawPersonSortedFields["afd3"]
+	case "afd5":
+		return RawPersonSortedFields["afd5"]
+	case "csi":
+		return RawPersonSortedFields["csi"]
+	default:
+		return []string{}
+	}
 }
 
 // ************************** Raw ordering *******************************
@@ -313,30 +374,5 @@ func init() {
 			"MARS",
 			"BATCH",
 		},
-	}
-}
-
-func GetRawPersonSortedFields(source string) (res []string) {
-	switch source {
-	case "a1", "a2", "a3", "a4", "a5", "a6":
-		return RawPersonSortedFields["a"]
-	case "d6":
-		return RawPersonSortedFields["d6"]
-	case "d10":
-		return RawPersonSortedFields["d10"]
-	case "e1", "e3":
-		return RawPersonSortedFields["e"]
-	case "afd1":
-		return RawPersonSortedFields["afd1"]
-	case "afd1-100":
-		return RawPersonSortedFields["afd1-100"]
-	case "afd3":
-		return RawPersonSortedFields["afd3"]
-	case "afd5":
-		return RawPersonSortedFields["afd5"]
-	case "csi":
-		return RawPersonSortedFields["csi"]
-	default:
-		panic("ERROR IN THE CODE - undefined RawPersonSortedFields for source '" + source + "'")
 	}
 }

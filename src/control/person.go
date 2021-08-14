@@ -18,6 +18,8 @@ import (
 type detailsPerson struct {
 	Person    *model.Person
 	RawFields map[string][]string
+	WikidataEntityURL string
+	GroupSlugNames          map[string]string
 }
 
 type detailsPersons struct {
@@ -40,6 +42,11 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	//person.Name.Official.Given = "test official given"
 	//person.Name.NobiliaryParticle = "von"
 
+	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+	
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
@@ -48,6 +55,8 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		Details: detailsPerson{
 			Person:    person,
 			RawFields: model.RawPersonSortedFields,
+			WikidataEntityURL: model.WD_ENTITY_BASE_URL,
+			GroupSlugNames:          groupSlugNames,
 		},
 	}
 	return nil

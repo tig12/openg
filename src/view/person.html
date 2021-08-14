@@ -13,12 +13,6 @@
         <td>Name</td>
         <td>{{.GetName}}</td>
     </tr>
-    {{if .Name.Fame}}
-    <tr>
-        <td>Public name</td>
-        <td>{{.Name.Fame}}</td>
-    </tr>
-    {{end}}
     {{if .Sex}}
     <tr>
         <td>Sex</td>
@@ -40,6 +34,14 @@
     <tr>
         <td>Birth Place</td>
         <td>{{.Birth.Place.String}}</td>
+    </tr>
+    <tr>
+        <td>Occupations</td>
+        <td>
+            {{range .Occus}}
+            <div><a href="/occupation/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+            {{end}}
+        </td>
     </tr>
     <tr>
         <td>Trust level</td>
@@ -86,10 +88,10 @@
             </tr>
         {{end}}
     {{end}}
-    {{if .Name.NobiliaryParticle}}
+    {{if .Name.Nobl}}
     <tr>
         <td>Nobiliary particle</td>
-        <td>{{.Name.NobiliaryParticle}}</td>
+        <td>{{.Name.Nobl}}</td>
     </tr>
     {{end}}
 </table>
@@ -146,7 +148,13 @@
         {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
         <tr>
             <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
-            <td>{{$value}}</td>
+            <td>
+                {{if eq $key "wd"}}
+                <a href="{{$.Details.WikidataEntityURL}}/{{$value}}">{{$value}}</a>
+                {{else}}
+                    {{$value}}
+                {{end}}
+            </td>
         </tr>
         {{end}}
     {{end}}
@@ -168,6 +176,21 @@ Original values of the fields used to build the person in Open Gauquelin databas
     </div>
 {{end}}
 <br class="clear-left">
+
+<!-- ********************************************************************************* -->
+<h2>History</h2>
+Successive commands issued with Gauquelin5 program to build this person, and corresponding values.
+{{range .History}}
+    <div class="margin-right margin-left">
+    <h3>Command: <code>php run-g5.php {{.Command}}</code></h3>
+    <div>Execution date: {{.Date}}</div>
+    {{if ne .Source "tweak"}}
+    <div class="margin-top05">Information source: <b><a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b></div>
+    {{end}}
+    <div class="margin-top05">Values:</div>
+    <table class="raw margin"><tr><td><pre>{{.Values | prettyPrint}}</pre></td></tr></table>
+    </div>
+{{end}}
 
 
 {{end}} {{/* with .Details.Person */}}

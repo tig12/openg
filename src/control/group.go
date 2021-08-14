@@ -18,7 +18,7 @@ import (
 type detailsGroup struct {
 	Group        *model.Group
 	DownloadBase string
-	Slug_Name          map[string]string
+	GroupSlugNames          map[string]string
 }
 
 /**
@@ -33,7 +33,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 		return err
 	}
 
-	slug_Name, err := model.GetGroupSlugNames(ctx.Config.RestURL)
+	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
@@ -41,7 +41,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	ctx.TemplateName = "group.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "Group " + group.Name,
+			Title: group.Name + "s",
 			CSSFiles: []string{
 				"/static/lib/datatables/datatables.min.css"},
 			JSFiles: []string{
@@ -51,7 +51,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 		Details: detailsGroup{
 			Group:        group,
 			DownloadBase: ctx.Config.Paths.Downloads,
-			Slug_Name:          slug_Name,
+			GroupSlugNames:          groupSlugNames,
 		},
 	}
 	return nil

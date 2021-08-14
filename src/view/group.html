@@ -20,7 +20,7 @@ $(document).ready(function() {
 
 {{with .Details.Group}}
 
-<h1>{{.Name}}</h1>
+<h1>{{.Name}}s</h1>
 
 <div class="big2 margin bold">
     <div>{{.Description}}</div>
@@ -70,7 +70,7 @@ $(document).ready(function() {
     <td>{{.Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
-            <div><a href="/occupation/{{.}}">{{index $.Details.Slug_Name .}}</a></div>
+            <div><a href="/occupation/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
         {{end}}
     </td>
 </tr>
