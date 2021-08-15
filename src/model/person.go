@@ -11,7 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	//"fmt"
+//"fmt"
 )
 
 // see init function at the end
@@ -112,7 +112,10 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug)
 	}
 	if len(persons) > 1 {
-		return nil, werr.Wrapf(err, "Several persons with identical slug: "+slug)
+		return nil, werr.New("Several persons with identical slug: "+slug)
+	}
+	if len(persons) == 0 {
+		return nil, werr.New("Unexisting person with slug: "+slug)
 	}
 	return &persons[0], nil
 }

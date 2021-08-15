@@ -6,6 +6,8 @@
 run:
   url: 127.0.0.1
   port: 2468
+  # "dev" or "prod"
+  mode: dev
 
 # Url to connect to postgrest api
 rest-url: http://localhost:3579

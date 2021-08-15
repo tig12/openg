@@ -5,7 +5,6 @@
     <div class="subtitle">{{.GetBirthDay}}</div>
 </h1>
 
-
 <table class="table-pres">
 
 <!-- ***************** General ******************** -->
@@ -47,6 +46,29 @@
         <td>Trust level</td>
         <td>{{.Trust}}</td>
     </tr>
+</table>
+
+<!-- ***************** Information sources ******************** -->
+<h3>Identifiers</h3>
+<table class="table-pres">
+    <tr>
+        <td><a href="/sources#g5">Open Gauquelin Database</a></td>
+        <td>{{.Slug}}</td>
+    </tr>
+    {{range $key, $value := .Ids_in_sources}}
+        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
+        <tr>
+            <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
+            <td>
+                {{if eq $key "wd"}}
+                <a href="{{$.Details.WikidataEntityURL}}/{{$value}}">{{$value}}</a>
+                {{else}}
+                    {{$value}}
+                {{end}}
+            </td>
+        </tr>
+        {{end}}
+    {{end}}
 </table>
 
 <!-- ***************** Name details ******************** -->
@@ -149,62 +171,65 @@
     {{end}}
 </table>
     
-<!-- ***************** Information sources ******************** -->
-<h3>Identifiers</h3>
-<table class="table-pres">
-    <tr>
-        <td><a href="/sources#g5">Open Gauquelin Database</a></td>
-        <td>{{.Slug}}</td>
-    </tr>
-    {{range $key, $value := .Ids_in_sources}}
-        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
-        <tr>
-            <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
-            <td>
-                {{if eq $key "wd"}}
-                <a href="{{$.Details.WikidataEntityURL}}/{{$value}}">{{$value}}</a>
-                {{else}}
-                    {{$value}}
-                {{end}}
-            </td>
-        </tr>
-        {{end}}
-    {{end}}
-</table>
-
 <!-- ********************************************************************************* -->
 <h2>Build history</h2>
-Successive commands issued with Gauquelin5 program to build this person, and corresponding values retained to build current person.
+Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
 {{range .History}}
     {{$sourceSlug := .Source}}
-    <h3>Command: <code>php run-g5.php {{.Command}}</code></h3>
+    <h3>Command: <code>{{.Command}}</code></h3>
     <div>Execution date: {{.Date}}</div>
+    
     {{if ne .Source "tweak"}}
+    
         <div class="margin-top05 margin-bottom">
             Information source: <b>
             <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
         </div>
+
+        <div class="float-left margin-right margin-left">
+            Raw data:
+            {{with index $.Details.Person.Raw $sourceSlug}}
+                {{$value := .}}
+                <table class="raw margin margin-left0">
+                    {{range $sourceSlug | rawPersonSortedFields}}
+                    <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+                    {{end}}
+                </table>
+            {{end}}
+        </div>
+            
+        <div class="float-left margin-right margin-left">
+            Values:
+            <table class="raw margin-top"><tr><td>
+                <pre>{{.Values | prettyPrint}}</pre>
+            </td></tr></table>
+        </div>
+        <br class="clear-left">
+        
+    {{else}}
+        {{/* tweaks */}}
+    
+        <div class="margin-top05 margin-bottom">
+            Information source: <b>"tweak file" (human correction)</b>
+        </div>
+
+        <div class="float-left margin-right margin-left">
+            Raw data:
+            <table class="raw margin-top"><tr><td>
+                <pre>{{.Values | prettyPrint}}</pre>
+            </td></tr></table>
+        </div>
+            
+        <div class="float-left margin-right margin-left">
+            Values:
+            <table class="raw margin-top"><tr><td>
+                <pre>{{index $.Details.Person.Raw "tweak" | prettyPrint}}</pre>
+            </td></tr></table>
+        </div>
+        <br class="clear-left">
+    
     {{end}}
 
-    <div class="float-left margin-right margin-left">
-        Raw data:
-        {{with index $.Details.Person.Raw $sourceSlug}}
-            {{$value := .}}
-            <table class="raw margin margin-left0">
-                {{range $sourceSlug | rawPersonSortedFields}}
-                <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
-                {{end}}
-            </table>
-        {{end}}
-    </div>
-        
-    <div class="float-left margin-right margin-left">
-        Values:
-        <table class="raw margin-top"><tr><td>
-            <pre>{{.Values | prettyPrint}}</pre>
-        </td></tr></table>
-    </div>
-    <br class="clear-left">
 {{end}}
 
 

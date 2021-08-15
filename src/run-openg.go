@@ -46,12 +46,12 @@ func main() {
 
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 
-	// r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
 
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
 
 	/*
+        // r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 		// r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.Dir(filepath.Join("view", "common")))))
 		serverView, err := fs.Sub(view.ViewFiles, "view")
 		if err != nil {
@@ -152,7 +152,7 @@ func HPDF(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(
 	}
 }
 
-// *********************** Gestion d'erreur **********************************
+// *********************** Error management **********************************
 // TODO put somewhere else, but where ?
 
 func notFound(w http.ResponseWriter, r *http.Request) {
@@ -165,6 +165,7 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 	type detailsErrorPage struct {
 		URL     string
 		Details string
+		Mode    string
 	}
 	var err error
 
@@ -175,6 +176,7 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 		Details: detailsErrorPage{
 			URL:     r.URL.String(),
 			Details: werr.SprintHTML(theErr),
+			Mode:    ctx.Config.Run.Mode,
 		},
 	}
 	tmpl := ctx.Template
