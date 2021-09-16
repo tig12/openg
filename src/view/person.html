@@ -179,56 +179,36 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
     <h3>Command: <code>{{.Command}}</code></h3>
     <div>Execution date: {{.Date}}</div>
     
-    {{if ne .Source "tweak"}}
-    
-        <div class="margin-top05 margin-bottom">
-            Information source: <b>
-            <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
-        </div>
+    <div class="margin-top05 margin-bottom">
+        Information source: <b>
+        <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
+    </div>
 
-        <div class="float-left margin-right margin-left">
-            Raw data:
-            {{with index $.Details.Person.Raw $sourceSlug}}
-                {{$value := .}}
-                <table class="raw margin margin-left0">
-                    {{range $sourceSlug | rawPersonSortedFields}}
-                    <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
-                    {{end}}
-                </table>
-            {{end}}
-        </div>
-            
-        <div class="float-left margin-right margin-left">
-            Values:
-            <table class="raw margin-top"><tr><td>
-                <pre>{{.Values | prettyPrint}}</pre>
-            </td></tr></table>
-        </div>
-        <br class="clear-left">
+    <div class="float-left margin-right margin-left">
+        Raw data:
+        {{with .Raw}}
+            {{$value := .}}
+            <table class="raw margin margin-left0">
+{{/* 
+todo
+{{if eq (index . $value) "mystring"}}
+  {{.}}
+{{end}}
+*/}}
+                {{range $sourceSlug | rawPersonSortedFields}}
+                <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+                {{end}}
+            </table>
+        {{end}}
+    </div>
         
-    {{else}}
-        {{/* tweaks */}}
-    
-        <div class="margin-top05 margin-bottom">
-            Information source: <b>"tweak file" (human correction)</b>
-        </div>
-
-        <div class="float-left margin-right margin-left">
-            Raw data:
-            <table class="raw margin-top"><tr><td>
-                <pre>{{.Values | prettyPrint}}</pre>
-            </td></tr></table>
-        </div>
-            
-        <div class="float-left margin-right margin-left">
-            Values:
-            <table class="raw margin-top"><tr><td>
-                <pre>{{index $.Details.Person.Raw "tweak" | prettyPrint}}</pre>
-            </td></tr></table>
-        </div>
-        <br class="clear-left">
-    
-    {{end}}
+    <div class="float-left margin-right margin-left">
+        New values:
+        <table class="raw margin-top"><tr><td>
+            <pre>{{.New | prettyPrint}}</pre>
+        </td></tr></table>
+    </div>
+    <br class="clear-left">
 
 {{end}}
 

@@ -19,21 +19,18 @@ import (
 type Person struct {
 	Id       int
 	Slug     string
-	To_check bool
-	Sources  []string
-	//	SourceSlugs    []string `json:"sources"`
-	//	Sources        []*Source
-	Ids_in_sources map[string]string
-	Trust          string
-	Trust_details  []string
 	Sex            string
 	Name           PersonName
 	Occus          []string
 	Birth          Event
 	Death          Event
-	Raw            map[string]map[string]string
+	Sources        []string
+	//	Sources        []*Source
+	Ids_in_sources map[string]string
+	Trust          interface{}
+	Acts           []string
 	History        []HistoryEntry
-	Notes          []string
+	Todo           []string
 }
 
 type PersonName struct {
@@ -63,33 +60,8 @@ type HistoryEntry struct {
 	Command string
 	Date    string
 	Source  string
-	//Values Person
-	Values interface{} // TODO
-	//Values HistoryPerson
-}
-
-/**
-    Stupid struct to remove
-    Quick fix for a bug:
-    trust is interpretred as a string in a normal person
-    and a float32 is necessary when a person is considered as an history entry
-**/
-type HistoryPerson struct {
-	Id       int
-	Slug     string
-	To_check bool
-	Sources  []string
-	//	SourceSlugs    []string `json:"sources"`
-	//	Sources        []*Source
-	Ids_in_sources map[string]string
-	Trust          float32
-	Trust_details  []string
-	Sex            string
-	Name           PersonName
-	Occus          []string
-	Birth          Event
-	Death          Event
-	Notes          []string
+	Raw     map[string]string
+	New     interface{}
 }
 
 // ************************** Get one *******************************
