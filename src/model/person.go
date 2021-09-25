@@ -25,12 +25,12 @@ type Person struct {
 	Birth          Event
 	Death          Event
 	Sources        []string
-	//	Sources        []*Source
 	Ids_in_sources map[string]string
 	Trust          interface{}
 	Acts           []string
 	History        []HistoryEntry
 	Todo           []string
+	Notes          []string
 }
 
 type PersonName struct {
@@ -63,6 +63,32 @@ type HistoryEntry struct {
 	Raw     map[string]string
 	New     interface{}
 }
+
+
+
+// ************************** PersonName *******************************
+/**
+    Returns a string representing a person name
+**/
+func (n *PersonName) DisplayedName() string {
+	if n.Usual != "" {
+		return n.Usual
+	}
+	if n.Fame.Full != ""{
+	    return n.Fame.Full
+	}
+	if n.Fame.Family != ""{
+        if n.Fame.Given == "" {
+            return n.Fame.Family + " " + n.Fame.Given
+        }
+	    return n.Fame.Family
+	}
+	if n.Given == "" {
+		return n.Family
+	}
+	return n.Family + " " + n.Given
+}
+
 
 // ************************** Get one *******************************
 
@@ -118,21 +144,6 @@ func (p *Person) String() string {
 }
 
 /**
-    Returns field UsualName if it exists.
-    Otherwise, returns a concatenation of given and family name.
-**/
-func (p *Person) GetName() string {
-	if p.Name.Usual != "" {
-		return p.Name.Usual
-	}
-	if p.Name.Given == "" {
-		return p.Name.Family
-	}
-	return p.Name.Given + " " + p.Name.Family
-
-}
-
-/**
     Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
     If Birth.Date exists, uses it.
     Otherwise uses field Birth.DateUT
@@ -176,6 +187,8 @@ func GetRawPersonSortedFields(source string) []string {
 		return RawPersonSortedFields["e"]
 	case "afd1":
 		return RawPersonSortedFields["afd1"]
+	case "afd2":
+		return RawPersonSortedFields["afd2"]
 	case "afd1-100":
 		return RawPersonSortedFields["afd1-100"]
 	case "afd3":
@@ -314,6 +327,22 @@ func init() {
 			"OCCU",
 			"OPUS",
 			"LEN",
+		},
+		"afd2": {
+		    "MUID",
+		    "NAME",
+		    "DATE",
+		    "TIME",
+		    "TZO",
+		    "TIMOD",
+		    "CY",
+		    "PLACE",
+		    "LAT",
+		    "LG",
+		    "OCCU",
+		    "BOOKS",
+		    "SOURCE",
+		    "GQ",
 		},
 		"afd3": {
 			"MUID",

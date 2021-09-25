@@ -63,6 +63,12 @@ h1 .subtitle{font-size:.8em;}
     list-style-type:none;
     padding-left:0;
 }
+.home li .nodownload {
+    padding-top:4px;
+}
+.home li .nodownload a{
+    padding-left:2.75em;
+}
 
 table.alternate tbody tr:nth-child(odd){
     background: linear-gradient(to left, #5d9cba, #aadff7);

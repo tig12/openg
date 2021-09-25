@@ -10,19 +10,19 @@
 <table id="global-stats" class="table-pres">
     <tr>
         <td>Total number of persons</td>
-        <td>{{.N}}</td>
+        <td>{{numberFormat .N}}</td>
     </tr>
     <tr>
         <td>
             with birth time
         </td>
-        <td>{{.N_time}}</td>
+        <td>{{numberFormat .N_time}}</td>
     </tr>
     <tr>
         <td>
             without birth time
         </td>
-        <td>{{.N_day}}</td>
+        <td>{{numberFormat .N_day}}</td>
     </tr>
 </table>
 
@@ -37,7 +37,7 @@
     <tr>
         <td>{{$cy}}
         <td>{{index $.Details.CountryNames $cy}}</td>
-        <td>{{$n}}</td>
+        <td>{{numberFormat $n}}</td>
     </tr>    
 {{end}}
 </tbody>
@@ -51,7 +51,7 @@
 </thead>
 <tbody>
 {{range $year, $n := .Years}}
-    <tr><td>{{$year}}</td><td>{{$n}}</td></tr>    
+    <tr><td>{{$year}}</td><td>{{numberFormat $n}}</td></tr>    
 {{end}}
 </tbody>
 </table>

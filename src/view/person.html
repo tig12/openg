@@ -1,7 +1,7 @@
 
 {{with .Details.Person}}
 <h1>
-    {{.GetName}}
+    {{.Name.DisplayedName}}
     <div class="subtitle">{{.GetBirthDay}}</div>
 </h1>
 
@@ -10,7 +10,7 @@
 <!-- ***************** General ******************** -->
     <tr>
         <td>Name</td>
-        <td>{{.GetName}}</td>
+        <td>{{.Name.DisplayedName}}</td>
     </tr>
     {{if .Sex}}
     <tr>
@@ -74,6 +74,18 @@
 <!-- ***************** Name details ******************** -->
 <h3>Name details</h3>
 <table class="table-pres">
+    {{if .Name.Fame}}
+    <tr>
+        <td>Public name</td>
+        <td>
+            {{if .Name.Fame.Full}}
+                {{.Name.Fame.Full}}
+            {{else }}
+                {{.Name.Fame.Family}} {{.Name.Fame.Given}}
+            {{end}}
+        </td>
+    </tr>
+    {{end}}
     {{if .Name.Family}}
     <tr>
         <td>Family name</td>

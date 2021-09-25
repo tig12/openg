@@ -100,7 +100,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	}
 	group = tmp[0]
 
-	// get the persons of the group
+	// get the members of the group
 	url = restURL + "/api_persongroop?group_slug=eq." + slug
 	response, err = http.Get(url)
 	if err != nil {

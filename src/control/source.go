@@ -95,8 +95,10 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"e3",
 		// Müller
 		"afd1-booklet",
-		"afd1",
+		"afd1",                                                                      
 		"afd1-100",
+		"afd2-booklet",
+		"afd2",
 		"afd3-booklet",
 		"afd3",
 		"afd5-booklet",

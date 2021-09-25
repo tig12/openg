@@ -46,7 +46,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: person.GetName() + " " + person.GetBirthDay(),
+			Title: person.Name.DisplayedName() + " " + person.GetBirthDay(),
 		},
 		Details: detailsPerson{
 			Person:            person,
