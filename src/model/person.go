@@ -99,7 +99,7 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 	url := restURL + "/person?slug=eq." + slug
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -124,7 +124,7 @@ func GetPersons(restURL string) (p []*Person, err error) {
 	url := restURL + "/person?limit=10&offset=0"
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {

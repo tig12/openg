@@ -84,7 +84,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	url = restURL + "/groop?slug=eq." + slug
 	response, err = http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -104,7 +104,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	url = restURL + "/api_persongroop?group_slug=eq." + slug
 	response, err = http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -127,7 +127,7 @@ func GetGroups(restURL string) (groups []*Group, err error) {
 	url := restURL + "/groop"
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {

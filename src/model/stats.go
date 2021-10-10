@@ -37,7 +37,7 @@ func GetStats(restURL string) (stats *Stats, err error) {
 	url = restURL + "/stats"
 	response, err = http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling "+url)
+		return nil, werr.Wrapf(err, "Error calling postgrest API: \n"+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {

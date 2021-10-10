@@ -38,6 +38,14 @@ func SprintHTML(err error) string {
     div.werr{
         font-weight:bold;
     }
+    div.werr .message{
+        font-size:1.3rem;
+        display:inline-block;
+        background:lightyellow;
+        border:1px solid grey;
+        padding:1rem;
+        margin:1rem;
+    }
 </style>
     `
 	res += "<table class=\"werr\">\n"
@@ -45,7 +53,7 @@ func SprintHTML(err error) string {
 	// lines contains traceback separated by "|", displayed in a table
 	// and the error message, stored in msg, displayed in a div
 	var tmp []string
-	msg := "<div class=\"werr\">"
+	msg := ""
 	for _, line := range lines {
 		tmp = strings.Split(line, "|")
 		if len(tmp) == 2 {
@@ -53,11 +61,14 @@ func SprintHTML(err error) string {
 			res += "        <td>" + strings.TrimSpace(tmp[0]) + "</td><td>" + strings.TrimSpace(tmp[1]) + "</td>\n"
 			res += "    </tr>\n"
 		} else {
-			msg += tmp[0] + "<br>\n"
+            if msg != "" {
+                msg += "\n<br>"
+            }
+			msg += tmp[0]
 		}
 	}
 	res += "</table>\n"
-	msg += "</div>\n"
+	msg = "<div class=\"werr\"><div class=\"message\">" + msg + "</div></div>"
 	res += msg
 	return res
 }
