@@ -17,6 +17,17 @@ a{text-decoration:none;}
 
 h3{margin-top:0.5rem; margin-bottom:0.5rem;}
 
+/*
+    Used for local anchors in a page.
+    Introduces an offset corresponding to the size of the fixed header.
+*/
+div.anchor {
+    display: block;
+    position: relative;
+    top: -50px;
+    visibility: hidden;
+}
+
 /* ================ Particular styles ================ */
 h1{
     margin-left:auto;
@@ -46,28 +57,6 @@ h1 .subtitle{font-size:.8em;}
 }
 .search input[type=text]{
     border-radius:10px;
-}
-
-/* home page */
-.home #sitelinks>ul{
-    margin-top:0;
-    float:left;
-    padding-left:1rem;
-    font-size:1.2rem;
-    line-height:2rem;
-    font-weight:bold;
-    border-left:1px solid grey;
-    /* background:#bac1c4; */
-}
-.home #sitelinks li{
-    list-style-type:none;
-    padding-left:0;
-}
-.home li .nodownload {
-    padding-top:4px;
-}
-.home li .nodownload a{
-    padding-left:2.75em;
 }
 
 table.alternate tbody tr:nth-child(odd){
@@ -122,5 +111,46 @@ table.wikitable td.paragraph{
     font-size:1.3em;
     font-weight:bold;
     background:#bac1c4;
+    padding:.5rem;
 }
+
+/* ================ Home page ================ */
+.home #sitelinks{
+    border-left:1px solid grey;
+}
+.home #sitelinks>ul{
+    margin-top:0;
+    padding-left:1rem;
+    font-size:1.2rem;
+    line-height:2rem;
+    font-weight:bold;
+    border-left:1px solid grey;
+    /* background:#bac1c4; */
+}
+.home #sitelinks li{
+    list-style-type:none;
+    padding-left:0;
+}
+.home li .nodownload {
+    padding-top:4px;
+}
+.home li .nodownload a{
+    padding-left:2.75em;
+}
+
+/* ================ Page person ================ */
+
+.person .general-summary{
+    background:#fffacd;
+    border:1px solid grey;
+    border-radius:10px;
+    padding:1rem;
+}
+.person .identifiers{
+    background:#fffacd;
+    border:1px solid grey;
+    border-radius:10px;
+    padding:1rem;
+}
+
 

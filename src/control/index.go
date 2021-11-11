@@ -1,3 +1,6 @@
+/** 
+
+**/
 package control
 
 import (
@@ -18,7 +21,7 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 		return err
 	}
 
-	ctx.TemplateName = "home.html"
+	ctx.TemplateName = "index.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{},
 		Details: detailsHome{

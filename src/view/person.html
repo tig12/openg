@@ -1,54 +1,59 @@
 
 {{with .Details.Person}}
-<h1>
+<h1 class="padding-bottom2">
     {{.Name.DisplayedName}}
     <div class="subtitle">{{.GetBirthDay}}</div>
 </h1>
 
-<table class="table-pres">
+<div class="person">
 
-<!-- ***************** General ******************** -->
-    <tr>
-        <td>Name</td>
-        <td>{{.Name.DisplayedName}}</td>
-    </tr>
-    {{if .Sex}}
-    <tr>
-        <td>Sex</td>
-        <td>{{.Sex}}</td>
-    </tr>
-    {{end}}
-    {{if .Birth.Date}}
-    <tr>
-        <td>Birth</td>
-        <td>{{.Birth.Date}}</td>
-    </tr>
-    {{end}}
-    {{if .Birth.DateUT}}
-    <tr>
-        <td>Birth (UTC)</td>
-        <td>{{.Birth.DateUT}}</td>
-    </tr>
-    {{end}}
-    <tr>
-        <td>Birth Place</td>
-        <td>{{.Birth.Place.String}}</td>
-    </tr>
-    <tr>
-        <td>Occupations</td>
-        <td>
-            {{range .Occus}}
-            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-            {{end}}
-        </td>
-    </tr>
-    <tr>
-        <td>Trust level</td>
-        <td>{{.Trust}}</td>
-    </tr>
-</table>
+<!-- ***************** General summary ******************** -->
+<div class="float-left">
+    <table class="table-pres general-summary">
+        <tr>
+            <td>Name</td>
+            <td>{{.Name.DisplayedName}}</td>
+        </tr>
+        {{if .Sex}}
+        <tr>
+            <td>Sex</td>
+            <td>{{.Sex}}</td>
+        </tr>
+        {{end}}
+        {{if .Birth.Date}}
+        <tr>
+            <td>Birth</td>
+            <td>{{.Birth.Date}}</td>
+        </tr>
+        {{end}}
+        {{if .Birth.DateUT}}
+        <tr>
+            <td>Birth (UTC)</td>
+            <td>{{.Birth.DateUT}}</td>
+        </tr>
+        {{end}}
+        <tr>
+            <td>Birth Place</td>
+            <td>{{.Birth.Place.String}}</td>
+        </tr>
+        <tr>
+            <td>Occupations</td>
+            <td>
+                {{range .Occus}}
+                <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <td>Trust level</td>
+            <td>{{.Trust}}</td>
+        </tr>
+    </table>
+</div><!-- end class="float-left" -->
 
-<!-- ***************** Information sources ******************** -->
+
+<!-- ***************** Identifiers ******************** -->
+<div class="float-left margin-left2 identifiers">
 <h3>Identifiers</h3>
 <table class="table-pres">
     <tr>
@@ -56,7 +61,7 @@
         <td>{{.Slug}}</td>
     </tr>
     {{range $key, $value := .Ids_in_sources}}
-        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
+        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd") (eq $key "csi")}}
         <tr>
             <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
             <td>
@@ -70,9 +75,12 @@
         {{end}}
     {{end}}
 </table>
+</div><!-- end class="float-right" -->
 
+
+<br class="clear-both">
 <!-- ***************** Name details ******************** -->
-<h3>Name details</h3>
+<h3 class="margin-top2">Name details</h3>
 <table class="table-pres">
     {{if .Name.Fame}}
     <tr>
@@ -131,7 +139,7 @@
 </table>
     
 <!-- ***************** Birth place details ******************** -->
-<h3>Birth place</h3>
+<h3 class="margin-top2">Birth place details</h3>
 <table class="table-pres">
     {{if .Birth.Place.Name}}
     <tr>
@@ -183,8 +191,17 @@
     {{end}}
 </table>
     
-<!-- ********************************************************************************* -->
-<h2>Build history</h2>
+<!-- ***************** Notes ******************** -->
+{{if .Notes}}
+<h3 class="margin-top2">Notes</h3>
+{{range .Notes}}
+    <div>{{. | safeHTML}}</div>
+{{end}}
+{{end}}
+
+<!-- ***************** Build history ******************** -->
+<hr class="margin-top">
+<h2 class="margin-top">Build history</h2>
 Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
 {{range .History}}
     {{$sourceSlug := .Source}}
@@ -224,5 +241,6 @@ todo
 
 {{end}}
 
+</div><!-- end class="person" -->
 
 {{end}} {{/* with .Details.Person */}}

@@ -69,8 +69,8 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"afd",
 		// secondary
 		"g5",
-		"cura5",
 		"newalch",
+		"cura5",
 		"wd",
 		// Gauquelin
 		"a1-booklet",
