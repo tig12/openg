@@ -1,0 +1,24 @@
+/******************************************************************************
+    Style for Person of Open Gauquelin database
+    
+    @license    GPL
+    @history    2021-11-20 22:36:08+01:00, Thierry Graff : Creation
+********************************************************************************/
+
+.person.general-summary,
+.person.issues,
+.person.notes
+{
+    background:#fffacd;
+    border:1px solid grey;
+    border-radius:10px;
+    padding:1rem;
+}
+.person .identifiers{
+    background:#fffacd;
+    border:1px solid grey;
+    border-radius:10px;
+    padding:1rem;
+}
+
+

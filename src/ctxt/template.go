@@ -14,6 +14,7 @@ import (
 	"openg.local/openg/generic/tiglib"
 	"openg.local/openg/model"
 	"path/filepath"
+	"strings"
 	"time"
 	"unicode"
 )
@@ -28,8 +29,10 @@ func init() {
 		"modulo":       modulo,
 		"safeHTML":     safeHTML,
 		"ucFirst":      ucFirst,
+		"nl2br":        nl2br,
 		"numberFormat": numberFormat,
 		"prettyPrint":  prettyPrint,
+		"whiteSpace2nbsp":        whiteSpace2nbsp,
 		// Pipelines related to current program
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"groupNameFromSlug":     groupNameFromSlug,
@@ -55,6 +58,29 @@ func dateIso(t time.Time) template.HTML {
 	return template.HTML(tiglib.DateIso(t))
 }
 
+func nl2br(t string) template.HTML {
+	return template.HTML(strings.Replace(template.HTMLEscapeString(t), "\n", "<br>", -1))
+}
+
+func numberFormat(n int) template.HTML {
+	return template.HTML(tiglib.NumberFormat(n, ' '))
+}
+
+/**
+    From https://siongui.github.io/2016/01/30/go-pretty-print-variable/
+**/
+func prettyPrint(v interface{}) string {
+	b, err := json.MarshalIndent(v, "", "  ")
+	if err == nil {
+		return string(b)
+	}
+	return ""
+}
+
+func safeHTML(str string) template.HTML {
+	return template.HTML(str)
+}
+
 // from https://www.php2golang.com/method/function.ucfirst.html
 func ucFirst(str string) template.HTML {
 	for _, v := range str {
@@ -64,12 +90,8 @@ func ucFirst(str string) template.HTML {
 	return template.HTML("")
 }
 
-func safeHTML(str string) template.HTML {
-	return template.HTML(str)
-}
-
-func numberFormat(n int) template.HTML {
-	return template.HTML(tiglib.NumberFormat(n, ' '))
+func whiteSpace2nbsp(t string) template.HTML {
+	return template.HTML(strings.Replace(template.HTMLEscapeString(t), " ", "&nbsp;", -1))
 }
 
 // ************************* Pipelines related to current program ********************************
@@ -97,13 +119,3 @@ func rawPersonSortedFields(sourceSlug string) []string {
 	return model.GetRawPersonSortedFields(sourceSlug)
 }
 
-/**
-    From https://siongui.github.io/2016/01/30/go-pretty-print-variable/
-**/
-func prettyPrint(v interface{}) string {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err == nil {
-		return string(b)
-	}
-	return ""
-}

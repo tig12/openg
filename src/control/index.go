@@ -49,3 +49,11 @@ func ShowDownloads(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) er
 	}
 	return nil
 }
+
+func ShowInstall(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+	ctx.TemplateName = "install.html"
+	ctx.Page = &ctxt.Page{
+		Header: ctxt.Header{},
+	}
+	return nil
+}

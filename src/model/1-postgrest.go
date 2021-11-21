@@ -25,7 +25,7 @@
 	request.Header.Set("Accept", "application/vnd.pgrst.object+json") // to have one object returned
     response, err = client.Do(request)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -61,7 +61,7 @@ func GetOneObject(url string) (result *interface{}, err error) {
 	request.Header.Set("Accept", "application/vnd.pgrst.object+json") // to have one object returned
 	response, err = client.Do(request)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -79,7 +79,7 @@ func GetManyObjects(url string) (result *interface{}, err error) {
 	//
 	response, err = http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err = ioutil.ReadAll(response.Body)
 	if err != nil {

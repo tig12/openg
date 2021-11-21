@@ -29,7 +29,8 @@ type Person struct {
 	Trust          interface{}
 	Acts           []string
 	History        []HistoryEntry
-	Todo           []string
+	Issues         map[string]string
+	//Issues         []string
 	Notes          []string
 }
 
@@ -60,7 +61,7 @@ type HistoryEntry struct {
 	Command string
 	Date    string
 	Source  string
-	Raw     map[string]string
+	Raw     map[string]interface{}
 	New     interface{}
 }
 
@@ -99,7 +100,7 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 	url := restURL + "/person?slug=eq." + slug
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
@@ -124,7 +125,7 @@ func GetPersons(restURL string) (p []*Person, err error) {
 	url := restURL + "/person?limit=10&offset=0"
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {

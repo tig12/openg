@@ -24,7 +24,7 @@ func GetOccus(restURL string) (occus []*Group, err error) {
 
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {

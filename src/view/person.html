@@ -75,10 +75,30 @@
         {{end}}
     {{end}}
 </table>
-</div><!-- end class="float-right" -->
+</div><!-- end class="float-left" -->
 
+<div class="float-left">
+<!-- ***************** Issues ******************** -->
+{{if .Issues}}
+<div class="issues">
+    <h3 class="margin-top2">Issues</h3>
+    {{ range $key, $value := .Issues }}
+        <div><b>{{$key}}</b> {{$value | safeHTML}}</div>
+    {{end}}
+{{end}}
+
+<!-- ***************** Notes ******************** -->
+{{if .Notes}}
+<div class="notes">
+    <h3 class="margin-top2">Notes</h3>
+    {{range .Notes}}
+        <div>{{. | safeHTML}}</div>
+    {{end}}
+{{end}}
+</div><!-- end class="float-left" -->
 
 <br class="clear-both">
+
 <!-- ***************** Name details ******************** -->
 <h3 class="margin-top2">Name details</h3>
 <table class="table-pres">
@@ -191,16 +211,9 @@
     {{end}}
 </table>
     
-<!-- ***************** Notes ******************** -->
-{{if .Notes}}
-<h3 class="margin-top2">Notes</h3>
-{{range .Notes}}
-    <div>{{. | safeHTML}}</div>
-{{end}}
-{{end}}
-
 <!-- ***************** Build history ******************** -->
 <hr class="margin-top">
+
 <h2 class="margin-top">Build history</h2>
 Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
 {{range .History}}
@@ -233,9 +246,11 @@ todo
         
     <div class="float-left margin-right margin-left">
         New values:
-        <table class="raw margin-top"><tr><td>
-            <pre>{{.New | prettyPrint}}</pre>
-        </td></tr></table>
+        <table class="raw margin-top">
+            <tr>
+                <td><pre>{{.New | prettyPrint}}</pre></td>
+            </tr>
+        </table>
     </div>
     <br class="clear-left">
 

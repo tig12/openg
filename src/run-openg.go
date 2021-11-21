@@ -36,6 +36,7 @@ func main() {
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
+	r.HandleFunc("/install", H(control.ShowInstall))
 
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 

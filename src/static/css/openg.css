@@ -6,6 +6,7 @@
 ********************************************************************************/
 
 @import "style.css";
+@import "person.css";
 
 /* ================ General styles ================ */                                               
 body{
@@ -27,6 +28,29 @@ div.anchor {
     top: -50px;
     visibility: hidden;
 }
+
+/* ================ semantic ================ */
+.warning{
+    width:50%;
+    padding:.5rem;
+    margin:.5rem;
+    background:gold;
+    border:1px solid grey;
+}
+.todo{
+    background:white;
+    border:1px solid grey;
+    padding:2px;
+    border-radius:2px;
+}
+.highlight{
+    background:gold;
+    border:1px solid grey;
+    padding:3px;
+    border-radius:3px;
+}
+
+
 
 /* ================ Particular styles ================ */
 h1{
@@ -133,9 +157,9 @@ table.wikitable td.paragraph{
 }
 .home li .nodownload {
     padding-top:4px;
+    padding-left:2.75em;
 }
 .home li .nodownload a{
-    padding-left:2.75em;
 }
 
 /* ================ Page person ================ */

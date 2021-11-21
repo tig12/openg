@@ -17,16 +17,16 @@ type Event struct {
 }
 
 type Place struct {
-	C1 string
-	C2 string
-	C3 string
+	C1 interface{} // string
+	C2 interface{} // string
+	C3 interface{} // string
 	Cy string
 	//    Lg              float64
-	Lg string
+	Lg    float32
 	//    Lat             float64
-	Lat   string
+	Lat   float32
 	Name  string
-	Geoid string
+	Geoid int
 }
 
 // ************************** Get fields *******************************

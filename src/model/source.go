@@ -59,7 +59,7 @@ func GetSources(restURL string) (sources []*Source, err error) {
 	url := restURL + "/source"
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, werr.Wrapf(err, "Error calling postgre API: "+url)
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {
