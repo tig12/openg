@@ -42,6 +42,16 @@ func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	return nil
 }
 
+func ShowFuture(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+	ctx.TemplateName = "future.html"
+	ctx.Page = &ctxt.Page{
+		Header: ctxt.Header{
+			Title: "Future developments | Open Gauquelin DB",
+		},
+	}
+	return nil
+}
+
 func ShowDownloads(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "download.html"
 	ctx.Page = &ctxt.Page{

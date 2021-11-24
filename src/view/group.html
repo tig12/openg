@@ -1,7 +1,7 @@
 <script>
 $(document).ready(function() {
     $('#persons').DataTable({
-        "order": [[ 1, 'asc' ]],
+        "order": [[ 3, 'asc' ]],
         "pageLength": 500,
         //"searching": false,
         "orderClasses": false, // Highlight the columns being ordered
@@ -63,11 +63,11 @@ $(document).ready(function() {
 <thead>
     <tr>
         <th>Ids</th>
+        <th>Occupations</th>
+        <th title="Country ISO 3166 code">C.</th>
         <th>Name</th>
         <th>Birth date</th>
         <th>Birth place</th>
-        <th>Country</th>
-        <th>Occupations</th>
     </tr>
 </thead>
 <tbody>
@@ -82,18 +82,18 @@ $(document).ready(function() {
     {{end}}
     </td>
     <td>
+        {{range .Occus}}
+            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+        {{end}}
+    </td>
+    <td>{{.Birth.Place.Cy}}</td>
+    <td>
         <a href="/person/{{.Slug}}">{{.Name.DisplayedName}}</a>
     </td>
     <td>{{.GetBirthDate}}</td>
     <td>
         {{.Birth.Place.Name}}
         {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
-    </td>
-    <td>{{.Birth.Place.Cy}}</td>
-    <td>
-        {{range .Occus}}
-            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-        {{end}}
     </td>
 </tr>
 {{end}}

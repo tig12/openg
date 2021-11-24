@@ -34,9 +34,10 @@ func main() {
 	r := mux.NewRouter()
 	// routes handled in controls/home.go
 	r.HandleFunc("/", H(control.ShowHome))
-	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/install", H(control.ShowInstall))
+	r.HandleFunc("/about", H(control.ShowAbout))
+	r.HandleFunc("/future", H(control.ShowFuture))
 
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 

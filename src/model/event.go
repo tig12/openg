@@ -26,7 +26,7 @@ type Place struct {
 	//    Lat             float64
 	Lat   float32
 	Name  string
-	Geoid int
+	Geoid interface{} // string or int
 }
 
 // ************************** Get fields *******************************
