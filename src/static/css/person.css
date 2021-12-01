@@ -7,7 +7,7 @@
 
 .person.general-summary,
 .person.issues,
-.person.notes
+.person .notes
 {
     background:#fffacd;
     border:1px solid grey;
@@ -20,5 +20,3 @@
     border-radius:10px;
     padding:1rem;
 }
-
-

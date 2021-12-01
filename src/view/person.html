@@ -77,25 +77,27 @@
 </table>
 </div><!-- end class="float-left" -->
 
-<div class="float-left">
+<div class="float-right margin-right2">
 <!-- ***************** Issues ******************** -->
 {{if .Issues}}
 <div class="issues">
-    <h3 class="margin-top2">Issues</h3>
+    <h3>Issues</h3>
     {{ range $key, $value := .Issues }}
         <div><b>{{$key}}</b> {{$value | safeHTML}}</div>
     {{end}}
+</div>
 {{end}}
 
 <!-- ***************** Notes ******************** -->
 {{if .Notes}}
 <div class="notes">
-    <h3 class="margin-top2">Notes</h3>
+    <h3>Notes</h3>
     {{range .Notes}}
         <div>{{. | safeHTML}}</div>
     {{end}}
+</div>
 {{end}}
-</div><!-- end class="float-left" -->
+</div><!-- end class="float-right" -->
 
 <br class="clear-both">
 
