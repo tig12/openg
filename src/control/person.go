@@ -18,8 +18,10 @@ import (
 type detailsPerson struct {
 	Person            *model.Person
 	RawFields         map[string][]string
+	Ids_partial_labels map[string]string
 	WikidataEntityURL string
 	GroupSlugNames    map[string]string
+	SourceSlugNames    map[string]string
 }
 
 type detailsPersons struct {
@@ -43,16 +45,23 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 
+	sourceSlugNames, err := model.GetSourceSlugNames(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+	
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: person.Name.DisplayedName() + " " + person.GetBirthDay(),
 		},
 		Details: detailsPerson{
-			Person:            person,
-			RawFields:         model.RawPersonSortedFields,
-			WikidataEntityURL: model.WD_ENTITY_BASE_URL,
-			GroupSlugNames:    groupSlugNames,
+			Person:             person,
+			RawFields:          model.RawPersonSortedFields,
+			WikidataEntityURL:  model.WD_ENTITY_BASE_URL,
+			Ids_partial_labels: model.Ids_partial_labels,
+			GroupSlugNames:     groupSlugNames,
+			SourceSlugNames:    sourceSlugNames,
 		},
 	}
 	return nil

@@ -26,6 +26,8 @@ type Person struct {
 	Death          Event
 	Sources        []string
 	Ids_in_sources map[string]string
+	Ids_partial    interface{}
+	//Ids_partial    map[string]string
 	Trust          interface{}
 	Acts           []string
 	History        []HistoryEntry
@@ -65,7 +67,14 @@ type HistoryEntry struct {
 	New     interface{}
 }
 
-
+// Displayed names of the partial ids
+var Ids_partial_labels = map[string]string{
+    "lerrcp": "Gauquelin",
+    "afd": "Müller",
+    "csicop-committee": "CSICOP",
+    "ertel": "Ertel",
+    "wd": "Wikidata",
+}
 
 // ************************** PersonName *******************************
 /**

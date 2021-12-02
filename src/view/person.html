@@ -52,29 +52,37 @@
 </div><!-- end class="float-left" -->
 
 
+<div class="float-left margin-left2">
+
 <!-- ***************** Identifiers ******************** -->
-<div class="float-left margin-left2 identifiers">
+<div class="identifiers">
 <h3>Identifiers</h3>
 <table class="table-pres">
     <tr>
-        <td><a href="/sources#g5">Open Gauquelin Database</a></td>
+        <td>Open Gauquelin Database</td>
         <td>{{.Slug}}</td>
     </tr>
-    {{range $key, $value := .Ids_in_sources}}
-        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd") (eq $key "csi")}}
+    {{range $key, $value := .Ids_partial}}
         <tr>
-            <td><a href="/sources#{{$key}}">{{$key | sourceNameFromSlug}}</a></td>
+            <td>{{index $.Details.Ids_partial_labels $key}}</td>
             <td>
-                {{if eq $key "wd"}}
-                <a href="{{$.Details.WikidataEntityURL}}/{{$value}}">{{$value}}</a>
-                {{else}}
-                    {{$value}}
-                {{end}}
+                {{$value}}
             </td>
         </tr>
-        {{end}}
     {{end}}
 </table>
+</div>
+
+<!-- ***************** Sources ******************** -->
+<div class="sources margin-top">
+<h3>Sources</h3>
+<ul class="naked">
+    {{ range .Sources }}
+        <li><a href="/sources#{{.}}">{{index $.Details.SourceSlugNames .}}</a></li>
+    {{end}}
+</ul>
+</div>
+
 </div><!-- end class="float-left" -->
 
 <div class="float-right margin-right2">
