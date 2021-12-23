@@ -9,12 +9,8 @@
 
 <table id="global-stats" class="table-pres">
     <tr>
-        <td>Total number of persons</td>
-        <td>{{numberFormat .N}}</td>
-    </tr>
-    <tr>
         <td>
-            with birth time
+            Number of persons with birth time
         </td>
         <td>{{numberFormat .N_time}}</td>
     </tr>
@@ -23,6 +19,10 @@
             without birth time
         </td>
         <td>{{numberFormat .N_day}}</td>
+    </tr>
+    <tr>
+        <td>Total</td>
+        <td>{{numberFormat .N}}</td>
     </tr>
 </table>
 
