@@ -27,8 +27,8 @@ $(document).ready(function() {
 {{with .Details.Group}}
 
 <div class="big2 margin bold">
-    <div>{{.Description}}</div>
-    <div>N = {{numberFormat .N}}</div>
+    <div class="margin-bottom">N = {{numberFormat .N}}</div>
+    <div>{{.Description | safeHTML}}</div>
 </div>
 
 <div class="big1 margin bold">
@@ -75,10 +75,8 @@ $(document).ready(function() {
 {{range .Members}}
 <tr>
     <td>
-    {{range $key, $value := .Ids_in_sources}}
-        {{if or (eq $key "lerrcp") (eq $key "afd") (eq $key "wd")}}
-            <div title="{{$key | sourceNameFromSlug}} id">{{$value}}</div>
-        {{end}}
+    {{range $key, $value := .Ids_partial}}
+        <div title="{{index $.Details.Ids_partial_labels $key}} id">{{$value}}</div>
     {{end}}
     </td>
     <td>

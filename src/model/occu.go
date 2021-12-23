@@ -31,7 +31,7 @@ func GetOccus(restURL string) (occus []*Group, err error) {
 		return nil, werr.Wrapf(err, "Error decoding occus data")
 	}
 	if err = json.Unmarshal(responseData, &occus); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal occus data")
+		return nil, werr.Wrapf(err, "Error json Unmarshal occus data\n" +string(responseData) + "\n")
 	}
 	// sort by name
 	sorted := make(occuSlice, 0, len(occus))

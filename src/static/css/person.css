@@ -5,16 +5,10 @@
     @history    2021-11-20 22:36:08+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
-.person.general-summary,
-.person.issues,
+.person .general-summary,
+.person .issues,
 .person .sources,
-.person .notes
-{
-    background:#fffacd;
-    border:1px solid grey;
-    border-radius:10px;
-    padding:1rem;
-}
+.person .notes,
 .person .identifiers{
     background:#fffacd;
     border:1px solid grey;

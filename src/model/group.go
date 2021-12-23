@@ -41,6 +41,7 @@ type Group struct {
 type GroupMember struct {
 	Slug           string `json:"person_slug"`
 	Ids_in_sources map[string]string
+	Ids_partial    map[string]string
 	Sex            string
 	Name           PersonName
 	Occus          []string
@@ -92,7 +93,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 	}
 	var tmp []*Group
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
-		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s'", slug))
+		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s'\n%s\n", slug, string(responseData)))
 	}
 	if len(tmp) == 0 {
 		var group = Group{}
@@ -111,7 +112,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 		return nil, werr.Wrapf(err, "Error decoding group members ("+slug+")")
 	}
 	if err = json.Unmarshal(responseData, &group.Members); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal Group.Members")
+		return nil, werr.Wrapf(err, "Error json Unmarshal Group.Members\n" +string(responseData) + "\n")
 	}
 
 	return group, nil
@@ -135,7 +136,7 @@ func GetGroups(restURL string) (groups []*Group, err error) {
 	}
 	groups = []*Group{}
 	if err = json.Unmarshal(responseData, &groups); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal groups data")
+		return nil, werr.Wrapf(err, "Error json Unmarshal groups data\n" +string(responseData) + "\n")
 	}
 	return groups, nil
 }

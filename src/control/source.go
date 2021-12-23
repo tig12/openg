@@ -38,10 +38,10 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 
 	var paragraphs = map[string]string{
 		"lerrcp":           "Primary sources",
-		"g5":               "Secondary sources",
+		"cura5":            "Cura 5",
 		"a1-booklet":       "Michel and Françoise Gauquelin",
 		"afd1-booklet":     "Arno Müller",
-		"csicop-committee": "CSICOP (US skeptics)",
+		"csicop":           "CSICOP (US skeptics)",
 	}
 
 	ctx.TemplateName = "sources.html"
@@ -68,10 +68,10 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"lerrcp",
 		"afd",
 		// secondary
-		"g5",
-		"newalch",
 		"cura5",
+		"newalch",
 		"wd",
+		"g5",
 		// Gauquelin
 		"a1-booklet",
 		"a1",
@@ -104,7 +104,7 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"afd5-booklet",
 		"afd5",
 		// csicop
-		"csicop-committee",
+        "csicop",
 		"csi",
 		"si42",
 	}

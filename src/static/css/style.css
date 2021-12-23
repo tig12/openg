@@ -5,17 +5,7 @@
     @history    2021-07-14 10:25:15+02:00, Thierry Graff : Creation from other project
 ********************************************************************************/
 
-/* ================ Normalization ================ */
-*{
-    box-sizing:border-box;
-}
-body{
-    font-size:1em;
-}                                                                                
-
-/* ================ Style shortcuts ================ */
-ul.spaced{margin-top:.8rem;}
-ol.spaced{margin-top:.8rem;}
+ul.spaced, ol.spaced{margin-top:.8rem;}
 ul.spaced>li, ol.spaced>li{padding-bottom:.8rem;}
 ul.naked>li,ol.naked>li{list-style-type:none;}
 ul.simple{list-style-type: '- ';}

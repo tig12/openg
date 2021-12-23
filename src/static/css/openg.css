@@ -5,6 +5,7 @@
     @history    2021-07-14 09:55:28+02:00, Thierry Graff : Creation
 ********************************************************************************/
 
+@import "normalize.css";
 @import "style.css";
 @import "person.css";
 
@@ -40,7 +41,7 @@ div.anchor {
 .todo{
     background:white;
     border:1px solid grey;
-    padding:2px;
+    padding:1px;
     border-radius:2px;
 }
 .highlight{
@@ -161,20 +162,3 @@ table.wikitable td.paragraph{
 }
 .home li .nodownload a{
 }
-
-/* ================ Person page ================ */
-
-.person .general-summary{
-    background:#fffacd;
-    border:1px solid grey;
-    border-radius:10px;
-    padding:1rem;
-}
-.person .identifiers{
-    background:#fffacd;
-    border:1px solid grey;
-    border-radius:10px;
-    padding:1rem;
-}
-
-

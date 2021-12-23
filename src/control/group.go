@@ -19,6 +19,7 @@ type detailsGroup struct {
 	Group          *model.Group
 	DownloadBase   string
 	GroupSlugNames map[string]string
+    Ids_partial_labels map[string]string
 }
 
 /**
@@ -57,6 +58,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 			Group:          group,
 			DownloadBase:   ctx.Config.Paths.Downloads,
 			GroupSlugNames: groupSlugNames,
+			Ids_partial_labels: model.Ids_partial_labels,
 		},
 	}
 	return nil

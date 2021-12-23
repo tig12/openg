@@ -24,15 +24,12 @@ type Person struct {
 	Occus          []string
 	Birth          Event
 	Death          Event
-	Sources        []string
 	Ids_in_sources map[string]string
-	Ids_partial    interface{}
-	//Ids_partial    map[string]string
+	Ids_partial    interface{} // map[string]string
 	Trust          interface{}
 	Acts           []string
 	History        []HistoryEntry
 	Issues         map[string]string
-	//Issues         []string
 	Notes          []string
 }
 
@@ -71,7 +68,7 @@ type HistoryEntry struct {
 var Ids_partial_labels = map[string]string{
     "lerrcp": "Gauquelin",
     "afd": "Müller",
-    "csicop-committee": "CSICOP",
+    "csicop": "CSICOP",
     "ertel": "Ertel",
     "wd": "Wikidata",
 }
@@ -117,7 +114,7 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 	}
 	persons := []Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug)
+		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug + "\n" +string(responseData) + "\n")
 	}
 	if len(persons) > 1 {
 		return nil, werr.New("Several persons with identical slug: "+slug)
@@ -142,7 +139,7 @@ func GetPersons(restURL string) (p []*Person, err error) {
 	}
 	persons := []*Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal persons data")
+		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n" +string(responseData) + "\n")
 	}
 	return persons, nil
 }

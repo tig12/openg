@@ -35,7 +35,7 @@ func GetIssues(restURL string) (issues []*Issue, err error) {
 		return nil, werr.Wrapf(err, "Error decoding issues data")
 	}
 	if err = json.Unmarshal(responseData, &issues); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal issues data")
+		return nil, werr.Wrapf(err, "Error json Unmarshal issues data\n" +string(responseData) + "\n")
 	}
 	return issues, nil
 }
