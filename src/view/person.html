@@ -1,283 +1,30 @@
 
+<div class="person" itemscope itemtype="https://schema.org/Person">
+
 {{with .Details.Person}}
 <h1 class="padding-bottom2">
     {{.Name.DisplayedName}}
     <div class="subtitle">{{.GetBirthDay}}</div>
 </h1>
 
-<div class="person" itemscope itemtype="https://schema.org/Person">
 
-<div class="flex-wrap">
-<!-- ======== col 1 ======== -->
-<div>
-    <!-- ***************** General summary ******************** -->
-    <table class="table-pres general-summary">
-        <tr>
-            <td>Name</td>
-            <td itemprop="name">{{.Name.DisplayedName}}</td>
-        </tr>
-        {{if .Sex}}
-            {{$gender := "" }}
-            {{if eq .Sex "M"}}
-                {{$gender = "https://schema.org/Male"}}
-            {{else}}
-                {{$gender = "https://schema.org/Female"}}
-            {{end}}
-        <tr>
-            <td>Sex</td>
-            <td itemprop="gender" content="{{$gender}}">{{.Sex}}</td>
-        </tr>
-        {{end}}
-        {{if .Birth.Date}}
-        <tr>
-            <td>Birth</td>
-            <td itemprop="birthDate">{{.Birth.Date}}</td>
-        </tr>
-        {{end}}
-        {{if .Birth.DateUT}}
-        <tr>
-            <td>Birth (UTC)</td>
-            <td>{{.Birth.DateUT}}</td>
-        </tr>
-        {{end}}
-        <tr>
-            <td>Birth Place</td>
-            <td itemprop="birthPlace">{{.Birth.Place.String}}</td>
-        </tr>
-        <tr>
-            <td>Occupations</td>
-            <td>
-                {{range .Occus}}
-                <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-                {{end}}
-            </td>
-        </tr>
-        <tr>
-            <td>Trust level</td>
-            <td>{{.Trust}}</td>
-        </tr>
-    </table>
-    
-    <!-- ***************** Name details ******************** -->
-    <h3 class="margin-top2">Name details</h3>
-    <table class="table-pres">
-        {{if or .Name.Fame.Full .Name.Fame.Family .Name.Fame.Given}}
-        <tr>
-            <td>Public name</td>
-            <td>
-                {{if .Name.Fame.Full}}
-                    {{.Name.Fame.Full}}
-                {{else }}
-                    {{.Name.Fame.Family}} {{.Name.Fame.Given}}
-                {{end}}
-            </td>
-        </tr>
-        {{end}}
-        {{if .Name.Family}}
-        <tr>
-            <td>Family name</td>
-            <td>{{.Name.Family}}</td>
-        </tr>
-        {{end}}
-        {{if .Name.Given}}
-        <tr>
-            <td>Given name</td>
-            <td>{{.Name.Given}}</td>
-        </tr>
-        {{end}}
-        {{if .Name.Spouse}}
-        <tr>
-            <td>Spouse name</td>
-            <td>{{.Name.Spouse}}</td>
-        </tr>
-        {{end}}
-        {{if or .Name.Official.Family .Name.Official.Given}}
-            <tr>
-                <td>Official name</td>
-                <td></td>
-            </tr>
-            {{if .Name.Official.Family}}
-                <tr>
-                    <td>Family name</td>
-                    <td>{{.Name.Official.Family}}</td>
-                </tr>
-            {{end}}
-            {{if .Name.Official.Given}}
-                <tr>
-                    <td>Given name</td>
-                    <td>{{.Name.Official.Given}}</td>
-                </tr>
-            {{end}}
-        {{end}}
-        {{if .Name.Nobl}}
-        <tr>
-            <td>Nobiliary particle</td>
-            <td>{{.Name.Nobl}}</td>
-        </tr>
-        {{end}}
-    </table>
-        
-    <!-- ***************** Birth place details ******************** -->
-    <h3 class="margin-top2">Birth place details</h3>
-    <table class="table-pres">
-        {{if .Birth.Place.Name}}
-        <tr>
-            <td>Name</td>
-            <td>{{.Birth.Place.Name}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.Cy}}
-        <tr>
-            <td>Country</td>
-            <td>{{.Birth.Place.Cy}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.C1}}
-        <tr>
-            <td>Admin level 1</td>
-            <td>{{.Birth.Place.C1}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.C2}}
-        <tr>
-            <td>Admin level 2</td>
-            <td>{{.Birth.Place.C2}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.C3}}
-        <tr>
-            <td>Admin level 3</td>
-            <td>{{.Birth.Place.C3}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.Lg}}
-        <tr>
-            <td>Longitude</td>
-            <td>{{.Birth.Place.Lg}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.Lg}}
-        <tr>
-            <td>Latitude</td>
-            <td>{{.Birth.Place.Lat}}</td>  
-        </tr>
-        {{end}}
-        {{if .Birth.Place.Geoid}}
-        <tr>
-            <td>Geonames ID</td>
-            <td><a href="http://www.geonames.org/{{printf "%.f" .Birth.Place.Geoid}}">{{printf "%.f" .Birth.Place.Geoid}}</a></td>
-        </tr>
-        {{end}}
-    </table>
-        
-</div><!-- ======== end col 1 ======== -->
+<div class="tab">
+  <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-general');" id="general">General</button>
+  <button class="tablinks" onclick="openTab(event, 'tab-build');" id="build">Build history</button>
+</div>
 
+<div id="tab-general" class="tabcontent">
+    <p>
+        {{ template "person-general.html" $ }}
+    </p>
+</div>
 
-<!-- ======== col 2 ======== -->
-<div class="margin-left2">
-
-    <!-- ***************** Identifiers ******************** -->
-    <div class="identifiers">
-    <h3>Identifiers</h3>
-    <table class="table-pres">
-        <tr>
-            <td>Open Gauquelin Database</td>
-            <td>{{.Slug}}</td>
-        </tr>
-        {{range $key, $value := .Ids_partial}}
-            <tr>
-                <td>{{index $.Details.Ids_partial_labels $key}}</td>
-                <td>
-                    {{$value}}
-                </td>
-            </tr>
-        {{end}}
-    </table>
-    </div>
-    
-    <!-- ***************** Sources ******************** -->
-    <div class="sources margin-top">
-    <h3>Sources</h3>
-    <ul class="naked">
-        {{range $key, $value := .Ids_in_sources}}
-            <li><a href="/sources#{{$key}}">{{index $.Details.SourceSlugNames $key}}</a></li>
-        {{end}}
-    </ul>
-    </div>
-
-</div><!-- ======== end col 2 ======== -->
-
-
-<!-- ======== col 3 ======== -->
-<div class="margin-left2">
-    <!-- ***************** Issues ******************** -->
-    {{if .Issues}}
-    <div class="issues">
-        <h3>Issues</h3>
-        {{ range $key, $value := .Issues }}
-            <div><b>{{$key}}</b> {{$value | safeHTML}}</div>
-        {{end}}
-    </div>
-    {{end}}
-    
-    <!-- ***************** Notes ******************** -->
-    {{if .Notes}}
-    <div class="notes">
-        <h3>Notes</h3>
-        {{range .Notes}}
-            <div>{{. | safeHTML}}</div>
-        {{end}}
-    </div>
-    {{end}}
-</div><!-- ======== end col 3 ======== -->
-
-</div><!-- end flex-wrap -->
-
-<!-- ***************** Build history ******************** -->
-<hr class="margin-top">
-
-<h2 class="margin-top">Build history</h2>
-Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
-{{range .History}}
-    {{$sourceSlug := .Source}}
-    <h3>Command: <code>{{.Command}}</code></h3>
-    <div>Execution date: {{.Date}}</div>
-    
-    <div class="margin-top05 margin-bottom">
-        Information source: <b>
-        <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
-    </div>
-
-    <div class="float-left margin-right margin-left">
-        Raw data:
-        {{with .Raw}}
-            {{$value := .}}
-            <table class="raw margin margin-left0">
-{{/* 
-todo
-{{if eq (index . $value) "mystring"}}
-  {{.}}
-{{end}}
-*/}}
-                {{range $sourceSlug | rawPersonSortedFields}}
-                <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
-                {{end}}
-            </table>
-        {{end}}
-    </div>
-        
-    <div class="float-left margin-right margin-left">
-        New values:
-        <table class="raw margin-top">
-            <tr>
-                <td><pre>{{.New | prettyPrint}}</pre></td>
-            </tr>
-        </table>
-    </div>
-    <br class="clear-left">
-
-{{end}}
-
-</div><!-- end class="person" -->
+<div id="tab-build" class="tabcontent">
+    <p>
+        {{ template "person-build.html" $ }}
+    </p>
+</div>
 
 {{end}} {{/* with .Details.Person */}}
+
+</div><!-- end class="person" -->
