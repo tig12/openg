@@ -67,7 +67,7 @@ func GetSources(restURL string) (sources []*Source, err error) {
 	}
 	sources = []*Source{}
 	if err = json.Unmarshal(responseData, &sources); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal sources data\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal sources data\n"+string(responseData)+"\n")
 	}
 	return sources, nil
 }

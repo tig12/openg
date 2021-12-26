@@ -25,14 +25,14 @@ var tmpl *template.Template
 func init() {
 	var fmap = template.FuncMap{
 		// Generic pipelines
-		"dateIso":      dateIso,
-		"modulo":       modulo,
-		"safeHTML":     safeHTML,
-		"ucFirst":      ucFirst,
-		"nl2br":        nl2br,
-		"numberFormat": numberFormat,
-		"prettyPrint":  prettyPrint,
-		"whiteSpace2nbsp":        whiteSpace2nbsp,
+		"dateIso":         dateIso,
+		"modulo":          modulo,
+		"safeHTML":        safeHTML,
+		"ucFirst":         ucFirst,
+		"nl2br":           nl2br,
+		"numberFormat":    numberFormat,
+		"prettyPrint":     prettyPrint,
+		"whiteSpace2nbsp": whiteSpace2nbsp,
 		// Pipelines related to current program
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"groupNameFromSlug":     groupNameFromSlug,
@@ -118,4 +118,3 @@ func groupNameFromSlug(slug string) template.HTML {
 func rawPersonSortedFields(sourceSlug string) []string {
 	return model.GetRawPersonSortedFields(sourceSlug)
 }
-

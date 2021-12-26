@@ -4,7 +4,7 @@
 - See panic if url = http://localhost:8021/person/albani-peppino (no birth time)
   
 - http://localhost:8021/person/farabeuf-louis-1841-05-06
-    Nothe (check date) must be replaced by an issue
+    Note (check date) must be replaced by an issue
 
 Change in database (todos for gauquelin5 software)
     - store lg, lat as doubles in json structure

@@ -15,7 +15,7 @@ type Config struct {
 		Port string
 		Mode string
 	}
-	
+
 	// postgrest
 	RestURL string `yaml:"rest-url"`
 

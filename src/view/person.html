@@ -4,7 +4,12 @@
 {{with .Details.Person}}
 <h1 class="padding-bottom2">
     {{.Name.DisplayedName}}
-    <div class="subtitle">{{.GetBirthDay}}</div>
+    <div class="subtitle">
+        {{.GetBirthDay}}
+        {{if .GetDeathDay}}
+             - {{.GetDeathDay}}
+        {{end}}
+    </div>
 </h1>
 
 

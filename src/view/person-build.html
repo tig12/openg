@@ -7,28 +7,38 @@
 
 Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
 {{range .History}}
+    {{$curHistory := .}}
     {{$sourceSlug := .Source}}
-    <h3>Command: <code>{{.Command}}</code></h3>
-    <div>Execution date: {{.Date}}</div>
+    <h2 class="margin-top2">Command: <code>{{.Command}}</code></h2>
     
     <div class="margin-top05 margin-bottom">
-        Information source: <b>
-        <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a></b>
+        Information source:
+        <b>
+        {{if .Source | sourceNameFromSlug}}
+        <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a>
+        {{else}}
+            {{.Source}}
+        {{end}}
+        </b>
     </div>
 
-    <div class="float-left margin-right margin-left">
+    <div>Execution date: <b>{{.Date}}</b></div>
+    
+    <div class="float-left margin-right margin-top">
         Raw data:
         {{with .Raw}}
             {{$value := .}}
             <table class="raw margin margin-left0">
                 {{range $sourceSlug | rawPersonSortedFields}}
                 <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+                {{else}}
+                <tr><td><pre>{{$curHistory.New | prettyPrint}}</pre></td></tr>
                 {{end}}
             </table>
         {{end}}
     </div>
         
-    <div class="float-left margin-right margin-left">
+    <div class="float-left margin-right margin-top">
         New values:
         <table class="raw margin-top">
             <tr>

@@ -8,17 +8,18 @@ package model
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-//"fmt"
+	"strconv"
 )
 
 // see init function at the end
 
 type Person struct {
-	Id       int
-	Slug     string
+	Id             int
+	Slug           string
 	Sex            string
 	Name           PersonName
 	Occus          []string
@@ -31,6 +32,8 @@ type Person struct {
 	History        []HistoryEntry
 	Issues         []string
 	Notes          []string
+	// not stored in table person
+	Groups []*PersonGroup
 }
 
 type PersonName struct {
@@ -66,14 +69,19 @@ type HistoryEntry struct {
 
 // Displayed names of the partial ids
 var Ids_partial_labels = map[string]string{
-    "lerrcp": "Gauquelin",
-    "afd": "Müller",
-    "csicop": "CSICOP",
-    "ertel": "Ertel",
-    "wd": "Wikidata",
+	"lerrcp": "Gauquelin",
+	"afd":    "Müller",
+	"csicop": "CSICOP",
+	"ertel":  "Ertel",
+	"wd":     "Wikidata",
 }
 
 // ************************** PersonName *******************************
+
+func (p *Person) String() string {
+	return p.Slug
+}
+
 /**
     Returns a string representing a person name
 **/
@@ -81,21 +89,20 @@ func (n *PersonName) DisplayedName() string {
 	if n.Usual != "" {
 		return n.Usual
 	}
-	if n.Fame.Full != ""{
-	    return n.Fame.Full
+	if n.Fame.Full != "" {
+		return n.Fame.Full
 	}
-	if n.Fame.Family != ""{
-        if n.Fame.Given == "" {
-            return n.Fame.Family + " " + n.Fame.Given
-        }
-	    return n.Fame.Family
+	if n.Fame.Family != "" {
+		if n.Fame.Given == "" {
+			return n.Fame.Family + " " + n.Fame.Given
+		}
+		return n.Fame.Family
 	}
 	if n.Given == "" {
 		return n.Family
 	}
 	return n.Family + " " + n.Given
 }
-
 
 // ************************** Get one *******************************
 
@@ -114,19 +121,41 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 	}
 	persons := []Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug + "\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal person data "+slug+"\n"+string(responseData)+"\n")
 	}
 	if len(persons) > 1 {
-		return nil, werr.New("Several persons with identical slug: "+slug)
+		return nil, werr.New("Several persons with identical slug: " + slug)
 	}
 	if len(persons) == 0 {
-		return nil, werr.New("Unexisting person with slug: "+slug)
+		return nil, werr.New("Unexisting person with slug: " + slug)
 	}
 	return &persons[0], nil
 }
 
+// ************************** Compute fields *******************************
+
+/**
+    Computes field 'Groups' of a person
+**/
+func (p *Person) ComputeGroups(restURL string) (err error) {
+	url := restURL + "/api_persongroop?person_id=eq." + strconv.Itoa(p.Id)
+	response, err := http.Get(url)
+	if err != nil {
+		return werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return werr.Wrapf(err, "Error decoding PersonGroup data"+string(responseData)+"\n")
+	}
+	if err = json.Unmarshal(responseData, &p.Groups); err != nil {
+		return werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal PersonGroups\n%s\n", string(responseData)))
+	}
+	return nil
+}
+
 // ************************** Get many *******************************
 
+// NOT USED - REMOVE ?
 func GetPersons(restURL string) (p []*Person, err error) {
 	url := restURL + "/person?limit=10&offset=0"
 	response, err := http.Get(url)
@@ -139,16 +168,12 @@ func GetPersons(restURL string) (p []*Person, err error) {
 	}
 	persons := []*Person{}
 	if err = json.Unmarshal(responseData, &persons); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n"+string(responseData)+"\n")
 	}
 	return persons, nil
 }
 
 // ************************** Get fields *******************************
-
-func (p *Person) String() string {
-	return p.Slug
-}
 
 /**
     Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
@@ -156,21 +181,16 @@ func (p *Person) String() string {
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDate() string {
-	return GetBirthDate(p.Birth.Date, p.Birth.DateUT)
+	return GetLegalOrUTDate(p.Birth.Date, p.Birth.DateUT)
 }
 
 /**
-    Function used by Person and GroupMember
+    Returns a person's death date (day and time), format YYYY-MM-DD HH:MM:SS
+    If Death.Date exists, uses it.
+    Otherwise uses field Death.DateUT
 **/
-func GetBirthDate(date, dateUT string) (res string) {
-	if date != "" {
-		res = date
-	} else if dateUT != "" {
-		res = dateUT
-	} else {
-		return "XXXX-XX-XX XX:XX:XX"
-	}
-	return res
+func (p *Person) GetDeathDate() string {
+	return GetLegalOrUTDate(p.Death.Date, p.Death.DateUT)
 }
 
 /**
@@ -179,7 +199,38 @@ func GetBirthDate(date, dateUT string) (res string) {
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDay() string {
-	return p.GetBirthDate()[:10]
+    tmp := p.GetBirthDate()
+    if len(tmp) == 0 {
+        return ""
+    }
+	return tmp[:10]
+}
+
+/**
+    Returns a person's death day, format YYYY-MM-DD
+    If Death.Date exists, uses it.
+    Otherwise uses field Death.DateUT
+**/
+func (p *Person) GetDeathDay() string {
+    tmp := p.GetDeathDate()
+    if len(tmp) == 0 {
+        return ""
+    }
+	return tmp[:10]
+}
+
+/**
+    Function used by Person and GroupMember
+**/
+func GetLegalOrUTDate(date, dateUT string) (res string) {
+	if date != "" {
+		res = date
+	} else if dateUT != "" {
+		res = dateUT
+	} else {
+		return ""
+	}
+	return res
 }
 
 func GetRawPersonSortedFields(source string) []string {
@@ -336,20 +387,20 @@ func init() {
 			"LEN",
 		},
 		"afd2": {
-		    "MUID",
-		    "NAME",
-		    "DATE",
-		    "TIME",
-		    "TZO",
-		    "TIMOD",
-		    "CY",
-		    "PLACE",
-		    "LAT",
-		    "LG",
-		    "OCCU",
-		    "BOOKS",
-		    "SOURCE",
-		    "GQ",
+			"MUID",
+			"NAME",
+			"DATE",
+			"TIME",
+			"TZO",
+			"TIMOD",
+			"CY",
+			"PLACE",
+			"LAT",
+			"LG",
+			"OCCU",
+			"BOOKS",
+			"SOURCE",
+			"GQ",
 		},
 		"afd3": {
 			"MUID",

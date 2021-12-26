@@ -12,16 +12,18 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-//"fmt"
+	//"fmt"
 )
 
 type detailsPerson struct {
-	Person            *model.Person
-	RawFields         map[string][]string
+	Person             *model.Person
+	RawFields          map[string][]string
 	Ids_partial_labels map[string]string
-	WikidataEntityURL string
-	GroupSlugNames    map[string]string
+	WikidataEntityURL  string
+	GroupSlugNames     map[string]string
 	SourceSlugNames    map[string]string
+	CountryCodesNames  map[string]string
+	BelongsToHistoricalGroups bool
 }
 
 type detailsPersons struct {
@@ -40,6 +42,11 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 
+	err = person.ComputeGroups(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+
 	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err
@@ -50,10 +57,18 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 	
+	belongsToHistoricalGroups := false
+	for _,g := range(person.Groups){
+	    if g.GroupType == model.GROUP_TYPE_HISTORICAL {
+	        belongsToHistoricalGroups = true
+	        break
+	    }
+	}
+
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: person.Name.DisplayedName() + " " + person.GetBirthDay(),
+			Title:    person.Name.DisplayedName() + " " + person.GetBirthDay(),
 			CSSFiles: []string{"/static/lib/tabstrip/tabstrip.css"},
 		},
 		Details: detailsPerson{
@@ -63,6 +78,8 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			Ids_partial_labels: model.Ids_partial_labels,
 			GroupSlugNames:     groupSlugNames,
 			SourceSlugNames:    sourceSlugNames,
+			CountryCodesNames:  model.CountryCodesNames,
+			BelongsToHistoricalGroups: belongsToHistoricalGroups,
 		},
 		Footer: ctxt.Footer{
 			JSFiles: []string{

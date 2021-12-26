@@ -68,7 +68,7 @@ func GetOneObject(url string) (result *interface{}, err error) {
 		return nil, werr.Wrapf(err, "Error decoding response body")
 	}
 	if err = json.Unmarshal(responseData, result); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal\n"+string(responseData)+"\n")
 	}
 	return result, nil
 }
@@ -86,7 +86,7 @@ func GetManyObjects(url string) (result *interface{}, err error) {
 		return nil, werr.Wrapf(err, "Error decoding response body")
 	}
 	if err = json.Unmarshal(responseData, result); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal\n"+string(responseData)+"\n")
 	}
 	return result, nil
 }

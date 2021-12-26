@@ -48,6 +48,22 @@ type GroupMember struct {
 	Birth          Event
 }
 
+/** Structure to store data of view api_persongroop  **/
+type PersonGroup struct {
+	PersonId       int32  `json:"person_id"`
+	PersonSlug     string `json:"person_slug"`
+	GroupId        int32  `json:"group_id"`
+	GroupSlug      string `json:"group_slug"`
+	GroupName      string `json:"group_name"`
+	GroupType      string `json:"group_type"`
+	Ids_in_sources map[string]string
+	Ids_partial    interface{} // map[string]string
+	Sex            string
+	Name           PersonName
+	Occus          []string
+	Birth          Event
+}
+
 // ************************** slug - names *******************************
 // map group slug => group name
 var groupSlugNames = make(map[string]string)
@@ -55,9 +71,9 @@ var groupSlugNames = make(map[string]string)
 func GetGroupSlugNames(restURL string) (map[string]string, error) {
 	// lazy loading
 	if len(groupSlugNames) == 0 {
-		groups, err := GetGroups(restURL)
+		groups, err := GetAllGroups(restURL)
 		if err != nil {
-			return nil, werr.Wrapf(err, "Error calling GetGroup()")
+			return nil, werr.Wrapf(err, "Error calling GetAllGroups()")
 		}
 		for _, group := range groups {
 			groupSlugNames[group.Slug] = group.Name
@@ -112,7 +128,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 		return nil, werr.Wrapf(err, "Error decoding group members ("+slug+")")
 	}
 	if err = json.Unmarshal(responseData, &group.Members); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal Group.Members\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal Group.Members\n"+string(responseData)+"\n")
 	}
 
 	return group, nil
@@ -124,7 +140,7 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
     Returns all the groups present in database.
     Each group only contains the fields stored in database (no computed fields like members).
 **/
-func GetGroups(restURL string) (groups []*Group, err error) {
+func GetAllGroups(restURL string) (groups []*Group, err error) {
 	url := restURL + "/groop"
 	response, err := http.Get(url)
 	if err != nil {
@@ -136,7 +152,7 @@ func GetGroups(restURL string) (groups []*Group, err error) {
 	}
 	groups = []*Group{}
 	if err = json.Unmarshal(responseData, &groups); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal groups data\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal groups data\n"+string(responseData)+"\n")
 	}
 	return groups, nil
 }
@@ -153,5 +169,5 @@ func (g *Group) String() string {
     Otherwise uses field Birth.DateUT
 **/
 func (p *GroupMember) GetBirthDate() string {
-	return GetBirthDate(p.Birth.Date, p.Birth.DateUT)
+	return GetLegalOrUTDate(p.Birth.Date, p.Birth.DateUT)
 }

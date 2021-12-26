@@ -16,10 +16,10 @@ import (
 )
 
 type detailsGroup struct {
-	Group          *model.Group
-	DownloadBase   string
-	GroupSlugNames map[string]string
-    Ids_partial_labels map[string]string
+	Group              *model.Group
+	DownloadBase       string
+	GroupSlugNames     map[string]string
+	Ids_partial_labels map[string]string
 }
 
 /**
@@ -55,9 +55,9 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 				"/static/lib/datatables/datatables.min.js"},
 		},
 		Details: detailsGroup{
-			Group:          group,
-			DownloadBase:   ctx.Config.Paths.Downloads,
-			GroupSlugNames: groupSlugNames,
+			Group:              group,
+			DownloadBase:       ctx.Config.Paths.Downloads,
+			GroupSlugNames:     groupSlugNames,
 			Ids_partial_labels: model.Ids_partial_labels,
 		},
 	}

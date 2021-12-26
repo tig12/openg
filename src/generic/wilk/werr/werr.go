@@ -61,9 +61,9 @@ func SprintHTML(err error) string {
 			res += "        <td>" + strings.TrimSpace(tmp[0]) + "</td><td>" + strings.TrimSpace(tmp[1]) + "</td>\n"
 			res += "    </tr>\n"
 		} else {
-            if msg != "" {
-                msg += "\n<br>"
-            }
+			if msg != "" {
+				msg += "\n<br>"
+			}
 			msg += tmp[0]
 		}
 	}

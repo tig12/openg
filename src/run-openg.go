@@ -54,20 +54,20 @@ func main() {
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
 
 	/*
-	    // Ancienne méthode, n'utilisant pas embed
-        // r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
-		// r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.Dir(filepath.Join("view", "common")))))
-		serverView, err := fs.Sub(view.ViewFiles, "view")
-		if err != nil {
-			log.Fatal(err)
-		}
-		r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(serverView))))
-		//
-		serverViewCommon, err := fs.Sub(view.ViewFiles, filepath.Join("view", "common"))
-		if err != nil {
-			log.Fatal(err)
-		}
-		r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.FS(serverViewCommon))))
+			    // Ancienne méthode, n'utilisant pas embed
+		        // r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+				// r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.Dir(filepath.Join("view", "common")))))
+				serverView, err := fs.Sub(view.ViewFiles, "view")
+				if err != nil {
+					log.Fatal(err)
+				}
+				r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(serverView))))
+				//
+				serverViewCommon, err := fs.Sub(view.ViewFiles, filepath.Join("view", "common"))
+				if err != nil {
+					log.Fatal(err)
+				}
+				r.PathPrefix("/view/common/").Handler(http.StripPrefix("/view/common/", http.FileServer(http.FS(serverViewCommon))))
 	*/
 
 	r.NotFoundHandler = http.HandlerFunc(notFound)

@@ -37,11 +37,11 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	}
 
 	var paragraphs = map[string]string{
-		"lerrcp":           "Primary sources",
-		"cura5":            "Cura 5",
-		"a1-booklet":       "Michel and Françoise Gauquelin",
-		"afd1-booklet":     "Arno Müller",
-		"csicop":           "CSICOP (US skeptics)",
+		"lerrcp":       "Primary sources",
+		"cura5":        "Cura 5",
+		"a1-booklet":   "Michel and Françoise Gauquelin",
+		"afd1-booklet": "Arno Müller",
+		"csicop":       "CSICOP (US skeptics)",
 	}
 
 	ctx.TemplateName = "sources.html"
@@ -95,7 +95,7 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"e3",
 		// Müller
 		"afd1-booklet",
-		"afd1",                                                                      
+		"afd1",
 		"afd1-100",
 		"afd2-booklet",
 		"afd2",
@@ -104,7 +104,7 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"afd5-booklet",
 		"afd5",
 		// csicop
-        "csicop",
+		"csicop",
 		"csi",
 		"si42",
 	}

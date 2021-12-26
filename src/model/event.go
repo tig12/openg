@@ -9,7 +9,7 @@ package model
 import ()
 
 type Event struct {
-	Tzo    string
+	TZO    string
 	Date   string
 	Note   string
 	Place  Place
@@ -22,7 +22,7 @@ type Place struct {
 	C3 interface{} // string
 	Cy string
 	//    Lg              float64
-	Lg    float32
+	Lg float32
 	//    Lat             float64
 	Lat   float32
 	Name  string

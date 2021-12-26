@@ -11,10 +11,12 @@
 <div>
     <!-- ***************** General summary ******************** -->
     <table class="table-pres general-summary">
+    
         <tr>
             <td>Name</td>
             <td itemprop="name">{{.Name.DisplayedName}}</td>
         </tr>
+        
         {{if .Sex}}
             {{$gender := "" }}
             {{if eq .Sex "M"}}
@@ -23,43 +25,52 @@
                 {{$gender = "https://schema.org/Female"}}
             {{end}}
         <tr>
-            <td>Sex</td>
+            <td>Gender</td>
             <td itemprop="gender" content="{{$gender}}">{{.Sex}}</td>
         </tr>
         {{end}}
+        
         {{if .Birth.Date}}
         <tr>
-            <td>Birth</td>
+            <td>Birth date</td>
             <td itemprop="birthDate">{{.Birth.Date}}</td>
         </tr>
         {{end}}
-        {{if .Birth.DateUT}}
+        
+        {{if and (not .Birth.Date) .Birth.DateUT}}
         <tr>
             <td>Birth (UTC)</td>
             <td>{{.Birth.DateUT}}</td>
         </tr>
         {{end}}
+        
+        {{if .Birth.Place.String}}
         <tr>
-            <td>Birth Place</td>
+            <td>Place</td>
             <td itemprop="birthPlace">{{.Birth.Place.String}}</td>
         </tr>
+        {{end}}
+        
+        {{if .Death.Date}}
         <tr>
-            <td>Occupations</td>
-            <td>
-                {{range .Occus}}
-                <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-                {{end}}
-            </td>
+            <td>Death date</td>
+            <td itemprop="deathDate">{{.Death.Date}}</td>
         </tr>
+        {{end}}
+        
+        {{if .Death.Place.String}}
         <tr>
-            <td>Trust level</td>
-            <td>{{.Trust}}</td>
+            <td>Place</td>
+            <td itemprop="deathPlace">{{.Death.Place.String}}</td>
         </tr>
+        {{end}}
+        
     </table>
     
     <!-- ***************** Name details ******************** -->
     <h3 class="margin-top2">Name details</h3>
     <table class="table-pres">
+    
         {{if or .Name.Fame.Full .Name.Fame.Family .Name.Fame.Given}}
         <tr>
             <td>Public name</td>
@@ -72,24 +83,28 @@
             </td>
         </tr>
         {{end}}
+        
         {{if .Name.Family}}
         <tr>
             <td>Family name</td>
-            <td>{{.Name.Family}}</td>
+            <td itemprop="familyName">{{.Name.Family}}</td>
         </tr>
         {{end}}
+        
         {{if .Name.Given}}
         <tr>
             <td>Given name</td>
-            <td>{{.Name.Given}}</td>
+            <td itemprop="givenName">{{.Name.Given}}</td>
         </tr>
         {{end}}
+        
         {{if .Name.Spouse}}
         <tr>
             <td>Spouse name</td>
             <td>{{.Name.Spouse}}</td>
         </tr>
         {{end}}
+        
         {{if or .Name.Official.Family .Name.Official.Given}}
             <tr>
                 <td>Official name</td>
@@ -108,6 +123,7 @@
                 </tr>
             {{end}}
         {{end}}
+        
         {{if .Name.Nobl}}
         <tr>
             <td>Nobiliary particle</td>
@@ -116,51 +132,84 @@
         {{end}}
     </table>
         
+    {{if and .Birth.Date .Birth.DateUT}}
+    <!-- ***************** Birth time details ******************** -->
+    <h3 class="margin-top2">Birth time details</h3>
+    <table class="table-pres">
+        <tr>
+            <td>Legal time</td>
+            <td>{{.Birth.Date}}</td>
+        </tr>
+        
+        <tr>
+            <td>Universal time</td>
+            <td>{{.Birth.DateUT}}</td>
+        </tr>
+        
+        <tr>
+            <td>Timezone offset</td>
+            <td>{{.Birth.TZO}}</td>
+        </tr>
+    </table>
+    {{end}}
+    
     <!-- ***************** Birth place details ******************** -->
     <h3 class="margin-top2">Birth place details</h3>
-    <table class="table-pres">
+    <table class="table-pres" itemprop="birthPlace" itemscope itemtype="https://schema.org/Place">
+        
         {{if .Birth.Place.Name}}
         <tr>
             <td>Name</td>
-            <td>{{.Birth.Place.Name}}</td>  
+            <td itemprop="name">{{.Birth.Place.Name}}</td>  
         </tr>
         {{end}}
+        
         {{if .Birth.Place.Cy}}
         <tr>
             <td>Country</td>
-            <td>{{.Birth.Place.Cy}}</td>  
+            <td>
+                <span itemprop="containedIn" itemscope itemtype="https://schema.org/Country">
+                    {{.Birth.Place.Cy}}
+                </span>
+                ({{index $.Details.CountryCodesNames .Birth.Place.Cy}})
+            </td>  
         </tr>
         {{end}}
+        
         {{if .Birth.Place.C1}}
         <tr>
             <td>Admin level 1</td>
             <td>{{.Birth.Place.C1}}</td>  
         </tr>
         {{end}}
+        
         {{if .Birth.Place.C2}}
         <tr>
             <td>Admin level 2</td>
             <td>{{.Birth.Place.C2}}</td>  
         </tr>
         {{end}}
+        
         {{if .Birth.Place.C3}}
         <tr>
             <td>Admin level 3</td>
             <td>{{.Birth.Place.C3}}</td>  
         </tr>
         {{end}}
-        {{if .Birth.Place.Lg}}
-        <tr>
-            <td>Longitude</td>
-            <td>{{.Birth.Place.Lg}}</td>  
-        </tr>
+        
+        {{if and .Birth.Place.Lat .Birth.Place.Lg}}
+        <tbody itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
+            <tr>
+                <td>Longitude</td>
+                <td itemprop="longitude">{{.Birth.Place.Lg}}</td>  
+            </tr>
+            <tr>
+                <td>Latitude</td>
+                <td itemprop="latitude">{{.Birth.Place.Lat}}</td>  
+            </tr>
+        </tbody>
         {{end}}
-        {{if .Birth.Place.Lg}}
-        <tr>
-            <td>Latitude</td>
-            <td>{{.Birth.Place.Lat}}</td>  
-        </tr>
-        {{end}}
+        
         {{if .Birth.Place.Geoid}}
         <tr>
             <td>Geonames ID</td>
@@ -169,6 +218,60 @@
         {{end}}
     </table>
         
+    {{if .Death.Place.Name}}
+    <!-- ***************** Death place details ******************** -->
+    <h3 class="margin-top2">Death place details</h3>
+    <table class="table-pres">
+        {{if .Death.Place.Name}}
+        <tr>
+            <td>Name</td>
+            <td>{{.Death.Place.Name}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.Cy}}
+        <tr>
+            <td>Country</td>
+            <td>{{.Death.Place.Cy}} ({{index $.Details.CountryCodesNames .Death.Place.Cy}})</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.C1}}
+        <tr>
+            <td>Admin level 1</td>
+            <td>{{.Death.Place.C1}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.C2}}
+        <tr>
+            <td>Admin level 2</td>
+            <td>{{.Death.Place.C2}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.C3}}
+        <tr>
+            <td>Admin level 3</td>
+            <td>{{.Death.Place.C3}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.Lg}}
+        <tr>
+            <td>Longitude</td>
+            <td>{{.Death.Place.Lg}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.Lg}}
+        <tr>
+            <td>Latitude</td>
+            <td>{{.Death.Place.Lat}}</td>  
+        </tr>
+        {{end}}
+        {{if .Death.Place.Geoid}}
+        <tr>
+            <td>Geonames ID</td>
+            <td><a href="http://www.geonames.org/{{printf "%.f" .Death.Place.Geoid}}">{{printf "%.f" .Death.Place.Geoid}}</a></td>
+        </tr>
+        {{end}}
+    </table>
+    {{end}}
 </div><!-- ======== end col 1 ======== -->
 
 
@@ -176,7 +279,7 @@
 <div class="margin-left2">
 
     <!-- ***************** Identifiers ******************** -->
-    <div class="identifiers">
+    <div class="admin">
     <h3>Identifiers</h3>
     <table class="table-pres">
         <tr>
@@ -192,11 +295,37 @@
             </tr>
         {{end}}
     </table>
+    
+    <!-- ************************************* -->
+    <h3 class="margin-top2 help">Trust level: {{.Trust}}</h3>
     </div>
     
+    <!-- ***************** Groups ******************** -->
+    <div class="groups margin-top">
+        {{if .Occus}}
+            <h3>Occupations</h3>
+            <ul class="naked">
+                {{range .Occus}}
+                <li itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></li>
+                {{end}}
+            </ul>
+        {{end}}
+        
+        {{if $.Details.BelongsToHistoricalGroups}}
+            <h3>Groups to which this person belongs</h3>
+            <ul class="naked">
+                {{range .Groups}}
+                    {{if eq .GroupType "history"}}
+                    <li><a href="/group/{{.GroupSlug}}">{{.GroupName}}</a></li>
+                    {{end}}
+                {{end}}
+            </ul>
+        {{end}}
+    </div>
+
     <!-- ***************** Sources ******************** -->
     <div class="sources margin-top">
-    <h3>Sources</h3>
+    <h3>Information sources</h3>
     <ul class="naked">
         {{range $key, $value := .Ids_in_sources}}
             <li><a href="/sources#{{$key}}">{{index $.Details.SourceSlugNames $key}}</a></li>

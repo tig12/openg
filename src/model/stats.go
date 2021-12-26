@@ -45,7 +45,7 @@ func GetStats(restURL string) (stats *Stats, err error) {
 	}
 	var tmp []*Stats
 	if err = json.Unmarshal(responseData, &tmp); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal Stats\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal Stats\n"+string(responseData)+"\n")
 	}
 	if len(tmp) == 0 {
 		var stats = Stats{}

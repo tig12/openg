@@ -11,21 +11,22 @@ import (
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-//	"sort"
+	//	"sort"
 )
 
 type Issue struct {
-    PersonSlug     string `json:"slug"`
-    PersonName     PersonName `json:"name"`
-	Values         []string `json:"issues"`
+	PersonSlug string     `json:"slug"`
+	PersonName PersonName `json:"name"`
+	Values     []string   `json:"issues"`
 }
+
 // ************************** Get many *******************************
 
 /**
     Returns all issues, sorted by name.
 **/
 func GetIssues(restURL string) (issues []*Issue, err error) {
-    
+
 	url := restURL + "/api_issue"
 	response, err := http.Get(url)
 	if err != nil {
@@ -36,8 +37,7 @@ func GetIssues(restURL string) (issues []*Issue, err error) {
 		return nil, werr.Wrapf(err, "Error decoding issues data")
 	}
 	if err = json.Unmarshal(responseData, &issues); err != nil {
-		return nil, werr.Wrapf(err, "Error json Unmarshal issues data\n" +string(responseData) + "\n")
+		return nil, werr.Wrapf(err, "Error json Unmarshal issues data\n"+string(responseData)+"\n")
 	}
 	return issues, nil
 }
-

@@ -6,22 +6,35 @@
 ********************************************************************************/
 
 .person .general-summary,
-.person .issues,
+.person .groups,
 .person .sources,
 .person .notes,
-.person .identifiers{
+.person .issues,
+.person .admin{
     border:1px solid grey;
     border-radius:10px;
     padding:1rem;
 }
 
 .person .general-summary,
+.person .groups,
 .person .sources,
-.person .notes,
-.person .identifiers{
+.person .notes{
     background:#fffacd;
+}
+
+.person .admin{
+    background:lightgrey;
 }
 
 .person .issues{
     background:#f7a7a3;
+}
+
+.person .groups li{
+    font-weight:bold;
+}
+
+.person .help:hover{
+    cursor: help;
 }

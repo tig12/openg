@@ -8,7 +8,7 @@ import (
 
 /** For the page with all occupations **/
 type detailsIssues struct {
-	Issues              []*model.Issue
+	Issues             []*model.Issue
 	DownloadBase       string
 	WD_ENTITY_BASE_URL string
 	Slug_Name          map[string]string
@@ -22,7 +22,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	if err != nil {
 		return err
 	}
-	
+
 	ctx.TemplateName = "issues.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
