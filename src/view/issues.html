@@ -1,2 +1,56 @@
+<script>
+$(document).ready(function() {
+    $('#issues').DataTable({
+        "order": [[ 1, 'asc' ]],
+        "pageLength": 500,
+        "searching": false,
+        "orderClasses": false, // Highlight the columns being ordered
+        "bInfo" : false, // hide "Showing 1 of N entries"
+        "bLengthChange": false, // Hide "Show N entries"
+        "language": {
+            "search": "Search this group:"
+        }
+    });
+} );
+</script>
+<style>
+    table#issues th{text-align:left;}
+    table#issues tr.odd{background-color:#eee;}
+    table#issues tr.even{background-color:#ddd;}
+    table#issues.dataTable tbody tr:hover {
+      background-color: #ffa;
+    }
+</style>
 
-<h1>Open Gauquelin DB issues</h1>
+<h1>
+Persons' issues
+<br>Open Gauquelin DB
+</h1>
+
+<div class="intro">
+Current page shows potential errors identified on persons' fields.
+</div>
+
+<table id="issues" class="display" style="width:100%">
+<thead>
+    <tr>
+        <th>Person</th>
+        <th>Issues</th>
+    </tr>
+</thead>
+<tbody>
+
+{{range .Details.Issues}}
+    <tr>
+        <td><a href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a></td>
+        <td>
+            {{range .Values}}
+                <div>{{. | safeHTML}}</div>
+            {{end}}
+        </td>
+    </tr>
+
+{{end}}
+
+</tbody>
+</table>

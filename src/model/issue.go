@@ -15,8 +15,9 @@ import (
 )
 
 type Issue struct {
-	key            int
-	Value          string
+    PersonSlug     string `json:"slug"`
+    PersonName     PersonName `json:"name"`
+	Values         []string `json:"issues"`
 }
 // ************************** Get many *******************************
 
@@ -25,7 +26,7 @@ type Issue struct {
 **/
 func GetIssues(restURL string) (issues []*Issue, err error) {
     
-	url := restURL + "/api_issues"
+	url := restURL + "/api_issue"
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

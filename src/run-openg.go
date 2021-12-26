@@ -34,6 +34,7 @@ func main() {
 	r := mux.NewRouter()
 	// routes handled in controls/home.go
 	r.HandleFunc("/", H(control.ShowHome))
+	r.HandleFunc("/issues", H(control.ShowIssues))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/install", H(control.ShowInstall))
 	r.HandleFunc("/about", H(control.ShowAbout))

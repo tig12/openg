@@ -29,7 +29,7 @@ type Person struct {
 	Trust          interface{}
 	Acts           []string
 	History        []HistoryEntry
-	Issues         map[string]string
+	Issues         []string
 	Notes          []string
 }
 

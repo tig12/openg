@@ -54,6 +54,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: person.Name.DisplayedName() + " " + person.GetBirthDay(),
+			CSSFiles: []string{"/static/lib/tabstrip/tabstrip.css"},
 		},
 		Details: detailsPerson{
 			Person:             person,
@@ -62,6 +63,10 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			Ids_partial_labels: model.Ids_partial_labels,
 			GroupSlugNames:     groupSlugNames,
 			SourceSlugNames:    sourceSlugNames,
+		},
+		Footer: ctxt.Footer{
+			JSFiles: []string{
+				"/static/lib/tabstrip/tabstrip.js"},
 		},
 	}
 	return nil

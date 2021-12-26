@@ -10,8 +10,18 @@
 .person .sources,
 .person .notes,
 .person .identifiers{
-    background:#fffacd;
     border:1px solid grey;
     border-radius:10px;
     padding:1rem;
+}
+
+.person .general-summary,
+.person .sources,
+.person .notes,
+.person .identifiers{
+    background:#fffacd;
+}
+
+.person .issues{
+    background:#f7a7a3;
 }
