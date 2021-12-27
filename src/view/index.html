@@ -1,7 +1,7 @@
 <div class="home">
 
 <h1 class="margin-bottom3">
-    Open Gauquelin Database (ogdb)
+    Open Gauquelin Database (OGDB)
     <div class="subtitle">
         <br>Timed birth dates of famous persons
     </div>
@@ -10,28 +10,18 @@
 <!-- ************************************* -->
 <div class="float-left padding-left">
 
-<div class="">
-The purpose of this site is to build data usable to perform statistical tests of astrology in a scientifically acceptable way.
-</div>
-
-<div class="big2">
+<div class="intro">
 {{with .Details.Stats}}
-This database contains <b>{{numberFormat .N_time}} persons with birth time</b> (and {{numberFormat .N_day}} without birth time).
-<br>Born between {{.YearMin}} and {{.YearMax}}
-<br><a href="/stats">See more statistics</a>
+This database contains <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
+<br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
 {{end}}
+
+<br><br>It contains data used to perform statistical tests on astrology, gathered by Michel and Françoise Gauquelin, Arno Müller and Suitbert Ertel.
 </div>
 
-
-<style>
-.historical{
-
-}
-.historical li{list-style-type:none;}
-</style>
-
+<div class="historical">
 <h2>Historical datasets</h2>
-<ul class="historical">
+<ul>
     <li class="author">
         <b>Michel &amp; Françoise Gauquelin</b>
         <ul>
@@ -260,20 +250,25 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> (
             </li>
         </ul>
     </li>
-    
+
 </ul>
+</div>
+
 </div><!-- end float-left -->
 
 <!-- ************************************* -->
 <div id="sitelinks" class="float-right padding-right2">
     <ul>
         <li><a href="/occupations">Lists by occupation</a></li>
-        <li><a href="/sources">Information sources</a></li>
         <li><a href="/issues">Persons' issues</a></li>
-        <li><a href="/stats">Database statistics</a></li>
+        <li><a href="/sources">Information sources</a></li>
+        <li><center><hr style="width:80%;"></center></li>
+        <li><a href="/about">About OGDB</a></li>
         <li><a href="/downloads">Data Downloads</a></li>
-        <li><a href="/about">About ogdb</a></li>
-        <li><a href="/future">Future</a></li>
+        <li><a href="/stats">Database statistics</a></li>
+        <li><center><hr style="width:80%;"></center></li>
+        <li><a href="/install">Install OGDB</a></li>
+        <li><a href="/future">Future developments</a></li>
     </ul>
     
 </div><!-- end float-right -->

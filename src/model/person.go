@@ -70,8 +70,10 @@ type HistoryEntry struct {
 // Displayed names of the partial ids
 var Ids_partial_labels = map[string]string{
 	"lerrcp": "Gauquelin",
-	"afd":    "Müller",
+	"muller": "Müller",
+	"cpara":  "Comité Para",
 	"csicop": "CSICOP",
+	"cfepp":  "CFEPP",
 	"ertel":  "Ertel",
 	"wd":     "Wikidata",
 }
@@ -92,16 +94,23 @@ func (n *PersonName) DisplayedName() string {
 	if n.Fame.Full != "" {
 		return n.Fame.Full
 	}
-	if n.Fame.Family != "" {
-		if n.Fame.Given == "" {
-			return n.Fame.Family + " " + n.Fame.Given
+	fam := n.Family
+	if n.Nobl != "" {
+	    if string(n.Nobl[len(n.Nobl)-1]) == "'" {
+	        fam = n.Nobl +fam
+	    }else{
+	        fam = n.Nobl + " " + fam
+	    }
+	}
+	if fam != "" {
+		if n.Fame.Given != "" {
+			return fam + " " + n.Fame.Given
 		}
-		return n.Fame.Family
 	}
 	if n.Given == "" {
-		return n.Family
+		return fam
 	}
-	return n.Family + " " + n.Given
+	return fam + " " + n.Given
 }
 
 // ************************** Get one *******************************

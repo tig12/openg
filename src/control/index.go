@@ -15,15 +15,15 @@ type detailsHome struct {
 }
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-
 	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
-
 	ctx.TemplateName = "index.html"
 	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{},
+		Header: ctxt.Header{
+            CSSFiles: []string{"static/css/index.css"},
+		},
 		Details: detailsHome{
 			Stats:        stats,
 			DownloadBase: ctx.Config.Paths.Downloads,
@@ -36,7 +36,7 @@ func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	ctx.TemplateName = "about.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "About the Open Gauquelin Database",
+			Title: "About | Open Gauquelin DB",
 		},
 	}
 	return nil

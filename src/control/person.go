@@ -69,7 +69,9 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title:    person.Name.DisplayedName() + " " + person.GetBirthDay(),
-			CSSFiles: []string{"/static/lib/tabstrip/tabstrip.css"},
+			CSSFiles: []string{
+			    "/static/lib/tabstrip/tabstrip.css",
+			    "/static/css/person.css"},
 		},
 		Details: detailsPerson{
 			Person:             person,
