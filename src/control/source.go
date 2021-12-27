@@ -35,13 +35,21 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	if err != nil {
 		return err
 	}
-
+	
+	
+	/** 
+	    source slug => Paragraph title
+	    When the view builds source list,
+	    The paragraph title is displayed BEFORE the source.
+	    (ex: "Primary sources" is displayed before lerrcp source).
+	**/
 	var paragraphs = map[string]string{
 		"lerrcp":       "Primary sources",
-		"cura5":        "Cura 5",
+		"cura5":        "Secondary sources",
 		"a1-booklet":   "Michel and Françoise Gauquelin",
 		"afd1-booklet": "Arno Müller",
 		"csicop":       "CSICOP (US skeptics)",
+		"3a_sports":    "Ertel",
 	}
 
 	ctx.TemplateName = "sources.html"
@@ -107,6 +115,8 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"csicop",
 		"csi",
 		"si42",
+		// ertel
+		"3a_sports",
 	}
 	var res = []*model.Source{}
 	for _, slug := range order {
