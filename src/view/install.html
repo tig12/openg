@@ -1,7 +1,51 @@
 
-<h1>INSTALL Open Gauquelin Database<br>TODO</h1>
+<h1>INSTALL Open Gauquelin Database</h1>
+
+
+<div class="intro">
+    This page describes how to run this web site on your local machine.
+    <br>The procedure describes how to do on a Linux machine (tested on Debian 10 and Ubuntu 20.4).
+    <br>Normally, it should also work on Windows and MacOS, but has never been tested.
+</div>
 
 
 <!-- ********************************************************************************* -->
-<h2>Use </h2>
+<h2>Prerequisites</h2>
+
+You need to have installed on your machine :
+
+<ul class="spaced margin-top">
+    <li>The Go programming language (version 1.17 or higher) - <a href="https://go.dev/doc/install">See go documentation</a>.</li>
+    <li>Postgresql database management system (version 12 or higher) - <a href="https://www.postgresql.org/download/">See postgresql documentation</a></li>
+    <li>Postgrest web server (version 8.0 or higher) - <a href="https://postgrest.org/en/stable/install.html">See postgrest documentation</a></li>
+</ul>
+
+
+<!-- ********************************************************************************* -->
+<h2>Install the database</h2>
+
+There are two solutions:
+
+<ol class="spaced margin-top">
+    <li>
+        <a href="/download">Download the postgresql dump</a> and import it on your local postgresql.
+    </li>
+    
+    <li>
+        Generate the database from scratch using g5 program - see <a href="https://tig12.github.io/gauquelin5/install.html">g5 installation instructions</a>.
+    </li>
+</ol>
+
+
+<!-- ********************************************************************************* -->
+<h2>Install openg</h2>
+
+<code>openg</code> is the name of the program which runs current site and permits to browse the database.
+
+<br><br>Clone the repository:
+
+<pre>git clone --depth=1 https://github.com/tig12/openg.git</pre>
+Note: <code>--depth=1</code> is optional, only useful to save up disk space and bandwidth.
+
+
 

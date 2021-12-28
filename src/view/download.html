@@ -1,22 +1,221 @@
 
-<h1>Open Gauquelin Database Downloads<br>TODO</h1>
+<h1>Open Gauquelin Database Downloads</h1>
 
+<div class="intro">
+    Most downloadable files are in CSV format, which contain only part of the information of the database.
+    <br>The only file containing the full information is the postgresql dump (see below).
+    <br>If you need a specific format or different extracts, <a href="/about">contact me</a>.
+</div>
 
+<!-- ********************************************************************************* -->
 <h2>Download full database</h2>
 
 <ul>
     <li><a href="">Postgresql dump</a> - to run opengauquelin on your local machine - See <a href="install">page INSTALL</a></li>
-    <li><a href="">CSV export - timed data</a></li>
-    <li><a href="">CSV export - timed and untimed data</a></li>
+    <li><a href="">CSV export - Timed data</a></li>
+    <li><a href="">CSV export - Timed and untimed data</a></li>
 </ul>
 
+<!-- ********************************************************************************* -->
+<h2>Download CSV lists by occupation</h2>
+See page <a href="/occupations">Lists by occupation</a> and click on the download icon <img class="padding-right padding-left" src="/static/img/download.png" alt="Download"> of the corresponding list.
 
-<h2>Download by occupation</h2>
-See page <a href="occupations">Lists by occupation</a>
+<!-- ********************************************************************************* -->
+<h2>Format of downloadable CSV files</h2>
 
+Some csv files contain fields that are not listed here
+<br>In this case, these fields are documented in the README files accompanying the generated files.
 
-<h2>Custom downloads</h2>
-Current do
+<table class="wikitable margin">
 
-
-<h2>Format of CSV files</h2>
+    <tr>
+        <th>Field name</th>
+        <th>Comments</th>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2" class="paragraph">Identifiers</td></tr>
+    
+    <tr>
+        <td>OGDBID</td>
+        <td>
+            <b>Open Gauquelin Database unique id</b>
+            <br>Looks like <code>alard-pierre-1937-09-17</code>.
+            <br>See <a href="https://tig12.github.io/gauquelin5/gauquelin.html#gauquelin-unique-id">the definition of OGDB unique id</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GQID</td>
+        <td>
+            <b>Gauquelin unique id</b>
+            <br>Looks like <code>A2-721</code>.
+            <br>See <a href="https://tig12.github.io/gauquelin5/gauquelin.html#gauquelin-unique-id">the definition of Gauquelin unique id</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>MUID</td>
+        <td>
+            <b>Müller unique id</b>
+            <br>Looks like <code>M1-325</code>.
+            <br>See <a href="https://tig12.github.io/gauquelin5/muller.html#muller-unique-id">the definition of Müller unique id</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>ERID</td>
+        <td>
+            <b>Ertel unique id</b>
+            <br>Looks like <code>ES-326</code> ; only used for sportspersons.
+            <br>See <a href="https://tig12.github.io/gauquelin5/ertel.html#ertel-unique-id">the definition of Ertel unique id</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>CSID</td>
+        <td>
+            <b>CSICOP unique id</b>
+            <br>Looks like <code>CSI-153</code> ; only used for sportspersons.
+            <br>See <a href="https://tig12.github.io/gauquelin5/csicop.html#csicop-unique-id">The definition of CSICOP unique id</a>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>WDID</td>
+        <td>
+            <b>Wikidata unique id</b>
+            <br>Looks like <code>Q41390</code>.
+            <br>Corresponds to the <a href="https://www.wikidata.org/wiki/Wikidata:Identifiers">Wikidata id of an entity</a>.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2" class="paragraph">Names</td></tr>
+    
+    <tr>
+        <td>FNAME</td>
+        <td>
+            <b>Family name</b>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GNAME</td>
+        <td>
+            <b>Given name</b>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>NOB</td>
+        <td>
+            <b>Nobiliary particle</b>.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2" class="paragraph">Dates</td></tr>
+    
+    <tr>
+        <td>DATE</td>
+        <td>
+            <b>Legal date</b> = date and time as written in the birth certificate.
+            <br>Format ISO 8601 of this form : <code>YYYY-MM-DD HH:MM</code>.
+            <br>Example : <code>2017-05-03 09:30</code>.
+            <br>Timezone offset is not included ; hour precision is minute (seconds omited).
+        </td>
+    </tr>
+    
+    <tr>
+        <td>DATE-UT</td>
+        <td>
+            <b>Date and time converted to universal time</b>.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2" class="paragraph">Geographical information</td></tr>
+    
+    <tr>
+        <td>PLACE</td>
+        <td>
+            <b>Birth place name</b>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>CY</td>
+        <td>
+            <b>country code</b> of birth place ; ISO 3166, 2 letters format.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>C1</td>
+        <td>
+            <b>Administrative division level 1</b> of birth place
+            <br>Means "province" in Italy, or "state" in the USA.
+            <br>Corresponds to ADM1 in geonames.org ("first-order administrative division").
+        </td>
+    </tr>
+    
+    <tr>
+        <td>C2</td>
+        <td>
+            <b>Administrative division level 2</b> of birth place
+            <br>Means "département" in France.
+            <br>Corresponds to ADM2 in geonames.org ("second-order administrative division").
+        </td>
+    </tr>
+    
+    <tr>
+        <td>C3</td>
+        <td>
+            <b>Administrative division level 3</b> of birth place
+            <br>Used for "arrondissements" (Paris, Lyon, Marseille) = division of a big city in different parts.
+            <br>Does NOT correspond to ADM3 in geonames.org ; in geonames.org, different arrondissements are modeled as different PLACE, and have different geonames id.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>GEOID</td>
+        <td>
+            <b>geonames.org unique identifier</b> of birth place.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>LG</td>
+        <td>
+            <b>Longitude</b> of birth place in decimal degrees.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>LAT</td>
+        <td>
+            <b>Latitude</b> of birth place in decimal degrees.
+        </td>
+    </tr>
+    
+    <!-- ************************************* -->
+    <tr><td colspan="2" class="paragraph">Other fields</td></tr>
+    <tr>
+        <td>G</td>
+        <td>
+            <b>Gender</b>
+            <br><code>F</code> or <code>M</code> in general.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>OCCU</td>
+        <td>
+            <b>Occupation code</b>, as listed in <a href="/occupations">page listing persons by occupation</a>.
+            <br>When a person has more than one occupation code, the codes are separated by "+".
+            Ex : politician+writer means that the person is identified as a politician and a writer.
+        </td>
+    </tr>
+    
+</table>
