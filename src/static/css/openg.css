@@ -29,7 +29,11 @@ div.anchor {
 
 /* ================ semantic ================ */
 .intro{
+}
 
+.content{
+    margin-left:1rem;
+    margin-bottom:1rem;
 }
 
 /* ================ Particular styles ================ */

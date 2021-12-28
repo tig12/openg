@@ -4,7 +4,10 @@
 {{with .Details.Stats}}
 
 <style>
-    table#global-stats td:nth-child(2){font-size:1.2rem;}
+table#global-stats td:nth-child(2){
+    font-size:1.2rem;
+    text-align:right;
+}
 </style>
 
 <table id="global-stats" class="table-pres">
@@ -28,32 +31,68 @@
 
 <!-- ********************************************************************************* -->
 <h2>Repartition by country</h2>
-<table class="wikitable">
-<thead>
-    <tr><th colspan="2">Country</th><th>N</th></tr>
-</thead>
-<tbody>
+
+<br class="clear-left">
+{{$i := 0}}
+{{$mod := 12}} {{/* Change when nb of contries changes */}}
+
 {{range $cy, $n := .Countries}}
+    {{if eq 0 (modulo $i $mod)}}
+        <table class="wikitable float-left margin-right">
+        <thead>
+            <tr><th colspan="2">Country</th><th>N</th></tr>
+        </thead>
+        <tbody>
+    {{end}}
     <tr>
         <td>{{$cy}}
         <td>{{index $.Details.CountryNames $cy}}</td>
         <td>{{numberFormat $n}}</td>
     </tr>    
+    {{$i = add $i 1}}
+    {{if eq 0 (modulo $i $mod)}}
+        </tbody>
+        </table>
+    {{end}}
 {{end}}
-</tbody>
-</table>
+
+{{if not (eq 0 (modulo $i $mod))}}
+    </tbody>
+    </table>
+{{end}}
+
+<br class="clear-left">
 
 <!-- ********************************************************************************* -->
 <h2>Repartition by year</h2>
-<table class="wikitable">
-<thead>
-    <tr><th>Year</th><th>N</th></tr>
-</thead>
-<tbody>
+
+<img class="margin border" src="/static/tmp/years.svg" alt="">
+
+<br class="clear-left">
+{{$i := 0}}
+{{$mod := 20}}
 {{range $year, $n := .Years}}
+    {{if eq 0 (modulo $i $mod)}}
+        <table class="wikitable float-left margin-right">
+        <thead>
+            <tr><th>Year</th><th>N</th></tr>
+        </thead>
+        <tbody>
+    {{end}}
+    
     <tr><td>{{$year}}</td><td>{{numberFormat $n}}</td></tr>    
+    {{$i = add $i 1}}
+    {{if eq 0 (modulo $i $mod)}}
+        </tbody>
+        </table>
+    {{end}}
 {{end}}
-</tbody>
-</table>
+
+{{if not (eq 0 (modulo $i $mod))}}
+    </tbody>
+    </table>
+{{end}}
+
+<br class="clear-left">
 
 {{end}} {{/* with .Details.Stats */}}

@@ -25,17 +25,18 @@ var tmpl *template.Template
 func init() {
 	var fmap = template.FuncMap{
 		// Generic pipelines
+		"add":             add,
 		"dateIso":         dateIso,
 		"modulo":          modulo,
-		"safeHTML":        safeHTML,
-		"ucFirst":         ucFirst,
 		"nl2br":           nl2br,
 		"numberFormat":    numberFormat,
 		"prettyPrint":     prettyPrint,
+		"safeHTML":        safeHTML,
+		"ucFirst":         ucFirst,
 		"whiteSpace2nbsp": whiteSpace2nbsp,
 		// Pipelines related to current program
-		"sourceNameFromSlug":    sourceNameFromSlug,
 		"groupNameFromSlug":     groupNameFromSlug,
+		"sourceNameFromSlug":    sourceNameFromSlug,
 		"rawPersonSortedFields": rawPersonSortedFields,
 	}
 	tmpl = template.
@@ -48,6 +49,10 @@ func init() {
 }
 
 // ************************* Generic pipelines ********************************
+
+func add(i, j int) int {
+	return i + j
+}
 
 func modulo(i, mod int) int {
 	return i % mod
