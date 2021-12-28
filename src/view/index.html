@@ -7,8 +7,8 @@
     </div>
 </h1>
 
-<!-- ************************************* -->
-<div class="float-left">
+<div class="flex-wrap">
+<div><!-- just for flex -->
 
 <div class="intro">
 {{with .Details.Stats}}
@@ -16,8 +16,10 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
 <br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
 {{end}}
 
-<br><br>It contains data used to perform statistical tests on astrology, gathered by Michel and Françoise Gauquelin, Arno Müller and Suitbert Ertel.
+<br><br>It contains data used to perform statistical tests on astrology,
+<br>gathered by Michel and Françoise Gauquelin, Arno Müller and Suitbert Ertel.
 </div>
+
 
 <div class="historical">
 <h2>Historical datasets</h2>
@@ -252,12 +254,15 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
     </li>
 
 </ul>
-</div>
+</div><!-- end class="historical" -->
 
-</div><!-- end float-left -->
+</div><!-- end just for flex -->
+
+<!-- div used by flex to take all space between .historical and .sitelinks -->
+<div class="central"></div>
 
 <!-- ************************************* -->
-<div id="sitelinks" class="float-right padding-right2">
+<div class="sitelinks">
     <ul>
         <li><a href="/occupations">Lists by occupation</a></li>
         <li><a href="/issues">Persons' issues</a></li>
@@ -270,9 +275,8 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         <li><a href="/install">Install OGDB</a></li>
         <li><a href="/future">Future developments</a></li>
     </ul>
-    
-</div><!-- end float-right -->
+</div>
 
-<br class="clear-both">
+</div><!-- end class="flex-wrap" -->
 
 </div><!-- end class="home" -->

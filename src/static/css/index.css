@@ -16,8 +16,6 @@
     padding-top:4px;
     padding-left:2.75em;
 }
-.home .historical li .nodownload a{
-}
 .home .historical li{
     list-style-type:none;
 }
@@ -26,22 +24,24 @@
     padding:0 5px;
 }
 
-
+.home .central{
+    flex-grow:4;
+}
 
 /* sitelinks, list on the right */
-.home #sitelinks{
-    border-left:1px solid grey;
+.home .sitelinks{
+    padding-left:2rem;
+    margin-right:2rem;
 }
-.home #sitelinks>ul{
+.home .sitelinks>ul{
     margin-top:0;
-    padding-left:1rem;
     font-size:1.2rem;
     line-height:2rem;
     font-weight:bold;
     border-left:1px solid grey;
     /* background:#bac1c4; */
 }
-.home #sitelinks li{
+.home .sitelinks li{
     list-style-type:none;
     padding-left:0;
 }
