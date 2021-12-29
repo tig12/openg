@@ -7,8 +7,9 @@
 {{with .Details.Person}}
 
 <div class="flex-wrap">
+
 <!-- ======== col 1 ======== -->
-<div>
+<div class="col1">
     <!-- ***************** General summary ******************** -->
     <table class="table-pres general-summary">
     
@@ -276,7 +277,7 @@
 
 
 <!-- ======== col 2 ======== -->
-<div class="margin-left2">
+<div class="col2">
 
     <!-- ***************** Identifiers ******************** -->
     <div class="admin">
@@ -337,7 +338,7 @@
 
 
 <!-- ======== col 3 ======== -->
-<div class="margin-left2">
+<div class="col3">
     <!-- ***************** Issues ******************** -->
     {{if .Issues}}
     <div class="issues">
@@ -355,7 +356,7 @@
     
     <!-- ***************** Notes ******************** -->
     {{if .Notes}}
-    <div class="notes">
+    <div class="notes margin-top">
         <h3>Notes</h3>
         {{range .Notes}}
             <div>{{. | safeHTML}}</div>

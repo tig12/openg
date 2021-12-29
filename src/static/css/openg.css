@@ -8,67 +8,36 @@
 @import "normalize.css";
 @import "style.css";
 
-/* ================ General styles ================ */                                               
-body{
-    font-family:Verdana, Geneva, sans-serif;
-    background: linear-gradient(to right, #5d9cba, #aadff7);
-}
-
-a{text-decoration:none;}
-
-pre{
-    white-space:pre-wrap;
-    margin:1rem;
-    background:lightgrey;
-    padding:.5rem;
-    border-radius:5px;
-    border:1px solid #717a9f;
-}
-/*
-    Used for local anchors in a page.
-    Introduces an offset corresponding to the size of the fixed header.
-*/
-div.anchor {
-    display: block;
-    position: relative;
-    top: -50px;
-    visibility: hidden;
-}
-
-/* ================ semantic ================ */
+/* ================ Semantic ================ */
 .intro{
     font-size:1.4rem;
     margin:1rem 0 1rem 2rem;
 }
 
 .content{
+    padding-left:1rem;
+    padding-right:1rem;
+    margin-top:4rem;
     margin-left:1rem;
     margin-bottom:1rem;
 }
 
-/* ================ Particular styles ================ */
-h1{
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-    margin-bottom:4rem;
+/* ================ Top header stuff ================ */
+/*
+    Used for local anchors in a page.
+    Introduces an offset corresponding to the size of the fixed header.
+*/
+div.anchor {
+    display:block;
+    position:relative;
+    top:-50px;
+    visibility:hidden;
 }
-h1 .subtitle{font-size:.8em;}
-
-h3{margin-top:0.5rem; margin-bottom:0.5rem;}
-
-/* used in all pages */
-.content{
-    padding-left:1rem;
-    padding-right:1rem;
-    margin-top:4em;
-}
-
 .top-header{
     position:fixed;
     top:0;
     width:100%;
-    background: linear-gradient(to left, #5d9cba, #aadff7);
+    background:linear-gradient(to left, #5d9cba, #aadff7);
     border-bottom:1px solid grey;
     z-index:1000;
 }
@@ -80,23 +49,47 @@ h3{margin-top:0.5rem; margin-bottom:0.5rem;}
     display:inline;
 }
 .search input[type=text]{
-    border-radius:10px;
+    border-radius:7px;
+}
+
+/* ================ Particular elements ================ */
+body{
+    font-family:Verdana, Geneva, sans-serif;
+    background:linear-gradient(to right, #5d9cba, #aadff7);
+}
+a{
+    text-decoration:none;
+}
+h1{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    margin-bottom:4rem;
+}
+h1 .subtitle{
+    font-size:.8em;
+}
+h3{
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+}
+pre{
+    white-space:pre-wrap;
+    margin:1rem;
+    background:lightgrey;
+    padding:.5rem;
+    border-radius:5px;
+    border:1px solid #717a9f;
+}
+pre.normal{
+    background:none;
+}
+.hr-cool{
+    width:80%;
 }
 
 table.alternate tbody tr:nth-child(odd){
-    background: linear-gradient(to left, #5d9cba, #aadff7);
-}
-
-/* Table showing raw values of a person */
-table.raw{
-    border-collapse:collapse;
-    background:#dce2e5;
-    font-family:"Courier New",Courier,monospace;
-}
-table.raw > tr > th, table.raw > tr > td, table.raw > * > tr > th, table.raw > * > tr > td {
-    border:1px solid black;
-    padding:0.2rem 0.4rem;
-    vertical-align:top;
+    background:linear-gradient(to left, #5d9cba, #aadff7);
 }
 
 /* 2 columns, to present results */
@@ -117,13 +110,17 @@ table.raw > tr > th, table.raw > tr > td, table.raw > * > tr > th, table.raw > *
 table.wikitable{
     border-collapse:collapse;
 }
-table.wikitable > tr > th, table.wikitable > * > tr > th {
-    /* #f1f8ff #eaecf0; */
+table.wikitable > tr > th,
+table.wikitable > * > tr > th{
+    /* #f1f8ff #eaecf0 lightyellow */
     background-color:lightyellow;
     text-align:center;
     vertical-align:top;
 }
-table.wikitable > tr > th, table.wikitable > tr > td, table.wikitable > * > tr > th, table.wikitable > * > tr > td {
+table.wikitable > tr > th,
+table.wikitable > tr > td,
+table.wikitable > * > tr > th,
+table.wikitable > * > tr > td{
     border:1px solid black;
     padding:0.2rem 0.4rem;
     vertical-align:top;
@@ -132,9 +129,16 @@ table.wikitable tr td code{
     background:none;
 }
 table.wikitable td.paragraph{
-    font-size:1.3em;
+    font-size:1.3rem;
     font-weight:bold;
     background:#bac1c4;
     padding:1rem;
 }
 
+/* datatable */
+table.datatable th{text-align:left;}
+table.datatable tr.odd{background-color:#eee;}
+table.datatable tr.even{background-color:#ddd;}
+table.datatable tbody tr:hover {
+    background-color:#ffa;
+}

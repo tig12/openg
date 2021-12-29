@@ -1,3 +1,4 @@
+
 <script>
 $(document).ready(function() {
     $('#persons').DataTable({
@@ -13,14 +14,6 @@ $(document).ready(function() {
     });
 } );
 </script>
-<style>
-    table#persons th{text-align:left;}
-    table#persons tr.odd{background-color:#eee;}
-    table#persons tr.even{background-color:#ddd;}
-    table#persons.dataTable tbody tr:hover {
-      background-color: #ffa;
-    }
-</style>
 
 <h1>{{.Header.Title}}</h1>
 
@@ -59,7 +52,7 @@ $(document).ready(function() {
 </div>
 {{end}}
 
-<table id="persons" class="display" style="width:100%">
+<table id="persons" class="datatable">
 <thead>
     <tr>
         <th>Ids</th>

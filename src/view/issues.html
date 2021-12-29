@@ -1,3 +1,4 @@
+
 <script>
 $(document).ready(function() {
     $('#issues').DataTable({
@@ -13,14 +14,6 @@ $(document).ready(function() {
     });
 } );
 </script>
-<style>
-    table#issues th{text-align:left;}
-    table#issues tr.odd{background-color:#eee;}
-    table#issues tr.even{background-color:#ddd;}
-    table#issues.dataTable tbody tr:hover {
-      background-color: #ffa;
-    }
-</style>
 
 <h1>
 Persons' issues
@@ -28,10 +21,10 @@ Persons' issues
 </h1>
 
 <div class="intro">
-Current page shows potential errors identified on persons' fields.
+Current page shows potential individual problematic cases in Open Gauquelin database.
 </div>
 
-<table id="issues" class="display" style="width:100%">
+<table id="issues" class="datatable">
 <thead>
     <tr>
         <th>Person</th>

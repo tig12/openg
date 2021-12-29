@@ -1,27 +1,4 @@
-<style>
-/* 
-    table.dataTable tr.odd .sorting_1 { background-color: #E2E4FF; }
-    table.dataTable tr.even .sorting_1 { background-color: white; }                            
-    table#example.dataTable tbody tr:hover {
-      background-color: #ffa;
-    }
-     
-    table#example.dataTable tbody tr:hover > .sorting_1 {
-      background-color: #ffa;
-    }
-    table#occupations tbody tr.odd {background: linear-gradient(to left, #5d9cba, #aadff7);}
-    table#occupations tbody tr.even {background: linear-gradient(to right, #5d9cba, #aadff7);}
-    
-    
-    table#occupations tr.odd{background-color:#5d9cba;}
-    table#occupations tr.even{background-color:#aadff7;}
-    table#occupations tbody tr:hover{background-color:lightgrey;}
-    table#occupations td{border:1px solid black;}
-*/
-    table#occupations th{text-align:left;}
-    table#occupations tr.odd{background-color:#eee;}
-    table#occupations tr.even{background-color:#ddd;}
-</style>
+
 <script>
 $(document).ready(function() {
     $('#occupations').DataTable({
@@ -37,7 +14,7 @@ $(document).ready(function() {
 
 <h1>Lists by occupation</h1>
 
-<table id="occupations" class="display" style="width:100%">
+<table id="occupations" class="datatable">
 <thead>
     <tr>
         <th></th>

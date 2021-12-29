@@ -32,7 +32,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
                 {{range $sourceSlug | rawPersonSortedFields}}
                 <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
                 {{else}}
-                <tr><td><pre>{{$curHistory.New | prettyPrint}}</pre></td></tr>
+                <tr><td><pre class="normal">{{$curHistory.New | prettyPrint}}</pre></td></tr>
                 {{end}}
             </table>
         {{end}}
@@ -42,7 +42,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
         New values:
         <table class="raw margin-top">
             <tr>
-                <td><pre>{{.New | prettyPrint}}</pre></td>
+                <td><pre class="normal">{{.New | prettyPrint}}</pre></td>
             </tr>
         </table>
     </div>
