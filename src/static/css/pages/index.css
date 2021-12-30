@@ -7,20 +7,19 @@
 
 
 /* Historical tests */
-.home .historical{
-}
 .home .historical li{
     list-style-type:none;
+}
+.home .historical li.author{
+    padding-bottom:2rem;
 }
 .home .historical li .nodownload {
     padding-top:4px;
     padding-left:2.75em;
 }
-.home .historical li{
-    list-style-type:none;
-}
 .home .historical .todo{
-    background:white;
+    background:gold;
+    border:1px solid grey;
     padding:0 5px;
 }
 
@@ -30,18 +29,20 @@
 
 /* sitelinks, list on the right */
 .home .sitelinks{
-    padding-left:2rem;
-    margin-right:2rem;
+    position:fixed;
+    top:100px;
+    right:2rem;
+    background-color:#dbe599;
+    padding:1rem;
+    border:1px solid grey;
+    border-radius:4px;
+    box-shadow:5px 5px 5px grey;
+    
 }
-.home .sitelinks>ul{
+.home .sitelinks>div{
     margin-top:0;
     font-size:1.2rem;
     line-height:2rem;
     font-weight:bold;
-    border-left:1px solid grey;
     /* background:#bac1c4; */
-}
-.home .sitelinks li{
-    list-style-type:none;
-    padding-left:0;
 }

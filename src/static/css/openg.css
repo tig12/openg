@@ -20,6 +20,7 @@
     margin-top:4rem;
     margin-left:1rem;
     margin-bottom:1rem;
+    line-height:1.618;
 }
 
 /* ================ Top header stuff ================ */
@@ -40,6 +41,7 @@ div.anchor {
     background:linear-gradient(to left, #5d9cba, #aadff7);
     border-bottom:1px solid grey;
     z-index:1000;
+    box-shadow: 3px 3px 5px #888888;
 }
 .top-right{
     float:right;
@@ -55,10 +57,13 @@ div.anchor {
 /* ================ Particular elements ================ */
 body{
     font-family:Verdana, Geneva, sans-serif;
-    background:linear-gradient(to right, #5d9cba, #aadff7);
+    background:#dbdbdb;
 }
 a{
     text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
 }
 h1{
     margin-left:auto;
@@ -88,10 +93,6 @@ pre.normal{
     width:80%;
 }
 
-table.alternate tbody tr:nth-child(odd){
-    background:linear-gradient(to left, #5d9cba, #aadff7);
-}
-
 /* 2 columns, to present results */
 .table-pres td:nth-child(1){
     text-align:right;
@@ -106,27 +107,29 @@ table.alternate tbody tr:nth-child(odd){
     padding-top:1rem;
 }
 
+table.alternate tbody tr:nth-child(odd){
+    background:#bdd7ee;
+}
+table.alternate tbody tr:nth-child(even){
+    background:#ddebf7;
+}
+
 /* Wikitable */
 table.wikitable{
     border-collapse:collapse;
 }
 table.wikitable > tr > th,
 table.wikitable > * > tr > th{
-    /* #f1f8ff #eaecf0 lightyellow */
-    background-color:lightyellow;
+    background-color:#dbe599;
     text-align:center;
-    vertical-align:top;
+    vertical-align:center;
+    border:1px solid black;
 }
-table.wikitable > tr > th,
 table.wikitable > tr > td,
-table.wikitable > * > tr > th,
 table.wikitable > * > tr > td{
     border:1px solid black;
     padding:0.2rem 0.4rem;
     vertical-align:top;
-}
-table.wikitable tr td code{
-    background:none;
 }
 table.wikitable td.paragraph{
     font-size:1.3rem;
@@ -136,9 +139,34 @@ table.wikitable td.paragraph{
 }
 
 /* datatable */
+table.datatable{
+    width:100%;
+}
 table.datatable th{text-align:left;}
-table.datatable tr.odd{background-color:#eee;}
-table.datatable tr.even{background-color:#ddd;}
+table.datatable tbody tr td{
+    padding:.7rem;
+}
 table.datatable tbody tr:hover {
     background-color:#ffa;
+}
+.datatable-links{
+    margin:.5rem 0;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+}
+.datatable-links a{
+    display: inline-block;
+    border-radius: 2px;
+    border: 1px solid #979797;
+    background: linear-gradient(to bottom, white 0%, #dcdcdc 100%);
+    font-size:130%;
+    padding:0 6px;
+    margin:2px 3px;
+}
+.datatable-links a:hover,
+.datatable-links a.current{
+    text-decoration:none;
+    background:linear-gradient(to bottom, #0f0e0e 0%, #383636 100%);
+    color:#dcf0f7;
 }

@@ -22,13 +22,17 @@
 .person .issues,
 .person .admin{
     border:1px solid grey;
-    border-radius:10px;
+    border-radius:4px;
     padding:1rem;
 }
 
 .person .general-summary,
 .person .groups,
 .person .sources,
+.person .notes{
+    background:#c5e1f7;
+}
+
 .person .notes{
     background:#fffacd;
 }
@@ -46,34 +50,8 @@
 }
 
 /* Table showing raw values of a person */
-table.raw{
-    border-collapse:collapse;
-    font-family:"Courier New",Courier,monospace;
-}
-table.raw > tr > th,
-table.raw > tr > td,
-table.raw > * > tr > th,
-table.raw > * > tr > td {
-    padding:0.2rem 0.4rem;
-    vertical-align:top;
-}
-
-/*
-Simulate uml note - not integrated yet
-https://designshack.net/articles/css/code-a-simple-folded-corner-effect-with-css/
-*/
-.foldtr {
-  position:relative;
-  box-shadow:-5px 7px 5px rgba(0,0,0,0.8);
-}
-.foldtr:before {
-  content:"";
-  position:absolute;
-  top:0%;
-  right:0%;
-  width:0px;
-  height:0px;
-  border-bottom:50px solid #eee;
-  border-right:50px solid transparent;
-  box-shadow:-7px 7px 7px rgba(0,0,0,0.3);
+.raw{
+    white-space:pre-wrap;
+    background:white;
+    padding:1rem;
 }

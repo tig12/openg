@@ -38,7 +38,7 @@ table#global-stats td:nth-child(2){
 
 {{range $cy, $n := .Countries}}
     {{if eq 0 (modulo $i $mod)}}
-        <table class="wikitable float-left margin-right">
+        <table class="wikitable float-left margin-right alternate">
         <thead>
             <tr><th colspan="2">Country</th><th>N</th></tr>
         </thead>
@@ -73,7 +73,7 @@ table#global-stats td:nth-child(2){
 {{$mod := 20}}
 {{range $year, $n := .Years}}
     {{if eq 0 (modulo $i $mod)}}
-        <table class="wikitable float-left margin-right">
+        <table class="wikitable float-left margin-right alternate">
         <thead>
             <tr><th>Year</th><th>N</th></tr>
         </thead>

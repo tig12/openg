@@ -7,8 +7,10 @@
 package model
 
 import (
-	"encoding/json"
 	"fmt"
+	"math"
+	"strconv"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
@@ -35,6 +37,9 @@ type Group struct {
 	Parents  []*Group
 	Children []*Group
 	Members  []*GroupMember
+	// fields used for display
+	Limit     int // Nb of members displayed by page
+	NPages    int // nb of pages used to display the group
 }
 
 /** Simplified representation of a person **/
@@ -92,7 +97,13 @@ func GetGroupNameFromSlug(restURL, slug string) (string, error) {
 
 // ************************** Get one *******************************
 
-func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
+/** 
+    Returns a group and its members => 2 calls to the API
+    @param  slug    Slug of the group to fetch from the API
+    @param  page    Pagination for the group members
+    @param  limit   Nb of members to fetch  
+**/
+func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err error) {
 	var url string
 	var responseData []byte
 	var response *http.Response
@@ -112,13 +123,31 @@ func GetGroupBySlug(restURL, slug string) (group *Group, err error) {
 		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s'\n%s\n", slug, string(responseData)))
 	}
 	if len(tmp) == 0 {
-		var group = Group{}
-		return &group, werr.Wrapf(err, "EMPTY Stats - need to be initialized")
+		//var group = Group{}
+		//return &group, werr.Wrapf(err, fmt.Sprintf("Unexisting group slug '%s'", slug))
+		return nil, werr.Wrapf(err, fmt.Sprintf("Unexisting group slug '%s'", slug))
 	}
 	group = tmp[0]
-
+	group.Limit = limit
+	
 	// get the members of the group
-	url = restURL + "/api_persongroop?group_slug=eq." + slug
+	
+	n := group.N
+	if n == 0 {
+		return nil, werr.Wrapf(err, fmt.Sprintf("Group '%s' has 0 elements - Must be computed before using", slug))
+	}
+	pagemax := int(math.Ceil(float64(n) / float64(limit)))
+	group.NPages = pagemax
+	if page > pagemax {
+	    page = pagemax
+	}
+	offset := (page - 1) * limit
+	url = restURL + "/api_persongroop" + 
+	    "?group_slug=eq." + slug +
+	    "&order=person_slug" +
+	    "&limit=" + strconv.Itoa(limit) +
+	    "&offset=" + strconv.Itoa(offset)
+	    
 	response, err = http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

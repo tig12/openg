@@ -3,12 +3,9 @@
 <h1 class="margin-bottom3">
     Open Gauquelin Database (OGDB)
     <div class="subtitle">
-        <br>Timed birth dates of famous persons
+        Timed birth dates of famous persons
     </div>
 </h1>
-
-<div class="flex-wrap">
-<div><!-- just for flex -->
 
 <div class="intro">
 {{with .Details.Stats}}
@@ -17,9 +14,9 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
 {{end}}
 
 <br><br>It currently contains data used to perform statistical tests on astrology,
-<br>gathered by Michel and Françoise Gauquelin, Arno Müller and Suitbert Ertel.
+<br>gathered by Michel and Françoise Gauquelin, Arno Müller, Suitbert Ertel
+<br>and three groups of skeptics.
 </div>
-
 
 <div class="historical">
 <h2>Historical datasets</h2>
@@ -115,7 +112,7 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         </ul>
     </li><!-- end gauquelin -->
     
-    <li class="margin-top">
+    <li class="author">
         <b>Arno Müller</b>
         <ul class="naked">
             <li>
@@ -158,7 +155,7 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         </ul>
     </li>
     
-    <li class="margin-top">
+    <li class="author">
         <b>Comité PARA - Belgian skeptics 1976</b>
         
         <ul class="naked">
@@ -170,7 +167,7 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         </ul>
     </li>
     
-    <li class="margin-top">
+    <li class="author">
         <b>CSICOP - U.S. skeptics 1979</b>
         <ul class="naked">
             <li>
@@ -191,7 +188,7 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         </ul>
     </li>
     
-    <li class="margin-top">
+    <li class="author">     
         <b>CFEPP - French skeptics 1996</b>
         <ul class="naked">
             <li class="nodownload">
@@ -202,7 +199,7 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
         </ul>
     </li>
     
-    <li class="margin-top">
+    <li class="author">
         <b>Suitbert Ertel</b>
         <ul class="naked">
             <li>
@@ -256,27 +253,18 @@ This database contains <b>{{numberFormat .N_time}} persons with birth time</b> a
 </ul>
 </div><!-- end class="historical" -->
 
-</div><!-- end just for flex -->
-
-<!-- div used by flex to take all space between .historical and .sitelinks -->
-<div class="central"></div>
-
 <!-- ************************************* -->
 <div class="sitelinks">
-    <ul>
-        <li><a href="/occupations">Lists by occupation</a></li>
-        <li><a href="/issues">Persons' issues</a></li>
-        <li><a href="/sources">Information sources</a></li>
-        <li><center><hr class="hr-cool"></center></li>
-        <li><a href="/about">About OGDB</a></li>
-        <li><a href="/downloads">Data Downloads</a></li>
-        <li><a href="/stats">Database statistics</a></li>
-        <li><center><hr class="hr-cool"></center></li>
-        <li><a href="/install">Install OGDB</a></li>
-        <li><a href="/future">Future developments</a></li>
-    </ul>
+    <div><a href="/occupations">Lists by occupation</a></div>
+    <div><a href="/issues">Persons' issues</a></div>
+    <div><a href="/sources">Information sources</a></div>
+    <div><center><hr class="hr-cool"></center></div>
+    <div><a href="/about">About OGDB</a></div>
+    <div><a href="/downloads">Data Downloads</a></div>
+    <div><a href="/stats">Database statistics</a></div>
+    <div><center><hr class="hr-cool"></center></div>
+    <div><a href="/install">Install OGDB</a></div>
+    <div><a href="/future">Future developments</a></div>
 </div>
-
-</div><!-- end class="flex-wrap" -->
 
 </div><!-- end class="home" -->

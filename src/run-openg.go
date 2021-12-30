@@ -41,6 +41,7 @@ func main() {
 	r.HandleFunc("/future", H(control.ShowFuture))
 
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
+	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
 
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))

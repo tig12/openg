@@ -71,7 +71,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			Title:    person.Name.DisplayedName() + " " + person.GetBirthDay(),
 			CSSFiles: []string{
 			    "/static/lib/tabstrip/tabstrip.css",
-			    "/static/css/person.css"},
+			    "/static/css/pages/person.css"},
 		},
 		Details: detailsPerson{
 			Person:             person,

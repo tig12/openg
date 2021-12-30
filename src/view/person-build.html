@@ -11,42 +11,55 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
     {{$sourceSlug := .Source}}
     <h2 class="margin-top2">Command: <code>{{.Command}}</code></h2>
     
-    <div class="margin-top05 margin-bottom">
-        Information source:
-        <b>
-        {{if .Source | sourceNameFromSlug}}
-        <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a>
-        {{else}}
-            {{.Source}}
-        {{end}}
-        </b>
-    </div>
-
-    <div>Execution date: <b>{{.Date}}</b></div>
-    
-    <div class="float-left margin-right margin-top">
-        Raw data:
-        {{with .Raw}}
-            {{$value := .}}
-            <table class="raw margin margin-left0">
-                {{range $sourceSlug | rawPersonSortedFields}}
-                <tr><td>{{.}}</td><td>{{index $value .}}</td></tr>
+    <table class="table-pres margin-bottom">
+        <tr>
+            <td>
+                Information source
+            </td>
+            <td>
+                {{if .Source | sourceNameFromSlug}}
+                <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a>
                 {{else}}
-                <tr><td><pre class="normal">{{$curHistory.New | prettyPrint}}</pre></td></tr>
+                    {{.Source}}
                 {{end}}
+            </td>
+        </tr>
+        <tr>
+            <td>Execution date</td>
+            <td>{{.Date}}</td>
+        </tr>
+    </table>
+
+    
+    <div class="flex-wrap">
+        <div class="margin-right">
+            Raw data:
+            {{with .Raw}}
+                {{$value := .}}
+                <table class="raw">
+                    {{range $sourceSlug | rawPersonSortedFields}}
+                    <tr>
+                        <td>{{.}}</td>
+                        <td>{{index $value .}}</td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td>{{$curHistory.New | prettyPrint}}</td>
+                    </tr>
+                    {{end}}
+                </table>
+            {{end}}
+        </div>
+            
+        <div class="margin-right">
+            New values:
+            <table class="raw">
+                <tr>
+                    <td>{{.New | prettyPrint}}</td>
+                </tr>
             </table>
-        {{end}}
-    </div>
-        
-    <div class="float-left margin-right margin-top">
-        New values:
-        <table class="raw margin-top">
-            <tr>
-                <td><pre class="normal">{{.New | prettyPrint}}</pre></td>
-            </tr>
-        </table>
-    </div>
-    <br class="clear-left">
+        </div>
+    </div> <!-- end class="flex-wrap" -->
 
 {{end}}
 

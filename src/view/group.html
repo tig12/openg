@@ -1,26 +1,12 @@
 
-<script>
-$(document).ready(function() {
-    $('#persons').DataTable({
-        "order": [[ 3, 'asc' ]],
-        "pageLength": 500,
-        //"searching": false,
-        "orderClasses": false, // Highlight the columns being ordered
-        "bInfo" : false, // hide "Showing 1 of N entries"
-        "bLengthChange": false, // Hide "Show N entries"
-        "language": {
-            "search": "Search this group:"
-        }
-    });
-} );
-</script>
-
-<h1>{{.Header.Title}}</h1>
+<h1>
+    {{.Header.Title}}
+    <div class="subtitle">N = {{numberFormat .Details.Group.N}}</div>
+</h1>
 
 {{with .Details.Group}}
 
-<div class="big2 margin bold">
-    <div class="margin-bottom">N = {{numberFormat .N}}</div>
+<div class="big2 margin margin-top0 bold">
     <div>{{.Description | safeHTML}}</div>
 </div>
 
@@ -52,15 +38,17 @@ $(document).ready(function() {
 </div>
 {{end}}
 
-<table id="persons" class="datatable">
+{{ template "group-nav.html" $ }}
+
+<table id="persons" class="datatable alternate">
 <thead>
     <tr>
         <th>Ids</th>
-        <th>Occupations</th>
-        <th title="Country ISO 3166 code">C.</th>
         <th>Name</th>
         <th>Birth date</th>
         <th>Birth place</th>
+        <th title="Country ISO 3166 code">C.</th>
+        <th>Occupations</th>
     </tr>
 </thead>
 <tbody>
@@ -73,12 +61,6 @@ $(document).ready(function() {
     {{end}}
     </td>
     <td>
-        {{range .Occus}}
-            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-        {{end}}
-    </td>
-    <td>{{.Birth.Place.Cy}}</td>
-    <td>
         <a href="/person/{{.Slug}}">{{.Name.DisplayedName}}</a>
     </td>
     <td>{{.GetBirthDate}}</td>
@@ -86,10 +68,18 @@ $(document).ready(function() {
         {{.Birth.Place.Name}}
         {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
     </td>
+    <td>{{.Birth.Place.Cy}}</td>
+    <td>
+        {{range .Occus}}
+            <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+        {{end}}
+    </td>
 </tr>
 {{end}}
 
 </tbody>
 </table>
+
+{{ template "group-nav.html" $ }}
 
 {{end}} {{/* with .Details.Group */}}

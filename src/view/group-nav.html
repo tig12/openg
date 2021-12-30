@@ -1,0 +1,8 @@
+
+<nav class="datatable-links">
+    <a href="/group/{{$.Details.Group.Slug}}/{{$.Details.PrevPage}}">Previous</a>
+    {{range $.Details.Pages}}
+        <a href="/group/{{$.Details.Group.Slug}}/{{.}}"{{if eq . $.Details.CurrentPage}} class="current"{{end}}>{{.}}</a>
+    {{end}}
+    <a href="/group/{{$.Details.Group.Slug}}/{{$.Details.NextPage}}">Next</a>
+</nav>
