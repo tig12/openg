@@ -9,37 +9,34 @@ Notations:
 <ul>
     <li>
         <b>g5</b>: Program used to build the Opegn Gauquelin database.
-        <ul class="naked margin05">
-            <li><a href="https://github.com/tig12/gauquelin5">Code repository - github.com/tig12/gauquelin5</a></li>
-            <li><a href="https://tig12.github.io/gauquelin5">Documentation - tig12.github.io/gauquelin5</a></li>
-        </ul>
-        
     </li>
 </ul>
 </div>
 
 <!-- ********************************************************************************* -->
-<h2>Handle person issues</h2>
-Mark the dubious persons identified during g5 build process, for example, when Gauquelin and Müller dates differ, or when timezone computation must be checked.
-<br><br>Add a field <code>issue</code> to person
-<br>Key value map: issue type => issue description
+<h2>Improve the quality of data</h2>
+Much work can be done to build better data.
+<ul>
+    <li>
+        Timezone offset computation is partial and need to be completed.
+    </li>
+    <li>
+        The merge of different data sources (Gauquelin, Müller, skeptics) permits to identify potential errors. Few errors are marked and listed on <a href="/issues">page "Persons' issues"</a>. Other errors can be extracted from the merge process.
+    </li>
+</ul>
 
 <!-- ********************************************************************************* -->
 <h2>Relate the database to birth certificates</h2>
+
 See <a href="https://tig12.github.io/gauquelin5/acts.html">g5 page about acts</a>
+
+<!-- ********************************************************************************* -->
+<h2>Rank the persons by eminence</h2>
+
+Build eminence indicators and add this notion to the database.
+<br>A preliminary study can be found on
+<a href="https://tig12.github.io/gauquelin5/eminence.html">g5 page about eminence</a>.
 
 <!-- ********************************************************************************* -->
 <h2>Turn the database to a wiki</h2>
 For a collective build of reliable and verifiable timed data.
-
-
-<!-- ********************************************************************************* -->
-<h2>Eminence ranking</h2>
-
-See if it is possible to implement eminence indicators as described in
-<a href="https://tig12.github.io/gauquelin5/eminence.html">g5 page about eminence</a>.
-
-<br><br><a href="https://tig12.github.io/gauquelin5/eminence-math.html">Preparatory work has been done for mathematicians</a>.
-
-<br><br>Add a field <code>eminence</code> to person
-<br>Key value map: eminence indicator id => eminence rank

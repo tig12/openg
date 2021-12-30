@@ -125,29 +125,8 @@ func Hajax(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func
 	}
 }
 
-// *********************************************************
-// HPDF = Handler PDF
-// Same as H, but for pdf (does not execute templates)
-// @param  h Controller function
-func HPDF(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(http.ResponseWriter, *http.Request) {
-	return func(w http.ResponseWriter, r *http.Request) {
-		var err error
-		ctx := ctxt.NewContext()
-		err = h(ctx, w, r) // Calls controller h
-		if err != nil {
-			ctxt.LogError(err)
-		}
-	}
-}
-
 // *********************** Error management **********************************
-// TODO put somewhere else, but where ?
-
-func notFound(w http.ResponseWriter, r *http.Request) {
-	ctx := ctxt.NewContext()
-	err := fmt.Errorf("Page inexistante :<br><code><b>%s</b></code>", r.URL)
-	showErrorPage(err, ctx, w, r)
-}
+// TODO put somewhere else
 
 func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) {
 	type detailsErrorPage struct {
@@ -159,7 +138,7 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "ERREUR",
+			Title: "ERROR",
 		},
 		Details: detailsErrorPage{
 			URL:     r.URL.String(),
@@ -183,4 +162,39 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 		ctxt.LogError(err)
 		return
 	}
+}
+
+// Error page displaying the error, in mode dev and in mode prod
+func notFound(w http.ResponseWriter, r *http.Request) {
+    ctx := ctxt.NewContext()
+	type detailsErrorPage struct {
+		URL     string
+	}
+	var err error
+
+	ctx.Page = &ctxt.Page{
+		Header: ctxt.Header{
+			Title: "PAGE NOT FOUND",
+		},
+		Details: detailsErrorPage{
+			URL:     r.URL.String(),
+		},
+	}
+	tmpl := ctx.Template
+	err = tmpl.ExecuteTemplate(w, "header.html", ctx.Page)
+	if err != nil {
+		ctxt.LogError(err)
+		return
+	}
+	err = tmpl.ExecuteTemplate(w, "error-404.html", ctx.Page)
+	if err != nil {
+		ctxt.LogError(err)
+		return
+	}
+	err = tmpl.ExecuteTemplate(w, "footer.html", ctx.Page)
+	if err != nil {
+		ctxt.LogError(err)
+		return
+	}
+	
 }

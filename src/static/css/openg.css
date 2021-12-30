@@ -89,6 +89,9 @@ pre{
 pre.normal{
     background:none;
 }
+.hr-big{
+    margin:1rem;
+}
 .hr-cool{
     width:80%;
 }

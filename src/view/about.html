@@ -42,9 +42,17 @@ opengauquelin.org is a personal project, done on my spare time.
 
 
 <!-- ********************************************************************************* -->
+<hr class="hr-big">
 <h2>Goals</h2>
 
-The goal is to produce data usable for science. This implies several things:
+Goals of OGDB are described on <a href="https://tig12.github.io/gauquelin5">home page of g5 documentation</a>:
+<ol class="simple margin-bottom">
+    <li>Gather the <a href="https://tig12.github.io/gauquelin5/historical-tests.html">historical data</a>, check them, correct them, and merge them in a single database.</li>
+    <li>Connect the historical data to standard datasets like wikidata and complete birth times to build larger groups.</li>
+    <li>Build new eminence indicators and sort famous persons by eminence rank.</li>
+</ol>
+
+The goal is to produce data usable for science. This implies:
 
 <ul class="naked spaced">
     <li>
@@ -62,6 +70,7 @@ The goal is to produce data usable for science. This implies several things:
 
 
 <!-- ********************************************************************************* -->
+<hr class="hr-big">
 <h2 id="data-reliability">Data reliability</h2>
 
 The data contained in OGDB integrate many corrections, so data are more reliable than the sources it uses.
@@ -83,13 +92,13 @@ To measure data reliability, an indicator was built and is used in this database
     </li>
     <li>
         <div class="bold">3 - Birth Record (BR)</div>
-        (= copy of the BC by an officer - may contain mistakes)
+        (= copy of the BC by an officer)
         <br>Original document available and verifiable by anyone.
     </li>
     <li>
         <div class="bold">4 - to check</div>
-        Data coming from sources à priori serious (Gauquelin, Müller) but in practice containing errors.
-        <br>Need to be matched against BC.
+        Data coming from sources à priori serious (Gauquelin, Müller, skeptic groups) but in practice containing errors.
+        <br>Need to be matched against a BC.
     </li>
     <li>
         <div class="bold">5 - the rest</div>
@@ -99,14 +108,17 @@ To measure data reliability, an indicator was built and is used in this database
 
 Most births that occured in the 19th and early 20th century do not have a HC. So the best we can hope for OGDB is to reach level 2.
 
-<br><br>Currently, almots all data of OGDB are level 4.
+<br><br>Currently, almost all data of OGDB are level 4.
 
 <br><br>Important remark : Françoise and Michel Gauquelin, and Arno Müller were apparently very serious and were taking a lot of care to avoid errors. <b>But in practice, they never had access to BCs</b>: they were writing to the town halls ; an officer was copying the information contained in the BC and sending them back a letter. They were only recieving BRs.
 
-<br><br>So here is a first source of error, the transcription from BC to BR.
+<br>This is a first source of error, the transcription from BC to BR.
 <br>Other sources of errors exist:
 <ul class="margin-top spaced">
     <li>Gauquelin or Müller error when integrating the BR in their files.</li>
     <li>Error when original paper files where put in an electronic form.</li>
     <li>Bugs in g5 program should be added to this list...</li>
 </ul>
+
+<b>But we today have the possibility to build reliable data</b>, because birth certificates are available online, so we can easily check. Checking thousands of birth date is a long task, but it's really easier than at Gauquelin epoch.
+
