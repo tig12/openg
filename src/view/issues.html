@@ -1,20 +1,4 @@
 
-<script>
-$(document).ready(function() {
-    $('#issues').DataTable({
-        "order": [[ 0, 'asc' ]],
-        "pageLength": 500,
-        "searching": false,
-        "orderClasses": false, // Highlight the columns being ordered
-        "bInfo" : false, // hide "Showing 1 of N entries"
-        "bLengthChange": false, // Hide "Show N entries"
-        "language": {
-            "search": "Search this group:"
-        }
-    });
-} );
-</script>
-
 <h1>
 Persons' issues
 <br>Open Gauquelin DB
@@ -24,7 +8,7 @@ Persons' issues
 Current page shows potential individual problematic cases in Open Gauquelin database.
 </div>
 
-<table id="issues" class="datatable">
+<table class="datatable alternate">
 <thead>
     <tr>
         <th>Person</th>

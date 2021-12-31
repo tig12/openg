@@ -49,7 +49,7 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 		"a1-booklet":   "Michel and Françoise Gauquelin",
 		"afd1-booklet": "Arno Müller",
 		"csicop":       "CSICOP (US skeptics)",
-		"3a_sports":    "Ertel",
+		"3a_sports":    "Suitbert Ertel",
 	}
 
 	ctx.TemplateName = "sources.html"
@@ -72,10 +72,10 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 **/
 func orderSources(sources []*model.Source) []*model.Source {
 	order := []string{
-		// primary
+		// Primary
 		"lerrcp",
 		"afd",
-		// secondary
+		// Secondary
 		"cura5",
 		"newalch",
 		"wd",
@@ -111,11 +111,11 @@ func orderSources(sources []*model.Source) []*model.Source {
 		"afd3",
 		"afd5-booklet",
 		"afd5",
-		// csicop
+		// CSICOP
 		"csicop",
 		"csi",
 		"si42",
-		// ertel
+		// Ertel
 		"3a_sports",
 	}
 	var res = []*model.Source{}

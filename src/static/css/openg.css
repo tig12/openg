@@ -8,6 +8,12 @@
 @import "normalize.css";
 @import "style.css";
 
+@media print{
+    .top-header{
+        display:none;
+    }
+}
+
 /* ================ Semantic ================ */
 .intro{
     font-size:1.4rem;
@@ -121,17 +127,17 @@ table.alternate tbody tr:nth-child(even){
 table.wikitable{
     border-collapse:collapse;
 }
-table.wikitable > tr > th,
-table.wikitable > * > tr > th{
+table.wikitable th{
     background-color:#dbe599;
     text-align:center;
     vertical-align:center;
     border:1px solid black;
+    padding:.5rem;
 }
 table.wikitable > tr > td,
 table.wikitable > * > tr > td{
     border:1px solid black;
-    padding:0.2rem 0.4rem;
+    padding:.4rem;
     vertical-align:top;
 }
 table.wikitable td.paragraph{

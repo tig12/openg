@@ -1,18 +1,11 @@
 
 - File LICENCE - Add in all files including views
 
-- See panic if url = http://localhost:8021/person/albani-peppino (no birth time)
-  
-- http://localhost:8021/person/farabeuf-louis-1841-05-06
-    Note (check date) must be replaced by an issue
+- Add semantic html5 (nav main section etc)
 
 Change in database (todos for gauquelin5 software)
     - store lg, lat as doubles in json structure
     - store nobiliary particle as string (not boolean)
-
-- Person page : replace float by flex
-    Check in particular
-    http://localhost:8021/person/albani-giuseppe-1921-04-08
 
 - Encapsulate all GET requests to the api in a function:
     - Replace calls like:

@@ -27,11 +27,6 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: "Open Gauquelin DB issues",
-			CSSFiles: []string{
-				"/static/lib/datatables/datatables.min.css"},
-			JSFiles: []string{
-				"/static/lib/datatables/jquery-3.3.1.min.js",
-				"/static/lib/datatables/datatables.min.js"},
 		},
 		Details: detailsIssues{
 			Issues:             issues,
@@ -41,5 +36,3 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	}
 	return nil
 }
-
-// ShowOccupation() is handled by group
