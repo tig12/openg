@@ -17,7 +17,7 @@ import (
 	"openg.local/openg/generic/wilk/werr"
 	"openg.local/openg/static"
 	"openg.local/openg/view"
-	//	"path/filepath"
+	"path/filepath"
 	"time"
 )
 
@@ -32,7 +32,7 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
-	// routes handled in controls/home.go
+	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/issues", H(control.ShowIssues))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
@@ -54,6 +54,9 @@ func main() {
 
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
 
+	r.HandleFunc("/download", HDownloadIndex)
+	r.PathPrefix("/download/").Handler(http.StripPrefix("/download/", http.FileServer(http.Dir(filepath.Join("..", "download")))))
+	
 	r.NotFoundHandler = http.HandlerFunc(notFound)
 
 	ctx := ctxt.NewContext()
@@ -65,6 +68,10 @@ func main() {
 	}
 
 	log.Fatal(srv.ListenAndServe())
+}
+
+func HDownloadIndex(w http.ResponseWriter, r *http.Request) {
+    http.ServeFile(w, r, filepath.Join("..", "download", "index.html"))
 }
 
 // *********************************************************
@@ -164,7 +171,7 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 	}
 }
 
-// Error page displaying the error, in mode dev and in mode prod
+// Error 404 page, same behaviour in mode dev and in mode prod
 func notFound(w http.ResponseWriter, r *http.Request) {
     ctx := ctxt.NewContext()
 	type detailsErrorPage struct {
