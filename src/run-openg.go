@@ -70,6 +70,7 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 }
 
+// Particular case for one single file
 func HDownloadIndex(w http.ResponseWriter, r *http.Request) {
     http.ServeFile(w, r, filepath.Join("..", "download", "index.html"))
 }

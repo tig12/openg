@@ -1,5 +1,5 @@
 /******************************************************************************
-    General styles
+    Style shortcuts
     
     @license    GPL
     @history    2021-07-14 10:25:15+02:00, Thierry Graff : Creation from other project
@@ -47,7 +47,6 @@ ul.simple{list-style-type: '- ';}
 .vertical-align-bottom{vertical-align:bottom;}
 
 .border-none{border:none;}
-.border-radius10{border-radius:10px;}
 .border{border:1px solid grey;}
 .border2{border:2px solid grey;}
 .border-left{border-left:1px solid grey;}

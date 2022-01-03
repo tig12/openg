@@ -12,6 +12,7 @@ Current page shows potential individual problematic cases in Open Gauquelin data
 <thead>
     <tr>
         <th>Person</th>
+        <th>Ids</th>
         <th>Issues</th>
     </tr>
 </thead>
@@ -20,6 +21,11 @@ Current page shows potential individual problematic cases in Open Gauquelin data
 {{range .Details.Issues}}
     <tr>
         <td><a href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a></td>
+        <td>
+            {{range $source, $id := .IdsPartial}}
+                <span class="padding-left">{{$id}}</span>
+            {{end}}
+        </td>
         <td>
             {{range .Values}}
                 <div>{{. | safeHTML}}</div>

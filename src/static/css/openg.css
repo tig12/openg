@@ -29,7 +29,14 @@
     line-height:1.618;
 }
 
-/* ================ Top header stuff ================ */
+.warning{
+    font-weight:bold;
+    background:gold;
+    padding:2px;
+    border:1px solid red;
+}
+
+/* ================ Top header ================ */
 /*
     Used for local anchors in a page.
     Introduces an offset corresponding to the size of the fixed header.
@@ -96,7 +103,7 @@ pre.normal{
     background:none;
 }
 .hr-big{
-    margin:1rem;
+    margin:2rem 1rem;
 }
 .hr-cool{
     width:80%;
