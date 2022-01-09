@@ -14,6 +14,11 @@
     }
 }
 
+body{
+    font-family:Verdana, Geneva, sans-serif;
+    background:#dbdbdb;
+}
+
 /* ================ Semantic ================ */
 .intro{
     font-size:1.4rem;
@@ -68,10 +73,6 @@ div.anchor {
 }
 
 /* ================ Particular elements ================ */
-body{
-    font-family:Verdana, Geneva, sans-serif;
-    background:#dbdbdb;
-}
 a{
     text-decoration:none;
 }

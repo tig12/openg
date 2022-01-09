@@ -14,10 +14,12 @@ import (
 )
 
 type Issue struct {
-	PersonSlug string     `json:"slug"`
-	PersonName PersonName `json:"name"`
-	IdsPartial map[string]string   `json:"ids_partial"`
-	Values     []string   `json:"issues"`
+	PersonSlug  string            `json:"slug"`
+	PersonName  PersonName        `json:"name"`
+	PersonBirth Event             `json:"birth"`
+	IdsPartial  map[string]string `json:"ids_partial"`
+	PersonOccus []string          `json:"occus"`
+	Values      []string          `json:"issues"`
 }
 
 // ************************** Get many *******************************

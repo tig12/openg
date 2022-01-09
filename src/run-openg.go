@@ -56,7 +56,7 @@ func main() {
 
 	r.HandleFunc("/download", HDownloadIndex)
 	r.PathPrefix("/download/").Handler(http.StripPrefix("/download/", http.FileServer(http.Dir(filepath.Join("..", "download")))))
-	
+
 	r.NotFoundHandler = http.HandlerFunc(notFound)
 
 	ctx := ctxt.NewContext()
@@ -72,7 +72,7 @@ func main() {
 
 // Particular case for one single file
 func HDownloadIndex(w http.ResponseWriter, r *http.Request) {
-    http.ServeFile(w, r, filepath.Join("..", "download", "index.html"))
+	http.ServeFile(w, r, filepath.Join("..", "download", "index.html"))
 }
 
 // *********************************************************
@@ -174,9 +174,9 @@ func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 
 // Error 404 page, same behaviour in mode dev and in mode prod
 func notFound(w http.ResponseWriter, r *http.Request) {
-    ctx := ctxt.NewContext()
+	ctx := ctxt.NewContext()
 	type detailsErrorPage struct {
-		URL     string
+		URL string
 	}
 	var err error
 
@@ -185,7 +185,7 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 			Title: "PAGE NOT FOUND",
 		},
 		Details: detailsErrorPage{
-			URL:     r.URL.String(),
+			URL: r.URL.String(),
 		},
 	}
 	tmpl := ctx.Template
@@ -204,5 +204,5 @@ func notFound(w http.ResponseWriter, r *http.Request) {
 		ctxt.LogError(err)
 		return
 	}
-	
+
 }

@@ -35,9 +35,8 @@ func ShowSources(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	if err != nil {
 		return err
 	}
-	
-	
-	/** 
+
+	/**
 	    source slug => Paragraph title
 	    When the view builds source list,
 	    The paragraph title is displayed BEFORE the source.

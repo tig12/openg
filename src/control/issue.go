@@ -11,6 +11,7 @@ type detailsIssues struct {
 	Issues             []*model.Issue
 	DownloadBase       string
 	WD_ENTITY_BASE_URL string
+	GroupSlugNames     map[string]string
 	Slug_Name          map[string]string
 }
 
@@ -23,6 +24,12 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 
+	// to show the occus of a person
+	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+
 	ctx.TemplateName = "issues.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
@@ -31,6 +38,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		Details: detailsIssues{
 			Issues:             issues,
 			DownloadBase:       ctx.Config.Paths.Downloads,
+			GroupSlugNames:     groupSlugNames,
 			WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
 		},
 	}

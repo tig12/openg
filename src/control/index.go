@@ -22,7 +22,7 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "index.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-            CSSFiles: []string{"static/css/pages/index.css"},
+			CSSFiles: []string{"static/css/pages/index.css"},
 		},
 		Details: detailsHome{
 			Stats:        stats,

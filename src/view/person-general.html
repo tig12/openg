@@ -41,7 +41,7 @@
         {{if and (not .Birth.Date) .Birth.DateUT}}
         <tr>
             <td>Birth (UTC)</td>
-            <td>{{.Birth.DateUT}}</td>
+            <td itemprop="birthDate">{{.Birth.DateUT}}</td>
         </tr>
         {{end}}
         
@@ -343,7 +343,7 @@
     {{if .Issues}}
     <div class="issues">
         <h3>
-            <img src="/static/img/warning.png" alt="WARNING" />
+            <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
             Issues
         </h3>
         <ul>

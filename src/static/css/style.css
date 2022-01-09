@@ -5,14 +5,25 @@
     @history    2021-07-14 10:25:15+02:00, Thierry Graff : Creation from other project
 ********************************************************************************/
 
-ul.spaced, ol.spaced{margin-top:.8rem;}
-ul.spaced>li, ol.spaced>li{padding-bottom:.8rem;}
-ul.naked>li,ol.naked>li{list-style-type:none;}
-ul.simple{list-style-type: '- ';}
-
 .flex-wrap{
     display:flex;
     flex-wrap:wrap;
+}
+
+ul.spaced,
+ol.spaced{
+    margin-top:.8rem;
+}
+ul.spaced>li,
+ol.spaced>li{
+    padding-bottom:.8rem;
+}
+ul.naked>li,
+ol.naked>li{
+    list-style-type:none;
+}
+ul.simple{
+    list-style-type: '- ';
 }
 
 .whitespace-nowrap{white-space:nowrap;}

@@ -13,17 +13,27 @@ Current page shows potential individual problematic cases in Open Gauquelin data
     <tr>
         <th>Person</th>
         <th>Ids</th>
+        <th>Occupations</th>
         <th>Issues</th>
     </tr>
 </thead>
 <tbody>
 
 {{range .Details.Issues}}
-    <tr>
-        <td><a href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a></td>
+    <tr itemscope itemtype="https://schema.org/Person">
+        <td>
+            <a itemprop="name" href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a>
+            {{if .PersonBirth.Date}}<div itemprop="birthDate">{{.PersonBirth.Date}}</div>{{end}}
+            {{if and (not .PersonBirth.Date) .PersonBirth.DateUT}}<div itemprop="birthDate">{{.PersonBirth.DateUT}}</div>{{end}}
+        </td>
         <td>
             {{range $source, $id := .IdsPartial}}
                 <span class="padding-left">{{$id}}</span>
+            {{end}}
+        </td>
+        <td>
+            {{range .PersonOccus}}
+            <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
             {{end}}
         </td>
         <td>

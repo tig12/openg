@@ -7,13 +7,13 @@
 package model
 
 import (
-	"fmt"
-	"math"
-	"strconv"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"math"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
+	"strconv"
 )
 
 const GROUP_TYPE_OCCU = "occu"
@@ -38,8 +38,8 @@ type Group struct {
 	Children []*Group
 	Members  []*GroupMember
 	// fields used for display
-	Limit     int // Nb of members displayed by page
-	NPages    int // nb of pages used to display the group
+	Limit  int // Nb of members displayed by page
+	NPages int // nb of pages used to display the group
 }
 
 /** Simplified representation of a person **/
@@ -97,11 +97,11 @@ func GetGroupNameFromSlug(restURL, slug string) (string, error) {
 
 // ************************** Get one *******************************
 
-/** 
+/**
     Returns a group and its members => 2 calls to the API
     @param  slug    Slug of the group to fetch from the API
     @param  page    Pagination for the group members
-    @param  limit   Nb of members to fetch  
+    @param  limit   Nb of members to fetch
 **/
 func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err error) {
 	var url string
@@ -129,9 +129,9 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 	}
 	group = tmp[0]
 	group.Limit = limit
-	
+
 	// get the members of the group
-	
+
 	n := group.N
 	if n == 0 {
 		return nil, werr.Wrapf(err, fmt.Sprintf("Group '%s' has 0 elements - Must be computed before using", slug))
@@ -139,15 +139,15 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 	pagemax := int(math.Ceil(float64(n) / float64(limit)))
 	group.NPages = pagemax
 	if page > pagemax {
-	    page = pagemax
+		page = pagemax
 	}
 	offset := (page - 1) * limit
-	url = restURL + "/api_persongroop" + 
-	    "?group_slug=eq." + slug +
-	    "&order=person_slug" +
-	    "&limit=" + strconv.Itoa(limit) +
-	    "&offset=" + strconv.Itoa(offset)
-	    
+	url = restURL + "/api_persongroop" +
+		"?group_slug=eq." + slug +
+		"&order=person_slug" +
+		"&limit=" + strconv.Itoa(limit) +
+		"&offset=" + strconv.Itoa(offset)
+
 	response, err = http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

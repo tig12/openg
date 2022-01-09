@@ -96,11 +96,11 @@ func (n *PersonName) DisplayedName() string {
 	}
 	fam := n.Family
 	if n.Nobl != "" {
-	    if string(n.Nobl[len(n.Nobl)-1]) == "'" {
-	        fam = n.Nobl +fam
-	    }else{
-	        fam = n.Nobl + " " + fam
-	    }
+		if string(n.Nobl[len(n.Nobl)-1]) == "'" {
+			fam = n.Nobl + fam
+		} else {
+			fam = n.Nobl + " " + fam
+		}
 	}
 	if fam != "" {
 		if n.Fame.Given != "" {
@@ -208,10 +208,10 @@ func (p *Person) GetDeathDate() string {
     Otherwise uses field Birth.DateUT
 **/
 func (p *Person) GetBirthDay() string {
-    tmp := p.GetBirthDate()
-    if len(tmp) == 0 {
-        return ""
-    }
+	tmp := p.GetBirthDate()
+	if len(tmp) == 0 {
+		return ""
+	}
 	return tmp[:10]
 }
 
@@ -221,10 +221,10 @@ func (p *Person) GetBirthDay() string {
     Otherwise uses field Death.DateUT
 **/
 func (p *Person) GetDeathDay() string {
-    tmp := p.GetDeathDate()
-    if len(tmp) == 0 {
-        return ""
-    }
+	tmp := p.GetDeathDate()
+	if len(tmp) == 0 {
+		return ""
+	}
 	return tmp[:10]
 }
 
