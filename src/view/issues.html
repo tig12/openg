@@ -12,6 +12,7 @@ Current page shows potential individual problematic cases in Open Gauquelin data
 <thead>
     <tr>
         <th>Person</th>
+        <th title="Country">Cy</th>
         <th>Ids</th>
         <th>Occupations</th>
         <th>Issues</th>
@@ -25,6 +26,9 @@ Current page shows potential individual problematic cases in Open Gauquelin data
             <a itemprop="name" href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a>
             {{if .PersonBirth.Date}}<div itemprop="birthDate">{{.PersonBirth.Date}}</div>{{end}}
             {{if and (not .PersonBirth.Date) .PersonBirth.DateUT}}<div itemprop="birthDate">{{.PersonBirth.DateUT}}</div>{{end}}
+        </td>
+        <td>
+            {{.PersonBirth.Place.Cy}}
         </td>
         <td>
             {{range $source, $id := .IdsPartial}}

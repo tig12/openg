@@ -33,7 +33,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	ctx.TemplateName = "issues.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "OGDB persons' issues",
+			Title: "Persons' issues",
 		},
 		Details: detailsIssues{
 			Issues:             issues,
