@@ -15,5 +15,9 @@ rest-url: http://localhost:3579
 paths:
   # URL pointing to the downloadable files
   download: https://opengauquelin.org/download
-  # Directory containing the birth certificates - not used yet
+  # URL pointing to the directory containing the birth certificates - not used yet
   acts: /path/to/acts
+
+# Number of rows displayed per page
+# For pages with pagination (group, issues)
+nb-per-page: 100

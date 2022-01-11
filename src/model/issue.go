@@ -25,10 +25,22 @@ type Issue struct {
 // ************************** Get many *******************************
 
 /**
-    Returns all issues, sorted by name.
+    Returns all issues for a given page, sorted by name.
+    @param  page    Current page of the issues to load
+    @param  limit   Nb of members to fetch
 **/
-func GetIssues(restURL string) (issues []*Issue, err error) {
+func GetIssues(restURL string, page, limit int) (issues []*Issue, err error) {
 
+/* 
+    n:= GetNbIssues(restURL)
+	pagemax := int(math.Ceil(float64(n) / float64(limit)))
+	group.NPages = pagemax
+	if page > pagemax {
+		page = pagemax
+	}
+	offset := (page - 1) * limit
+*/
+	
 	url := restURL + "/api_issue"
 	response, err := http.Get(url)
 	if err != nil {
@@ -42,4 +54,8 @@ func GetIssues(restURL string) (issues []*Issue, err error) {
 		return nil, werr.Wrapf(err, "Error json Unmarshal issues data\n"+string(responseData)+"\n")
 	}
 	return issues, nil
+}
+
+func GetNbIssues(restURL string) int {
+    return 261 // TODO 
 }

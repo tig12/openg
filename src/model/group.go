@@ -100,7 +100,7 @@ func GetGroupNameFromSlug(restURL, slug string) (string, error) {
 /**
     Returns a group and its members => 2 calls to the API
     @param  slug    Slug of the group to fetch from the API
-    @param  page    Pagination for the group members
+    @param  page    Current page of the group members to load
     @param  limit   Nb of members to fetch
 **/
 func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err error) {
@@ -123,8 +123,6 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 		return nil, werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Group '%s'\n%s\n", slug, string(responseData)))
 	}
 	if len(tmp) == 0 {
-		//var group = Group{}
-		//return &group, werr.Wrapf(err, fmt.Sprintf("Unexisting group slug '%s'", slug))
 		return nil, werr.Wrapf(err, fmt.Sprintf("Unexisting group slug '%s'", slug))
 	}
 	group = tmp[0]

@@ -8,13 +8,12 @@
 package control
 
 import (
-	"github.com/gorilla/mux"
 	"math"
+	"strconv"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	"strconv"
-	//"fmt"
+	"github.com/gorilla/mux"
 )
 
 type detailsGroup struct {
@@ -41,9 +40,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 		page, _ = strconv.Atoi(strPage) // error useless as routing imposes [1-9][0-9]*
 	}
 
-	N_PER_PAGE := 100 // could be placed in config
-
-	group, err := model.GetGroupBySlug(ctx.Config.RestURL, slug, page, N_PER_PAGE)
+	group, err := model.GetGroupBySlug(ctx.Config.RestURL, slug, page, ctx.Config.NbPerPage)
 	if err != nil {
 		return err
 	}
@@ -70,13 +67,6 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: title,
-			/*
-				CSSFiles: []string{
-					"/static/lib/datatables/datatables.min.css"},
-				JSFiles: []string{
-					"/static/lib/datatables/jquery-3.3.1.min.js",
-					"/static/lib/datatables/datatables.min.js"},
-			*/
 		},
 		Details: detailsGroup{
 			Group:              group,

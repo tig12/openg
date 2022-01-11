@@ -32,9 +32,9 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
+	
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
-	r.HandleFunc("/issues", H(control.ShowIssues))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/install", H(control.ShowInstall))
 	r.HandleFunc("/about", H(control.ShowAbout))
@@ -42,6 +42,9 @@ func main() {
 
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
+
+	r.HandleFunc("/issues", H(control.ShowIssues))
+	r.HandleFunc("/issues/{page:[1-9][0-9]*}", H(control.ShowIssues))
 
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))

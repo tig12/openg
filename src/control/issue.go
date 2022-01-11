@@ -1,9 +1,11 @@
 package control
 
 import (
+    "strconv"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
+	"github.com/gorilla/mux"
 )
 
 /** For the page with all occupations **/
@@ -19,7 +21,16 @@ type detailsIssues struct {
     Displays a page listing all issues
 **/
 func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-	issues, err := model.GetIssues(ctx.Config.RestURL)
+    
+	vars := mux.Vars(r)
+	strPage := vars["page"]
+	page := 1
+	if strPage != "" {
+		page, _ = strconv.Atoi(strPage) // error useless as routing imposes [1-9][0-9]*
+	}
+
+	issues, err := model.GetIssues(ctx.Config.RestURL, page, ctx.Config.NbPerPage)
+	
 	if err != nil {
 		return err
 	}

@@ -23,7 +23,7 @@ Current page shows potential individual problematic cases in Open Gauquelin data
 {{range .Details.Issues}}
     <tr itemscope itemtype="https://schema.org/Person">
         <td>
-            <a itemprop="name" href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a>
+            <b><a itemprop="name" href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a></b>
             {{if .PersonBirth.Date}}<div itemprop="birthDate">{{.PersonBirth.Date}}</div>{{end}}
             {{if and (not .PersonBirth.Date) .PersonBirth.DateUT}}<div itemprop="birthDate">{{.PersonBirth.DateUT}}</div>{{end}}
         </td>
