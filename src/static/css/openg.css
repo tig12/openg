@@ -72,6 +72,14 @@ div.anchor {
     border-radius:7px;
 }
 
+/* ================ Particular pages ================ */
+.error404{
+    position:relative;
+    top:3rem;
+}
+
+
+
 /* ================ Particular elements ================ */
 a{
     text-decoration:none;

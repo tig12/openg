@@ -44,7 +44,11 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	if err != nil {
 		return err
 	}
-
+	if group == nil{
+	    Show404(w, r)
+	    return nil
+	}
+	
 	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err

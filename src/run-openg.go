@@ -9,12 +9,10 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
-	//	"io/fs"
 	"log"
 	"net/http"
 	"openg.local/openg/control"
 	"openg.local/openg/ctxt"
-	"openg.local/openg/generic/wilk/werr"
 	"openg.local/openg/static"
 	"openg.local/openg/view"
 	"path/filepath"
@@ -60,7 +58,7 @@ func main() {
 	r.HandleFunc("/download", HDownloadIndex)
 	r.PathPrefix("/download/").Handler(http.StripPrefix("/download/", http.FileServer(http.Dir(filepath.Join("..", "download")))))
 
-	r.NotFoundHandler = http.HandlerFunc(notFound)
+	r.NotFoundHandler = http.HandlerFunc(control.Show404)
 
 	ctx := ctxt.NewContext()
 	srv := &http.Server{
@@ -90,7 +88,7 @@ func H(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(htt
 		//
 		err = h(ctx, w, r) // Call controller h ; fills ctx.TemplateName
 		if err != nil {
-			showErrorPage(err, ctx, w, r)
+			control.ShowErrorPage(err, ctx, w, r)
 			return
 		}
 		/*
@@ -136,76 +134,3 @@ func Hajax(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func
 	}
 }
 
-// *********************** Error management **********************************
-// TODO put somewhere else
-
-func showErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) {
-	type detailsErrorPage struct {
-		URL     string
-		Details string
-		Mode    string
-	}
-	var err error
-
-	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{
-			Title: "ERROR",
-		},
-		Details: detailsErrorPage{
-			URL:     r.URL.String(),
-			Details: werr.SprintHTML(theErr),
-			Mode:    ctx.Config.Run.Mode,
-		},
-	}
-	tmpl := ctx.Template
-	err = tmpl.ExecuteTemplate(w, "header.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "error.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "footer.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-}
-
-// Error 404 page, same behaviour in mode dev and in mode prod
-func notFound(w http.ResponseWriter, r *http.Request) {
-	ctx := ctxt.NewContext()
-	type detailsErrorPage struct {
-		URL string
-	}
-	var err error
-
-	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{
-			Title: "PAGE NOT FOUND",
-		},
-		Details: detailsErrorPage{
-			URL: r.URL.String(),
-		},
-	}
-	tmpl := ctx.Template
-	err = tmpl.ExecuteTemplate(w, "header.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "error-404.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-	err = tmpl.ExecuteTemplate(w, "footer.html", ctx.Page)
-	if err != nil {
-		ctxt.LogError(err)
-		return
-	}
-
-}
