@@ -8,6 +8,9 @@ Persons' issues
 Current page shows potential individual problematic cases in Open Gauquelin database.
 </div>
 
+{{ template "issues-nav.html" $ }}
+
+
 <table class="datatable alternate">
 <thead>
     <tr>
@@ -19,7 +22,6 @@ Current page shows potential individual problematic cases in Open Gauquelin data
     </tr>
 </thead>
 <tbody>
-
 {{range .Details.Issues}}
     <tr itemscope itemtype="https://schema.org/Person">
         <td>
@@ -46,8 +48,8 @@ Current page shows potential individual problematic cases in Open Gauquelin data
             {{end}}
         </td>
     </tr>
-
 {{end}}
-
 </tbody>
 </table>
+
+{{ template "issues-nav.html" $ }}
