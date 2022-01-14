@@ -8,12 +8,12 @@
 package control
 
 import (
+	"github.com/gorilla/mux"
 	"math"
-	"strconv"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	"github.com/gorilla/mux"
+	"strconv"
 )
 
 type detailsGroup struct {
@@ -44,11 +44,11 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	if err != nil {
 		return err
 	}
-	if group == nil{
-	    Show404(w, r)
-	    return nil
+	if group == nil {
+		Show404(w, r)
+		return nil
 	}
-	
+
 	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err

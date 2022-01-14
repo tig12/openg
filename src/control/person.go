@@ -36,9 +36,9 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	if err != nil {
 		return err
 	}
-	if person == nil{
-	    Show404(w, r)
-	    return nil
+	if person == nil {
+		Show404(w, r)
+		return nil
 	}
 
 	err = person.ComputeGroups(ctx.Config.RestURL)

@@ -22,8 +22,9 @@ type Config struct {
 	Paths struct {
 		Acts      string
 		Downloads string `yaml:"download"`
+		Log       string
 	} // `yaml:"paths"`
-	
+
 	// UI
 	NbPerPage int `yaml:"nb-per-page"`
 }

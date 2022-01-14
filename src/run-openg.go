@@ -30,7 +30,7 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
-	
+
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
@@ -61,6 +61,9 @@ func main() {
 	r.NotFoundHandler = http.HandlerFunc(control.Show404)
 
 	ctx := ctxt.NewContext()
+
+	r.Use(ctxt.LogRequest)
+
 	srv := &http.Server{
 		Handler:      r,
 		Addr:         ctx.Config.Run.URL + ":" + ctx.Config.Run.Port,
@@ -133,4 +136,3 @@ func Hajax(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func
 		}
 	}
 }
-

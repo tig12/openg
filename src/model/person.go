@@ -136,7 +136,7 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 		return nil, werr.New("Several persons with identical slug: " + slug)
 	}
 	if len(persons) == 0 {
-	    // do not return error because should be handled as 404 by caller
+		// do not return error because should be handled as 404 by caller
 		return nil, nil
 	}
 	return &persons[0], nil

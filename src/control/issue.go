@@ -1,12 +1,12 @@
 package control
 
 import (
-    "math"
-    "strconv"
+	"github.com/gorilla/mux"
+	"math"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	"github.com/gorilla/mux"
+	"strconv"
 )
 
 /** For the page with all occupations **/
@@ -16,6 +16,7 @@ type detailsIssues struct {
 	WD_ENTITY_BASE_URL string
 	GroupSlugNames     map[string]string
 	Slug_Name          map[string]string
+	NIssues            int
 	Pages              []int
 	CurrentPage        int
 	NextPage           int
@@ -26,7 +27,7 @@ type detailsIssues struct {
     Displays a page listing all issues
 **/
 func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    
+
 	vars := mux.Vars(r)
 	strPage := vars["page"]
 	page := 1
@@ -34,7 +35,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		page, _ = strconv.Atoi(strPage) // error useless as routing imposes [1-9][0-9]*
 	}
 
-	issues, pagemax, err := model.GetIssues(ctx.Config.RestURL, page, ctx.Config.NbPerPage)
+	issues, nIssues, pagemax, err := model.GetIssues(ctx.Config.RestURL, page, ctx.Config.NbPerPage)
 	if err != nil {
 		return err
 	}
@@ -44,7 +45,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	}
 	nextPage := int(math.Min(float64(pagemax), float64(page+1)))
 	prevPage := int(math.Max(1, float64(page-1)))
-	
+
 	// to show the occus of a person
 	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
@@ -61,6 +62,7 @@ func ShowIssues(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			DownloadBase:       ctx.Config.Paths.Downloads,
 			GroupSlugNames:     groupSlugNames,
 			WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
+			NIssues:            nIssues,
 			Pages:              pages,
 			CurrentPage:        page,
 			PrevPage:           prevPage,

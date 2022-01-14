@@ -2,7 +2,7 @@
     Controls the display of error pages.
 
     @license    GPL
-    @history    2022-01-13 21:18:14+01:00 , Thierry Graff : Creation from code previously located in run-openg.go 
+    @history    2022-01-13 21:18:14+01:00 , Thierry Graff : Creation from code previously located in run-openg.go
 ********************************************************************************/
 
 package control
@@ -13,7 +13,7 @@ import (
 	"openg.local/openg/generic/wilk/werr"
 )
 
-/** 
+/**
     Shows error page.
     Behaviour differ in dev and prod mode.
 **/
@@ -53,7 +53,7 @@ func ShowErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 	}
 }
 
-/** 
+/**
     Shows Page not found.
     Same behaviour in mode dev and in mode prod.
 **/
