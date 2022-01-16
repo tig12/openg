@@ -17,9 +17,10 @@ paths:
   download: https://opengauquelin.org/download
   # URL pointing to the directory containing the birth certificates - not used yet
   acts: /path/to/acts
-  # directory where access logs are written
+  # directory where access and error logs are written
   # useful only in mode prod
-  log: /home/thierry/dev/astrostats/openg/log
+  # see src/ctxt/log.go
+  log: /path/to/directory/containing/log
 
 # Number of rows displayed per page
 # For pages with pagination (group, issues)

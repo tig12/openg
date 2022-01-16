@@ -1,8 +1,8 @@
 /******************************************************************************
-        Adaptation from https://www.w3schools.com/howto/howto_js_autocomplete.asp
+    Adaptation from https://www.w3schools.com/howto/howto_js_autocomplete.asp
 
-        @license        GPL
-        @history        2020-01-17 16:35:45+01:00, Thierry Graff : Creation
+    @license        GPL
+    @history        2020-01-17 16:35:45+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
 /**
@@ -21,8 +21,8 @@ function autocomplete(inputField, dataProvider) {
         function(e) {
             let a, b, i, val = this.value;
             closeAllLists();
-            // 2 could be passed in param (minimal length before triggering autocomplete)
-            if (!val || val.length < 2) {
+            // 3 could be passed in param (minimal length before triggering autocomplete)
+            if (!val || val.length < 3) {
                 return false;
             }
             currentFocus = -1;
@@ -56,13 +56,14 @@ function autocomplete(inputField, dataProvider) {
                         });
                         a.appendChild(b);
                         //}
+                    }
+                }, // end resolve dataProvider promise
+                function(error) {
+                    // alert("Autocomplete problem\nPlease contact site's administrator");
                 }
-            }, // end resolve dataProvider promise
-            function(error) {
-                //alert("Problème autocomplete\nContacter l'administrateur du site");
-            }) // end then
+            ) // end then
             .catch(
-                () => { alert("Problème autocomplete\nContacter l'administrateur du site"); }
+                () => { alert("Autocomplete problem\nPlease contact site's administrator"); }
             );
         } // end event handler
     );

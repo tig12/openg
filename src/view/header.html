@@ -4,13 +4,27 @@
     <meta charset="utf-8" />
     <title>{{if ne .Header.Title ""}}{{.Header.Title}} | {{end}}Open Gauquelin Database</title>
     <link rel="icon" type="image/png" href="/static/img/open-gauquelin.png">
+    {{/*
+        === CSS ===
+    */}}
     <link href="/static/css/openg.css" rel="stylesheet" type="text/css">
     <link href="/static/css/menu.css" rel="stylesheet" type="text/css">
+    <link href="/static/lib/autocomplete/autocomplete.css" rel="stylesheet" type="text/css">
     {{range .Header.CSSFiles}}<link href="{{.}}" rel="stylesheet" type="text/css">
     {{end}}
+    {{/*
+        === javascript ===
+    */}}
+    <script src="/static/lib/autocomplete/autocomplete.js"></script>
+    <script src="/static/lib/autocomplete/getPossiblePersons.js"></script>
     {{range .Header.JSFiles}}
     <script src="{{.}}"></script>
     {{end}}
+    <script>
+        window.addEventListener("load", function(){
+            autocomplete(document.getElementById("search-input"), getPossiblePersons);
+        });
+    </script>
 </head>
 
 <body>
@@ -24,6 +38,7 @@
     <div class="search">
         Search
         <input
+            id="search-input"
             class="autocomplete"
             type="text"
             autocomplete="off"

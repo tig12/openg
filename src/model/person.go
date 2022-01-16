@@ -67,6 +67,15 @@ type HistoryEntry struct {
 	New     interface{}
 }
 
+// used by ajax
+type AutocompletePerson struct {
+    Slug string `json:"slug"`
+    Day  string `json:"day"`
+    Name string `json:"name"`
+}
+
+
+
 // Displayed names of the partial ids
 var Ids_partial_labels = map[string]string{
 	"lerrcp": "Gauquelin",
@@ -165,7 +174,7 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 
 // ************************** Get many *******************************
 
-// NOT USED - REMOVE ?
+// ==================== NOT USED - REMOVE ? ====================
 func GetPersons(restURL string) (p []*Person, err error) {
 	url := restURL + "/person?limit=10&offset=0"
 	response, err := http.Get(url)
@@ -181,6 +190,26 @@ func GetPersons(restURL string) (p []*Person, err error) {
 		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n"+string(responseData)+"\n")
 	}
 	return persons, nil
+}
+
+/** 
+    Used by ajax
+**/
+func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err error) {
+	url := restURL + "/search?slug=like." + str + "*"
+fmt.Println("=== model.GetPersonsAutocomplete url = " +url)
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error decoding persons data")
+	}
+	if err = json.Unmarshal(responseData, &p); err != nil {
+		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n"+string(responseData)+"\n")
+	}
+	return p, nil
 }
 
 // ************************** Get fields *******************************

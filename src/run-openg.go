@@ -12,6 +12,7 @@ import (
 	"log"
 	"net/http"
 	"openg.local/openg/control"
+	"openg.local/openg/control/ajax"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/static"
 	"openg.local/openg/view"
@@ -30,7 +31,10 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
-
+	
+	// ajax
+	r.HandleFunc("/ajax/autocomplete/persons/{str}", H(ajax.PersonsAutocomplete))
+	
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
@@ -62,7 +66,7 @@ func main() {
 
 	ctx := ctxt.NewContext()
 
-	r.Use(ctxt.LogRequest)
+	r.Use(ctxt.LogRequest) // middleware
 
 	srv := &http.Server{
 		Handler:      r,

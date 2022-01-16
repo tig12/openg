@@ -4,6 +4,7 @@
 package control
 
 import (
+//"errors"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
@@ -15,6 +16,7 @@ type detailsHome struct {
 }
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+//return errors.New("toto")
 	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
 		return err
