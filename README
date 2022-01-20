@@ -1,9 +1,14 @@
 
 
-Web application to browse and download data produced by Gauquelin5 program, see https://github.com/tig12/gauquelin5
+Web application to browse and download data produced by Gauquelin5 program (https://github.com/tig12/gauquelin5).
+
+Uses Postgrest (https://postgrest.org).
+
+Status: under development, not yet in production.
 
 Licence, for code and doc : choose between
 - GPL : General Public Licence (https://www.gnu.org/licenses/gpl.html)
 - FDL : Free Documentation Licence (https://www.gnu.org/licenses/fdl.html)
 - CC-BY-SA-4 : Creative Commons Attribution - Share Alike (http://creativecommons.org/licenses/by-sa/4.0)
 
+Repository created in July 2021 by Thierry Graff.
