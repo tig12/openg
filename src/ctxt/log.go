@@ -8,6 +8,7 @@
 package ctxt
 
 import (
+    "crypto/md5"
 	"fmt"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
@@ -79,6 +80,7 @@ func LogRequest(next http.Handler) http.Handler {
             } else {
 			    remoteAddr = r.RemoteAddr // not behind an Apache proxy
 			}
+            remoteAddr = fmt.Sprintf("%x", md5.Sum([]byte(remoteAddr))) // anonymize ip address
 			_, err = fmt.Fprintf(osfile, "%s %s %s %s\n",
 				now,
 				remoteAddr,
