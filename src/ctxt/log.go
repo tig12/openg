@@ -72,9 +72,16 @@ func LogRequest(next http.Handler) http.Handler {
 			if err != nil {
 				panic(err)
 			}
+			// Compute RemoteAddr
+			remoteAddr := ""
+			if tmp, ok := r.Header["X-Forwarded-For"]; ok {
+			    remoteAddr = tmp[0] // if the site is behind an Apache proxy
+            } else {
+			    remoteAddr = r.RemoteAddr // not behind an Apache proxy
+			}
 			_, err = fmt.Fprintf(osfile, "%s %s %s %s\n",
 				now,
-				r.RemoteAddr,
+				remoteAddr,
 				r.RequestURI,
 				r.Referer())
 			if err != nil {
