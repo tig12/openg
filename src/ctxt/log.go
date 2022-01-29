@@ -84,8 +84,8 @@ func LogRequest(next http.Handler) http.Handler {
 			_, err = fmt.Fprintf(osfile, "%s %s %s %s\n",
 				now,
 				remoteAddr,
-				r.RequestURI,
-				r.Referer())
+				r.Referer(),
+				r.RequestURI)
 			if err != nil {
 				panic(err)
 			}
