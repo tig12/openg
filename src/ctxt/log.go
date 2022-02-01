@@ -12,6 +12,7 @@ import (
 	"fmt"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
+	"openg.local/openg/generic/tiglib"
 	"os"
 	"strings"
 	"time"
@@ -57,7 +58,7 @@ func LogRequest(next http.Handler) http.Handler {
 			month := now[0:7]
 			day := now[0:10]
 			sep := string(os.PathSeparator)
-			// logfile looks like /path/to/directory/containing/log/2022/2022-01/2022-01-14.log
+			// logfile looks like /path/to/logs/2022/2022-01/2022-01-14.log
 			logdir := strings.Join([]string{ctx.Config.Paths.Log, year, month}, sep)
 			logfile := logdir + sep + day + ".log"
 			var osfile *os.File
@@ -80,7 +81,10 @@ func LogRequest(next http.Handler) http.Handler {
             } else {
 			    remoteAddr = r.RemoteAddr // not behind an Apache proxy
 			}
-            remoteAddr = fmt.Sprintf("%x", md5.Sum([]byte(remoteAddr))) // anonymize ip address
+            // anonymize ip address
+            remoteAddr = fmt.Sprintf("%x", md5.Sum([]byte(remoteAddr)))
+            remoteAddr = tiglib.StrRandomShorten(remoteAddr, 8)
+            
 			_, err = fmt.Fprintf(osfile, "%s %s %s %s\n",
 				now,
 				remoteAddr,
