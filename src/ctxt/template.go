@@ -67,8 +67,8 @@ func nl2br(t string) template.HTML {
 	return template.HTML(strings.Replace(template.HTMLEscapeString(t), "\n", "<br>", -1))
 }
 
-func numberFormat(n int) template.HTML {
-	return template.HTML(tiglib.NumberFormat(n, ' '))
+func numberFormat(x interface{}) template.HTML {
+	return template.HTML(tiglib.NumberFormat(x, ' '))
 }
 
 /**

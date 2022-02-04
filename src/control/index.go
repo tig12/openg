@@ -69,3 +69,11 @@ func ShowInstall(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	}
 	return nil
 }
+
+func ShowWiki(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+	ctx.TemplateName = "wiki.html"
+	ctx.Page = &ctxt.Page{
+		Header: ctxt.Header{},
+	}
+	return nil
+}
