@@ -112,7 +112,9 @@ pre.normal{
     background:none;
 }
 .hr-big{
-    margin:2rem 1rem;
+    width:50%;
+    margin:auto;
+    margin-top:2rem;
 }
 .hr-cool{
     width:80%;

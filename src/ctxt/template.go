@@ -1,8 +1,6 @@
 /******************************************************************************
     Templates
 
-    TODO - fix nl2br2 and sources.html {{url2href .Description | nl2br2 | safeHTML}}
-
     @license    GPL
     @history    2021-07-13 23:55:41+02:00, Thierry Graff : Creation
 ********************************************************************************/
