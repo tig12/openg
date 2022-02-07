@@ -11,9 +11,11 @@
 <h2>Download full database</h2>
 
 <ul>
-    <li><a href="">Postgresql dump</a> - to run opengauquelin on your local machine - See <a href="install">page INSTALL</a></li>
-    <li><a href="">CSV export - Timed data</a></li>
-    <li><a href="">CSV export - Timed and untimed data</a></li>
+    {{/* file name specified in g5 class commands/db/export/pgdump */}}
+    <li><a href="/download/ogdb-pg-dump.zip">Postgresql dump</a> - to run opengauquelin on your local machine, see <a href="install">page INSTALL</a></li>
+    {{/* file names specified in g5 class commands/db/export/allpersons */}}
+    <li><a href="/download/ogdb-time.csv.zip">CSV export - Timed data</a></li>
+    <li><a href="/download/ogdb-all.csv.zip">CSV export - Timed and untimed data</a></li>
 </ul>
 
 <!-- ********************************************************************************* -->
@@ -28,7 +30,6 @@ See page <a href="/occupations">Lists by occupation</a> and click on the downloa
 <!-- ********************************************************************************* -->
 <h2>Other downloads</h2>
 Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
-
 
 <!-- ********************************************************************************* -->
 <hr class="hr-big">
@@ -150,6 +151,13 @@ The downloadable CSV files do not all have the same format. For example, outputs
         <td>DATE-UT</td>
         <td>
             <b>Date and time converted to universal time</b>.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>TZO</td>
+        <td>
+            <b>Timezone offset</b>, see definition on page <a href="https://tig12.github.io/gauquelin5/time.html">tig12.github.io/gauquelin5/time.html</a>.
         </td>
     </tr>
     
