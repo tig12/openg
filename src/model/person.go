@@ -7,6 +7,7 @@
 package model
 
 import (
+    //"os"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -153,9 +154,7 @@ func GetPerson(restURL, slug string) (person *Person, err error) {
 
 // ************************** Compute fields *******************************
 
-/**
-    Computes field 'Groups' of a person
-**/
+/** Computes field 'Groups' of a person **/
 func (p *Person) ComputeGroups(restURL string) (err error) {
 	url := restURL + "/api_persongroop?person_id=eq." + strconv.Itoa(p.Id)
 	response, err := http.Get(url)
@@ -171,6 +170,25 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 	}
 	return nil
 }
+
+
+/** Computes field 'Acts' of a person **/
+/** 
+func (p *Person) ComputeActs(dirActs string) (err error) {
+    file := dirActs
+	//y, err := ioutil.ReadFile(dirActs)
+	if err != nil {
+	    if os.IsNotExist(err){
+            return; // p.Acts remains empty
+	    }
+		panic(err)
+	}
+//	err = yaml.Unmarshal(y, &config)
+	if err != nil {
+		panic(err)
+	}
+}
+**/
 
 // ************************** Get many *******************************
 

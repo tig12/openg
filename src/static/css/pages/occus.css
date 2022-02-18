@@ -1,0 +1,13 @@
+/******************************************************************************
+    Style for page listing occupations.
+    
+    @license    GPL
+    @history    2022-02-14 00:43:30+01:00, Thierry Graff : Creation
+********************************************************************************/
+
+#page-occus .datatable td:nth-child(1),
+#page-occus .datatable th:nth-child(1)
+{
+    text-align:center;
+}
+

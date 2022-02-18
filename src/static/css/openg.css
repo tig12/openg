@@ -41,6 +41,14 @@ body{
     border:1px solid red;
 }
 
+.todo{
+    display:inline-block;
+    margin:.5rem;
+    padding:.5rem;
+    border:1px solid grey;
+    background:gold;
+}
+
 /* ================ Top header ================ */
 /*
     Used for local anchors in a page.
@@ -169,7 +177,8 @@ table.wikitable td.paragraph{
 table.datatable{
     width:100%;
 }
-table.datatable th{text-align:left;}
+table.datatable thead tr th{text-align:left;}
+table.datatable thead tr th,
 table.datatable tbody tr td{
     padding:.7rem;
 }

@@ -32,7 +32,8 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 		Header: ctxt.Header{
 			Title: "Lists by occupation",
 			CSSFiles: []string{
-				"/static/lib/datatables/datatables.min.css"},
+				"/static/lib/datatables/datatables.min.css",
+			    "/static/css/pages/occus.css"},
 			JSFiles: []string{
 				"/static/lib/datatables/jquery-3.3.1.min.js",
 				"/static/lib/datatables/datatables.min.js"},

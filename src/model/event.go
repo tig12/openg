@@ -31,6 +31,10 @@ type Place struct {
 
 // ************************** Get fields *******************************
 
+func (e *Event) Day() string {
+	return e.Date
+}
+
 func (p *Place) String() string {
 	res := p.Name
 	if p.Cy != "" {
