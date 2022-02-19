@@ -175,18 +175,7 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 /** Computes field 'Acts' of a person **/
 /** 
 func (p *Person) ComputeActs(dirActs string) (err error) {
-    file := dirActs
-	//y, err := ioutil.ReadFile(dirActs)
-	if err != nil {
-	    if os.IsNotExist(err){
-            return; // p.Acts remains empty
-	    }
-		panic(err)
-	}
-//	err = yaml.Unmarshal(y, &config)
-	if err != nil {
-		panic(err)
-	}
+    p.Acts = append(p.acts, ComputeBC(p, dirActs)
 }
 **/
 
