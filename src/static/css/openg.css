@@ -49,6 +49,8 @@ body{
     background:gold;
 }
 
+.help:hover{cursor:help;}
+
 /* ================ Top header ================ */
 /*
     Used for local anchors in a page.
