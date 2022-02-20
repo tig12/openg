@@ -5,6 +5,9 @@
     @history    2021-12-27 18:11:37+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
+.home .central{
+    flex-grow:4;
+}
 
 /* Historical tests */
 .home .historical li{
@@ -12,6 +15,12 @@
 }
 .home .historical li.author{
     padding-bottom:2rem;
+}
+.home .historical li.datagroup{
+    padding-top:1rem;
+}
+.home .historical ul.dataset li{
+    padding-top:.5rem;
 }
 .home .historical li .nodownload {
     padding-top:4px;
@@ -21,10 +30,6 @@
     background:gold;
     border:1px solid grey;
     padding:0 5px;
-}
-
-.home .central{
-    flex-grow:4;
 }
 
 /* sitelinks, list on the right */
