@@ -14,4 +14,7 @@ Change in database (todos for gauquelin5 software)
     by something like:
     - write API_get(url)
     - In function API_get(), write clear error message saying that you need to start postgrest !!!
-    
+
+- See why error
+template: header.html:5:26: executing "header.html" at <.Header.Title>: nil pointer evaluating *ctxt.Page.Header
+when executing control.Show404()    

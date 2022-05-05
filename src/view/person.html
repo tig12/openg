@@ -14,8 +14,11 @@
 
 
 <div class="tab">
-  <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-general');" id="general">General</button>
-  <button class="tablinks" onclick="openTab(event, 'tab-build');" id="build">Build history</button>
+    <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-general');" id="general">General</button>
+    {{if ne 0 (len .Acts)}}
+        <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-acts');" id="acts">Birth certificate</button>
+    {{end}}
+    <button class="tablinks" onclick="openTab(event, 'tab-build');" id="build">Build history</button>
 </div>
 
 <div id="tab-general" class="tabcontent">
@@ -23,6 +26,14 @@
         {{ template "person-general.html" $ }}
     </p>
 </div>
+
+{{if ne 0 (len .Acts)}}
+<div id="tab-acts" class="tabcontent">
+    <p>
+        {{ template "person-acts.html" $ }}
+    </p>
+</div>
+{{end}}
 
 <div id="tab-build" class="tabcontent">
     <p>

@@ -19,9 +19,9 @@ type Issue struct {
 	PersonSlug  string            `json:"slug"`
 	PersonName  PersonName        `json:"name"`
 	PersonBirth Event             `json:"birth"`
-	IdsPartial  map[string]string `json:"ids_partial"`
-	PersonOccus []string          `json:"occus"`
+	IdsPartial  map[string]string `json:"partial_ids"`
 	Values      []string          `json:"issues"`
+	PersonOccus []string          `json:"occus"`
 }
 
 // ************************** Get many *******************************
@@ -52,7 +52,7 @@ func GetIssues(restURL string, page, limit int) (issues []*Issue, nIssues, pagem
 		"&offset=" + strconv.Itoa(offset)
 	response, err := http.Get(url)
 	if err != nil {
-		return nil, 0, 0, werr.Wrapf(err, "Error calling postgres API: "+url)
+		return nil, 0, 0, werr.Wrapf(err, "Error calling postgrest API: "+url)
 	}
 	responseData, err := ioutil.ReadAll(response.Body)
 	if err != nil {

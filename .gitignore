@@ -2,7 +2,7 @@
 config.yml
 postgrest.conf
 1.local
-1.build
+2.build
 
 # files marked for deletion
 z.*
@@ -17,8 +17,7 @@ download
 
 # directory where logs are stored
 # warning, can be changed in config.yml
-log
-log-prod
+log*
 
 .~lock.*
 \#*

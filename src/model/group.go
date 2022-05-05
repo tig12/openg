@@ -46,7 +46,7 @@ type Group struct {
 type GroupMember struct {
 	Slug           string `json:"person_slug"`
 	Ids_in_sources map[string]string
-	Ids_partial    map[string]string
+	Partial_ids    map[string]string
 	Sex            string
 	Name           PersonName
 	Occus          []string
@@ -62,7 +62,7 @@ type PersonGroup struct {
 	GroupName      string `json:"group_name"`
 	GroupType      string `json:"group_type"`
 	Ids_in_sources map[string]string
-	Ids_partial    interface{} // map[string]string
+	Partial_ids    interface{} // map[string]string
 	Sex            string
 	Name           PersonName
 	Occus          []string
@@ -132,7 +132,7 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 
 	n := group.N
 	if n == 0 {
-		return nil, werr.Wrapf(err, fmt.Sprintf("Group '%s' has 0 elements - Must be computed before using", slug))
+		return group, werr.Wrapf(err, fmt.Sprintf("Group '%s' has 0 elements - Must be computed before using", slug))
 	}
 	pagemax := int(math.Ceil(float64(n) / float64(limit)))
 	group.NPages = pagemax
@@ -145,7 +145,7 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 		"&order=person_slug" +
 		"&limit=" + strconv.Itoa(limit) +
 		"&offset=" + strconv.Itoa(offset)
-
+    
 	response, err = http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

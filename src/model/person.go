@@ -7,18 +7,18 @@
 package model
 
 import (
-    //"os"
-	"encoding/json"
 	"fmt"
+	"strconv"
+	"encoding/json"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	"strconv"
 )
 
 // see init function at the end
 
 type Person struct {
+    // fields stored in table person
 	Id             int
 	Slug           string
 	Sex            string
@@ -27,14 +27,15 @@ type Person struct {
 	Birth          Event
 	Death          Event
 	Ids_in_sources map[string]string
-	Ids_partial    interface{} // map[string]string
-	Trust          interface{}
+	Partial_ids    interface{} // map[string]string
+	Trust          string
 	Acts           []string
 	History        []HistoryEntry
 	Issues         []string
 	Notes          []string
 	// not stored in table person
-	Groups []*PersonGroup
+	ActObjects     map[string]Act
+	Groups         []*PersonGroup
 }
 
 type PersonName struct {
@@ -78,7 +79,7 @@ type AutocompletePerson struct {
 
 
 // Displayed names of the partial ids
-var Ids_partial_labels = map[string]string{
+var Partial_ids_labels = map[string]string{
 	"lerrcp": "Gauquelin",
 	"muller": "Müller",
 	"cpara":  "Comité Para",

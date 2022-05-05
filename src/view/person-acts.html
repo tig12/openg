@@ -1,0 +1,99 @@
+{{/* 
+    Called by person.html
+    . of current template corresponds to . of person.html
+*/}}
+
+{{with .Details.Person}}
+
+{{$bc := index .ActObjects "birth"}}
+
+<!-- ********************************************************************************* -->
+<h2>Contents</h2>
+<table class="table-pres">
+    <tr>
+        <td>Family name</td>
+        <td>{{$bc.Person.Name.Official.Family}}</td>
+    </tr>
+    <tr>
+        <td>Given name</td>
+        <td>{{$bc.Person.Name.Official.Given}}</td>
+    </tr>
+    <tr>
+        <td>Birth date</td>
+        <td>{{$bc.Person.Birth.Date}}</td>
+    </tr>
+    <tr>
+        <td>Birth place</td>
+        <td>{{$bc.Person.Birth.Place.Name}}</td>
+    </tr>
+    {{if $bc.Person.Birth.Note}}
+    <tr>
+        <td>Notes</td>
+        <td>{{$bc.Person.Birth.Note}}</td>
+    </tr>
+    {{end}}
+</table>
+
+<!-- ********************************************************************************* -->
+<h2>Information source</h2>
+<table class="table-pres">
+    <tr>
+        <td>Name</td>
+        <td>{{index $bc.Document "source" "name"}}</td>
+    </tr>
+    <tr>
+        <td>Place</td>
+        <td>
+            {{if index $bc.Document "source" "place"}}
+                {{index $bc.Document "source" "place"}}
+            {{end}}
+            {{if index $bc.Document "source" "c2"}}
+                {{index $bc.Document "source" "c2"}}
+            {{end}}
+            {{if index $bc.Document "source" "cy"}}
+                 {{index $bc.Document "source" "cy"}}
+            {{end}}
+        </td>
+    </tr>
+    <tr>
+        <td>Internet</td>
+        <td>
+            {{if index $bc.Document "source" "web" "url"}}
+                <div><a href="{{index $bc.Document "source" "web" "url"}}">{{index $bc.Document "source" "web" "url"}}</a></div>
+            {{end}}
+            {{if index $bc.Document "source" "web" "page"}}
+                <div>Page {{index $bc.Document "source" "web" "page"}}</div>
+            {{end}}
+        </td>
+    </tr>
+</table>
+
+<!-- ********************************************************************************* -->
+<h2>Document</h2>
+<table class="table-pres">
+{{ range $key, $value := $bc.Document.act }}
+    <tr>
+        <td>{{$key | ucFirst}}</td>
+        <td>{{$value}}</td>
+    </tr>
+{{ end }}
+</table>
+
+<!-- ********************************************************************************* -->
+<h2>OGDB integration</h2>
+<ul>
+{{range index $bc.Document "history"}}
+    <li>
+        {{index . "date"}}, {{index . "person"}}: {{index . "action"}}
+    </li>
+{{end}}
+</ul>
+
+{{/* 
+<pre>
+{{$bc | prettyPrint}}
+</pre>
+*/}}
+
+
+{{end}} {{/* with .Details.Person */}}

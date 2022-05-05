@@ -38,6 +38,9 @@
 </div>
 {{end}}
 
+
+{{if gt .N 0}} {{/* ==== non empty group ==== */}}
+
 {{ template "group-nav.html" $ }}
 
 <table class="datatable alternate">
@@ -56,8 +59,8 @@
 {{range .Members}}
 <tr>
     <td>
-    {{range $key, $value := .Ids_partial}}
-        <div title="{{index $.Details.Ids_partial_labels $key}} id">{{$value}}</div>
+    {{range $key, $value := .Partial_ids}}
+        <div>{{index $.Details.Partial_ids_labels $key}}: {{$value}}</div>
     {{end}}
     </td>
     <td>
@@ -81,5 +84,7 @@
 </table>
 
 {{ template "group-nav.html" $ }}
+
+{{end}}{{/* if gt .N 0 */}}
 
 {{end}} {{/* with .Details.Group */}}

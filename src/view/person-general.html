@@ -287,9 +287,9 @@
             <td>Open Gauquelin Database</td>
             <td>{{.Slug}}</td>
         </tr>
-        {{range $key, $value := .Ids_partial}}
+        {{range $key, $value := .Partial_ids}}
             <tr>
-                <td>{{index $.Details.Ids_partial_labels $key}}</td>
+                <td>{{index $.Details.Partial_ids_labels $key}}</td>
                 <td>
                     {{$value}}
                 </td>

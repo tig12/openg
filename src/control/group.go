@@ -20,7 +20,7 @@ type detailsGroup struct {
 	Group              *model.Group
 	DownloadBase       string
 	GroupSlugNames     map[string]string
-	Ids_partial_labels map[string]string
+	Partial_ids_labels map[string]string
 	Pages              []int
 	CurrentPage        int
 	NextPage           int
@@ -37,14 +37,15 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	strPage := vars["page"]
 	page := 1
 	if strPage != "" {
-		page, _ = strconv.Atoi(strPage) // error useless as routing imposes [1-9][0-9]*
+		page, _ = strconv.Atoi(strPage) // no error handling because routing imposes [1-9][0-9]*
 	}
 
 	group, err := model.GetGroupBySlug(ctx.Config.RestURL, slug, page, ctx.Config.NbPerPage)
 	if err != nil {
 		return err
 	}
-	if group == nil {
+	if group == nil { // does this case happen at all ?
+//func ShowErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) {
 		Show404(w, r)
 		return nil
 	}
@@ -76,7 +77,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 			Group:              group,
 			DownloadBase:       ctx.Config.Paths.Downloads,
 			GroupSlugNames:     groupSlugNames,
-			Ids_partial_labels: model.Ids_partial_labels,
+			Partial_ids_labels: model.Partial_ids_labels,
 			Pages:              pages,
 			CurrentPage:        page,
 			PrevPage:           prevPage,
