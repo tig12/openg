@@ -280,6 +280,10 @@ func GetLegalOrUTDate(date, dateUT string) (res string) {
 	return res
 }
 
+// ************************** Raw ordering *******************************
+// Auxiliary code to sort the raw fields of a person
+
+// Used by ctxt.template
 func GetRawPersonSortedFields(source string) []string {
 	switch source {
 	case "a1", "a2", "a3", "a4", "a5", "a6":
@@ -300,15 +304,16 @@ func GetRawPersonSortedFields(source string) []string {
 		return RawPersonSortedFields["afd3"]
 	case "afd5":
 		return RawPersonSortedFields["afd5"]
+	case "3a_sports":
+		return RawPersonSortedFields["3a_sports"]
 	case "csi":
 		return RawPersonSortedFields["csi"]
+	case "cfepp-final3":
+		return RawPersonSortedFields["cfepp-final3"]
 	default:
 		return []string{}
 	}
 }
-
-// ************************** Raw ordering *******************************
-// Auxiliary structures to sort the raw fileds of a person
 
 // map source slug => array of keys.
 var RawPersonSortedFields map[string][]string
@@ -369,43 +374,6 @@ func init() {
 			"CITY",
 			"COD",
 		},
-		"afd5": {
-			"NR",
-			"SAMPLE",
-			"GNR",
-			"CODE",
-			"NAME",
-			"GEBDATUM",
-			"JAHR",
-			"GEBZEIT",
-			"GEBORT",
-			"LAENGE",
-			"BREITE",
-			"MODE",
-			"KORR",
-			"ELECTDAT",
-			"ELECTAGE",
-			"STBDATUM",
-			"SONNE",
-			"MOND",
-			"VENUS",
-			"MARS",
-			"JUPITER",
-			"SATURN",
-			"SO_",
-			"MO_",
-			"VE_",
-			"MA_",
-			"JU_",
-			"SA_",
-			"PHAS_",
-			"AUFAB",
-			"NIENMO",
-			"NIENVE",
-			"NIENMA",
-			"NIENJU",
-			"NIENSA",
-		},
 		"afd1": {
 			"NAME",
 			"YEAR",
@@ -465,6 +433,79 @@ func init() {
 			"SOURCE",
 			"GQ",
 		},
+		"afd5": {
+			"NR",
+			"SAMPLE",
+			"GNR",
+			"CODE",
+			"NAME",
+			"GEBDATUM",
+			"JAHR",
+			"GEBZEIT",
+			"GEBORT",
+			"LAENGE",
+			"BREITE",
+			"MODE",
+			"KORR",
+			"ELECTDAT",
+			"ELECTAGE",
+			"STBDATUM",
+			"SONNE",
+			"MOND",
+			"VENUS",
+			"MARS",
+			"JUPITER",
+			"SATURN",
+			"SO_",
+			"MO_",
+			"VE_",
+			"MA_",
+			"JU_",
+			"SA_",
+			"PHAS_",
+			"AUFAB",
+			"NIENMO",
+			"NIENVE",
+			"NIENMA",
+			"NIENJU",
+			"NIENSA",
+		},
+		"3a_sports": {
+            "L",
+            "MF",
+            "NR",
+            "ENG",
+            "MA_",
+            "G_NR",
+            "MA12",
+            "MARS",
+            "NAME",
+            "PUBL",
+            "QUEL",
+            "AUFAB",
+            "CSINR",
+            "KURTZ",
+            "PHAS_",
+            "STUND",
+            "CFEPNR",
+            "EXTEND",
+            "NATION",
+            "TAGMON",
+            "ZITATE",
+            "ZITSUM",
+            "INDGRUP",
+            "PARA_NR",
+            "VORNAME",
+            "ZITRANG",
+            "GAUQ1955",
+            "GEBDATUM",
+            "GQBECORR",
+            "NIENCORR",
+            "NIENHUYS",
+            "SPORTART",
+            "CHRISNAME",
+            "ZITSUM_OD",
+		},
 		"csi": {
 			"Satz#",
 			"NAME",
@@ -481,6 +522,22 @@ func init() {
 			"SPORTART",
 			"MARS",
 			"BATCH",
+		},
+		"cfepp-final3": {
+            "S",
+            "LT",
+            "LV",
+            "TR",
+            "UT",
+            "LAT",
+            "SRC",
+            "LONG",
+            "NAME",
+            "SPORT",
+            "LOC_DATE",
+            "UNIV_DATE",
+            "BIRTH_PLACE",
+            "POSTAL_CODE",
 		},
 	}
 }

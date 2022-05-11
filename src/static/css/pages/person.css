@@ -49,9 +49,22 @@
     font-weight:bold;
 }
 
-/* Table showing raw values of a person */
-.raw{
+/* Tab "Build history" - Table showing raw values of a person */
+.person .raw{
+    white-space:pre-wrap;
+    background:white;
+    padding:.5rem;
+    border:1px solid grey;
+}
+.person .raw td{
+    padding:4px;
+}
+
+/* Tab "Build history" - Table showing new values of a person */
+.person .new{
     white-space:pre-wrap;
     background:white;
     padding:1rem;
+    border:1px solid grey;
 }
+

@@ -36,7 +36,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
             Raw data:
             {{with .Raw}}
                 {{$value := .}}
-                <table class="raw">
+                <table class="raw alternate">
                     {{range $sourceSlug | rawPersonSortedFields}}
                     <tr>
                         <td>{{.}}</td>
@@ -44,7 +44,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
                     </tr>
                     {{else}}
                     <tr>
-                        <td>{{$curHistory.New | prettyPrint}}</td>
+                        <td>{{$curHistory.Raw | prettyPrint}}</td>
                     </tr>
                     {{end}}
                 </table>
@@ -53,7 +53,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
             
         <div class="margin-right">
             New values:
-            <table class="raw">
+            <table class="new">
                 <tr>
                     <td>{{.New | prettyPrint}}</td>
                 </tr>
