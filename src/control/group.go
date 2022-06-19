@@ -45,7 +45,6 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 		return err
 	}
 	if group == nil { // does this case happen at all ?
-//func ShowErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) {
 		Show404(w, r)
 		return nil
 	}

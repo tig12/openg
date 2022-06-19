@@ -1,3 +1,5 @@
+# https://github.com/cosmtrek/air
+
 root = "."
 tmp_dir = "../tmp"
 
@@ -26,7 +28,7 @@ tmp_dir = "../tmp"
   watcher = "cyan"
 
 [log]
-  time = false
+  time = true
 
 [misc]
   clean_on_exit = false

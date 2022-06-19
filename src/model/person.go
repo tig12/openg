@@ -86,6 +86,7 @@ var Partial_ids_labels = map[string]string{
 	"csicop": "CSICOP",
 	"cfepp":  "CFEPP",
 	"ertel":  "Ertel",
+	"g55":    "Gauquelin 1955",
 	"wd":     "Wikidata",
 }
 
