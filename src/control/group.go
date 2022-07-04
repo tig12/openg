@@ -21,6 +21,7 @@ type detailsGroup struct {
 	DownloadBase       string
 	GroupSlugNames     map[string]string
 	Partial_ids_labels map[string]string
+	CountryCodesNames  map[string]string
 	Pages              []int
 	CurrentPage        int
 	NextPage           int
@@ -77,6 +78,7 @@ func ShowGroup(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 			DownloadBase:       ctx.Config.Paths.Downloads,
 			GroupSlugNames:     groupSlugNames,
 			Partial_ids_labels: model.Partial_ids_labels,
+			CountryCodesNames:  model.CountryCodesNames,
 			Pages:              pages,
 			CurrentPage:        page,
 			PrevPage:           prevPage,

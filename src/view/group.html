@@ -50,7 +50,7 @@
         <th>Name</th>
         <th>Birth date</th>
         <th>Birth place</th>
-        <th title="Country ISO 3166 code">C.</th>
+        <th>Country</th>
         <th>Occupations</th>
     </tr>
 </thead>
@@ -71,7 +71,7 @@
         {{.Birth.Place.Name}}
         {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
     </td>
-    <td>{{.Birth.Place.Cy}}</td>
+    <td>{{index $.Details.CountryCodesNames .Birth.Place.Cy}}</td>
     <td>
         {{range .Occus}}
             <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
