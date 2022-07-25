@@ -8,27 +8,72 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
+//	"github.com/gorilla/mux"
+	"fmt"
 )
 
+// Structure containing data for all tabs of home page
 type detailsHome struct {
-	Stats        *model.Stats
+    // common fields
 	DownloadBase string
+	SelectedTab  string
+	// tab intro
+	Stats        *model.Stats
+	// tab occupations
+	Occus              []*model.Group
+	WD_ENTITY_BASE_URL string
+	Slug_Name          map[string]string
 }
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-//return errors.New("toto")
+    
+	fmt.Printf("%+v\n",r)
+	selectedTab := ""
+	if *r["requestURI"] == "/" {
+		selectedTab = "intro"
+	} else if *r["requestURI"] == "/history" {
+		selectedTab = "history"
+	} else if *r["requestURI"] == "/occupations" {
+		selectedTab = "occu"
+	}
+	
+    // for tab intro
 	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
+	
+	// for tab occupations
+	occus, err := model.GetOccus(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+	slug_Name, err := model.GetGroupSlugNames(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+	
 	ctx.TemplateName = "index.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			CSSFiles: []string{"static/css/pages/index.css"},
+			CSSFiles: []string{
+			    "static/css/pages/index.css",
+			    "static/css/tabstrip.css",
+			},
 		},
 		Details: detailsHome{
 			Stats:        stats,
 			DownloadBase: ctx.Config.Paths.Downloads,
+			SelectedTab:  selectedTab,
+			// for tab occupations
+			Occus:              occus,
+			WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
+			Slug_Name:          slug_Name,
+		},
+		Footer: ctxt.Footer{
+			JSFiles: []string{
+				"/static/js/tabstrip.js",
+			},
 		},
 	}
 	return nil

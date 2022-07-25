@@ -37,6 +37,9 @@ func main() {
 	
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
+	r.HandleFunc("/occupations", H(control.ShowHome))
+	r.HandleFunc("/history", H(control.ShowHome))
+	
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/future", H(control.ShowFuture))
@@ -52,7 +55,7 @@ func main() {
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))
 
-	r.HandleFunc("/occupations", H(control.ShowOccupations))
+//	r.HandleFunc("/occupations", H(control.ShowOccupations))
 
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 

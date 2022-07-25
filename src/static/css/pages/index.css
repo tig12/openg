@@ -34,9 +34,12 @@
 
 /* sitelinks, list on the right */
 .home .sitelinks{
+    /* 
     position:fixed;
     top:100px;
     right:2rem;
+    */
+    float:right;
     background-color:#dbe599;
     padding:1rem;
     border:1px solid grey;

@@ -7,247 +7,29 @@
     </div>
 </h1>
 
-<div class="intro">
-{{with .Details.Stats}}
-This database contains <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
-<br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
-{{end}}
 
-<br><br>It currently contains data used to perform statistical tests on astrology,
-<br>gathered by Michel and Françoise Gauquelin, Arno Müller, Suitbert Ertel
-<br>and three groups of skeptics - between 1955 and 1996.
+<div class="tab">
+  <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-intro');" id="intro">Open Gauquelin</button>
+  <button class="tablinks" onclick="openTab(event, 'tab-history');" id="history">Historical datasets</button>
+  <button class="tablinks" onclick="openTab(event, 'tab-occus');" id="occus">Professional groups</button>
 </div>
 
-<div class="historical">
-<h2>Historical datasets</h2>
-<ul>
-    <li class="author">
-        <b>Michel &amp; Françoise Gauquelin</b>
-        <ul>
-            <li class="datagroup">
-                <span class="help" title="LERRCP: Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psycho-physiologiques&#10;Structure used by Michel and Françoise Gauquelin to publish their data and results, between 1970 and 1984.">LERRCP&nbsp;&nbsp;<span class="info">?</span></span>
- 
-                <ul class="dataset">
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A1.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a1">A1: <b>2088 sports champions</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A2.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a2">A2: <b>3643 scientists and medical doctors</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A3.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a3">A3: <b>3046 military men</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A4.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a4">A4: <b>2720 painters and French musicians</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A5.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a5">A5: <b>2410 actors and politicians</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/A6.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/a6">A6: <b>2026 writers and journalists</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/D6.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/d6">D6: <b>449 European sports champions</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/D10.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/d10">D10: <b>1396 successful Americans</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/E1.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/e1">E1: <b>2153 French physicians, military men and executives</b></a>
-                    </li>
-                    <li>
-                        <a href="{{.Details.DownloadBase}}/history/1970-1984-gauquelin/E3.csv.zip" title="Download CSV">
-                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                        </a>
-                        <a href="/group/e3">E3: <b>1539 French writers, artists, actors, politicians and journalists</b></a>
-                    </li>
-                </ul>
-            </li>
-            <li class="datagroup">
-                Gauquelin 1955
-                <ul>
-                    <li class="nodownload">
-                        <b>Groups published in <span class="help" title="LERRCP series A: 6 booklets containing birth dates, published by the Gauquelins in 1970 and 1971">LERRCP A</span> files</b> 
-                        <span class="todo inline-box margin-left2">TODO</span>
-                        <a href="https://tig12.github.io/gauquelin5/g55.html">See tig12.github.io</a>
-                    </li>
-                    <li class="nodownload">
-                        <a href="/group/g55-882-priests"><b>882 catholic priests</b></a>
-                        <ul>
-                            <li><a href="/group/g55-513-priests-paris"><b>513 priests from Paris Diocese</b></a></li>
-                            <li><a href="/group/g55-369-priests-albi"><b>369 priests from Albi Diocese</b></a></li>
-                        </ul>
-                    </li>
-                    <li class="nodownload">
-                        <a href="/group/g55-362-minor-painters"><b>362 minor painters</b></a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </li><!-- end gauquelin -->
-    
-    <li class="author">
-        <b>Arno Müller</b>, <span class="help" title="Astro-Forschungs-Daten&#10;Five booklets self-published by Arno Müller, 1991 - 1994">Astro-Forschungs-Daten (AFD)</span>
+<div id="tab-intro" class="tabcontent">
+    <p>
+        {{ template "index-intro.html" . }}
+    </p>
+</div>
+                                                                                                                                                      
+<div id="tab-history" class="tabcontent">
+    <p>
+        {{ template "index-history.html" . }}
+    </p>
+</div>
 
-        <ul class="dataset">
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-402-writers.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd1-writers">Müller 1, <b>402 Italian writers</b></a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-100-writers.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd1-100writers">Müller 1, <b>100 Italian writers without birth time</b></a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1992-muller2-men/muller-612-men.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd2-men">Müller 2, <b>612 famous men</b></a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1993-muller3-women/muller-234-women.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd3-women">Müller 3, <b>234 famous women</b></a>
-            </li>
-            <li class="nodownload">
-                Müller 4, <b>1145 members of German dynasties</b>
-                <span class="todo inline-box margin-left2">TODO</span>
-                <a href="https://tig12.github.io/gauquelin5/muller4-1145-dynasties.html">Scans and formatted text transcription available</a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1994-muller5-medics/muller-1083-medics.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd5-medics">Müller 5, <b>1083 members of the French Académie de Médecine</b></a>
-            </li>
-        </ul>
-    </li>
-    
-    <li class="author">
-        <b>Comité PARA - Belgian skeptics 1976</b>
-        
-        <ul class="naked">
-            <li class="nodownload">
-                <b><a href="/group/cpara">535 athletes</a></b>, group of the official test
-            </li>
-            <li class="nodownload">
-                <b><a href="/group/ertel-7-para-lowers">76 unpublished athletes</a></b> (= Ertel's subsample n&deg; 7)
-            </li>
-        </ul>
-    </li>
-    
-    <li class="author">
-        <b>CSICOP - U.S. skeptics 1979</b>
-        <ul class="naked">
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1979-csicop/csicop-irving-408.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/csicop"><b>408 American athletes</b> - Complete group</a>
-            </li>
-            <li class="nodownload">
-                <a href="/group/csicop-batch1">Batch 1 - 128 American athletes</a>
-            </li>
-            <li class="nodownload">
-                <a href="/group/csicop-batch2">Batch 2 - 98 American athletes</a>
-            </li>
-            <li class="nodownload">
-                <a href="/group/csicop-batch3">Batch 3 - 82 American athletes</a>
-            </li>
-        </ul>
-    </li>
-    
-    <li class="author">     
-        <b>CFEPP - French skeptics 1996</b>
-        <ul class="naked">
-            <li class="nodownload">
-                <b><a href="/group/cfepp-1066">1066 athletes</a></b>, official list published by CFEPP
-            </li>
-            <li class="nodownload">
-                <b><a href="/group/cfepp-1120">1120 athletes</a></b>, CFEPP + Nienhuys additions
-            </li>
-        </ul>
-    </li>
-    
-    <li class="author">
-        <b>Suitbert Ertel</b>
-        <ul class="naked">
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/ertel-4384-sport"><b>4384 athletes</b> - Complete group</a> (3155 timed and 1229 untimed)
-            </li>
-            <li class="nodownload">
-                <table>
-                    <tr><td><a href="/group/ertel-1-first-french">1 - First French</a></td><td>N = 553</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-2-first-european">2 - First European</a></td><td>N = 1202</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-3-italian-football">3 - Italian football</a></td><td>N = 599</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-4-german-various">4 - German various</a></td><td>N = 115</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-5-french-occasionals">5 - French occasionals</a>&nbsp;&nbsp;</td><td>N = 202</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-6-para-champions">6 - Para champions</a></td><td>N = 332</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-7-para-lowers">7 - Para lowers</a></td><td>N = 76</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-8-csicop-us">8 - CSICOP-U.S.</a></td><td>N = 192</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-9-second-european">9 - Second European</a></td><td>N = 450</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-9-second-european">9 - Second European</a></td><td>N = 24</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-11-lower-french">11 - Lower French</a></td><td>N = 453</td><td>untimed</td></td></tr>
-                    <tr><td><a href="/group/ertel-12-gauq-us">12 - GAUQ-U.S.</a></td><td>N = 159</td><td></td></tr>
-                    <tr><td><a href="/group/ertel-13-plus-special">13 - Plus special</a></td><td>N = 27</td><td>untimed</td></td></tr>
-                </table>
-            </li>
-
-        </ul>
-    </li>
-
-</ul>
-</div><!-- end class="historical" -->
-
-<!-- ************************************* -->
-<div class="sitelinks">
-    <div><a href="/occupations">Lists by occupation</a></div>
-    <div><a href="/issues">Persons' issues</a></div>
-    <div><a href="/sources">Information sources</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/about">About</a></div>
-    <div><a href="/downloads">Downloads</a></div>
-    <div><a href="/stats">DB stats</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/install">Install</a></div>
-    <div><a href="/wiki">Wiki - Participate</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/future">Future</a></div>
+<div id="tab-occus" class="tabcontent">
+    <p>
+        {{ template "index-occus.html" . }}
+    </p>
 </div>
 
 </div><!-- end class="home" -->
