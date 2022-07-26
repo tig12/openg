@@ -13,14 +13,24 @@
 .home .historical li{
     list-style-type:none;
 }
+
 .home .historical li.author{
     padding-bottom:2rem;
 }
-.home .historical li.datagroup{
-    padding-top:1rem;
+.home .historical span.author{
+    font-weight:bold;
+    font-size:1.2rem;
 }
-.home .historical ul.dataset li{
-    padding-top:.5rem;
+
+.home .historical li.datagroup{
+    padding-top:.8rem;
+}
+.home .historical span.datagroup{
+    font-size:1.2rem;
+}
+
+.home .historical ul.datalist>li{
+    padding-top:.3rem;
 }
 .home .historical li .nodownload {
     padding-top:4px;

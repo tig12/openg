@@ -1,18 +1,21 @@
 <div class="historical">
 
 <div class="intro">
-    Here is a quasi complete reconstitution of the data used in published statistical tests on astrology, between 1955 and 1987.
+    Here is a quasi complete reconstitution of the data used in published statistical tests on astrology, between 1955 and 1996.
     <br>
 </div>
 
 <ul>
     <li class="author">
-        <b>Michel &amp; Françoise Gauquelin</b>
+        <span class="author">Michel &amp; Françoise Gauquelin</span>
         <ul>
         
             <li class="datagroup">
-                Gauquelin 1955 - <a href="https://tig12.github.io/gauquelin5/g55.html">See tig12.github.io</a>
-                <ul>
+                <span class="datagroup">Gauquelin 1955, "L'influence des astres"</span>
+                <span class="todo inline-box margin-left2">WIP, links not yet operational</span>
+                
+                <!-- <a href="https://tig12.github.io/gauquelin5/g55.html">See tig12.github.io</a> -->
+                <ul class="datalist">
                     <li><a href="/group/g55-01-576-physicians"><b>576 MEMBRES ASSOCIÉS ET CORRESPONDANTS DE L'ACADÉMIE DE MÉDECINE</b></a></li>
                     <li><a href="/group/g55-02-508-physicians"><b>508 AUTRES MEDECINS NOTABLES</b></a></li>
                     <li><a href="/group/g55-03-570-sportsmen"><b>570 SPORTIFS</b></a></li>
@@ -26,17 +29,17 @@
                     <li>
                         <a href="/group/g55-05-906-painters"><b>906 PEINTRES</b></a>
                         <ul>
-                            <li><a href="g55-">237 Peintres célébres</a></li>
-                            <li><a href="g55-">668 Peintres notables</a></li>
+                            <li><a href="g55-05-237-peintres-celebres">237 Peintres célébres</a></li>
+                            <li><a href="g55-05-668-peintres-notables">668 Peintres notables</a></li>
                         </ul>
                     </li>
                     <li><a href="/group/g55-06-361-minor-painters"><b>361 PEINTRES MINEURS</b></a></li>
                     
                     <li><a href="/group/g55-07-500-actors"><b>500 ACTEURS</b></a></li>
                         <ul>
-                            <li><a href="g55-07-">122 Acteurs célèbres du siècle dernier</a></li>
-                            <li><a href="g55-07-">225 Acteurs contemporains célébres</a></li>
-                            <li><a href="g55-07-">153 Acteurs contemporains moins connus</a></li>
+                            <li><a href="g55-07-122-acteurs-celebres-du-siecle-dernier">122 Acteurs célèbres du siècle dernier</a></li>
+                            <li><a href="g55-07-225-acteurs-contemporains-celebres">225 Acteurs contemporains célébres</a></li>
+                            <li><a href="g55-07-153-acteurs-contemporains-moins-connus">153 Acteurs contemporains moins connus</a></li>
                         </ul>
                     
                     <li>
@@ -55,21 +58,13 @@
                             <li><a href="/group/g55-10-369-priests-albi">369 Prêtres du diocèse d'Albi</a></li>
                         </ul>
                     </li>
-                    
-                    <!-- 
-                    <li class="nodownload">
-                        <ul>
-                        </ul>
-                    </li>
-                    -->
-                    
                 </ul>
             </li>
         
             <li class="datagroup">
-                <span class="help" title="LERRCP: Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psycho-physiologiques&#10;Structure used by Michel and Françoise Gauquelin to publish their data and results, between 1970 and 1984.">LERRCP&nbsp;&nbsp;<span class="info">?</span></span>
+                <span class="help datagroup" title="LERRCP: Laboratoire d'Étude des Relations entre Rythmes Cosmiques et Psycho-physiologiques&#10;Structure used by Michel and Françoise Gauquelin to publish their data and results, between 1970 and 1984.">LERRCP&nbsp;&nbsp;<span class="info">?</span></span>
  
-                <ul class="dataset">
+                <ul class="datalist">
                     <!-- 
                     <li class="nodownload">
                         <b>Groups published in <span class="help" title="LERRCP series A: 6 booklets containing birth dates, published by the Gauquelins in 1970 and 1971">LERRCP A</span> files</b> 
@@ -144,49 +139,64 @@
     </li><!-- end gauquelin -->
     
     <li class="author">
-        <b>Arno Müller</b>, <span class="help" title="Astro-Forschungs-Daten&#10;Five booklets self-published by Arno Müller, 1991 - 1994">Astro-Forschungs-Daten (AFD)</span>
-
-        <ul class="dataset">
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-402-writers.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd1-writers">Müller 1, <b>402 Italian writers</b></a>
+        <span class="author">Arno Müller</span>
+        
+        <ul>
+            <li class="datagroup">
+                <span class="help datagroup" title="Astro-Forschungs-Daten&#10;Five booklets self-published by Arno Müller, 1991 - 1994">Astro-Forschungs-Daten&nbsp;&nbsp;<span class="info">?</span></span>
+                <ul class="datalist">
+                    <li>
+                        <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-402-writers.csv.zip" title="Download CSV">
+                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
+                        </a>
+                        <a href="/group/muller-afd1-writers">Müller 1, <b>402 Italian writers</b></a>
+                    </li>
+                    <li>
+                        <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-100-writers.csv.zip" title="Download CSV">
+                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
+                        </a>
+                        <a href="/group/muller-afd1-100writers">Müller 1, <b>100 Italian writers without birth time</b></a>
+                    </li>
+                    <li>
+                        <a href="{{.Details.DownloadBase}}/history/1992-muller2-men/muller-612-men.csv.zip" title="Download CSV">
+                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
+                        </a>
+                        <a href="/group/muller-afd2-men">Müller 2, <b>612 famous men</b></a>
+                    </li>
+                    <li>
+                        <a href="{{.Details.DownloadBase}}/history/1993-muller3-women/muller-234-women.csv.zip" title="Download CSV">
+                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
+                        </a>
+                        <a href="/group/muller-afd3-women">Müller 3, <b>234 famous women</b></a>
+                    </li>
+                    <li class="nodownload">
+                        Müller 4, <b>1145 members of German dynasties</b>
+                        <span class="todo inline-box margin-left2">TODO</span>
+                        <a href="https://tig12.github.io/gauquelin5/muller4-1145-dynasties.html">Formatted text file available</a>
+                    </li>
+                    <li>
+                        <a href="{{.Details.DownloadBase}}/history/1994-muller5-medics/muller-1083-medics.csv.zip" title="Download CSV">
+                            <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
+                        </a>
+                        <a href="/group/muller-afd5-medics">Müller 5, <b>1083 members of the French Académie de Médecine</b></a>
+                    </li>
+                </ul>
             </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1991-muller1-writers/muller-100-writers.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd1-100writers">Müller 1, <b>100 Italian writers without birth time</b></a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1992-muller2-men/muller-612-men.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd2-men">Müller 2, <b>612 famous men</b></a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1993-muller3-women/muller-234-women.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd3-women">Müller 3, <b>234 famous women</b></a>
-            </li>
-            <li class="nodownload">
-                Müller 4, <b>1145 members of German dynasties</b>
-                <span class="todo inline-box margin-left2">TODO</span>
-                <a href="https://tig12.github.io/gauquelin5/muller4-1145-dynasties.html">Formatted text file available</a>
-            </li>
-            <li>
-                <a href="{{.Details.DownloadBase}}/history/1994-muller5-medics/muller-1083-medics.csv.zip" title="Download CSV">
-                    <img class="vertical-align-bottom padding-right" src="/static/img/download.png" alt="Download CSV">
-                </a>
-                <a href="/group/muller-afd5-medics">Müller 5, <b>1083 members of the French Académie de Médecine</b></a>
+            
+            <li class="datagroup">
+                <span class="datagroup">Unpublished data</span>
+                <ul class="datalist">
+                    <li><b>1288 German physicians</b> - <span class="todo inline-box margin-left2">NOT DONE - Data possibly lost</span></li>
+                </ul>
             </li>
         </ul>
+        
+        
+
     </li>
     
     <li class="author">
-        <b>Comité PARA - Belgian skeptics 1976</b>
+        <span class="author">Comité PARA - Belgian skeptics 1976</span>
         
         <ul class="naked">
             <li class="nodownload">
@@ -199,7 +209,7 @@
     </li>
     
     <li class="author">
-        <b>CSICOP - U.S. skeptics 1979</b>
+        <span class="author">CSICOP - U.S. skeptics 1979</span>
         <ul class="naked">
             <li>
                 <a href="{{.Details.DownloadBase}}/history/1979-csicop/csicop-irving-408.csv.zip" title="Download CSV">
@@ -219,8 +229,8 @@
         </ul>
     </li>
     
-    <li class="author">     
-        <b>CFEPP - French skeptics 1996</b>
+    <li class="author">
+        <span class="author">CFEPP - French skeptics 1996</span>
         <ul class="naked">
             <li class="nodownload">
                 <b><a href="/group/cfepp-1066">1066 athletes</a></b>, official list published by CFEPP
@@ -232,7 +242,7 @@
     </li>
     
     <li class="author">
-        <b>Suitbert Ertel</b>
+        <span class="author">Suitbert Ertel</span>
         <ul class="naked">
             <li>
                 <a href="{{.Details.DownloadBase}}/history/" title="Download CSV">

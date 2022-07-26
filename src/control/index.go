@@ -8,8 +8,6 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-//	"github.com/gorilla/mux"
-	"fmt"
 )
 
 // Structure containing data for all tabs of home page
@@ -27,14 +25,13 @@ type detailsHome struct {
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
     
-	fmt.Printf("%+v\n",r)
 	selectedTab := ""
-	if *r["requestURI"] == "/" {
-		selectedTab = "intro"
-	} else if *r["requestURI"] == "/history" {
-		selectedTab = "history"
-	} else if *r["requestURI"] == "/occupations" {
-		selectedTab = "occu"
+	if r.RequestURI == "/" {
+		selectedTab = "tab-intro"
+	} else if r.RequestURI == "/history" {
+		selectedTab = "tab-history"
+	} else if r.RequestURI == "/occupations" {
+		selectedTab = "tab-occus"
 	}
 	
     // for tab intro

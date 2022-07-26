@@ -15,14 +15,19 @@
     <div><a href="/future">Future</a></div>
 </div>
 
-<div class="intro">
 {{with .Details.Stats}}
-This database contains <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
-<br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
-{{end}}
+<div class="intro">
+The purpose of this site is to build a database of famous persons, with their birth place, date <b>and time</b>.
+<br>Emphasis is put on reliability and verifiability of the data.
 
 <br><br>It currently contains data used to perform statistical tests on astrology,
 <br>gathered by Michel and Françoise Gauquelin, Arno Müller, Suitbert Ertel
 <br>and three groups of skeptics - between 1955 and 1996.
+<br>This gives <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
+
+<br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
 
 </div>
+
+{{end}}
+
