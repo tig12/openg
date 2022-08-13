@@ -80,14 +80,15 @@ type AutocompletePerson struct {
 
 // Displayed names of the partial ids
 var Partial_ids_labels = map[string]string{
-	"lerrcp": "Gauquelin",
-	"muller": "Müller",
-	"cpara":  "Comité Para",
-	"csicop": "CSICOP",
-	"cfepp":  "CFEPP",
-	"ertel":  "Ertel",
-	"g55":    "Gauquelin 1955",
-	"wd":     "Wikidata",
+	"lerrcp":     "Gauquelin",
+	"muller":     "Müller",
+	"cpara":      "Comité Para",
+	"csicop":     "CSICOP",
+	"cfepp":      "CFEPP",
+	"ertel":      "Ertel",
+	"g55-book":   "Gauquelin 1955",
+	"g55":        "Gauquelin 1955", // to delete when new import of priests and minor painters is integrated
+	"wd":         "Wikidata",
 }
 
 // ************************** PersonName *******************************
