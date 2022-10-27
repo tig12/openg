@@ -10,10 +10,18 @@
 */}}
 
 <style>
+    #ogdb-form{
+        background:#eee
+    }
     #ogdb-form ul{list-style-type:none;}
     #ogdb-form .command input{
         font-weight:bold;
         padding:4px;
+    }
+    #ogdb-form .command input[type=button]{
+        background-image: linear-gradient(90deg, #aaa 0%, #ccc 50%, #aaa 100%); 
+        padding:8px;
+        border-radius:10px;
     }
 </style>
 
@@ -48,52 +56,58 @@
         Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
     </fieldset>
     
+    {{/* 
     <fieldset class="margin-top margin-bottom">
         <legend class="bold padding-right05 padding-left05">2 - Choose the fields</legend>
     </fieldset>
+    */}}
     
     <fieldset class="margin-top margin-bottom">
-        <legend class="bold padding-right05 padding-left05">3 - Choose the format</legend>
+        <legend class="bold padding-right05 padding-left05">2 - Choose the format</legend>
         
         <div class="grid2-pres">
             <b>CSV Separator</b>
-            <div>
+            <div class="padding-left2">
                 <div>
                     <input type="radio" name="radio-sep" id="semicolon" checked>
-                    <label for="semicolon">Semicolon ;</label>
+                    <label for="semicolon"><span class="bold big3 padding-left05">;</span> Semicolon</label>
                 </div>
                 <div>
                     <input type="radio" name="radio-sep" id="coma">
-                    <label for="coma">Coma ,</label>
+                    <label for="coma"><span class="bold big3 padding-left05">,</span> Coma</label>
                 </div>
             </div>
         </div>
         
         <fieldset class="margin-top margin-bottom">
             <legend class="bold padding-right05 padding-left05">Date</legend>
-            <div class="margin-top05">
-                <input type="radio" name="radio-field-date" id="date-iso" checked>
-                <label for="date-iso">Date and time in one column, format ISO 8601.</label>
-                <table class="wikitable margin-left">
-                    <tr><th>DATE</th></tr>
-                    <tr><td>2022-10-27 21:34+02:00</td></tr>
-                </table>            
+            <div class="grid2-pres">
+                <div>
+                    <input type="radio" name="radio-field-date" id="date-iso" checked>
+                    <label for="date-iso">Date and time in one column, format ISO 8601.</label>
+                    <table class="wikitable margin-left">
+                        <tr><th>DATE</th></tr>
+                        <tr><td>2022-10-27 21:34+02:00</td></tr>
+                    </table>            
+                </div>
+                <div class="margin-left2">
+                    <input type="radio" name="radio-field-date" id="date-many-cols">
+                    <label for="date-many-cols">One column for year, one column for month etc.</label>
+                    <table class="wikitable margin-left">
+                        <tr><th>Y</th><th>M</th><th>D</th><th>H</th><th>Mi</th><th>TZO</th></tr>
+                        <tr><td>2022</td><td>10</td><td>27</td><td>21</td><td>34</td><td>+02:00</td></tr>
+                    </table>            
+                </div>
             </div>
-            <div class="margin-top">
-                <input type="radio" name="radio-field-date" id="date-many-cols">
-                <label for="date-many-cols">One column for year, one column for month etc.</label>
-                <table class="wikitable margin-left">
-                    <tr><th>Y</th><th>M</th><th>D</th><th>H</th><th>Mi</th><th>TZO</th></tr>
-                    <tr><td>2022</td><td>10</td><td>27</td><td>21</td><td>34</td><td>+02:00</td></tr>
-                </table>            
-            </div>
-            
         </fieldset>
     </fieldset>
 
     <div class="float-right command">
         <input type="button" name="cancel" value="Cancel" onClick="cancel();">
+        <input type="button" name="download" value="Download" class="margin-left">
+        {{/* 
         <input type="submit" class="margin-left" value="Download">
+        */}}
     </div>
 
 </form>
