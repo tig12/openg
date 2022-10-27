@@ -1,0 +1,29 @@
+/** 
+    @copyright  BDL, Bois du Larzac.
+    @licence    GPL, conformémént au fichier LICENCE situé à la racine du projet.
+**/
+.form{
+    display:inline-block;
+    background:#f2f2f2;
+    border:1px solid grey;
+    padding:1.2em;
+    margin-left:1em;
+}
+
+/* Field alignment - 2 fields per line */
+.grid2-form {
+    display:grid;
+    grid-template-columns:max-content 1fr;
+    grid-gap:1em;
+}
+.grid2-form label{
+    text-align:right;
+    font-weight:bold;
+}
+.grid2-form label.optional{
+    font-weight:normal;
+    color:green;
+}
+.grid2-form label.normal{
+    font-weight:normal;
+}

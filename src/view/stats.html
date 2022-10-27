@@ -30,40 +30,6 @@ table#global-stats td:nth-child(2){
 </table>
 
 <!-- ********************************************************************************* -->
-<h2>Repartition by country</h2>
-
-<br class="clear-left">
-{{$i := 0}}
-{{$mod := 12}} {{/* Change when nb of contries changes */}}
-
-{{range $cy, $n := .Countries}}
-    {{if eq 0 (modulo $i $mod)}}
-        <table class="wikitable float-left margin-right alternate">
-        <thead>
-            <tr><th colspan="2">Country</th><th>N</th></tr>
-        </thead>
-        <tbody>
-    {{end}}
-    <tr>
-        <td>{{$cy}}
-        <td>{{index $.Details.CountryNames $cy}}</td>
-        <td>{{numberFormat $n}}</td>
-    </tr>    
-    {{$i = add $i 1}}
-    {{if eq 0 (modulo $i $mod)}}
-        </tbody>
-        </table>
-    {{end}}
-{{end}}
-
-{{if not (eq 0 (modulo $i $mod))}}
-    </tbody>
-    </table>
-{{end}}
-
-<br class="clear-left">
-
-<!-- ********************************************************************************* -->
 <h2>Repartition by year</h2>
 
 <img class="margin border" src="/static/tmp/years.svg" alt="">
@@ -81,6 +47,39 @@ table#global-stats td:nth-child(2){
     {{end}}
     
     <tr><td>{{$year}}</td><td>{{numberFormat $n}}</td></tr>    
+    {{$i = add $i 1}}
+    {{if eq 0 (modulo $i $mod)}}
+        </tbody>
+        </table>
+    {{end}}
+{{end}}
+
+{{if not (eq 0 (modulo $i $mod))}}
+    </tbody>
+    </table>
+{{end}}
+
+<br class="clear-left">
+
+<!-- ********************************************************************************* -->
+<h2>Repartition by country</h2>
+
+{{$i := 0}}
+{{$mod := 12}} {{/* Change when nb of contries changes */}}
+
+{{range $cy, $n := .Countries}}
+    {{if eq 0 (modulo $i $mod)}}
+        <table class="wikitable float-left margin-right alternate">
+        <thead>
+            <tr><th colspan="2">Country</th><th>N</th></tr>
+        </thead>
+        <tbody>
+    {{end}}
+    <tr>
+        <td>{{$cy}}
+        <td>{{index $.Details.CountryNames $cy}}</td>
+        <td>{{numberFormat $n}}</td>
+    </tr>    
     {{$i = add $i 1}}
     {{if eq 0 (modulo $i $mod)}}
         </tbody>

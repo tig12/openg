@@ -1,35 +1,171 @@
 
-<h1>Open Gauquelin Database Downloads</h1>
+<h1>
+    Open Gauquelin Database Downloads
+    <br><div class="warning inline-block padding2">Prototype</div>
+</h1>
 
-<div class="intro">
-    Most downloadable files are in CSV format, which contain only part of the information of the database.
-    <br>The only file containing the full information is the postgresql dump (see below).
-    <br>If you need a specific format or different extracts, <a href="/about">contact me</a>.
+<!-- ********************************************************************************* -->
+{{/* 
+<form class="form" action="{{$.Details.UrlAction}}" onsubmit="return validateForm();" method="post" novalidate>
+*/}}
+
+<style>
+    #ogdb-form ul{list-style-type:none;}
+    #ogdb-form .command input{
+        font-weight:bold;
+        padding:4px;
+    }
+</style>
+
+<form id="ogdb-form" class="form" action="" onsubmit="return validateForm();" method="post" novalidate>
+
+    <fieldset class="margin-top margin-bottom">
+        <legend class="bold padding-right05 padding-left05">1 - Choose what to download</legend>
+    
+        <h3>Full database</h3>
+        <ul>
+            
+            <li>
+                <input type="radio" name="radio-what" id="full-pg-dump" value="full-pg-dump">
+                {{/* file name specified in g5 class commands/db/export/pgdump */}}
+                <a href="/download/ogdb-pg-dump.zip">Postgresql dump</a> - to run opengauquelin.org on your local machine, see <a href="install">page INSTALL</a>
+            </li>
+            
+            <li>
+                <input type="radio" name="radio-what" id="full-csv-time" value="full-csv-time">
+                CSV export - Timed data
+            </li>
+            <li>
+                <input type="radio" name="radio-what" id="full-csv-all" value="full-csv-all">
+                CSV export - Timed and untimed data
+            </li>
+        </ul>
+        
+        <h3>Historical datasets</h3>
+        
+        <h3>Lists by occupation (profession)</h3>
+        
+        <h3>Other downloads</h3>
+        Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
+    </fieldset>
+    
+    <fieldset class="margin-top margin-bottom">
+        <legend class="bold padding-right05 padding-left05">2 - Choose the fields</legend>
+    </fieldset>
+    
+    <fieldset class="margin-top margin-bottom">
+        <legend class="bold padding-right05 padding-left05">3 - Choose the format</legend>
+            <input type="radio" name="radio-what" id="full-csv-all" value="full-csv-all">
+    </fieldset>
+
+    <div class="float-right command">
+        <input type="button" name="cancel" value="Cancel" onClick="cancel();">
+        <input type="submit" class="margin-left" value="Download">
+    </div>
+
+</form>
+<!-- ********************************************************************************* -->
+
+
+
+<!--
+<a name="help"></a>
+<div id="help" class="margin display-none">
+    <div class="help-content">
+        <div class="help-title">Aide</div>
+        
+        <div class="section">
+            <b>Taux TVA</b> : Il s'agit du taux apparaissant sur la facture. La liste des valeurs possibles peut être modifiée dans le fichier <code>config.yml</code>, section <code>tva-bdl</code>, valeur <code>autres-valorisations</code>.
+        </div>
+        
+    </div>
 </div>
+-->
 
-<!-- ********************************************************************************* -->
-<h2>Download full database</h2>
+<script>
+window.addEventListener("load", function(){
+    initialize();
+});
 
-<ul>
-    {{/* file name specified in g5 class commands/db/export/pgdump */}}
-    <li><a href="/download/ogdb-pg-dump.zip">Postgresql dump</a> - to run opengauquelin on your local machine, see <a href="install">page INSTALL</a></li>
-    {{/* file names specified in g5 class commands/db/export/allpersons */}}
-    <li><a href="/download/ogdb-time.csv.zip">CSV export - Timed data</a></li>
-    <li><a href="/download/ogdb-all.csv.zip">CSV export - Timed and untimed data</a></li>
-</ul>
+// ***************************************
+function initialize(){
+    {{/* 
+    // form new
+    if({{.Id}} == 0){
+        document.getElementById("typevente-NON").checked = true;
+    }
+    // form update
+    else{
+        document.getElementById("acheteur").value = "{{.Acheteur.String}}";
+        document.getElementById("tva-{{.TVA}}").selected = true;
+        valorisationChanged();
+        document.getElementById("typevente-{{.TypeVente}}").checked = true;
+        if(document.getElementById("valorisation-PI").selected){
+            if('{{.Unite}}' == 'NP'){
+                document.getElementById("unite-pi-np").checked = true;
+            }
+            else{
+                document.getElementById("unite-pi-st").checked = true;
+            }
+        }
+    }
+    */}}
+}
 
-<!-- ********************************************************************************* -->
-<h2>Download historical datasets</h2>
-Files coming from the history of statistical tests on astrology can be downloaded from <a href="/history">page Historical datasets</a>.
-<br>Click on the download icon <img class="padding-right padding-left" src="/static/img/download.png" alt="Download"> of the corresponding list.
+function cancel(){
+}
 
-<!-- ********************************************************************************* -->
-<h2>Download CSV lists by occupation</h2>
-See page <a href="/occupations">Lists by occupation</a> and click on the download icon <img class="padding-right padding-left" src="/static/img/download.png" alt="Download"> of the corresponding list.
+// ***************************************
+function validateForm(){
+{{/* 
+    let msg = "";
+    //
+    const check = checkActeur("acheteur", "- Vous devez renseigner l'acheteur.\n");
+    document.getElementById("id-acheteur").value = check[0];
+    msg += check[1];
+    //
+    if(document.getElementById("datecontrat").value == ""){
+        msg += "- Vous devez renseigner la date du contrat.\n";
+    }
+    //
+    if(document.getElementById("typevalo").value == "CHOOSE_VALORISATION"){
+        msg += "- Vous devez choisir une valorisation.\n";
+    }
+    //
+    if(document.getElementById("tva").value == "CHOOSE_TVA"){
+        msg += "- Vous devez choisir un taux de TVA.\n";
+    }
+    //
+    if(document.getElementById("exploitation").value == "CHOOSE_EXPLOITATION"){
+        msg += "- Vous devez choisir un type d'exploitation.\n";
+    }
+    //
+    if(document.getElementById("CHOOSE_ESSENCE").selected == true){
+        msg += "- Vous devez choisir une essence.\n";                                           
+    }
+    //
+    if(document.getElementById("volume-realise").value == ""){
+        msg += "- Vous devez renseigner le volume réalisé.\n";
+    }
+    //
+    if(document.getElementById("puht").value == ""){
+        msg += "- Vous devez renseigner le PU HT.\n";
+    }
+    //
+    if(msg != ""){
+        msg = "Impossible de valider ce formulaire :\n" + msg;
+        alert(msg);
+        return false;
+    }
+    //
+    chantierLienFillHiddenFields(); // dans view/common/chantier-lien.html
+    //
+    return true;
+*/}}
+}
+</script>
 
-<!-- ********************************************************************************* -->
-<h2>Other downloads</h2>
-Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
+
 
 <!-- ********************************************************************************* -->
 <hr class="hr-big">
@@ -266,3 +402,4 @@ The downloadable CSV files do not all have the same format. For example, outputs
     </tr>
     
 </table>
+

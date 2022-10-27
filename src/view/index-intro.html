@@ -6,7 +6,7 @@
     <div><a href="/sources">Information sources</a></div>
     <div><center><hr class="hr-cool"></center></div>
     <div><a href="/about">About</a></div>
-    <div><a href="/downloads">Downloads</a></div>
+    <div><a href="/downloads">Downloads</a> - <a href="/downloads2">2</a></div>
     <div><a href="/stats">DB stats</a></div>
     <div><center><hr class="hr-cool"></center></div>
     <div><a href="/install">Install</a></div>
@@ -17,13 +17,12 @@
 
 {{with .Details.Stats}}
 <div class="intro">
-The purpose of this site is to build a database of famous persons, with their birth place, date <b>and time</b>.
-<br>Emphasis is put on reliability and verifiability of the data.
+The purpose of this site is to build a <b>reliable</b> and <b>verifiable</b> database of famous persons, <b>with their birth time</b>.
 
-<br><br>It currently contains data used to perform statistical tests on astrology,
-<br>gathered by Michel and Françoise Gauquelin, Arno Müller, Suitbert Ertel
-<br>and three groups of skeptics - between 1955 and 1996.
-<br>This gives <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
+<br><br>It currently contains the data used to perform <a href="https://tig12.github.io/gauquelin5/historical-tests.html">statistical tests on astrology</a>, between 1955 and 1996 (<a href="/history">"historical data"</a>).
+<br>These data were gathered by <b>Michel and Françoise Gauquelin</b>, <b>Arno Müller</b>, <b>Suitbert Ertel</b> and 3 groups of skeptics: <b>Comité Para</b> - Belgium 1976, <b>CSICOP</b> - U.S. 1979, <b>CFEPP</b> - France 1996.
+
+<br><br>This gives <b>{{numberFormat .N_time}} persons with birth time</b> and <b>{{numberFormat .N_day}} without birth time</b>.
 
 <br>Born between {{.YearMin}} and {{.YearMax}} - <a href="/stats">See more statistics</a>
 
