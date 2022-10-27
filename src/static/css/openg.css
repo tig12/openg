@@ -145,6 +145,18 @@ pre.normal{
 }
 
 /* 2 columns, to present results */
+.grid2-pres{
+    display:grid;
+    grid-template-columns: max-content 1fr;
+}
+.grid2-pres>*:nth-child(odd){
+    text-align:right;
+    padding-right:1em;
+}
+.grid2-pres>*:nth-child(even){
+}
+
+/* 2 columns, to present results */
 .table-pres td:nth-child(1){
     text-align:right;
     vertical-align:top;
