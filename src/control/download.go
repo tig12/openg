@@ -4,18 +4,30 @@
 package control
 
 import (
-//"errors"
 	"net/http"
 	"openg.local/openg/ctxt"
-//	"openg.local/openg/model"
+	"openg.local/openg/model"
 )
 
+type detailsDownloadForm struct {
+	Occupations    []*model.Group
+}
+
 func ShowDownloads2(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+    
+    occupations, err := model.GetOccus(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+
 	ctx.TemplateName = "download2.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
             CSSFiles: []string{"/static/css/form.css"},
             //JSFiles: []string{},
+		},
+		Details: detailsDownloadForm{
+			Occupations: occupations,
 		},
 	}
 	
@@ -27,11 +39,6 @@ func ShowDownloads2(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) e
 				"/view/common/prix.js"},
 		},
 		Menu: "chantiers",
-		Details: detailsChautreList{
-			Chantiers: chantiers,
-			Annee:     annee,
-			Annees:    annees,
-		},
 	} */
 
 	return nil

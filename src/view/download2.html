@@ -27,9 +27,11 @@
 
 <form id="ogdb-form" class="form" action="" onsubmit="return validateForm();" method="post" novalidate>
 
+    <!-- ********************************************************************************* -->
     <fieldset class="margin-top margin-bottom">
         <legend class="bold padding-right05 padding-left05">1 - Choose what to download</legend>
     
+        <!-- *************************** -->
         <h3>Full database</h3>
         <ul>
             
@@ -48,23 +50,46 @@
             </li>
         </ul>
         
+        <!-- *************************** -->
         <h3>Historical datasets</h3>
         
+        <!-- *************************** -->
         <h3>Lists by occupation (profession)</h3>
+        <div class="margin margin-left0 big1">
+            <input type="checkbox" name="only-timed" id="only-timed">
+            <label for="only-timed">Export only timed data</label>
+        </div>
+        <div style="display:flex; flex-wrap:wrap;">
+            {{range $.Details.Occupations}}
+                <span class="padding-right2">
+                    <input type="radio" name="radio-what" id="occu-{{.Slug}}">
+                    <label for="occu-{{.Slug}}">{{.Name}}</label>
+                </span>
+            {{end}}
+        </div>
         
+        <!-- *************************** -->
         <h3>Other downloads</h3>
         Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
     </fieldset>
     
+    
     {{/* 
+    <!-- ********************************************************************************* -->
     <fieldset class="margin-top margin-bottom">
         <legend class="bold padding-right05 padding-left05">2 - Choose the fields</legend>
     </fieldset>
     */}}
     
+    
+    <!-- ********************************************************************************* -->
     <fieldset class="margin-top margin-bottom">
         <legend class="bold padding-right05 padding-left05">2 - Choose the format</legend>
-        
+        <div class="margin margin-left0 big1">
+            <input type="checkbox" name="title-fields" id="title-fields" checked>
+            <label for="title-fields">First line contains the field names</label>
+        </div>
+
         <div class="grid2-pres">
             <b>CSV Separator</b>
             <div class="padding-left2">
@@ -74,7 +99,7 @@
                 </div>
                 <div>
                     <input type="radio" name="radio-sep" id="coma">
-                    <label for="coma"><span class="bold big3 padding-left05">,</span> Coma</label>
+                    <label for="coma"><span class="bold big3 padding-left05">,</span> Comma</label>
                 </div>
             </div>
         </div>
@@ -100,7 +125,7 @@
             </div>
     </fieldset>
 
-    <div class="float-right command">
+    <div class="command big2 margin-left2">
         <input type="button" name="cancel" value="Cancel" onClick="cancel();">
         <input type="button" name="download" value="Download" class="margin-left">
         {{/* 
