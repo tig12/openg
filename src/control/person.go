@@ -64,11 +64,11 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		}
 	}
 
-    err = model.ComputeBC(person, ctx.Config.Paths.Acts)
+	err = model.ComputeBC(person, ctx.Config.Paths.Acts)
 	if err != nil {
 		return err
 	}
-	
+
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{

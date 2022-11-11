@@ -24,16 +24,18 @@ function openTab(tabName) {
     const btnName = tabName.substr(4); // remove 'tab-' to get button name
     document.getElementById(btnName).className += " active";
     const tab_url = {
-        'intro'     : '',
-        'history'   : 'history',
-        'occus'     : 'occupations',
+        'intro'         : '',
+        'history'       : 'history',
+        'occus'         : 'occupations',
+        'candidates'    : 'candidates',
     };
     const tab_title = {
-        'intro'     : 'Open Gauquelin Database',
-        'history'   : 'Historical datasets | Open Gauquelin Database',
-        'occus'     : 'Lists by occupations | Open Gauquelin Database',
+        'intro'         : 'Open Gauquelin Database',
+        'history'       : 'Historical datasets | Open Gauquelin Database',
+        'occus'         : 'Lists by occupations | Open Gauquelin Database',
+        'candidates'    : 'Data candidates | Open Gauquelin Database',
     };
-console.log(tab_url[btnName] + ' - ' + tab_title[btnName]);
+//console.log(tab_url[btnName] + ' - ' + tab_title[btnName]);
     history.pushState({}, '', tab_url[btnName]);
     document.title = tab_title[btnName];
 }

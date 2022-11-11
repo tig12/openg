@@ -31,15 +31,16 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
-	
+
 	// ajax
 	r.HandleFunc("/ajax/autocomplete/persons/{str}", H(ajax.PersonsAutocomplete))
-	
+
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/occupations", H(control.ShowHome))
 	r.HandleFunc("/history", H(control.ShowHome))
-	
+	r.HandleFunc("/candidates", H(control.ShowHome))
+
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
@@ -55,8 +56,6 @@ func main() {
 
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))
-
-//	r.HandleFunc("/occupations", H(control.ShowOccupations))
 
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 

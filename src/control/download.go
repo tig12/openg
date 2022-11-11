@@ -10,12 +10,12 @@ import (
 )
 
 type detailsDownloadForm struct {
-	Occupations    []*model.Group
+	Occupations []*model.Group
 }
 
 func ShowDownloads2(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    
-    occupations, err := model.GetOccus(ctx.Config.RestURL)
+
+	occupations, err := model.GetOccus(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
@@ -23,14 +23,14 @@ func ShowDownloads2(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) e
 	ctx.TemplateName = "download2.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-            CSSFiles: []string{"/static/css/form.css"},
-            //JSFiles: []string{},
+			CSSFiles: []string{"/static/css/form.css"},
+			//JSFiles: []string{},
 		},
 		Details: detailsDownloadForm{
 			Occupations: occupations,
 		},
 	}
-	
+
 	/* ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: titrePage,

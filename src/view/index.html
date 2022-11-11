@@ -1,3 +1,7 @@
+{{/* 
+    See src/static/js/tabstrip.js to add a tab tile and url.
+*/}}
+
 <div class="home">
 
 <h1 class="margin-bottom3">
@@ -12,6 +16,7 @@
   <button class="tablinks defaultOpen" onclick="openTab('tab-intro');" id="intro">Open Gauquelin</button>
   <button class="tablinks" onclick="openTab('tab-history');" id="history">Historical data</button>
   <button class="tablinks" onclick="openTab('tab-occus');" id="occus">Professional groups</button>
+  <button class="tablinks" onclick="openTab('tab-candidates');" id="candidates">Data candidates</button>
 </div>
 
 <div id="tab-intro" class="tabcontent">
@@ -29,6 +34,12 @@
 <div id="tab-occus" class="tabcontent">
     <p>
         {{ template "index-occus.html" . }}
+    </p>
+</div>
+
+<div id="tab-candidates" class="tabcontent">
+    <p>
+        {{ template "index-candidates.html" . }}
     </p>
 </div>
 

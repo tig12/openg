@@ -51,7 +51,7 @@ func ShowErrorPage(theErr error, ctx *ctxt.Context, w http.ResponseWriter, r *ht
 		ctxt.LogError(err)
 		return
 	}
-    ctxt.LogError(theErr)
+	ctxt.LogError(theErr)
 }
 
 /**

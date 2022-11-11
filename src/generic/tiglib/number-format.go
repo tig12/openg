@@ -1,4 +1,4 @@
-/** 
+/**
      Format a number with grouped thousands.
 **/
 package tiglib

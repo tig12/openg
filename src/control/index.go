@@ -4,7 +4,7 @@
 package control
 
 import (
-//"errors"
+	//"errors"
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
@@ -12,19 +12,20 @@ import (
 
 // Structure containing data for all tabs of home page
 type detailsHome struct {
-    // common fields
+	// common fields
 	DownloadBase string
 	SelectedTab  string
 	// tab intro
-	Stats        *model.Stats
+	Stats *model.Stats
 	// tab occupations
 	Occus              []*model.Group
 	WD_ENTITY_BASE_URL string
 	Slug_Name          map[string]string
 }
 
+// Handles all tabs of index page
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    
+
 	selectedTab := ""
 	if r.RequestURI == "/" {
 		selectedTab = "tab-intro"
@@ -32,14 +33,16 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 		selectedTab = "tab-history"
 	} else if r.RequestURI == "/occupations" {
 		selectedTab = "tab-occus"
+	} else if r.RequestURI == "/candidates" {
+		selectedTab = "tab-candidates"
 	}
-	
-    // for tab intro
+
+	// for tab intro
 	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
-	
+
 	// for tab occupations
 	occus, err := model.GetOccus(ctx.Config.RestURL)
 	if err != nil {
@@ -49,13 +52,13 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	if err != nil {
 		return err
 	}
-	
+
 	ctx.TemplateName = "index.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			CSSFiles: []string{
-			    "static/css/pages/index.css",
-			    "static/css/tabstrip.css",
+				"static/css/pages/index.css",
+				"static/css/tabstrip.css",
 			},
 		},
 		Details: detailsHome{

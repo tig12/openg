@@ -8,44 +8,44 @@
 package ctxt
 
 import (
-    "crypto/md5"
+	"crypto/md5"
 	"fmt"
 	"net/http"
-	"openg.local/openg/generic/wilk/werr"
 	"openg.local/openg/generic/tiglib"
+	"openg.local/openg/generic/wilk/werr"
 	"os"
 	"strings"
 	"time"
 )
 
-/* 
+/*
 func LogError(err error) {
     werr.Print(err)
     return
 }
 */
 func LogError(theError error) {
-    ctx := NewContext() // TODO find a way to avoid creating a new context here ?
-    var err error
-    now := time.Now().Format(time.RFC3339) // string
-    if ctx.Config.Run.Mode == "dev" {
-        fmt.Printf("\n======================= %s =======================\n", now)
-        werr.Print(theError)
-        return
-    }
-    logfile := ctx.Config.Paths.Log + string(os.PathSeparator) + "error.log"
-    osfile, err := os.OpenFile(logfile, os.O_APPEND|os.O_WRONLY, 0644)
-    defer osfile.Close()
-    if err != nil  && os.IsNotExist(err){
-        osfile, err = os.Create(logfile)
-        if err != nil {
-            panic(err)
-        }
-    }
-    _, err = fmt.Fprintf(osfile, "\n======================= %s =======================\n%s\n", now, err)
-    if err != nil {
-        panic(err)
-    }
+	ctx := NewContext() // TODO find a way to avoid creating a new context here ?
+	var err error
+	now := time.Now().Format(time.RFC3339) // string
+	if ctx.Config.Run.Mode == "dev" {
+		fmt.Printf("\n======================= %s =======================\n", now)
+		werr.Print(theError)
+		return
+	}
+	logfile := ctx.Config.Paths.Log + string(os.PathSeparator) + "error.log"
+	osfile, err := os.OpenFile(logfile, os.O_APPEND|os.O_WRONLY, 0644)
+	defer osfile.Close()
+	if err != nil && os.IsNotExist(err) {
+		osfile, err = os.Create(logfile)
+		if err != nil {
+			panic(err)
+		}
+	}
+	_, err = fmt.Fprintf(osfile, "\n======================= %s =======================\n%s\n", now, err)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func LogRequest(next http.Handler) http.Handler {
@@ -77,14 +77,14 @@ func LogRequest(next http.Handler) http.Handler {
 			// Compute RemoteAddr
 			remoteAddr := ""
 			if tmp, ok := r.Header["X-Forwarded-For"]; ok {
-			    remoteAddr = tmp[0] // if the site is behind an Apache proxy
-            } else {
-			    remoteAddr = r.RemoteAddr // not behind an Apache proxy
+				remoteAddr = tmp[0] // if the site is behind an Apache proxy
+			} else {
+				remoteAddr = r.RemoteAddr // not behind an Apache proxy
 			}
-            // anonymize ip address
-            remoteAddr = fmt.Sprintf("%x", md5.Sum([]byte(remoteAddr)))
-            remoteAddr = tiglib.StrRandomShorten(remoteAddr, 8)
-            
+			// anonymize ip address
+			remoteAddr = fmt.Sprintf("%x", md5.Sum([]byte(remoteAddr)))
+			remoteAddr = tiglib.StrRandomShorten(remoteAddr, 8)
+
 			_, err = fmt.Fprintf(osfile, "%s %s %s %s\n",
 				now,
 				remoteAddr,

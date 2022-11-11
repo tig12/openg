@@ -145,7 +145,7 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 		"&order=person_slug" +
 		"&limit=" + strconv.Itoa(limit) +
 		"&offset=" + strconv.Itoa(offset)
-    
+
 	response, err = http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

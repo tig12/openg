@@ -7,18 +7,18 @@
 package model
 
 import (
-	"fmt"
-	"strconv"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
+	"strconv"
 )
 
 // see init function at the end
 
 type Person struct {
-    // fields stored in table person
+	// fields stored in table person
 	Id             int
 	Slug           string
 	Sex            string
@@ -34,8 +34,8 @@ type Person struct {
 	Issues         []string
 	Notes          []string
 	// not stored in table person
-	ActObjects     map[string]Act
-	Groups         []*PersonGroup
+	ActObjects map[string]Act
+	Groups     []*PersonGroup
 }
 
 type PersonName struct {
@@ -71,24 +71,22 @@ type HistoryEntry struct {
 
 // used by ajax
 type AutocompletePerson struct {
-    Slug string `json:"slug"`
-    Day  string `json:"day"`
-    Name string `json:"name"`
+	Slug string `json:"slug"`
+	Day  string `json:"day"`
+	Name string `json:"name"`
 }
-
-
 
 // Displayed names of the partial ids
 var Partial_ids_labels = map[string]string{
-	"lerrcp":     "Gauquelin",
-	"muller":     "Müller",
-	"cpara":      "Comité Para",
-	"csicop":     "CSICOP",
-	"cfepp":      "CFEPP",
-	"ertel":      "Ertel",
-	"g55-book":   "Gauquelin 1955",
-	"g55":        "Gauquelin 1955", // to delete when new import of priests and minor painters is integrated
-	"wd":         "Wikidata",
+	"lerrcp":   "Gauquelin",
+	"muller":   "Müller",
+	"cpara":    "Comité Para",
+	"csicop":   "CSICOP",
+	"cfepp":    "CFEPP",
+	"ertel":    "Ertel",
+	"g55-book": "Gauquelin 1955",
+	"g55":      "Gauquelin 1955", // to delete when new import of priests and minor painters is integrated
+	"wd":       "Wikidata",
 }
 
 // ************************** PersonName *******************************
@@ -174,9 +172,8 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 	return nil
 }
 
-
 /** Computes field 'Acts' of a person **/
-/** 
+/**
 func (p *Person) ComputeActs(dirActs string) (err error) {
     p.Acts = append(p.acts, ComputeBC(p, dirActs)
 }
@@ -202,12 +199,12 @@ func GetPersons(restURL string) (p []*Person, err error) {
 	return persons, nil
 }
 
-/** 
+/**
     Used by ajax
 **/
 func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err error) {
 	url := restURL + "/search?slug=like." + str + "*"
-fmt.Println("=== model.GetPersonsAutocomplete url = " +url)
+	fmt.Println("=== model.GetPersonsAutocomplete url = " + url)
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
@@ -473,40 +470,40 @@ func init() {
 			"NIENSA",
 		},
 		"3a_sports": {
-            "L",
-            "MF",
-            "NR",
-            "ENG",
-            "MA_",
-            "G_NR",
-            "MA12",
-            "MARS",
-            "NAME",
-            "PUBL",
-            "QUEL",
-            "AUFAB",
-            "CSINR",
-            "KURTZ",
-            "PHAS_",
-            "STUND",
-            "CFEPNR",
-            "EXTEND",
-            "NATION",
-            "TAGMON",
-            "ZITATE",
-            "ZITSUM",
-            "INDGRUP",
-            "PARA_NR",
-            "VORNAME",
-            "ZITRANG",
-            "GAUQ1955",
-            "GEBDATUM",
-            "GQBECORR",
-            "NIENCORR",
-            "NIENHUYS",
-            "SPORTART",
-            "CHRISNAME",
-            "ZITSUM_OD",
+			"L",
+			"MF",
+			"NR",
+			"ENG",
+			"MA_",
+			"G_NR",
+			"MA12",
+			"MARS",
+			"NAME",
+			"PUBL",
+			"QUEL",
+			"AUFAB",
+			"CSINR",
+			"KURTZ",
+			"PHAS_",
+			"STUND",
+			"CFEPNR",
+			"EXTEND",
+			"NATION",
+			"TAGMON",
+			"ZITATE",
+			"ZITSUM",
+			"INDGRUP",
+			"PARA_NR",
+			"VORNAME",
+			"ZITRANG",
+			"GAUQ1955",
+			"GEBDATUM",
+			"GQBECORR",
+			"NIENCORR",
+			"NIENHUYS",
+			"SPORTART",
+			"CHRISNAME",
+			"ZITSUM_OD",
 		},
 		"csi": {
 			"Satz#",
@@ -526,20 +523,20 @@ func init() {
 			"BATCH",
 		},
 		"cfepp-final3": {
-            "S",
-            "LT",
-            "LV",
-            "TR",
-            "UT",
-            "LAT",
-            "SRC",
-            "LONG",
-            "NAME",
-            "SPORT",
-            "LOC_DATE",
-            "UNIV_DATE",
-            "BIRTH_PLACE",
-            "POSTAL_CODE",
+			"S",
+			"LT",
+			"LV",
+			"TR",
+			"UT",
+			"LAT",
+			"SRC",
+			"LONG",
+			"NAME",
+			"SPORT",
+			"LOC_DATE",
+			"UNIV_DATE",
+			"BIRTH_PLACE",
+			"POSTAL_CODE",
 		},
 	}
 }
