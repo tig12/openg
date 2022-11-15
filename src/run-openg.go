@@ -102,12 +102,10 @@ func H(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(htt
 			control.ShowErrorPage(err, ctx, w, r)
 			return
 		}
-		/*
-			if ctx.Redirect != "" {
-				http.Redirect(w, r, ctx.Redirect, http.StatusSeeOther)
-				return
-			}
-		*/
+        if ctx.Redirect != "" {
+            http.Redirect(w, r, ctx.Redirect, http.StatusSeeOther)
+            return
+        }
 		//
 		tmpl := ctx.Template
 		//
