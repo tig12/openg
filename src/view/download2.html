@@ -40,19 +40,34 @@
         <ul>
             
             <li>
-                <input type="radio" name="radio-what" id="full-pgdump">
+                <input type="radio" name="radio-what" value="full-pgdump" id="full-pgdump">
                 <label for="full-pgdump"><b>Postgresql dump</b> - to load the database in postgresql, see <a href="install">page INSTALL</a></label>
             </li>
             
             <li>
-                <input type="radio" name="radio-what" id="full-csv-time">
+                <input type="radio" name="radio-what" value="full-csv-time" id="full-csv-time">
                 <label for="full-csv-time">CSV export - Timed data</label>
             </li>
             <li>
-                <input type="radio" name="radio-what" id="full-csv-all">
+                <input type="radio" name="radio-what" value="full-csv-all" id="full-csv-all">
                 <label for="full-csv-all">CSV export - Timed and untimed data</label>
             </li>
         </ul>
+        
+        <!-- *************************** -->
+        <h3>Lists by occupation (profession)</h3>
+        <div class="margin margin-left0 big1">
+            <input type="checkbox" name="only-timed" value="only-timed" id="only-timed">
+            <label for="only-timed">Export only timed data</label>
+        </div>
+        <div style="display:flex; flex-wrap:wrap;">
+            {{range $.Details.Occupations}}
+                <span class="padding-right2">
+                    <input type="radio" name="radio-what" value="occu-{{.Slug}}" id="occu-{{.Slug}}">
+                    <label for="occu-{{.Slug}}">{{.Name}}</label>
+                </span>
+            {{end}}
+        </div>
         
         <!-- *************************** -->
         <h3>Historical datasets</h3>
@@ -65,43 +80,43 @@
                         <span class="datagroup">Gauquelin 1955, "L'influence des astres"</span>
                         <ul class="datalist">
                             <li>
-                                <input type="radio" name="radio-what" id="g55-01-576-physicians">
+                                <input type="radio" name="radio-what" value="g55-01-576-physicians" id="g55-01-576-physicians">
                                 <label for="g55-01-576-physicians">01 - 576 MEMBRES ASSOCIÉS ET CORRESPONDANTS DE L'ACADÉMIE DE MÉDECINE</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-02-508-physicians">
+                                <input type="radio" name="radio-what" value="g55-02-508-physicians" id="g55-02-508-physicians">
                                 <label for="g55-02-508-physicians">02 - 508 AUTRES MEDECINS NOTABLES</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-03-570-sportsmen">
+                                <input type="radio" name="radio-what" value="g55-03-570-sportsmen" id="g55-03-570-sportsmen">
                                 <label for="g55-03-570-sportsmen">03 - 570 SPORTIFS</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-04-676-military">
+                                <input type="radio" name="radio-what" value="g55-04-676-military" id="g55-04-676-military">
                                 <label for="g55-04-676-military">04 - 676 MILITAIRES</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-05-906-painters">
+                                <input type="radio" name="radio-what" value="g55-05-906-painters" id="g55-05-906-painters">
                                 <label for="g55-05-906-painters">05 - 906 PEINTRES</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-06-361-minor-painters">
+                                <input type="radio" name="radio-what" value="g55-06-361-minor-painters" id="g55-06-361-minor-painters">
                                 <label for="g55-06-361-minor-painters">06 - 361 PEINTRES MINEURS</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-07-500-actors">
+                                <input type="radio" name="radio-what" value="g55-07-500-actors" id="g55-07-500-actors">
                                 <label for="g55-07-500-actors">07 - 500 ACTEURS</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-08-494-deputies">
+                                <input type="radio" name="radio-what" value="g55-08-494-deputies" id="g55-08-494-deputies">
                                 <label for="g55-08-494-deputies">08 - 494 DEPUTES</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-09-349-scientists">
+                                <input type="radio" name="radio-what" value="g55-09-349-scientists" id="g55-09-349-scientists">
                                 <label for="g55-09-349-scientists">09 - 349 MEMBRES, ASSOCIES ET CORRESPONDANTS DE L'ACADEMIE DES SCIENCES</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="g55-10-884-priests">
+                                <input type="radio" name="radio-what" value="g55-10-884-priests" id="g55-10-884-priests">
                                 <label for="g55-10-884-priests">10 - 884 PRETRES</label>
                             </li>
                         </ul>
@@ -112,43 +127,43 @@
         
                         <ul class="datalist">
                             <li>
-                                <input type="radio" name="radio-what" id="a1">
+                                <input type="radio" name="radio-what" value="a1" id="a1">
                                 <label for="a1">A1: 2088 sports champions</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="a2">
+                                <input type="radio" name="radio-what" value="a2" id="a2">
                                 <label for="a2">A2: 3643 scientists and medical doctors</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="a3">
+                                <input type="radio" name="radio-what" value="a3" id="a3">
                                 <label for="a3">A3: 3046 military men</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="a4">
+                                <input type="radio" name="radio-what" value="a4" id="a4">
                                 <label for="a4">A4: 2720 painters and French musicians</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="a5">
+                                <input type="radio" name="radio-what" value="a5" id="a5">
                                 <label for="a5">A5: 2410 actors and politicians</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="a6">
+                                <input type="radio" name="radio-what" value="a6" id="a6">
                                 <label for="a6">A6: 2026 writers and journalists</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="d6">
+                                <input type="radio" name="radio-what" value="d6" id="d6">
                                 <label for="d6">D6: 449 European sports champions</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="d10">
+                                <input type="radio" name="radio-what" value="d10" id="d10">
                                 <label for="d10">D10: 1396 successful Americans</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="e1">
+                                <input type="radio" name="radio-what" value="e1" id="e1">
                                 <label for="e1">E1: 2153 French physicians, military men and executives</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="e3">
+                                <input type="radio" name="radio-what" value="e3" id="e3">
                                 <label for="e3">E3: 1539 French writers, artists, actors, politicians and journalists</label>
                             </li>
                         </ul>
@@ -164,23 +179,23 @@
                     <li class="datagroup">
                         <ul class="datalist">
                             <li>
-                                <input type="radio" name="radio-what" id="muller-afd1-writers">
+                                <input type="radio" name="radio-what" value="muller-afd1-writers" id="muller-afd1-writers">
                                 <label for="muller-afd1-writers">Müller 1, 402 Italian writers</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="muller-afd1-100writers">
+                                <input type="radio" name="radio-what" value="muller-afd1-100writers" id="muller-afd1-100writers">
                                 <label for="muller-afd1-100writers">Müller 1, 100 Italian writers without birth time</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="muller-afd2-men">
+                                <input type="radio" name="radio-what" value="muller-afd2-men" id="muller-afd2-men">
                                 <label for="muller-afd2-men">Müller 2, 612 famous men</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="muller-afd3-women">
+                                <input type="radio" name="radio-what" value="muller-afd3-women" id="muller-afd3-women">
                                 <label for="muller-afd3-women">Müller 3, 234 famous women</label>
                             </li>
                             <li>
-                                <input type="radio" name="radio-what" id="muller-afd5-medics">
+                                <input type="radio" name="radio-what" value="muller-afd5-medics" id="muller-afd5-medics">
                                 <label for="muller-afd5-medics">Müller 5, 1083 members of the French Académie de Médecine</label>
                             </li>
                         </ul>
@@ -195,13 +210,15 @@
                 
                 <ul>
                     <li>
-                        <input type="radio" name="radio-what" id="cpara">
+                        <input type="radio" name="radio-what" value="cpara" id="cpara">
                         <label for="cpara">535 athletes, group of the official test</label>
                     </li>
+                    {{/* 
                     <li>
-                        <input type="radio" name="radio-what" id="ertel-7-para-lowers">
+                        <input type="radio" name="radio-what" value="ertel-7-para-lowers" id="ertel-7-para-lowers">
                         <label for="ertel-7-para-lowers">76 unpublished athletes (= Ertel's subsample n&deg; 7)</label>
                     </li>
+                    */}}
                 </ul>
             </li>
             
@@ -209,24 +226,21 @@
                 <span class="author">CSICOP - U.S. skeptics 1979</span>
                 <ul>
                     <li>
-                        <input type="radio" name="radio-what" id="csicop">
+                        <input type="radio" name="radio-what" value="csicop" id="csicop">
                         <label for="csicop">408 American athletes - Complete group</label>
                     </li>
                     {{/* 
                     <li>
-                        <input type="radio" name="radio-what" id="">
-                        <label for=""></label>
-                        <a href="/group/csicop-batch1">Batch 1 - 128 American athletes</a>
+                        <input type="radio" name="radio-what" value="csicop-batch1" id="csicop-batch1">
+                        <label for="csicop-batch1">Batch 1 - 128 American athletes</label>
                     </li>
                     <li>
-                        <input type="radio" name="radio-what" id="">
-                        <label for=""></label>
-                        <a href="/group/csicop-batch2">Batch 2 - 98 American athletes</a>
+                        <input type="radio" name="radio-what" value="csicop-batch2" id="csicop-batch2">
+                        <label for="csicop-batch2">Batch 2 - 98 American athletes</label>
                     </li>
                     <li>
-                        <input type="radio" name="radio-what" id="">
-                        <label for=""></label>
-                        <a href="/group/csicop-batch3">Batch 3 - 82 American athletes</a>
+                        <input type="radio" name="radio-what" value="csicop-batch3" id="csicop-batch3">
+                        <label for="csicop-batch3">Batch 3 - 82 American athletes</label>
                     </li>
                     */}}
                 </ul>
@@ -236,11 +250,11 @@
                 <span class="author">CFEPP - French skeptics 1996</span>
                 <ul>
                     <li>
-                        <input type="radio" name="radio-what" id="cfepp-1066">
+                        <input type="radio" name="radio-what" value="cfepp-1066" id="cfepp-1066">
                         <label for="cfepp-1066">1066 athletes, official list published by CFEPP</label>
                     </li>
                     <li>
-                        <input type="radio" name="radio-what" id="cfepp-1120">
+                        <input type="radio" name="radio-what" value="cfepp-1120" id="cfepp-1120">
                         <label for="cfepp-1120">1120 athletes, CFEPP + Nienhuys additions</label>
                     </li>
                 </ul>
@@ -250,7 +264,7 @@
                 <span class="author">Suitbert Ertel</span>
                 <ul>
                     <li>
-                        <input type="radio" name="radio-what" id="ertel-4384-sport">
+                        <input type="radio" name="radio-what" value="ertel-4384-sport" id="ertel-4384-sport">
                         <label for="ertel-4384-sport">4384 athletes - Complete group</label>
                     </li>
                     {{/* 
@@ -278,21 +292,6 @@
         </ul>
         
         <!-- *************************** -->
-        <h3>Lists by occupation (profession)</h3>
-        <div class="margin margin-left0 big1">
-            <input type="checkbox" name="only-timed" id="only-timed">
-            <label for="only-timed">Export only timed data</label>
-        </div>
-        <div style="display:flex; flex-wrap:wrap;">
-            {{range $.Details.Occupations}}
-                <span class="padding-right2">
-                    <input type="radio" name="radio-what" id="occu-{{.Slug}}">
-                    <label for="occu-{{.Slug}}">{{.Name}}</label>
-                </span>
-            {{end}}
-        </div>
-        
-        <!-- *************************** -->
         <h3>Other downloads</h3>
         Auxiliary files, like scans of original documents, can be downloaded from <a href="https://github.com/tig12/g5-aux">github.com/tig12/g5-aux</a>
     </fieldset>
@@ -310,20 +309,20 @@
     <fieldset class="margin-top margin-bottom">
         <legend class="bold padding-right05 padding-left05">2 - Choose the format</legend>
         <div class="margin margin-left0 big1">
-            <input type="checkbox" name="title-fields" id="title-fields" checked>
-            <label for="title-fields">First line contains the field names</label>
+            <input type="checkbox" name="first-line-names" id="first-line-names" value="first-line-names" checked>
+            <label for="first-line-names">First line contains the field names</label>
         </div>
 
         <div class="grid2-pres">
             <b>CSV Separator</b>
             <div class="padding-left2">
                 <div>
-                    <input type="radio" name="radio-sep" id="semicolon" checked>
+                    <input type="radio" name="radio-sep" value="semicolon" id="semicolon" checked>
                     <label for="semicolon"><span class="bold big3 padding-left05">;</span> Semicolon</label>
                 </div>
                 <div>
-                    <input type="radio" name="radio-sep" id="coma">
-                    <label for="coma"><span class="bold big3 padding-left05">,</span> Comma</label>
+                    <input type="radio" name="radio-sep" value="comma" id="comma">
+                    <label for="comma"><span class="bold big3 padding-left05">,</span> Comma</label>
                 </div>
             </div>
         </div>
@@ -331,7 +330,7 @@
             <div class="margin-top bold">Date</div>
             <div class="grid2-pres">
                 <div>
-                    <input type="radio" name="radio-field-date" id="date-iso" checked>
+                    <input type="radio" name="radio-field-date" value="date-iso" id="date-iso" checked>
                     <label for="date-iso">Date and time in one column, format ISO 8601.</label>
                     <table class="wikitable margin-left">
                         <tr><th>DATE</th></tr>
@@ -339,7 +338,7 @@
                     </table>            
                 </div>
                 <div class="margin-left2">
-                    <input type="radio" name="radio-field-date" id="date-many-cols">
+                    <input type="radio" name="radio-field-date" value="date-many-cols" id="date-many-cols">
                     <label for="date-many-cols">One column for year, one column for month etc.</label>
                     <table class="wikitable margin-left">
                         <tr><th>Y</th><th>M</th><th>D</th><th>H</th><th>Mi</th><th>TZO</th></tr>
@@ -383,27 +382,6 @@ window.addEventListener("load", function(){
 
 // ***************************************
 function initialize(){
-    {{/* 
-    // form new
-    if({{.Id}} == 0){
-        document.getElementById("typevente-NON").checked = true;
-    }
-    // form update
-    else{
-        document.getElementById("acheteur").value = "{{.Acheteur.String}}";
-        document.getElementById("tva-{{.TVA}}").selected = true;
-        valorisationChanged();
-        document.getElementById("typevente-{{.TypeVente}}").checked = true;
-        if(document.getElementById("valorisation-PI").selected){
-            if('{{.Unite}}' == 'NP'){
-                document.getElementById("unite-pi-np").checked = true;
-            }
-            else{
-                document.getElementById("unite-pi-st").checked = true;
-            }
-        }
-    }
-    */}}
 }
 
 function cancel(){
@@ -411,22 +389,21 @@ function cancel(){
 
 // ***************************************
 function validateForm(){
-    return true;
-{{/* 
+    
     let msg = "";
     //
-    if(document.getElementById("datecontrat").value == ""){
-        msg += "- Vous devez renseigner la date du contrat.\n";
+    const checked_what = document.querySelector('input[name = "radio-what"]:checked');
+    if(checked_what == null){
+        msg += "- You must choose one thing to download!";
     }
     //
     if(msg != ""){
-        msg = "Impossible de valider ce formulaire :\n" + msg;
+        msg = "Impossible to validate your request :\n" + msg;
         alert(msg);
         return false;
     }
     //
     return true;
-*/}}
 }
 </script>
 
