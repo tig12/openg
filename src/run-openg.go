@@ -33,7 +33,8 @@ func main() {
 	r := mux.NewRouter()
 
 	// ajax
-	r.HandleFunc("/ajax/autocomplete/persons/{str}", H(ajax.PersonsAutocomplete))
+	r.HandleFunc("/ajax/autocomplete/persons/{str}", Hajax(ajax.PersonsAutocomplete))
+	r.HandleFunc("/ajax/download/{what}/{firstLineNames}/{sep}/{fieldDate}", Hajax(ajax.Download))
 
 	// routes handled by controls/index.go
 	r.HandleFunc("/", H(control.ShowHome))

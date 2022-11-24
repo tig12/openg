@@ -29,7 +29,7 @@
     }
 </style>
 
-<form id="ogdb-form" class="form" action="/downloads2" onsubmit="return validateForm();" method="post" novalidate>
+<form id="ogdb-form" class="form" action="/downloads2" onsubmit="return submitForm();" method="post" novalidate>
 
     <!-- ********************************************************************************* -->
     <fieldset class="margin-top margin-bottom">
@@ -349,10 +349,9 @@
     </fieldset>
 
     <div class="command big2 margin-left2">
-        <input type="button" name="cancel" value="Cancel" onClick="cancel();">
-        <input type="submit" class="margin-left" value="Download">
+        <input type="button" class="margin-left" name="download" value="Download" onClick="submitForm();">
         {{/* 
-        <input type="button" class="margin-left" name="download" value="Download">
+        <input type="submit" class="margin-left" value="Download">
         */}}
     </div>
 
@@ -384,12 +383,11 @@ window.addEventListener("load", function(){
 function initialize(){
 }
 
-function cancel(){
-}
-
 // ***************************************
-function validateForm(){
-    
+async function submitForm(){
+    //
+    // 1 - validation
+    //
     let msg = "";
     //
     const checked_what = document.querySelector('input[name = "radio-what"]:checked');
@@ -403,7 +401,50 @@ function validateForm(){
         return false;
     }
     //
-    return true;
+    // 2 - Submission
+    //
+    let url = '/ajax/download';
+    //
+    const radioWhat = document.getElementsByName('radio-what');
+    let what;
+    for(i = 0; i < radioWhat.length; i++) {
+        if(radioWhat[i].checked){
+            what = radioWhat[i].value;
+            break;
+        }
+    }
+    url += '/' + what;
+    //
+    const firstLineNames = document.getElementById('first-line-names').checked ? 'on' : 'off';
+    url += '/' + firstLineNames;
+    //
+    const radioSep = document.getElementsByName('radio-sep');
+    let sep;
+    for(i = 0; i < radioSep.length; i++) {
+        if(radioSep[i].checked){
+            sep = radioSep[i].value;
+            break;
+        }
+    }
+    url += '/' + sep;
+    //
+    const radioFieldDate = document.getElementsByName('radio-field-date');
+    let fieldDate;
+    for(i = 0; i < radioFieldDate.length; i++) {
+        if(radioFieldDate[i].checked){
+            fieldDate = radioFieldDate[i].value;
+            break;
+        }
+    }
+    url += '/' + fieldDate;
+    
+    console.log("url =", url);
+    response = await fetch(url);
+    
+    //
+    // 3 - return false (no submission, as the job is done by ajax and window.open()
+    //
+    return false;
 }
 </script>
 
