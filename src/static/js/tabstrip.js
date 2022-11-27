@@ -27,12 +27,14 @@ function openTab(tabName) {
         'intro'         : '',
         'history'       : 'history',
         'occus'         : 'occupations',
+        'wiki'          : 'wiki',
         'candidates'    : 'candidates',
     };
     const tab_title = {
         'intro'         : 'Open Gauquelin Database',
         'history'       : 'Historical datasets | Open Gauquelin Database',
         'occus'         : 'Lists by occupations | Open Gauquelin Database',
+        'wiki'          : 'Wiki | Open Gauquelin Database',
         'candidates'    : 'Data candidates | Open Gauquelin Database',
     };
 //console.log(tab_url[btnName] + ' - ' + tab_title[btnName]);

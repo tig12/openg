@@ -33,6 +33,8 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 		selectedTab = "tab-history"
 	} else if r.RequestURI == "/occupations" {
 		selectedTab = "tab-occus"
+	} else if r.RequestURI == "/wiki" {
+		selectedTab = "tab-wiki"
 	} else if r.RequestURI == "/candidates" {
 		selectedTab = "tab-candidates"
 	}
@@ -115,10 +117,11 @@ func ShowInstall(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	return nil
 }
 
-func ShowWiki(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+
+/* func ShowWiki(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.TemplateName = "wiki.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{},
 	}
 	return nil
-}
+} */

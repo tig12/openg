@@ -9,6 +9,10 @@
     display:flex;
     flex-wrap:wrap;
 }
+.flex-nowrap{
+    display:flex;
+    flex-wrap:nowrap;
+}
 
 ul.spaced,
 ol.spaced{
