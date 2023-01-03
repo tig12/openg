@@ -29,52 +29,63 @@
 
 <body>
 <header class="top-header">
-<a id="pagetop" href="/" class="bold">
-    <img class="vertical-align-middle" src="/static/img/open-gauquelin.png" alt="Open Gauquelin Home">
-    Open Gauquelin Database
-</a>
-<span class="padding-left2"><span class="warning">--- DRAFT - Under development ---</span></span>
-<div class="top-right">
-    <div class="search">
-        Search
-        <input
-            id="search-input"
-            class="autocomplete"
-            type="text"
-            autocomplete="off"
-            size="40"
-placeholder="Not yet operational"
-disabled
-        />
-        <input
-            class="margin-right"
-            type="button"
-            value="Go"
-        />
+    <a id="pagetop" href="/" class="bold">
+        <img class="vertical-align-middle" src="/static/img/open-gauquelin.png" alt="Open Gauquelin Home">
+        Open Gauquelin Database
+    </a>
+    
+    <span class="top-nav">
+        <a href="/history">Historical datasets</a>
+        <a href="/occupations">Professional groups</a>
+        <a href="/wiki">Wiki</a>
+        <a href="/downloads">Downloads</a>
+        <a href="/about">Contact</a>
+    </span>
+    
+    <div class="top-right">
+        <div class="search">
+            Search
+            <input
+                id="search-input"
+                class="autocomplete"
+                type="text"
+                autocomplete="off"
+                size="40"
+    placeholder="Not yet operational"
+    disabled
+            />
+            <input
+                class="margin-right"
+                type="button"
+                value="Go"
+            />
+        </div>
+        <ul class="menus">
+            <li class="dropdown">
+                <a class="dropbtn" href="/"><img src="/static/img/menu.png"></a>
+                <div class="dropdown-content">
+                    <a class="bold" href="/">Home</a>
+                    <center><hr class="hr-cool"></center>
+                    <a href="/history">Historical datasets</a>
+                    <a href="/occupations">Lists by occupation</a>
+                    <a href="/issues">Questionable data</a>
+                    <a href="/candidates">Data candidates</a>
+                    <a href="/sources">Information sources</a>
+                    <center><hr class="hr-cool"></center>
+                    <a href="/about">Contact, About</a>
+                    <a href="/downloads">Downloads</a>
+                    <a href="/stats">DB stats</a>
+                    <center><hr class="hr-cool"></center>
+                    <a href="/install">Install</a>
+                    <a href="/wiki">Wiki</a>
+                    <center><hr class="hr-cool"></center>
+                    <a href="/future">Future</a>
+                </div>
+            </li>
+        </ul>
     </div>
-    <ul class="menus">
-        <li class="dropdown">
-            <a class="dropbtn" href="/"><img src="/static/img/menu.png"></a>
-            <div class="dropdown-content">
-                <a class="bold" href="/">Home</a>
-                <center><hr class="hr-cool"></center>
-                <a href="/history">Historical datasets</a>
-                <a href="/occupations">Lists by occupation</a>
-                <a href="/issues">Questionable data</a>
-                <a href="/sources">Information sources</a>
-                <center><hr class="hr-cool"></center>
-                <a href="/about">Contact, About</a>
-                <a href="/downloads">Downloads</a>
-                <a href="/stats">DB stats</a>
-                <center><hr class="hr-cool"></center>
-                <a href="/install">Install</a>
-                <a href="/wiki">Wiki</a>
-                <center><hr class="hr-cool"></center>
-                <a href="/future">Future</a>
-            </div>
-        </li>
-    </ul>
-</div>
+    
 </header>
 
 <div class="content">
+

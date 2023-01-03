@@ -42,25 +42,3 @@
     padding:0 5px;
 }
 
-/* sitelinks, list on the right */
-.home .sitelinks{
-    /* 
-    position:fixed;
-    top:100px;
-    right:2rem;
-    */
-    float:right;
-    background-color:#dbe599;
-    padding:1rem;
-    border:1px solid grey;
-    border-radius:4px;
-    box-shadow:5px 5px 5px grey;
-    
-}
-.home .sitelinks>div{
-    margin-top:0;
-    font-size:1.2rem;
-    line-height:2rem;
-    font-weight:bold;
-    /* background:#bac1c4; */
-}

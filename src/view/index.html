@@ -1,47 +1,15 @@
 {{/* 
-    See src/static/js/tabstrip.js to add a tab tile and url.
+    To add a tab title and url, see
+        - src/static/lib/tabstrip/tabstrip.js 
+        - src/view/header.html (end of file)
+        - control/index.go
 */}}
 
 <div class="home">
 
-<!-- ************************************* -->
-<div class="sitelinks">
-    <div><a href="/occupations">Lists by occupation</a></div>
-    <div><a href="/issues">Questionable data</a></div>
-    <div><a href="/sources">Information sources</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/about">Contact, About</a></div>
-    <div><a href="/downloads">Downloads</a></div>
-    <div><a href="/stats">DB stats</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/install">Install</a></div>
-    <div><a href="/wiki">Wiki</a></div>
-    <div><center><hr class="hr-cool"></center></div>
-    <div><a href="/future">Future</a></div>
-</div>
-<!-- ************************************* -->
-
-
-
-<h1 class="margin-bottom3">
-    Open Gauquelin Database (ogdb)
-    <div class="subtitle">
-        Timed birth dates of famous persons
-    </div>
-</h1>
-
-
-<div class="tab">
-  <button class="tablinks defaultOpen" onclick="openTab('tab-intro');" id="intro">Open Gauquelin</button>
-  <button class="tablinks" onclick="openTab('tab-history');" id="history">Historical data</button>
-  <button class="tablinks" onclick="openTab('tab-occus');" id="occus">Professional groups</button>
-  <button class="tablinks" onclick="openTab('tab-wiki');" id="wiki">Wiki</button>
-  <button class="tablinks" onclick="openTab('tab-candidates');" id="candidates">Data candidates</button>
-</div>
-
-<div id="tab-intro" class="tabcontent">
+<div id="tab-home" class="tabcontent">
     <p>
-        {{ template "index-intro.html" . }}
+        {{ template "index-home.html" . }}
     </p>
 </div>
                                                                                                                                                       
@@ -68,11 +36,5 @@
         {{ template "index-candidates.html" . }}
     </p>
 </div>
-
-<script>
-window.addEventListener("load", function(){
-    openTab('{{.Details.SelectedTab}}');
-});
-</script>
 
 </div><!-- end class="home" -->

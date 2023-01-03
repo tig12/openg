@@ -26,7 +26,10 @@ type Person struct {
 	Occus          []string
 	Birth          Event
 	Death          Event
-	Ids_in_sources map[string]string
+	// declared interface{} instead of map[string]string
+	// because if empty, json has an empty array, not an empty map.
+	// problem when building the json in php, cannot distinguish between an empty array and an empty map.
+	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
 	Acts           []string

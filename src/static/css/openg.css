@@ -97,7 +97,16 @@ div.anchor {
 .search input[type=text]{
     border-radius:7px;
 }
-
+.top-nav{
+    padding-left:4rem;
+    padding-bottom:5px;
+}
+.top-nav a{
+    padding-left:.5rem;
+    padding-right:.5rem;
+    background:lightblue;
+    border-radius:2px;
+}
 /* ================ Particular pages ================ */
 .error404{
     position:relative;

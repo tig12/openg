@@ -36,19 +36,19 @@ func main() {
 	r.HandleFunc("/ajax/autocomplete/persons/{str}", Hajax(ajax.PersonsAutocomplete))
 	r.HandleFunc("/ajax/download/{what}/{firstLineNames}/{sep}/{fieldDate}", Hajax(ajax.Download))
 
-	// routes handled by controls/index.go
+	// routes handled by controls/quasi-static.go
 	r.HandleFunc("/", H(control.ShowHome))
-	r.HandleFunc("/occupations", H(control.ShowHome))
-	r.HandleFunc("/history", H(control.ShowHome))
-	r.HandleFunc("/candidates", H(control.ShowHome))
-	r.HandleFunc("/wiki", H(control.ShowHome))
-
+	r.HandleFunc("/history", H(control.ShowHistory))
+	r.HandleFunc("/occupations", H(control.ShowOccupations))
+	r.HandleFunc("/wiki", H(control.ShowWiki))
+	r.HandleFunc("/candidates", H(control.ShowCandidates))
 	r.HandleFunc("/about", H(control.ShowAbout))
-	r.HandleFunc("/downloads", H(control.ShowDownloads))
-	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
 	r.HandleFunc("/future", H(control.ShowFuture))
 	r.HandleFunc("/install", H(control.ShowInstall))
 
+	r.HandleFunc("/downloads", H(control.ShowDownloads))
+	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
+	
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
 
