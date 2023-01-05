@@ -6,7 +6,6 @@
 ********************************************************************************/
 
 
-//document.getElementById("defaultOpen").click();
 document.getElementsByClassName("defaultOpen")[0].click();
 
 function openTab(evt, tabame) {
