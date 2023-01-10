@@ -5,35 +5,40 @@
 
 {{with .Details.Person}}
 
-{{$bc := index .ActObjects "birth"}}
+{{$bc := index .Acts "birth"}}
+
+<pre>
+{{$bc | prettyPrint}}
+</pre>
 
 <!-- ********************************************************************************* -->
 <h2>Contents</h2>
 <table class="table-pres">
     <tr>
         <td>Family name</td>
-        <td>{{$bc.Person.Name.Official.Family}}</td>
+        <td>{{.Name.Official.Family}}</td>
     </tr>
     <tr>
         <td>Given name</td>
-        <td>{{$bc.Person.Name.Official.Given}}</td>
+        <td>{{.Name.Official.Given}}</td>
     </tr>
     <tr>
         <td>Birth date</td>
-        <td>{{$bc.Person.Birth.Date}}</td>
+        <td>{{.Birth.Date}}</td>
     </tr>
     <tr>
         <td>Birth place</td>
-        <td>{{$bc.Person.Birth.Place.Name}}</td>
+        <td>{{.Birth.Place.Name}}</td>
     </tr>
-    {{if $bc.Person.Birth.Note}}
+    {{if .Birth.Note}}
     <tr>
         <td>Notes</td>
-        <td>{{$bc.Person.Birth.Note}}</td>
+        <td>{{.Birth.Note}}</td>
     </tr>
     {{end}}
 </table>
 
+{{/* 
 <!-- ********************************************************************************* -->
 <h2>Information source</h2>
 <table class="table-pres">
@@ -88,12 +93,8 @@
     </li>
 {{end}}
 </ul>
-
-{{/* 
-<pre>
-{{$bc | prettyPrint}}
-</pre>
 */}}
+
 
 
 {{end}} {{/* with .Details.Person */}}

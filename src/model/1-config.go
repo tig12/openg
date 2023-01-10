@@ -20,7 +20,7 @@ type Config struct {
 	RestURL string `yaml:"rest-url"`
 
 	Paths struct {
-		Acts      string
+		Wiki      string
 		Downloads string `yaml:"download"`
 		Log       string
 	} // `yaml:"paths"`

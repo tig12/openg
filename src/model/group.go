@@ -45,8 +45,8 @@ type Group struct {
 /** Simplified representation of a person **/
 type GroupMember struct {
 	Slug           string `json:"person_slug"`
-	Ids_in_sources map[string]string
-	Partial_ids    map[string]string
+	Ids_in_sources interface{} // map[string]string
+	Partial_ids    interface{} // map[string]string
 	Sex            string
 	Name           PersonName
 	Occus          []string
@@ -61,7 +61,7 @@ type PersonGroup struct {
 	GroupSlug      string `json:"group_slug"`
 	GroupName      string `json:"group_name"`
 	GroupType      string `json:"group_type"`
-	Ids_in_sources map[string]string
+	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Sex            string
 	Name           PersonName

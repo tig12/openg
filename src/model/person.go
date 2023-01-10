@@ -32,12 +32,11 @@ type Person struct {
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
-	Acts           []string
+	Acts           map[string]Act  // `yaml:"acts"`
 	History        []HistoryEntry
 	Issues         []string
 	Notes          []string
 	// not stored in table person
-	ActObjects map[string]Act
 	Groups     []*PersonGroup
 }
 

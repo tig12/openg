@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
+	"fmt"
 )
 
 type detailsPerson struct {
@@ -23,6 +24,8 @@ type detailsPerson struct {
 	SourceSlugNames           map[string]string
 	CountryCodesNames         map[string]string
 	BelongsToHistoricalGroups bool
+	HasBC                     bool // HasBirthCertificate
+	ActObjects                map[string]model.Act
 }
 
 /**
@@ -31,6 +34,7 @@ type detailsPerson struct {
 func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	vars := mux.Vars(r)
 	slug := vars["slug"]
+fmt.Printf("slug = %+v\n",slug)
 
 	person, err := model.GetPerson(ctx.Config.RestURL, slug)
 	if err != nil {
@@ -40,7 +44,21 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		Show404(w, r)
 		return nil
 	}
+	
+//fmt.Printf("person.Acts = %+v\n",person.Acts)
+//fmt.Printf("person = %+v\n",person)
 
+//	header := (person.Acts["birth"]).(model.BC).Header
+//fmt.Printf("header = %+v\n",header)
+bcTest := person.Acts["birth"]
+fmt.Printf("bcTest = %+v\n",bcTest)
+//	hasBC := bcTest.(model.BC).Header
+//fmt.Printf("hasBC = %+v\n",hasBC)
+//	_, hasBC := bcTest.(model.BC).Header
+//fmt.Printf("hasBC = %+v\n",hasBC)
+hasBC := bcTest.(model.BC)
+fmt.Printf("hasBC = %+v\n",hasBC)
+	
 	err = person.ComputeGroups(ctx.Config.RestURL)
 	if err != nil {
 		return err
@@ -64,7 +82,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		}
 	}
 
-	err = model.ComputeBC(person, ctx.Config.Paths.Acts)
+	err = model.ComputeBC(person, ctx.Config.Paths.Wiki)
 	if err != nil {
 		return err
 	}
@@ -87,6 +105,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			SourceSlugNames:           sourceSlugNames,
 			CountryCodesNames:         model.CountryCodesNames,
 			BelongsToHistoricalGroups: belongsToHistoricalGroups,
+//			HasBC:                     hasBC,
 		},
 		Footer: ctxt.Footer{
 			JSFiles: []string{

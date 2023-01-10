@@ -133,8 +133,8 @@
         {{end}}
     </table>
         
-    {{if and .Birth.Date .Birth.DateUT}}
     <!-- ***************** Birth time details ******************** -->
+    {{if and .Birth.Date .Birth.DateUT}}
     <h3 class="margin-top2">Birth time details</h3>
     <table class="table-pres">
         <tr>
@@ -219,8 +219,8 @@
         {{end}}
     </table>
         
-    {{if .Death.Place.Name}}
     <!-- ***************** Death place details ******************** -->
+    {{if .Death.Place.Name}}
     <h3 class="margin-top2">Death place details</h3>
     <table class="table-pres">
         {{if .Death.Place.Name}}
@@ -302,7 +302,8 @@
     </div>
     
     <!-- ***************** Groups ******************** -->
-    <div class="groups margin-top">
+    {{if (or .Occus $.Details.BelongsToHistoricalGroups)}}
+        <div class="groups margin-top">
         {{if .Occus}}
             <h3>Occupations</h3>
             <ul class="naked">
@@ -322,47 +323,52 @@
                 {{end}}
             </ul>
         {{end}}
-    </div>
+        </div>
+    {{end}}
 
     <!-- ***************** Sources ******************** -->
-    <div class="sources margin-top">
-    <h3>Information sources</h3>
-    <ul class="naked">
-        {{range $key, $value := .Ids_in_sources}}
-            <li><a href="/sources#{{$key}}">{{index $.Details.SourceSlugNames $key}}</a></li>
-        {{end}}
-    </ul>
-    </div>
+    {{if .Ids_in_sources}}
+        <div class="sources margin-top">
+            <h3>Information sources</h3>
+            <ul class="naked">
+                {{range $key, $value := .Ids_in_sources}}
+                    <li><a href="/sources#{{$key}}">{{index $.Details.SourceSlugNames $key}}</a></li>
+                {{end}}
+            </ul>
+        </div>
+    {{end}}
 
 </div><!-- ======== end col 2 ======== -->
 
 
 <!-- ======== col 3 ======== -->
 <div class="col3">
+
     <!-- ***************** Issues ******************** -->
     {{if .Issues}}
-    <div class="issues">
-        <h3>
-            <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
-            Issues
-        </h3>
-        <ul>
-        {{ range .Issues }}
-            <li>{{. | safeHTML}}</li>
-        {{end}}
-        </ul>
-    </div>
+        <div class="issues">
+            <h3>
+                <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
+                Issues
+            </h3>
+            <ul>
+            {{ range .Issues }}
+                <li>{{. | safeHTML}}</li>
+            {{end}}
+            </ul>
+        </div>
     {{end}}
     
     <!-- ***************** Notes ******************** -->
     {{if .Notes}}
-    <div class="notes margin-top">
-        <h3>Notes</h3>
-        {{range .Notes}}
-            <div>{{. | safeHTML}}</div>
-        {{end}}
-    </div>
+        <div class="notes margin-top">
+            <h3>Notes</h3>
+            {{range .Notes}}
+                <div>{{. | safeHTML}}</div>
+            {{end}}
+        </div>
     {{end}}
+    
 </div><!-- ======== end col 3 ======== -->
 
 </div><!-- end flex-wrap -->

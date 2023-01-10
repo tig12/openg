@@ -3,6 +3,7 @@ config.yml
 postgrest.conf
 1.local
 2.build
+src/wiki-data
 
 # files marked for deletion
 z.*
