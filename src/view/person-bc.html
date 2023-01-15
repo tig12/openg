@@ -5,7 +5,7 @@
 
 {{with .Details.Person}}
 
-{{$bc := index .Acts "birth"}}
+{{$bc := .Acts.Birth}}
 
 <pre>
 {{$bc | prettyPrint}}

@@ -15,12 +15,13 @@ rest-url: http://localhost:3579
 paths:
   # URL pointing to the downloadable files
   download: https://opengauquelin.org/download
-  # URL pointing to the directory containing the birth certificates - not used yet
-  acts: /path/to/acts
-  # directory where access and error logs are written
+  # Directory where access and error logs are written
   # useful only in mode prod
   # see src/ctxt/log.go
   log: /path/to/directory/containing/log
+  # URL pointing to the directory containing wiki data
+  # clone of https://github.com/tig12/ogdb-wiki
+  acts: /path/to/acts
 
 # Number of rows displayed per page
 # For pages with pagination (group, issues)

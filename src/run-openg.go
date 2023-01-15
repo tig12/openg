@@ -31,6 +31,7 @@ func main() {
 	}()
 
 	r := mux.NewRouter()
+	ctx := ctxt.NewContext()
 
 	// ajax
 	r.HandleFunc("/ajax/autocomplete/persons/{str}", Hajax(ajax.PersonsAutocomplete))
@@ -61,15 +62,16 @@ func main() {
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
-
+	
+	// remove or keep for install ?
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
+
+	r.PathPrefix("/wiki-data").Handler(http.StripPrefix("/wiki-data/", http.FileServer(http.Dir(ctx.Config.Paths.WikiDataDir))))
 
 	r.HandleFunc("/download", HDownloadIndex)
 	r.PathPrefix("/download/").Handler(http.StripPrefix("/download/", http.FileServer(http.Dir(filepath.Join("..", "download")))))
 
 	r.NotFoundHandler = http.HandlerFunc(control.Show404)
-
-	ctx := ctxt.NewContext()
 
 	r.Use(ctxt.LogRequest) // middleware
 

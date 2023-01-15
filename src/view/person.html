@@ -26,6 +26,14 @@
     </p>
 </div>
 
+{{if $.Details.HasBC}}
+<div id="tab-acts" class="tabcontent">
+    <p>
+        {{ template "person-bc.html" $ }}
+    </p>
+</div>
+{{end}}
+{{/* 
 {{if ne 0 (len .Acts)}}
 <div id="tab-acts" class="tabcontent">
     <p>
@@ -33,6 +41,7 @@
     </p>
 </div>
 {{end}}
+*/}}
 
 <div id="tab-build" class="tabcontent">
     <p>

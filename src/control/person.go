@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	"fmt"
+"fmt"
 )
 
 type detailsPerson struct {
@@ -25,7 +25,7 @@ type detailsPerson struct {
 	CountryCodesNames         map[string]string
 	BelongsToHistoricalGroups bool
 	HasBC                     bool // HasBirthCertificate
-	ActObjects                map[string]model.Act
+	BCURLs                    []string
 }
 
 /**
@@ -34,32 +34,17 @@ type detailsPerson struct {
 func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	vars := mux.Vars(r)
 	slug := vars["slug"]
-fmt.Printf("slug = %+v\n",slug)
 
-	person, err := model.GetPerson(ctx.Config.RestURL, slug)
+	p, err := model.GetPerson(ctx.Config.RestURL, slug)
 	if err != nil {
 		return err
 	}
-	if person == nil {
+	if p == nil {
 		Show404(w, r)
 		return nil
 	}
 	
-//fmt.Printf("person.Acts = %+v\n",person.Acts)
-//fmt.Printf("person = %+v\n",person)
-
-//	header := (person.Acts["birth"]).(model.BC).Header
-//fmt.Printf("header = %+v\n",header)
-bcTest := person.Acts["birth"]
-fmt.Printf("bcTest = %+v\n",bcTest)
-//	hasBC := bcTest.(model.BC).Header
-//fmt.Printf("hasBC = %+v\n",hasBC)
-//	_, hasBC := bcTest.(model.BC).Header
-//fmt.Printf("hasBC = %+v\n",hasBC)
-hasBC := bcTest.(model.BC)
-fmt.Printf("hasBC = %+v\n",hasBC)
-	
-	err = person.ComputeGroups(ctx.Config.RestURL)
+	err = p.ComputeGroups(ctx.Config.RestURL)
 	if err != nil {
 		return err
 	}
@@ -75,14 +60,16 @@ fmt.Printf("hasBC = %+v\n",hasBC)
 	}
 
 	belongsToHistoricalGroups := false
-	for _, g := range person.Groups {
+	for _, g := range p.Groups {
 		if g.GroupType == model.GROUP_TYPE_HISTORICAL {
 			belongsToHistoricalGroups = true
 			break
 		}
 	}
 
-	err = model.ComputeBC(person, ctx.Config.Paths.Wiki)
+fmt.Printf("p.BC = %+v\n",p.BC)
+	hasBC := p.BC.Header != nil
+	bcURLs, err := model.ComputeBCImages(p, ctx.Config.Paths.WikiDataDir)
 	if err != nil {
 		return err
 	}
@@ -90,14 +77,14 @@ fmt.Printf("hasBC = %+v\n",hasBC)
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: person.Name.DisplayedName() + " " + person.GetBirthDay(),
+			Title: p.Name.DisplayedName() + " " + p.GetBirthDay(),
 			CSSFiles: []string{
 				"/static/lib/tabstrip/tabstrip.css",
 				"/static/css/pages/person.css",
 			},
 		},
 		Details: detailsPerson{
-			Person:                    person,
+			Person:                    p,
 			RawFields:                 model.RawPersonSortedFields,
 			WikidataEntityURL:         model.WD_ENTITY_BASE_URL,
 			Partial_ids_labels:        model.Partial_ids_labels,
@@ -105,7 +92,8 @@ fmt.Printf("hasBC = %+v\n",hasBC)
 			SourceSlugNames:           sourceSlugNames,
 			CountryCodesNames:         model.CountryCodesNames,
 			BelongsToHistoricalGroups: belongsToHistoricalGroups,
-//			HasBC:                     hasBC,
+			HasBC:                     hasBC,
+			BCURLs:                    bcURLs,
 		},
 		Footer: ctxt.Footer{
 			JSFiles: []string{

@@ -1,9 +1,0 @@
-
-
-To display the birth certificates with the default setting of paths / wiki in config.yml
-you must add a symbolic link 'wiki' to the root of directory containing wiki data, a clone of https://github.com/tig12/ogdb-wiki
-This permits to access acts via /static/wiki
-
-This is useless if the setting in config.yml is an absolute url.
-
-/static/wiki is ignored by git.

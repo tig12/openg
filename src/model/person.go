@@ -32,13 +32,21 @@ type Person struct {
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
-	Acts           map[string]Act  // `yaml:"acts"`
+	Acts           map[string]BC
 	History        []HistoryEntry
 	Issues         []string
 	Notes          []string
 	// not stored in table person
 	Groups     []*PersonGroup
+BC             BC // BC is contained in Acts
 }
+
+type PersonActs struct {
+    Birth   *BC
+    Death   interface{} // TODO replace by DC
+}
+
+
 
 type PersonName struct {
 	Usual     string
