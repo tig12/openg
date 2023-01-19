@@ -1,5 +1,5 @@
 /******************************************************************************
-    Structures describing an event
+    Space and time related structures.
 
     @license    GPL
     @history    2021-07-16 23:20:57+02:00, Thierry Graff : Creation

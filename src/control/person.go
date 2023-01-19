@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-"fmt"
+//"fmt"
 )
 
 type detailsPerson struct {
@@ -67,8 +67,10 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		}
 	}
 
-fmt.Printf("p.BC = %+v\n",p.BC)
-	hasBC := p.BC.Header != nil
+//fmt.Printf("p.Acts.BC = %+v\n",p.Acts.BC)
+//fmt.Printf("p = %+v\n",p)
+	hasBC := len(p.Acts.Birth.Header.History) != 0
+	//hasBC := true
 	bcURLs, err := model.ComputeBCImages(p, ctx.Config.Paths.WikiDataDir)
 	if err != nil {
 		return err

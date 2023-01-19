@@ -37,7 +37,7 @@ func main() {
 	r.HandleFunc("/ajax/autocomplete/persons/{str}", Hajax(ajax.PersonsAutocomplete))
 	r.HandleFunc("/ajax/download/{what}/{firstLineNames}/{sep}/{fieldDate}", Hajax(ajax.Download))
 
-	// routes handled by controls/quasi-static.go
+	// routes handled by control/quasi-static.go
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/history", H(control.ShowHistory))
 	r.HandleFunc("/occupations", H(control.ShowOccupations))

@@ -14,19 +14,23 @@ import (
 )
 
 type BC struct {
-	Header        interface{}
-	Source        interface{} // BCSource
-	Person        interface{} // *Person
-	OpenGauquelin interface{}
-	Extras        interface{}
+	Header        DocumentHeader `json:"header"`
+	Source        struct {
+        CivilRegistry    interface{} `json:"civil-registry"`
+        DocumentCreation struct{
+            Date string `json:"date"`
+            Place string `json:"place"`
+        } `json:"document-creation"`
+        Notes            string `json:"notes"`
+        Images           map[string]string `json:"images"`
+    }
+	OpenGauquelin struct {
+	    Projects    map[string]string `json:"projects"`
+	} `json:"opengauquelin"`
+	Person        PartialPerson `json:"person"`
+	Extras        PartialPerson `json:"extras"`
 }
 
-type BCSource struct {
-	CivilRegistry    interface{} `yaml:"civil-registry"`
-	DocumentCreation interface{} `yaml:"document-creation"`
-	Notes            interface{}
-	Images           []string
-}
 
 /**
     Returns the urls of the images representing the BC.

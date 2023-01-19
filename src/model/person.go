@@ -17,6 +17,27 @@ import (
 
 // see init function at the end
 
+/** 
+    Fields that can be present in an act, in field "person" or "extras".
+    Put apart to avoid recursion problem
+    // TODO NOT USED YET
+**/
+type PartialPerson struct {
+	// fields stored in table person
+	Id             int
+	Slug           string
+	Sex            string
+	Name           PersonName
+	Occus          map[string]string
+	Birth          Event
+	Death          Event
+	Ids_in_sources interface{} // map[string]string
+	Partial_ids    interface{} // map[string]string
+	Trust          string
+	Issues         []string
+	Notes          []string
+}
+
 type Person struct {
 	// fields stored in table person
 	Id             int
@@ -32,13 +53,12 @@ type Person struct {
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
-	Acts           map[string]BC
-	History        []HistoryEntry
+	Acts           Acts    `json:"acts"`
+	History        []PersonHistoryEntry
 	Issues         []string
 	Notes          []string
 	// not stored in table person
 	Groups     []*PersonGroup
-BC             BC // BC is contained in Acts
 }
 
 type PersonActs struct {
@@ -71,7 +91,7 @@ type FameName struct {
 	Family string
 }
 
-type HistoryEntry struct {
+type PersonHistoryEntry struct {
 	Command string
 	Date    string
 	Source  string
@@ -101,9 +121,9 @@ var Partial_ids_labels = map[string]string{
 
 // ************************** PersonName *******************************
 
-func (p *Person) String() string {
+/* func (p *Person) String() string {
 	return p.Slug
-}
+} */
 
 /**
     Returns a string representing a person name
