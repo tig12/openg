@@ -3,98 +3,135 @@
     . of current template corresponds to . of person.html
 */}}
 
-{{with .Details.Person}}
-
-{{$bc := .Acts.Birth}}
-
-<pre>
-{{$bc | prettyPrint}}
-</pre>
-
-<!-- ********************************************************************************* -->
-<h2>Contents</h2>
-<table class="table-pres">
-    <tr>
-        <td>Family name</td>
-        <td>{{.Name.Official.Family}}</td>
-    </tr>
-    <tr>
-        <td>Given name</td>
-        <td>{{.Name.Official.Given}}</td>
-    </tr>
-    <tr>
-        <td>Birth date</td>
-        <td>{{.Birth.Date}}</td>
-    </tr>
-    <tr>
-        <td>Birth place</td>
-        <td>{{.Birth.Place.Name}}</td>
-    </tr>
-    {{if .Birth.Note}}
-    <tr>
-        <td>Notes</td>
-        <td>{{.Birth.Note}}</td>
-    </tr>
+{{if .Details.BCURLs}}
+    {{range .Details.BCURLs}}
+        <div><img style="max-width:90%; height:auto; width:auto;" src="{{.}}" alt="Original birth certificate"></div>
     {{end}}
-</table>
+{{end}}
 
-{{/* 
-<!-- ********************************************************************************* -->
-<h2>Information source</h2>
-<table class="table-pres">
-    <tr>
-        <td>Name</td>
-        <td>{{index $bc.Document "source" "name"}}</td>
-    </tr>
-    <tr>
-        <td>Place</td>
-        <td>
-            {{if index $bc.Document "source" "place"}}
-                {{index $bc.Document "source" "place"}}
-            {{end}}
-            {{if index $bc.Document "source" "c2"}}
-                {{index $bc.Document "source" "c2"}}
-            {{end}}
-            {{if index $bc.Document "source" "cy"}}
-                 {{index $bc.Document "source" "cy"}}
-            {{end}}
-        </td>
-    </tr>
-    <tr>
-        <td>Internet</td>
-        <td>
-            {{if index $bc.Document "source" "web" "url"}}
-                <div><a href="{{index $bc.Document "source" "web" "url"}}">{{index $bc.Document "source" "web" "url"}}</a></div>
-            {{end}}
-            {{if index $bc.Document "source" "web" "page"}}
-                <div>Page {{index $bc.Document "source" "web" "page"}}</div>
-            {{end}}
-        </td>
-    </tr>
-</table>
 
-<!-- ********************************************************************************* -->
-<h2>Document</h2>
-<table class="table-pres">
-{{ range $key, $value := $bc.Document.act }}
-    <tr>
-        <td>{{$key | ucFirst}}</td>
-        <td>{{$value}}</td>
-    </tr>
-{{ end }}
-</table>
+{{$bc := .Details.Person.Acts.Birth}}
+
+<div class="flex-wrap">
+
+
+    <div>
+        <!-- ********************************************************************************* -->
+        <h2>Transcription</h2>
+        Informations transcribed from this document
+        {{with .Details.Person}}
+        <table class="table-pres">
+            <tr>
+                <td>Family name</td>
+                <td>{{.Name.Official.Family}}</td>
+            </tr>
+            <tr>
+                <td>Given name</td>
+                <td>{{.Name.Official.Given}}</td>
+            </tr>
+            <tr>
+                <td>Birth date</td>
+                <td>{{.Birth.Date}}</td>
+            </tr>
+            <tr>
+                <td>Birth place</td>
+                <td>{{.Birth.Place.Name}}</td>
+            </tr>
+            {{if .Birth.Note}}
+            <tr>
+                <td>Notes</td>
+                <td>{{.Birth.Note}}</td>
+            </tr>
+            {{end}}
+        </table>
+        {{end}} {{/* with .Details.Person */}}
+        {{if $bc.Extras}}
+            <!-- ********************************************************************************* -->
+            <h2>Other informations</h2>
+            Informations not present in the document,
+            <br>but added by the person who transcribed the act
+            {{if $bc.Extras.Occus}}
+                <!-- ************************************* -->
+                <h3>Occupations</h3>
+                <ul class="margin-top0">
+                {{ range $key, $value := $bc.Extras.Occus }}
+                    <li><a href="/group/{{$value}}">{{$value | ucFirst}}</a></li>
+                {{end}}
+                </ul>
+            {{end}}
+        {{end}}
+        
+    </div>
+
+    <div class="margin-left2 padding-left2">
+        <!-- ********************************************************************************* -->
+        <h2>Information source</h2>
+        {{if $bc.Source.CivilRegistry}}{{with $bc.Source.CivilRegistry}}
+        <table class="table-pres">
+            <tr>
+                <td>Type</td>
+                <td>Civil registry</td>
+            </tr>
+            {{if .Name}}
+            <tr>
+                <td>Name</td>
+                <td>{{.Name}}</td>
+            </tr>
+            {{end}}
+            <tr>
+            {{if .Place}}
+                <td>Place</td>
+                <td>{{.Place}}</td>
+            </tr>
+            {{end}}
+            {{if .Web}}
+            <tr>
+                <td>Internet availability</td>
+                <td>
+                    {{if .Web.URL}}
+                        <div><a href="{{.Web.URL}}">Online civil registry</a></div>
+                    {{end}}
+                    {{if .Web.Page}}
+                        <div>Page {{.Web.Page}}</div>
+                    {{end}}
+                </td>
+            </tr>
+            {{end}}
+        </table>
+        {{end}}{{end}}
+    </div>
+
+</div><!-- end flex-wrap -->
+
 
 <!-- ********************************************************************************* -->
 <h2>OGDB integration</h2>
-<ul>
-{{range index $bc.Document "history"}}
-    <li>
-        {{index . "date"}}, {{index . "person"}}: {{index . "action"}}
-    </li>
-{{end}}
-</ul>
+{{if $bc.OpenGauquelin}}{{with $bc.OpenGauquelin}}
+    {{if .Projects}}
+    This addition of this birth certificate in opengauquelin database is part of the following projects: 
+    <ul class="margin-top0">
+    {{ range $key, $value := .Projects }}
+        <li><a href="/wiki/project/{{$value}}">{{$value | ucFirst}}</a></li>
+    {{end}}
+    </ul>
+    {{end}}
+{{end}}{{end}}
+
+<!-- ************************************* -->
+<h3>About this document</h3>
+{{if $bc.Header.History}}{{with $bc.Header.History}}
+    <ul class="margin-top0">
+    {{ range $key, $value := . }}
+        <li>
+            {{.Date}}, {{.Actor}}: {{.Action}}
+        </li>
+    {{end}}
+    </ul>
+{{end}}{{end}}
+
+
+{{/* 
+<pre>
+{{$bc | prettyPrint}}
+</pre>
 */}}
-
-
-
-{{end}} {{/* with .Details.Person */}}

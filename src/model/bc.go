@@ -7,16 +7,23 @@
 package model
 
 import (
-// "gopkg.in/yaml.v3"
-// "os"
-// "strings"
-//"fmt"
 )
 
 type BC struct {
 	Header        DocumentHeader `json:"header"`
 	Source        struct {
-        CivilRegistry    interface{} `json:"civil-registry"`
+        CivilRegistry    struct {
+            Name    string `json:"name"`
+            Place   string `json:"place"`
+            Country string `json:"cy"`
+            C1      string `json:"c1"`
+            C2      string `json:"c2"`
+            C3      string `json:"c3"`
+            Web struct {
+                URL string `json:"url"`
+                Page string `json:"page"`
+            } `json:"web"`
+        } `json:"civil-registry"`
         DocumentCreation struct{
             Date string `json:"date"`
             Place string `json:"place"`
@@ -35,55 +42,21 @@ type BC struct {
 /**
     Returns the urls of the images representing the BC.
 **/
-func ComputeBCImages(p *Person, baseUrl string) (result []string, err error) {
-/* 
-    candidates := []string{}
-    if len(p.BC.Source.Images) == 0 {
-        candidates = append(candidates, "BC.jpg")
-    } else {
-        candidates = p.BC.Source.Images
+func ComputeBCImageURLs(p *Person, baseUrl string) (result []string) {
+    if !p.HasBC() {
+        return result
     }
-fmt.Printf("p.BC.Source = %+v\n",p.BC.Source)
-fmt.Printf("candidates = %+v\n",candidates)
-*/
-    
-	/*
-		found := false
-		for _, act := range p.Acts {
-			if act == "birth" {
-				found = true
-				break
-			}
-		}
-		if !found {
-			return nil
-		}
-		parts := strings.Split(p.Slug, "-")
-		l := len(parts)
-		// ex: file = /path/to/acts/birth/1897/11/26/accard-robert-1897-11-26/BC.yml
-		file := strings.Join([]string{
-			dirActs,
-			"birth",
-			parts[l-3],
-			parts[l-2],
-			parts[l-1],
-			p.Slug,
-			"BC.yml",
-		}, string(os.PathSeparator))
-
-		contents, err := os.ReadFile(file)
-		if err != nil {
-			if os.IsNotExist(err) {
-				return nil // p.Acts remains empty
-			}
-			return err
-		}
-		var bc BC
-		err = yaml.Unmarshal(contents, &bc)
-		if err != nil {
-			return err
-		}
-		p.Acts["birth"] = bc
-	*/
-	return result, nil
+    //
+    candidates := map[string]string{}
+    if len(p.Acts.Birth.Source.Images) == 0 {
+        candidates["0"] = "BC.jpg"
+    } else {
+        candidates = p.Acts.Birth.Source.Images
+    }
+    for _, candidate := range(candidates) {
+        // "wiki-data" is hard coded, see run-openg.go
+        url := "/wiki-data/birth/" + Slug2URL(p) + "/" + candidate
+        result = append(result, url)
+    }
+	return result
 }

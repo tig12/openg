@@ -20,17 +20,17 @@ import (
 /** 
     Fields that can be present in an act, in field "person" or "extras".
     Put apart to avoid recursion problem
-    // TODO NOT USED YET
+    // TODO : see if it can be used for struct Person
 **/
 type PartialPerson struct {
 	// fields stored in table person
 	Id             int
 	Slug           string
 	Sex            string
-	Name           PersonName
-	Occus          map[string]string
-	Birth          Event
-	Death          Event
+	Name           *PersonName
+	Occus          map[string]string // obliged to have a map because of go unmarshalling
+	Birth          *Event
+	Death          *Event
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
@@ -43,17 +43,17 @@ type Person struct {
 	Id             int
 	Slug           string
 	Sex            string
-	Name           PersonName
+	Name           *PersonName
 	Occus          []string
-	Birth          Event
-	Death          Event
+	Birth          *Event
+	Death          *Event
 	// declared interface{} instead of map[string]string
 	// because if empty, json has an empty array, not an empty map.
 	// problem when building the json in php, cannot distinguish between an empty array and an empty map.
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
-	Acts           Acts    `json:"acts"`
+	Acts           *Acts    `json:"acts"`
 	History        []PersonHistoryEntry
 	Issues         []string
 	Notes          []string
@@ -61,20 +61,13 @@ type Person struct {
 	Groups     []*PersonGroup
 }
 
-type PersonActs struct {
-    Birth   *BC
-    Death   interface{} // TODO replace by DC
-}
-
-
-
 type PersonName struct {
 	Usual     string
 	Given     string
 	Family    string
 	Spouse    string
-	Official  OfficialName
-	Fame      FameName
+	Official  *OfficialName
+	Fame      *FameName
 	Nicknames []string
 	Alter     []string
 	Nobl      string
@@ -121,9 +114,9 @@ var Partial_ids_labels = map[string]string{
 
 // ************************** PersonName *******************************
 
-/* func (p *Person) String() string {
+func (p *Person) String() string {
 	return p.Slug
-} */
+}
 
 /**
     Returns a string representing a person name
@@ -202,12 +195,10 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 	return nil
 }
 
-/** Computes field 'Acts' of a person **/
-/**
-func (p *Person) ComputeActs(dirActs string) (err error) {
-    p.Acts = append(p.acts, ComputeBC(p, dirActs)
+/** Returns a boolean indicating if a person has a birth certificate **/
+func (p *Person) HasBC() bool {
+    return len(p.Acts.Birth.Header.History) != 0
 }
-**/
 
 // ************************** Get many *******************************
 

@@ -19,9 +19,11 @@ paths:
   # useful only in mode prod
   # see src/ctxt/log.go
   log: /path/to/directory/containing/log
-  # URL pointing to the directory containing wiki data
+  
+  # Directory containing wiki data (must be located on the same machine)
   # clone of https://github.com/tig12/ogdb-wiki
-  acts: /path/to/acts
+  # accessible through /wiki-data
+  acts: /path/to/ogdb-wiki
 
 # Number of rows displayed per page
 # For pages with pagination (group, issues)

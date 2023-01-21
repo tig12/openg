@@ -67,14 +67,8 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		}
 	}
 
-//fmt.Printf("p.Acts.BC = %+v\n",p.Acts.BC)
-//fmt.Printf("p = %+v\n",p)
-	hasBC := len(p.Acts.Birth.Header.History) != 0
-	//hasBC := true
-	bcURLs, err := model.ComputeBCImages(p, ctx.Config.Paths.WikiDataDir)
-	if err != nil {
-		return err
-	}
+	hasBC := p.HasBC()
+	bcURLs := model.ComputeBCImageURLs(p, ctx.Config.Paths.WikiDataDir)
 
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
