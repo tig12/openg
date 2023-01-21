@@ -67,6 +67,12 @@ body{
 
 .help:hover{cursor:help;}
 
+.trust1{background-color:#39ca75;}
+.trust2{background-color:#82e2a9;}
+.trust3{background-color:#ffce2b;}
+.trust4{background-color:#fda05c;}
+.trust5{background-color:#f8726b;}
+
 /* ================ Top header ================ */
 /*
     Used for local anchors in a page.
@@ -84,7 +90,7 @@ div.anchor {
     width:100%;
     background:linear-gradient(to left, #5d9cba, #aadff7);
     border-bottom:1px solid grey;
-    z-index:1000;
+    z-index:100;
     box-shadow: 3px 3px 5px #888888;
 }
 .top-right{

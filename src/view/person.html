@@ -12,6 +12,20 @@
     </div>
 </h1>
 
+{{if $.Details.HasBC}}
+<div style="
+    position:absolute;
+    top:85px; left:-45px;
+    transform: rotate(-45deg);
+    padding:3px 50px;
+    background:gold;
+    border:1px solid blue;
+">Verified data</div>
+
+
+{{end}}
+
+
 <div class="tab">
     <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-general');" id="general">General</button>
     {{if $.Details.HasBC}}
@@ -33,15 +47,6 @@
     </p>
 </div>
 {{end}}
-{{/* 
-{{if ne 0 (len .Acts)}}
-<div id="tab-acts" class="tabcontent">
-    <p>
-        {{ template "person-acts.html" $ }}
-    </p>
-</div>
-{{end}}
-*/}}
 
 <div id="tab-build" class="tabcontent">
     <p>

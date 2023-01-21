@@ -7,12 +7,12 @@
 package model
 
 import (
+	"openg.local/openg/generic/wilk/werr"
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 	"net/http"
-	"openg.local/openg/generic/wilk/werr"
 	"strconv"
+	"fmt"
 )
 
 // see init function at the end
@@ -28,7 +28,7 @@ type PartialPerson struct {
 	Slug           string
 	Sex            string
 	Name           *PersonName
-	Occus          map[string]string // obliged to have a map because of go unmarshalling
+	Occus          map[string]string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
 	Birth          *Event
 	Death          *Event
 	Ids_in_sources interface{} // map[string]string
@@ -197,7 +197,7 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 
 /** Returns a boolean indicating if a person has a birth certificate **/
 func (p *Person) HasBC() bool {
-    return len(p.Acts.Birth.Header.History) != 0
+    return p.Acts != nil
 }
 
 // ************************** Get many *******************************

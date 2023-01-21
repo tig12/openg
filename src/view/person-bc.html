@@ -3,30 +3,23 @@
     . of current template corresponds to . of person.html
 */}}
 
-{{if .Details.BCURLs}}
-    {{range .Details.BCURLs}}
-        <div><img style="max-width:90%; height:auto; width:auto;" src="{{.}}" alt="Original birth certificate"></div>
-    {{end}}
-{{end}}
-
-
 {{$bc := .Details.Person.Acts.Birth}}
+{{/* <pre>{{$bc | prettyPrint}}</pre> */}}
 
 <div class="flex-wrap">
 
-
-    <div>
+    <div class="padding-right2 border-right">
         <!-- ********************************************************************************* -->
         <h2>Transcription</h2>
         Informations transcribed from this document
         {{with .Details.Person}}
         <table class="table-pres">
             <tr>
-                <td>Family name</td>
+                <td>Official family name</td>
                 <td>{{.Name.Official.Family}}</td>
             </tr>
             <tr>
-                <td>Given name</td>
+                <td>Official given name</td>
                 <td>{{.Name.Official.Given}}</td>
             </tr>
             <tr>
@@ -46,13 +39,12 @@
         </table>
         {{end}} {{/* with .Details.Person */}}
         {{if $bc.Extras}}
-            <!-- ********************************************************************************* -->
-            <h2>Other informations</h2>
+            <!-- ************************************* -->
+            <h3>Other informations</h3>
             Informations not present in the document,
             <br>but added by the person who transcribed the act
             {{if $bc.Extras.Occus}}
-                <!-- ************************************* -->
-                <h3>Occupations</h3>
+                <b>Occupations</b>
                 <ul class="margin-top0">
                 {{ range $key, $value := $bc.Extras.Occus }}
                     <li><a href="/group/{{$value}}">{{$value | ucFirst}}</a></li>
@@ -63,14 +55,14 @@
         
     </div>
 
-    <div class="margin-left2 padding-left2">
+    <div class="border-left padding-left2">
         <!-- ********************************************************************************* -->
         <h2>Information source</h2>
         {{if $bc.Source.CivilRegistry}}{{with $bc.Source.CivilRegistry}}
         <table class="table-pres">
             <tr>
                 <td>Type</td>
-                <td>Civil registry</td>
+                <td>Birth certificate</td>
             </tr>
             {{if .Name}}
             <tr>
@@ -100,38 +92,40 @@
         </table>
         {{end}}{{end}}
     </div>
+    
+    <div>
+        <!-- ********************************************************************************* -->
+        <h2>OGDB integration</h2>
+        {{if $bc.OpenGauquelin}}{{with $bc.OpenGauquelin}}
+            {{if .Projects}}
+            This addition of this birth certificate in opengauquelin database is part of the following projects: 
+            <ul class="margin-top0">
+            {{ range $key, $value := .Projects }}
+                <li><a href="/wiki/project/{{$value}}">{{$value | ucFirst}}</a></li>
+            {{end}}
+            </ul>
+            {{end}}
+        {{end}}{{end}}
+    </div>
 
 </div><!-- end flex-wrap -->
 
-
 <!-- ********************************************************************************* -->
-<h2>OGDB integration</h2>
-{{if $bc.OpenGauquelin}}{{with $bc.OpenGauquelin}}
-    {{if .Projects}}
-    This addition of this birth certificate in opengauquelin database is part of the following projects: 
-    <ul class="margin-top0">
-    {{ range $key, $value := .Projects }}
-        <li><a href="/wiki/project/{{$value}}">{{$value | ucFirst}}</a></li>
+<!--                                    Act image                                      -->
+<!-- ********************************************************************************* -->
+{{if .Details.BCURLs}}
+    {{range .Details.BCURLs}}
+        <div><img style="max-width:90%; height:auto; width:auto;" src="{{.}}" alt="Original birth certificate"></div>
     {{end}}
-    </ul>
-    {{end}}
-{{end}}{{end}}
+{{end}}
 
 <!-- ************************************* -->
-<h3>About this document</h3>
+<h3>History of this document</h3>
 {{if $bc.Header.History}}{{with $bc.Header.History}}
     <ul class="margin-top0">
     {{ range $key, $value := . }}
-        <li>
-            {{.Date}}, {{.Actor}}: {{.Action}}
-        </li>
+        <li>{{.Date}}, {{.Actor}}: {{.Action}} </li>
     {{end}}
     </ul>
 {{end}}{{end}}
 
-
-{{/* 
-<pre>
-{{$bc | prettyPrint}}
-</pre>
-*/}}

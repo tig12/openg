@@ -87,19 +87,6 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func ShowWiki(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-	//
-	ctx.TemplateName = "wiki.html"
-	//
-	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{
-			Title: "Wiki",
-		},
-		Footer: ctxt.Footer{},
-	}
-	return nil
-}
-
 func ShowCandidates(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	//
 	ctx.TemplateName = "data-candidates.html"

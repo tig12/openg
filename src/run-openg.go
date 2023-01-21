@@ -41,12 +41,14 @@ func main() {
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/history", H(control.ShowHistory))
 	r.HandleFunc("/occupations", H(control.ShowOccupations))
-	r.HandleFunc("/wiki", H(control.ShowWiki))
 	r.HandleFunc("/candidates", H(control.ShowCandidates))
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/future", H(control.ShowFuture))
 	r.HandleFunc("/install", H(control.ShowInstall))
 
+	r.HandleFunc("/wiki", H(control.ShowWiki))
+	r.HandleFunc("/wiki/project/{slug:[a-z0-9\\-]+}", H(control.ShowWikiProject))
+	
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
 	

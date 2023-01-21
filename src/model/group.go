@@ -48,12 +48,16 @@ type GroupMember struct {
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Sex            string
-	Name           PersonName
+	Name           *PersonName
 	Occus          []string
-	Birth          Event
+	Birth          *Event
+	Trust          string
 }
 
-/** Structure to store data of view api_persongroop  **/
+/**
+    Structure to store data of view api_persongroop
+    TODO Used nowher, suppress ?
+**/
 type PersonGroup struct {
 	PersonId       int32  `json:"person_id"`
 	PersonSlug     string `json:"person_slug"`
