@@ -12,7 +12,7 @@ import (
 )
 
 type Context struct {
-	Page *Page
+	Page         *Page
 	Redirect     string
 	TemplateName string
 	Template     *template.Template

@@ -7,17 +7,17 @@
 package model
 
 import (
-	"openg.local/openg/generic/wilk/werr"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"net/http"
+	"openg.local/openg/generic/wilk/werr"
 	"strconv"
-	"fmt"
 )
 
 // see init function at the end
 
-/** 
+/**
     Fields that can be present in an act, in field "person" or "extras".
     Put apart to avoid recursion problem
     // TODO : see if it can be used for struct Person
@@ -40,25 +40,25 @@ type PartialPerson struct {
 
 type Person struct {
 	// fields stored in table person
-	Id             int
-	Slug           string
-	Sex            string
-	Name           *PersonName
-	Occus          []string
-	Birth          *Event
-	Death          *Event
+	Id    int
+	Slug  string
+	Sex   string
+	Name  *PersonName
+	Occus []string
+	Birth *Event
+	Death *Event
 	// declared interface{} instead of map[string]string
 	// because if empty, json has an empty array, not an empty map.
 	// problem when building the json in php, cannot distinguish between an empty array and an empty map.
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Trust          string
-	Acts           *Acts    `json:"acts"`
+	Acts           *Acts `json:"acts"`
 	History        []PersonHistoryEntry
 	Issues         []string
 	Notes          []string
 	// not stored in table person
-	Groups     []*PersonGroup
+	Groups []*PersonGroup
 }
 
 type PersonName struct {
@@ -197,7 +197,7 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 
 /** Returns a boolean indicating if a person has a birth certificate **/
 func (p *Person) HasBC() bool {
-    return p.Acts != nil
+	return p.Acts != nil
 }
 
 // ************************** Get many *******************************

@@ -20,9 +20,9 @@ type Config struct {
 	RestURL string `yaml:"rest-url"`
 
 	Paths struct {
-		WikiDataDir  string `yaml:"wiki-data-dir"`
-		Downloads string `yaml:"download"`
-		Log       string
+		WikiDataDir string `yaml:"wiki-data-dir"`
+		Downloads   string `yaml:"download"`
+		Log         string
 	} // `yaml:"paths"`
 
 	// UI

@@ -13,6 +13,7 @@ import (
 type detailsHome struct {
 	Stats *model.Stats
 }
+
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	stats, err := model.GetStats(ctx.Config.RestURL)
 	if err != nil {
@@ -26,7 +27,7 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 			},
 		},
 		Details: detailsHome{
-			Stats:        stats,
+			Stats: stats,
 		},
 		Footer: ctxt.Footer{},
 	}
@@ -37,8 +38,9 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 type detailsHistory struct {
 	DownloadBase string
 }
+
 func ShowHistory(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-    //
+	//
 	ctx.TemplateName = "history.html"
 	//
 	ctx.Page = &ctxt.Page{
@@ -56,10 +58,11 @@ func ShowHistory(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 // Lists by profession
 type detailsOccus struct {
 	Occus              []*model.Group
-	DownloadBase    string
+	DownloadBase       string
 	WD_ENTITY_BASE_URL string
 	Slug_Name          map[string]string
 }
+
 func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	//
 	ctx.TemplateName = "occus.html"
@@ -78,7 +81,7 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 		},
 		Details: detailsOccus{
 			Occus:              occus,
-			DownloadBase: ctx.Config.Paths.Downloads,
+			DownloadBase:       ctx.Config.Paths.Downloads,
 			WD_ENTITY_BASE_URL: model.WD_ENTITY_BASE_URL,
 			Slug_Name:          slug_Name,
 		},
@@ -142,8 +145,9 @@ func ShowInstall(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 
 // TODO REMOVE when download2 is finished
 type detailsDownload struct {
-	DownloadBase    string
+	DownloadBase string
 }
+
 func ShowDownloads(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	//
 	ctx.TemplateName = "download.html"

@@ -14,8 +14,7 @@ type DocumentHeader struct {
 }
 
 type DocumentHistoryEntry struct {
-	Actor string `json:"actor"`
+	Actor  string `json:"actor"`
 	Action string `json:"action"`
-	Date string `json:"date"`
+	Date   string `json:"date"`
 }
-

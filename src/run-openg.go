@@ -48,10 +48,10 @@ func main() {
 
 	r.HandleFunc("/wiki", H(control.ShowWiki))
 	r.HandleFunc("/wiki/project/{slug:[a-z0-9\\-]+}", H(control.ShowWikiProject))
-	
+
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
-	
+
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
 
@@ -64,7 +64,7 @@ func main() {
 	r.HandleFunc("/person/{slug:[a-z0-9\\-]+}", H(control.ShowPerson))
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
-	
+
 	// remove or keep for install ?
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
 
@@ -107,10 +107,10 @@ func H(h func(*ctxt.Context, http.ResponseWriter, *http.Request) error) func(htt
 			control.ShowErrorPage(err, ctx, w, r)
 			return
 		}
-        if ctx.Redirect != "" {
-            http.Redirect(w, r, ctx.Redirect, http.StatusSeeOther)
-            return
-        }
+		if ctx.Redirect != "" {
+			http.Redirect(w, r, ctx.Redirect, http.StatusSeeOther)
+			return
+		}
 		//
 		tmpl := ctx.Template
 		//

@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-//"fmt"
+	//"fmt"
 )
 
 type detailsPerson struct {
@@ -43,7 +43,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		Show404(w, r)
 		return nil
 	}
-	
+
 	err = p.ComputeGroups(ctx.Config.RestURL)
 	if err != nil {
 		return err

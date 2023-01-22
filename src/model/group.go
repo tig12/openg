@@ -44,7 +44,7 @@ type Group struct {
 
 /** Simplified representation of a person **/
 type GroupMember struct {
-	Slug           string `json:"person_slug"`
+	Slug           string      `json:"person_slug"`
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Sex            string
@@ -59,12 +59,12 @@ type GroupMember struct {
     TODO Used nowher, suppress ?
 **/
 type PersonGroup struct {
-	PersonId       int32  `json:"person_id"`
-	PersonSlug     string `json:"person_slug"`
-	GroupId        int32  `json:"group_id"`
-	GroupSlug      string `json:"group_slug"`
-	GroupName      string `json:"group_name"`
-	GroupType      string `json:"group_type"`
+	PersonId       int32       `json:"person_id"`
+	PersonSlug     string      `json:"person_slug"`
+	GroupId        int32       `json:"group_id"`
+	GroupSlug      string      `json:"group_slug"`
+	GroupName      string      `json:"group_name"`
+	GroupType      string      `json:"group_type"`
 	Ids_in_sources interface{} // map[string]string
 	Partial_ids    interface{} // map[string]string
 	Sex            string

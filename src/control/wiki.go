@@ -1,20 +1,18 @@
 /**
-    This file gathers controllers for "quasi static pages"
 **/
 package control
 
 import (
+	"github.com/gorilla/mux"
+	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	"net/http"
-	"github.com/gorilla/mux"
-"fmt"
+	//"fmt"
 )
 
 type detailsWikiProject struct {
-	Project                   *model.WikiProject
+	Project *model.WikiProject
 }
-
 
 func ShowWiki(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	//
@@ -33,7 +31,6 @@ func ShowWikiProject(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 	vars := mux.Vars(r)
 	slug := vars["slug"]
 	project, err := model.GetWikiProject(ctx.Config.RestURL, slug)
-fmt.Printf("%+v\n",project)
 	if err != nil {
 		return err
 	}
@@ -44,8 +41,8 @@ fmt.Printf("%+v\n",project)
 		Header: ctxt.Header{
 			Title: "Wiki project: " + project.Name,
 		},
-		Details: detailsWikiProject {
-		    Project: project,
+		Details: detailsWikiProject{
+			Project: project,
 		},
 		Footer: ctxt.Footer{},
 	}

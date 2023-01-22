@@ -7,19 +7,19 @@
 package model
 
 import (
-	"openg.local/openg/generic/wilk/werr"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-//	"fmt"
+	"openg.local/openg/generic/wilk/werr"
+	//	"fmt"
 )
 
 type WikiProject struct {
-	Header        DocumentHeader `json:"header"`
-	Id             int
-	Slug           string
-	Name           string
-	Description    string
+	Header      DocumentHeader `json:"header"`
+	Id          int
+	Slug        string
+	Name        string
+	Description string
 }
 
 // ************************** Get one *******************************

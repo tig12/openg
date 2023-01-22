@@ -6,20 +6,18 @@
 ********************************************************************************/
 package model
 
-import (
-)
+import ()
 
 // To process the download form
 type DownloadFormData struct {
-    What            string      // slug of the group to download
-    OnlyTimed       bool
-    // output format
-    FirstLineNames  bool
-    Separator       string      // ";" or ","
-    DateFormat      string      // "date-iso" or "date-many-cols"
+	What      string // slug of the group to download
+	OnlyTimed bool
+	// output format
+	FirstLineNames bool
+	Separator      string // ";" or ","
+	DateFormat     string // "date-iso" or "date-many-cols"
 }
 
-
 func ExportGroup(downloadFormData *DownloadFormData) (result string, err error) {
-    return "toto", nil
+	return "toto", nil
 }
