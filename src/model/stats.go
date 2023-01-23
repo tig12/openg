@@ -18,7 +18,8 @@ import (
 type Stats struct {
 	N         int
 	N_time    int
-	N_day     int
+	N_notime  int
+	N_countries int
 	Countries map[string]int
 	Years     map[string]int // `json:"years"`
 	// not in database
@@ -56,6 +57,7 @@ func GetStats(restURL string) (stats *Stats, err error) {
 	// year min, year max
 	years := tiglib.MapKeysStringInt(stats.Years)
 	stats.YearMin, stats.YearMax = tiglib.MinMaxString(years)
+	stats.N_countries = len(stats.Countries)
 
 	return stats, nil
 }

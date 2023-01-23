@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
+"fmt"
 )
 
 // Home
@@ -16,6 +17,7 @@ type detailsHome struct {
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	stats, err := model.GetStats(ctx.Config.RestURL)
+fmt.Printf("%+v\n",stats)
 	if err != nil {
 		return err
 	}
@@ -23,7 +25,7 @@ func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			CSSFiles: []string{
-				"static/css/pages/index.css",
+				"static/css/pages/home.css",
 			},
 		},
 		Details: detailsHome{
@@ -46,6 +48,9 @@ func ShowHistory(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) erro
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: "Historical datasets",
+			CSSFiles: []string{
+				"static/css/pages/historical.css",
+			},
 		},
 		Details: detailsHistory{
 			DownloadBase: ctx.Config.Paths.Downloads,
@@ -90,13 +95,13 @@ func ShowOccupations(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) 
 	return nil
 }
 
-func ShowCandidates(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+func ShowOtherData(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	//
-	ctx.TemplateName = "data-candidates.html"
+	ctx.TemplateName = "other-data.html"
 	//
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
-			Title: "Data candidates",
+			Title: "Other data",
 		},
 		Footer: ctxt.Footer{},
 	}
@@ -110,20 +115,6 @@ func ShowAbout(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error 
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: "About OGBD",
-		},
-		Footer: ctxt.Footer{},
-	}
-	return nil
-}
-
-// TODO remove this page
-func ShowFuture(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-	//
-	ctx.TemplateName = "future.html"
-	//
-	ctx.Page = &ctxt.Page{
-		Header: ctxt.Header{
-			Title: "Future developments",
 		},
 		Footer: ctxt.Footer{},
 	}

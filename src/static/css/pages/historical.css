@@ -1,42 +1,37 @@
 /******************************************************************************
-    Style for home page of Open Gauquelin database
+    Style for page "historical tests" of Open Gauquelin database
     
     @license    GPL
     @history    2021-12-27 18:11:37+01:00, Thierry Graff : Creation
 ********************************************************************************/
 
-.home .central{
-    flex-grow:4;
-}
-
-/* Historical tests */
-.home .historical li{
+.historical li{
     list-style-type:none;
 }
 
-.home .historical li.author{
+.historical li.author{
     padding-bottom:2rem;
 }
-.home .historical span.author{
+.historical span.author{
     font-weight:bold;
     font-size:1.2rem;
 }
 
-.home .historical li.datagroup{
+.historical li.datagroup{
     padding-top:.8rem;
 }
-.home .historical span.datagroup{
+.historical span.datagroup{
     font-size:1.2rem;
 }
 
-.home .historical ul.datalist>li{
+.historical ul.datalist>li{
     padding-top:.3rem;
 }
-.home .historical li .nodownload {
+.historical li .nodownload {
     padding-top:4px;
     padding-left:2.75em;
 }
-.home .historical .todo{
+.historical .todo{
     background:gold;
     border:1px solid grey;
     padding:0 5px;

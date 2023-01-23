@@ -28,7 +28,7 @@ type WikiProject struct {
     Loads a wiki project from database
 **/
 func GetWikiProject(restURL, slug string) (project *WikiProject, err error) {
-	url := restURL + "/api_wikiproject?slug=eq." + slug
+	url := restURL + "/wikiproject?slug=eq." + slug
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

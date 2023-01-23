@@ -41,9 +41,8 @@ func main() {
 	r.HandleFunc("/", H(control.ShowHome))
 	r.HandleFunc("/history", H(control.ShowHistory))
 	r.HandleFunc("/occupations", H(control.ShowOccupations))
-	r.HandleFunc("/candidates", H(control.ShowCandidates))
+	r.HandleFunc("/other-data", H(control.ShowOtherData))
 	r.HandleFunc("/about", H(control.ShowAbout))
-	r.HandleFunc("/future", H(control.ShowFuture))
 	r.HandleFunc("/install", H(control.ShowInstall))
 
 	r.HandleFunc("/wiki", H(control.ShowWiki))
