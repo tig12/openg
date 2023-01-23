@@ -35,7 +35,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	vars := mux.Vars(r)
 	slug := vars["slug"]
 
-	p, err := model.GetPerson(ctx.Config.RestURL, slug)
+	p, err := model.GetPersonFromSlug(ctx.Config.RestURL, slug)
 	if err != nil {
 		return err
 	}

@@ -7,20 +7,29 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-"fmt"
+//"fmt"
 )
 
 // Home
 type detailsHome struct {
 	Stats *model.Stats
+	Recents []*model.WikiRecent
 }
 
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	stats, err := model.GetStats(ctx.Config.RestURL)
-fmt.Printf("%+v\n",stats)
+//fmt.Printf("%+v\n",stats)
 	if err != nil {
 		return err
 	}
+	//
+	recents, err := model.GetWikiRecentsFull(ctx.Config.RestURL, 5)
+//	recents, err := model.GetWikiRecents(ctx.Config.RestURL, 5)
+	if err != nil {
+		return err
+	}
+//fmt.Printf("%+v\n",recents)
+	//
 	ctx.TemplateName = "home.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
@@ -30,6 +39,7 @@ fmt.Printf("%+v\n",stats)
 		},
 		Details: detailsHome{
 			Stats: stats,
+			Recents: recents,
 		},
 		Footer: ctxt.Footer{},
 	}

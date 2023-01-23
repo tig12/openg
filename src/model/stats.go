@@ -20,6 +20,7 @@ type Stats struct {
 	N_time    int
 	N_notime  int
 	N_countries int
+	N_checked int
 	Countries map[string]int
 	Years     map[string]int // `json:"years"`
 	// not in database

@@ -1,6 +1,5 @@
 <div class="home">
 
-{{with .Details.Stats}}
 <h1 class="margin-bottom3">
     Open Gauquelin Database (ogdb)
     <div class="subtitle">
@@ -15,20 +14,33 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
 
 <div class="float-right margin padding margin-top0 padding-top0">
     <div class="right-box">
+        {{with .Details.Stats}}
         ogdb currently contains <b>{{numberFormat .N}}</b> persons
         <br><b>{{numberFormat .N_time}}</b> with birth time
         <br><b>{{numberFormat .N_notime}}</b> without birth time
+        <br><b>{{numberFormat .N_checked}}</b> birth times are reliable
         <br>Born between {{.YearMin}} and {{.YearMax}}
         <br>From {{.N_countries}} countries
-        <div class="margin-top05">
+        <div class="margin-top05 margin-bottom05">
             <a href="/stats"><img src="/static/img/stats.jpg" alt="Database statistics" class="border"></a>
         </div>
         <a href="/stats">See more database statistics</a>
+        {{end}}
     </div>
+    {{if .Details.Recents}}
     <div class="right-box margin-top2">
         <b>Last additions</b>
-        <br>See <b><a href="/wiki">Wiki</a></b>
+        <ul class="margin-top05 margin-bottom05">
+            {{range .Details.Recents}}
+                <li>
+                    <a href="/person/{{.Person.Slug}}">{{.Person.Name.DisplayedName}} {{.Person.GetBirthDay}}</a>
+                    <div class="small8 padding-left05">{{.Description}}</div>
+                </li>
+            {{end}}
+        </ul>
+        See <b><a href="/wiki">Wiki</a></b>
     </div>
+    {{end}}
     <div class="right-box margin-top2">
         Besides birth times of famous persons,
         <br>ogdb provides downloads to other data
@@ -55,7 +67,7 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
 <!-- ********************************************************************************* -->
 <h2 id="goals">Goals</h2>
 The purpose is to permit the reproduction of statistical tests on astrology with more complete and reliable data.
-<br>Achieving reliability is possible thanks to the availability of birth certificates online. Checking thousands of birth dates is a big task, but it's much easier than at Gauquelin epoch.
+<br>Achieving reliability is today possible thanks to the availability of birth certificates online. Checking thousands of birth dates is a big task, but it's much easier than at Gauquelin epoch.
 <div class="margin-top05">
     Main steps of this project are described in the <a href="https://tig12.github.io/gauquelin5">home page of g5 documentation</a>:
 </div>
@@ -88,7 +100,7 @@ The construction of a reliable database, verified by humans is a collective work
 See <a href="/wiki">page wiki</a> if you want to contribute.
 
 <!-- ********************************************************************************* -->
-<h2 id="data-reliability">Data reliability</h2>
+<h2 id="data-reliability" class="anchor">Data reliability</h2>
 The data contained in ogdb integrate many corrections, so data are more reliable than the sources it uses.
 <br><b>But one must be aware that ogdb cannot be considered as reliable.</b> It probably still contains many errors and the only way to be sure of the data is to check each birth date one by one, comparing the values stored in the database with the values written in the civil registries.
 
@@ -137,5 +149,4 @@ Most births that occured in the 19th and early 20th century do not have Hospital
     <li>Bugs in g5 program</li>
 </ul>
 
-{{end}}
 </div><!-- end class="home" -->
