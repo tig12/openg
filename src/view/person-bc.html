@@ -44,7 +44,7 @@
             Informations not present in the document,
             <br>but added by the person who transcribed the act
             {{if $bc.Extras.Occus}}
-                <b>Occupations</b>
+                <div class="bold">Occupations</div>
                 <ul class="margin-top0">
                 {{ range $key, $value := $bc.Extras.Occus }}
                     <li><a href="/group/{{$value}}">{{$value | ucFirst}}</a></li>
@@ -115,7 +115,11 @@
 <!-- ********************************************************************************* -->
 {{if .Details.BCURLs}}
     {{range .Details.BCURLs}}
-        <div><img style="max-width:90%; height:auto; width:auto;" src="{{.}}" alt="Original birth certificate"></div>
+        <div><img
+            class="margin05 border"
+            style="max-width:90%; height:auto; width:auto;"
+            src="{{.}}" alt="Original birth certificate">
+        </div>
     {{end}}
 {{end}}
 

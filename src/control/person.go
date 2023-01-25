@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-	//"fmt"
+//"fmt"
 )
 
 type detailsPerson struct {

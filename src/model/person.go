@@ -182,30 +182,6 @@ func GetPerson(url string) (person *Person, err error) {
 	return &persons[0], nil
 }
 
-// ************************** Compute fields *******************************
-
-/** Computes field 'Groups' of a person **/
-func (p *Person) ComputeGroups(restURL string) (err error) {
-	url := restURL + "/api_persongroop?person_id=eq." + strconv.Itoa(p.Id)
-	response, err := http.Get(url)
-	if err != nil {
-		return werr.Wrapf(err, "Error calling postgres API: "+url)
-	}
-	responseData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		return werr.Wrapf(err, "Error decoding PersonGroup data"+string(responseData)+"\n")
-	}
-	if err = json.Unmarshal(responseData, &p.Groups); err != nil {
-		return werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal PersonGroups\n%s\n", string(responseData)))
-	}
-	return nil
-}
-
-/** Returns a boolean indicating if a person has a birth certificate **/
-func (p *Person) HasBC() bool {
-	return p.Acts != nil
-}
-
 // ************************** Get many *******************************
 
 // ==================== NOT USED - REMOVE ? ====================
@@ -244,6 +220,30 @@ func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err e
 		return nil, werr.Wrapf(err, "Error json Unmarshal persons data\n"+string(responseData)+"\n")
 	}
 	return p, nil
+}
+
+// ************************** Compute fields *******************************
+
+/** Computes field 'Groups' of a person **/
+func (p *Person) ComputeGroups(restURL string) (err error) {
+	url := restURL + "/api_persongroop?person_id=eq." + strconv.Itoa(p.Id)
+	response, err := http.Get(url)
+	if err != nil {
+		return werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return werr.Wrapf(err, "Error decoding PersonGroup data"+string(responseData)+"\n")
+	}
+	if err = json.Unmarshal(responseData, &p.Groups); err != nil {
+		return werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal PersonGroups\n%s\n", string(responseData)))
+	}
+	return nil
+}
+
+/** Returns a boolean indicating if a person has a birth certificate **/
+func (p *Person) HasBC() bool {
+	return p.Acts != nil
 }
 
 // ************************** Get fields *******************************

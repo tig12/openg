@@ -53,7 +53,7 @@ func ComputeBCImageURLs(p *Person, baseUrl string) (result []string) {
 	}
 	for _, candidate := range candidates {
 		// "wiki-data" is hard coded, see run-openg.go
-		url := "/wiki-data/birth/" + Slug2URL(p) + "/" + candidate
+		url := "/wiki-data/person/" + Slug2URL(p) + "/" + candidate
 		result = append(result, url)
 	}
 	return result
