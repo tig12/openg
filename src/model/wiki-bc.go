@@ -6,7 +6,9 @@
 ********************************************************************************/
 package model
 
-import ()
+import (
+//	"openg.local/openg/generic/wilk/werr"
+)
 
 type BC struct {
 	Header DocumentHeader `json:"header"`
@@ -30,8 +32,8 @@ type BC struct {
 		Notes  string            `json:"notes"`
 		Images map[string]string `json:"images"`
 	}
-	OpenGauquelin struct {
-		Projects map[string]string `json:"projects"`
+	OpenGauquelin *struct {
+		WikiProjects *map[string]string `json:"projects"`
 	} `json:"opengauquelin"`
 	Person PartialPerson `json:"person"`
 	Extras PartialPerson `json:"extras"`
@@ -42,7 +44,7 @@ type BC struct {
 **/
 func ComputeBCImageURLs(p *Person, baseUrl string) (result []string) {
 	if !p.HasBC() {
-		return result
+		return result //empty
 	}
 	//
 	candidates := map[string]string{}
@@ -58,3 +60,4 @@ func ComputeBCImageURLs(p *Person, baseUrl string) (result []string) {
 	}
 	return result
 }
+

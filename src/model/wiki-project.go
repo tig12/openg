@@ -11,7 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
-	//	"fmt"
+//	"fmt"
 )
 
 type WikiProject struct {
@@ -20,6 +20,8 @@ type WikiProject struct {
 	Slug        string
 	Name        string
 	Description string
+	// Not in database
+	Persons     []*Person
 }
 
 // ************************** Get one *******************************
@@ -27,7 +29,7 @@ type WikiProject struct {
 /**
     Loads a wiki project from database
 **/
-func GetWikiProject(restURL, slug string) (project *WikiProject, err error) {
+func GetWikiProjectFromSlug(restURL, slug string) (project *WikiProject, err error) {
 	url := restURL + "/wikiproject?slug=eq." + slug
 	response, err := http.Get(url)
 	if err != nil {
@@ -47,3 +49,34 @@ func GetWikiProject(restURL, slug string) (project *WikiProject, err error) {
 	}
 	return projects[0], nil
 }
+
+/**
+    Computes the wiki projects related to a birth certificate.
+**/
+func ComputeBCWikiProjects(restURL string, bc *BC) (result []*WikiProject, err error) {
+    if bc.OpenGauquelin == nil {
+        return result, nil // empty
+    }
+    if bc.OpenGauquelin.WikiProjects == nil {
+        return result, nil // empty
+    }
+    for _, wpSlug := range(*bc.OpenGauquelin.WikiProjects){
+        wikiproject, err := GetWikiProjectFromSlug(restURL, wpSlug)
+        if err != nil {
+            return []*WikiProject{}, werr.Wrapf(err, "Error calling GetWikiProjectFromSlug("+wpSlug+")\n")
+        }
+        result = append(result, wikiproject)
+    }
+	return result, nil
+}
+
+// ************************** Instance mothods *******************************
+
+/**
+    Computes the persons relaed to a wiki project.
+**/
+func (wp *WikiProject) ComputePersons() error {
+    
+    return nil
+}
+

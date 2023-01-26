@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-//"fmt"
+"fmt"
 )
 
 type detailsPerson struct {
@@ -25,7 +25,8 @@ type detailsPerson struct {
 	CountryCodesNames         map[string]string
 	BelongsToHistoricalGroups bool
 	HasBC                     bool // HasBirthCertificate
-	BCURLs                    []string
+	BCImageURLs               []string
+	WikiProjects              []*model.WikiProject
 }
 
 /**
@@ -68,7 +69,16 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	}
 
 	hasBC := p.HasBC()
-	bcURLs := model.ComputeBCImageURLs(p, ctx.Config.Paths.WikiDataDir)
+	bcImageURLs := []string{}
+	wikiProjects := []*model.WikiProject{}
+	if hasBC {
+        bcImageURLs = model.ComputeBCImageURLs(p, ctx.Config.Paths.WikiDataDir)
+        wikiProjects, err = model.ComputeBCWikiProjects(ctx.Config.RestURL, p.Acts.Birth)
+        if err != nil {
+            return err
+        }
+    }
+fmt.Printf("wikiProjects = %+v\n",wikiProjects)
 
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
@@ -89,7 +99,8 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			CountryCodesNames:         model.CountryCodesNames,
 			BelongsToHistoricalGroups: belongsToHistoricalGroups,
 			HasBC:                     hasBC,
-			BCURLs:                    bcURLs,
+			BCImageURLs:               bcImageURLs,
+			WikiProjects:              wikiProjects,
 		},
 		Footer: ctxt.Footer{
 			JSFiles: []string{

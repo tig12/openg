@@ -58,7 +58,7 @@
     <div class="border-left padding-left2">
         <!-- ********************************************************************************* -->
         <h2>Information source</h2>
-        {{if $bc.Source.CivilRegistry}}{{with $bc.Source.CivilRegistry}}
+        {{with $bc.Source.CivilRegistry}}
         <table class="table-pres">
             <tr>
                 <td>Type</td>
@@ -90,22 +90,22 @@
             </tr>
             {{end}}
         </table>
-        {{end}}{{end}}
+        {{end}}
     </div>
     
     <div>
-        <!-- ********************************************************************************* -->
-        <h2>OGDB integration</h2>
-        {{if $bc.OpenGauquelin}}{{with $bc.OpenGauquelin}}
-            {{if .Projects}}
-            This addition of this birth certificate in opengauquelin database is part of the following projects: 
-            <ul class="margin-top0">
-            {{ range $key, $value := .Projects }}
-                <li><a href="/wiki/project/{{$value}}">{{$value | ucFirst}}</a></li>
+        {{if .Details.HasBC}}
+            {{with .Details.WikiProjects}}
+                <!-- ********************************************************************************* -->
+                <h2>OGDB integration</h2>
+                The addition of this birth certificate in opengauquelin database is part of the following projects: 
+                <ul class="margin-top0">
+                {{range . }}
+                    <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
+                {{end}}
             {{end}}
             </ul>
-            {{end}}
-        {{end}}{{end}}
+        {{end}}
     </div>
 
 </div><!-- end flex-wrap -->
@@ -113,8 +113,8 @@
 <!-- ********************************************************************************* -->
 <!--                                    Act image                                      -->
 <!-- ********************************************************************************* -->
-{{if .Details.BCURLs}}
-    {{range .Details.BCURLs}}
+{{if .Details.BCImageURLs}}
+    {{range .Details.BCImageURLs}}
         <div><img
             class="margin05 border"
             style="max-width:90%; height:auto; width:auto;"

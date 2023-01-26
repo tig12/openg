@@ -47,7 +47,7 @@ func GetIssues(restURL string, page, limit int) (issues []*Issue, nIssues, pagem
 	}
 	offset := (page - 1) * limit
 
-	url := restURL + "/api_issue" +
+	url := restURL + "/view_issue" +
 		"?limit=" + strconv.Itoa(limit) +
 		"&offset=" + strconv.Itoa(offset)
 	response, err := http.Get(url)

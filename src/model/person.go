@@ -17,27 +17,6 @@ import (
 
 // see init function at the end
 
-/**
-    Fields that can be present in an act, in field "person" or "extras".
-    Put apart to avoid recursion problem
-    // TODO : see if it can be used for struct Person
-**/
-type PartialPerson struct {
-	// fields stored in table person
-	Id             int
-	Slug           string
-	Sex            string
-	Name           *PersonName
-	Occus          map[string]string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
-	Birth          *Event
-	Death          *Event
-	Ids_in_sources interface{} // map[string]string
-	Partial_ids    interface{} // map[string]string
-	Trust          string
-	Issues         []string
-	Notes          []string
-}
-
 type Person struct {
 	// fields stored in table person
 	Id    int
@@ -59,6 +38,27 @@ type Person struct {
 	Notes          []string
 	// not stored in table person
 	Groups []*PersonGroup
+}
+
+/**
+    Fields that can be present in an act, in field "person" or "extras".
+    Put apart to avoid recursion problem
+    // TODO : see if it can be used for struct Person
+**/
+type PartialPerson struct {
+	// fields stored in table person
+	Id             int
+	Slug           string
+	Sex            string
+	Name           *PersonName
+	Occus          map[string]string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
+	Birth          *Event
+	Death          *Event
+	Ids_in_sources interface{} // map[string]string
+	Partial_ids    interface{} // map[string]string
+	Trust          string
+	Issues         []string
+	Notes          []string
 }
 
 type PersonName struct {
@@ -226,7 +226,7 @@ func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err e
 
 /** Computes field 'Groups' of a person **/
 func (p *Person) ComputeGroups(restURL string) (err error) {
-	url := restURL + "/api_persongroop?person_id=eq." + strconv.Itoa(p.Id)
+	url := restURL + "/view_persongroop?person_id=eq." + strconv.Itoa(p.Id)
 	response, err := http.Get(url)
 	if err != nil {
 		return werr.Wrapf(err, "Error calling postgres API: "+url)
