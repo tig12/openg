@@ -7,4 +7,15 @@
 
 <div class="intro">{{.Description}}</div>
 
+{{with .Persons}}
+Persons already associated to a birth certificate
+
+<ul class="margin-top05">
+    {{range .}}
+    <li><a href="/person/{{.Slug}}">{{.Name.Official.Given}} {{.Name.Official.Family}}</a></li>
+    {{end}}
+</ul>
+
 {{end}}
+
+{{end}} {{/* end with .Details.Project */}}

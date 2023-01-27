@@ -38,20 +38,6 @@
             {{end}}
         </table>
         {{end}} {{/* with .Details.Person */}}
-        {{if $bc.Extras}}
-            <!-- ************************************* -->
-            <h3>Other informations</h3>
-            Informations not present in the document,
-            <br>but added by the person who transcribed the act
-            {{if $bc.Extras.Occus}}
-                <div class="bold">Occupations</div>
-                <ul class="margin-top0">
-                {{ range $key, $value := $bc.Extras.Occus }}
-                    <li><a href="/group/{{$value}}">{{$value | ucFirst}}</a></li>
-                {{end}}
-                </ul>
-            {{end}}
-        {{end}}
         
     </div>
 
@@ -93,22 +79,22 @@
         {{end}}
     </div>
     
-    <div>
-        {{if .Details.HasBC}}
-            {{with .Details.WikiProjects}}
-                <!-- ********************************************************************************* -->
-                <h2>OGDB integration</h2>
-                The addition of this birth certificate in opengauquelin database is part of the following projects: 
-                <ul class="margin-top0">
-                {{range . }}
-                    <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
-                {{end}}
-            {{end}}
-            </ul>
-        {{end}}
-    </div>
-
 </div><!-- end flex-wrap -->
+
+<div>
+    {{if .Details.HasBC}}
+        {{with .Details.WikiProjects}}
+            <!-- ********************************************************************************* -->
+            <h2>OGDB integration</h2>
+            The addition of this birth certificate in opengauquelin database is part of the following projects: 
+            <ul class="margin-top0">
+            {{range . }}
+                <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
+            {{end}}
+        {{end}}
+        </ul>
+    {{end}}
+</div>
 
 <!-- ********************************************************************************* -->
 <!--                                    Act image                                      -->

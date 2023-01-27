@@ -19,9 +19,9 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
         ogdb currently contains <b>{{numberFormat .N}}</b> persons
         <br><b>{{numberFormat .N_time}}</b> with birth time
         <br><b>{{numberFormat .N_notime}}</b> without birth time
-        <br><b>{{numberFormat .N_checked}}</b> birth times are reliable
         <br>Born between {{.YearMin}} and {{.YearMax}}
         <br>From {{.N_countries}} countries
+        <br><b>{{numberFormat .N_checked}}</b> birth times are reliable
         <div class="margin-top05 margin-bottom05">
             <a href="/stats"><img src="/static/img/stats.jpg" alt="Database statistics" class="border"></a>
         </div>
@@ -72,18 +72,19 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
 <!-- ********************************************************************************* -->
 <h2 id="goals">Goals</h2>
 The purpose is to permit the reproduction of statistical tests on astrology with more complete and reliable data.
-<br>Achieving reliability is today possible thanks to the availability of birth certificates online. Checking thousands of birth dates is a big task, but it's much easier than at Gauquelin epoch.
 <div class="margin-top05">
     Main steps of this project are described in the <a href="https://tig12.github.io/gauquelin5">home page of g5 documentation</a>:
 </div>
 <ol class="simple margin-bottom margin-top0">
-    <li>Gather the <a href="https://tig12.github.io/gauquelin5/historical-tests.html">historical data</a>, check them, correct them, and merge them in a single database.</li>
+    <li>Gather the <a href="/history">historical data</a>, check them, correct them, and merge them in a single database.</li>
     <li>Connect the historical data to standard datasets like wikidata and complete birth times to build larger groups.</li>
     <li>Build new eminence indicators and sort famous persons by eminence rank.</li>
 </ol>
 
 <!-- ********************************************************************************* -->
 <h2>Wiki</h2>
+Achieving reliability is today possible thanks to the availability of birth certificates online. Checking thousands of birth dates is a big task, but it's much easier than at Gauquelin epoch.
+<br>
 The construction of a reliable database, verified by humans is a collective work.
 <br>Anyone can contribute through a <a href="/wiki">wiki</a>.
 <ul class="margin-top0">
@@ -142,7 +143,7 @@ Most births that occured in the 19th and early 20th century do not have Hospital
 <br>So the best we can hope for OGDB is to reach level 2.
 <br>Currently, almost all data of OGDB are level 5.
 
-<br><br><b>Remark</b> : Françoise and Michel Gauquelin, Arno Müller and the three groups of skeptics were apparently taking a lot of care to avoid errors. But in practice, <b>they didn't have access to Birth Certificates</b>: they were writing to the town halls ; an officer was copying the information contained in the BC and sending them back a letter. <b>They were only recieving Birth Records, level 3</b>.
+<br><br><b>Remark</b> : Françoise and Michel Gauquelin, Arno Müller and the three groups of skeptics were apparently taking a lot of care to avoid errors. But in practice, <b>they didn't have access to Birth Certificates</b>: they were writing to the town halls ; an officer was copying the information contained in the BC and sending them back a letter. <b>They were only recieving Birth Records (level 3)</b>.
 
 <br><br>So all Gauquelin and related data are considered level 5 because of error sources:
 <ul class="margin-top0">

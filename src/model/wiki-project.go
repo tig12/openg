@@ -7,6 +7,7 @@
 package model
 
 import (
+    "strconv"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -21,7 +22,17 @@ type WikiProject struct {
 	Name        string
 	Description string
 	// Not in database
-	Persons     []*Person
+	Persons     []*WikiProjectPerson
+}
+
+/** 
+    Partial data of a person
+**/
+type WikiProjectPerson struct {
+    Id      int     `json:"person_id"`
+    Slug    string  `json:"person_slug"`
+	Name    *PersonName `json:"name"`
+	Birth   *Event `json:"birth"`
 }
 
 // ************************** Get one *******************************
@@ -70,13 +81,42 @@ func ComputeBCWikiProjects(restURL string, bc *BC) (result []*WikiProject, err e
 	return result, nil
 }
 
-// ************************** Instance mothods *******************************
+// ************************** Get many *******************************
+
+func GetActiveWikiProjects(restURL string) (result []*WikiProject, err error) {
+	url := restURL + "/wikiproject?status=eq.active"
+	response, err := http.Get(url)
+	if err != nil {
+		return result, werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return result, werr.Wrapf(err, "Error decoding active wiki projects")
+	}
+	if err = json.Unmarshal(responseData, &result); err != nil {
+		return result, werr.Wrapf(err, "Error json Unmarshal wiki projects\n"+string(responseData)+"\n")
+	}
+    return result, nil
+}
+
+// ************************** Instance methods *******************************
 
 /**
-    Computes the persons relaed to a wiki project.
+    Computes the persons related to a wiki project.
 **/
-func (wp *WikiProject) ComputePersons() error {
-    
+func (wp *WikiProject) ComputePersons(restURL string) error {
+	url := restURL + "/view_wikiproject_person?project_id=eq." + strconv.Itoa(wp.Id)
+	response, err := http.Get(url)
+	if err != nil {
+		return werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return werr.Wrapf(err, "Error decoding wiki project persons data "+wp.Slug)
+	}
+	if err = json.Unmarshal(responseData, &wp.Persons); err != nil {
+		return werr.Wrapf(err, "Error json Unmarshal wiki project persons data "+wp.Slug+"\n"+string(responseData)+"\n")
+	}
     return nil
-}
+}    
 

@@ -121,6 +121,19 @@ div.anchor {
 }
 
 /* ================ Particular elements ================ */
+.right-box{
+    font-size:1.1rem;
+    padding-top:2px;
+    padding-left:1rem;
+    padding-bottom:5px;
+    padding-right:4px;
+    border-left:1px solid grey;
+    border-bottom:1px solid grey;
+    border-bottom-left-radius:10px;
+    box-shadow: -5px 5px 10px 0px rgba(0,0,0,0.25);
+}
+/* https://cssgenerator.org/box-shadow-css-generator.html */
+
 a{
     text-decoration:none;
 }

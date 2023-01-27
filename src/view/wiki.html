@@ -1,22 +1,51 @@
 
 <h1>
-    Wiki
+    Wiki - Open Gauquelin Database
     <br><div class="warning inline-block padding2">Work in progress</div>
 </h1>
 
+<div class="float-right margin padding margin-top0 padding-top0">
+    <div class="right-box padding-bottom">
+        <div class="bold center padding-top padding-bottom05">Active wiki projects</div>
+        <ul class="margin0 naked">
+        {{range $.Details.Projects }}
+            <li class="padding-bottom05">
+                <a href="/wiki/project/{{.Slug}}">{{.Name}}</a>
+            </li>
+        {{end}}
+        </ul>
+    </div>
+
+</div><!-- end class="float-right" -->
+
 <div class="intro">
-The construction of a reliable database, verified by humans is a collective work.
+The construction of a reliable database, verified by humans, is a collective work.
 <br>This page explains how to correct or complete the open Gauquelin database.
 </div>
 
-<div class="">
-<b>Abbreviations</b>
-<ul class="naked margin-top0">
-    <li><b>BC</b>: Birth Certificate</li>
-    <li><b>ogdb</b>: Open Gauquelin Data Base</li>
+<style>
+.toc ul>li{
+    list-style-type:none;
+}
+</style>
+<div class="toc">
+<ul>
+    <li><a href="#contribute">How to contribute ?</a></li>
+    <li><a href="#bc">BC.yml</a></li>
 </ul>
 </div>
 
+
+<div>
+    <b>Abbreviations</b>
+    <ul class="naked margin-top0">
+        <li><b>BC</b>: Birth Certificate</li>
+        <li><b>ogdb</b>: Open Gauquelin Data Base</li>
+    </ul>
+</div>
+
+<!-- ********************************************************************************* -->
+<h2 id="contribute">How to contribute ?</h2>
 To become a contributor:
 <ol>
     <li>Choose a person from the database or a new famous person.</li>
@@ -43,27 +72,5 @@ To become a contributor:
     
 </ol>
 
-{{/* 
 <!-- ********************************************************************************* -->
-<h2>BC.yml</h2>
-*/}}
-
-<!-- 
-<div class="intro">
-    If you are interested by this project, you can help.
-</div>
-
-<h2>Send feedback</h2>
-Any feedback is welcome:
-<ul class="spaced">
-    <li>About the documentation: are there any typos, things difficult to understand, missing topics?</li>
-    <li>About the downloadable data: is current format ok for you, do you need specific output?</li>
-    <li>Or about any other topic related to this project.</li>
-</ul>
-
-
-<h2>Check and correct data</h2>
-One of the next developments is to add wiki functionality to the database, to permit a collective building of reliable and verifiable data.
-<br>The purpose is to relate each birth date to its corresponding birth certificate.
-<br>Not operational yet.
--->
+<h2 id="bc">BC.yml</h2>
