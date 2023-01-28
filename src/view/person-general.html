@@ -65,6 +65,14 @@
             <td itemprop="deathPlace">{{.Death.Place.String}}</td>
         </tr>
         {{end}}
+        {{if .Birth.Notime}}
+        <tr>
+            <td colspan="2" class="padding05 border" style="text-align:left; background:#dbe599;">
+                It is probably <b>not possible</b> to know
+                <br>the birth time of this person
+            </td>
+        </tr>
+        {{end}}
         
     </table>
     

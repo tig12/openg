@@ -52,6 +52,7 @@ type PartialPerson struct {
 	Sex            string
 	Name           *PersonName
 	Occus          map[string]string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
+//	Occus          []string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
 	Birth          *Event
 	Death          *Event
 	Ids_in_sources interface{} // map[string]string

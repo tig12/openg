@@ -14,6 +14,7 @@ type Event struct {
 	Note   string
 	Place  Place
 	DateUT string `json:"date-ut"`
+	Notime bool
 }
 
 type Place struct {

@@ -75,7 +75,11 @@
                 </td>
             </tr>
             {{end}}
+            
         </table>
+        {{end}}{{/* end with $bc.Source.CivilRegistry */}}
+        {{with $bc.Source.Notes}}
+            <div>{{. | safeHTML}}</div>
         {{end}}
     </div>
     
@@ -86,7 +90,7 @@
         {{with .Details.WikiProjects}}
             <!-- ********************************************************************************* -->
             <h2>OGDB integration</h2>
-            The addition of this birth certificate in opengauquelin database is part of the following projects: 
+            The addition of this birth certificate in opengauquelin database is part of the following <a href="/wiki">wiki projects</a>: 
             <ul class="margin-top0">
             {{range . }}
                 <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
@@ -97,7 +101,7 @@
 </div>
 
 <!-- ********************************************************************************* -->
-<!--                                    Act image                                      -->
+<!--                                    Act images                                     -->
 <!-- ********************************************************************************* -->
 {{if .Details.BCImageURLs}}
     {{range .Details.BCImageURLs}}

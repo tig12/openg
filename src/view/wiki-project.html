@@ -12,7 +12,7 @@ Persons already associated to a birth certificate
 
 <ul class="margin-top05">
     {{range .}}
-    <li><a href="/person/{{.Slug}}">{{.Name.Official.Given}} {{.Name.Official.Family}}</a></li>
+    <li><a class="bold" href="/person/{{.Slug}}">{{.Name.Official.Given}} {{.Name.Official.Family}}</a> ({{.Birth.Date}})</li>
     {{end}}
 </ul>
 
