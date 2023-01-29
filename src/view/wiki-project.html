@@ -9,12 +9,14 @@
 
 {{with .Persons}}
 Persons already associated to a birth certificate
-
-<ul class="margin-top05">
+<table>
     {{range .}}
-    <li><a class="bold" href="/person/{{.Slug}}">{{.Name.Official.Given}} {{.Name.Official.Family}}</a> ({{.Birth.Date}})</li>
+    <tr>
+        <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
+        <td>{{.Birth.Date}}</td>
+    </tr>
     {{end}}
-</ul>
+</table>
 
 {{end}}
 
