@@ -131,8 +131,13 @@ div.anchor {
     border-bottom:1px solid grey;
     border-bottom-left-radius:10px;
     box-shadow: -5px 5px 10px 0px rgba(0,0,0,0.25);
+    background:#ccc;
 }
-/* https://cssgenerator.org/box-shadow-css-generator.html */
+/*
+https://cssgenerator.org/box-shadow-css-generator.html
+https://colorpicker.me
+https://cssgradient.io/
+*/
 
 a{
     text-decoration:none;
