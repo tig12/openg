@@ -18,9 +18,9 @@ type Event struct {
 }
 
 type Place struct {
-	C1 interface{} // string
-	C2 interface{} // string
-	C3 interface{} // string
+	C1 string
+	C2 string
+	C3 string
 	Cy string
 	//    Lg              float64
 	Lg float32

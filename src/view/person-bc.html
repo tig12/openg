@@ -59,7 +59,12 @@
             <tr>
             {{if .Place}}
                 <td>Place</td>
-                <td>{{.Place}}</td>
+                <td>
+                    {{if .Place.Name}}{{.Place.Name}}{{end}}
+                    {{if .Place.C1}}, {{.Place.C1}}{{end}}
+                    {{if .Place.C2}}, {{.Place.C2}}{{end}}
+                    {{if .Place.C3}} ({{.Place.C3}}){{end}}
+                </td>
             </tr>
             {{end}}
             {{if .Web}}

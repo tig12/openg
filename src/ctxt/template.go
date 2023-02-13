@@ -43,7 +43,7 @@ func init() {
 			Funcs(fmap).
 			ParseGlob(filepath.Join("view", "*.html"))).
 		Option("missingkey=error")
-	//	tmpl.New("listeActeurs").Funcs(fmap).ParseFiles(filepath.Join("view", "common", "listeActeurs.html"))
+//		template.Must(template.ParseGlob(filepath.Join("view", "wiki", "*.html")))
 }
 
 // ************************* Generic pipelines ********************************

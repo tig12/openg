@@ -1,0 +1,36 @@
+
+<h1>
+    YAML - Open Gauquelin Database
+</h1>
+
+<div class="float-right margin padding margin-top0 padding-top0">
+
+</div><!-- end class="float-right" -->
+
+<div class="intro">
+YAML is a syntax which permits to express structured data. It is both convenient to write for a human (almost no " ' , ;) and readable by a computer program.
+<br>YAML is used to document the birth certificate of a person, through a file called <a href="/wiki/doc/bc"></a>. 
+</div>
+
+<!-- ********************************************************************************* -->
+<h2>Expressing structured information with YAML</h2>
+The hierarchy of information is expressed with <b>tabulations</b>.
+<br>For example, this extract of a BC.yml file:
+<pre>
+person:
+  birth:
+    date: '1871-01-09 04:00'
+    place:
+      name: Saint-Affrique
+      cy: FR
+      c2: '12'
+  sex: M
+</pre>
+means that field <code>person</code> is conposed of 2 subfields: <code>birth</code> and <code>sex</code>.
+<br>Field <code>birth</code> is itself composed of subfields <code>date</code> and <code>place</code>.
+
+<!-- ********************************************************************************* -->
+<h2>Comments</h2>
+In a YAML file, 
+
+

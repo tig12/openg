@@ -1,4 +1,7 @@
 /**
+
+    Other wiki pages are handled by ShowStaticPage()
+
 **/
 package control
 

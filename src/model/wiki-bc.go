@@ -15,11 +15,7 @@ type BC struct {
 	Source struct {
 		CivilRegistry struct {
 			Name    string `json:"name"`
-			Place   string `json:"place"`
-			Country string `json:"cy"`
-			C1      string `json:"c1"`
-			C2      string `json:"c2"`
-			C3      string `json:"c3"`
+			Place   *Place
 			Web     struct {
 				URL  string `json:"url"`
 				Page string `json:"page"`

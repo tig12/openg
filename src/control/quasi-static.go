@@ -16,6 +16,23 @@ type detailsHome struct {
 	Recents []*model.WikiRecent
 }
 
+/** 
+    Here, fully static pages
+**/
+func ShowStaticPage(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
+    switch(r.URL.String()){
+    	case "/wiki/doc/bc.yml": ctx.TemplateName = "wiki-doc-bc.html"; break
+    	case "/wiki/doc/yaml": ctx.TemplateName = "wiki-doc-yaml.html"; break
+    	default: ctx.TemplateName = "error-404.html"; break
+    }
+	ctx.Page = &ctxt.Page{
+		Header: ctxt.Header{},
+		Footer: ctxt.Footer{},
+	}
+	return nil
+}
+
+
 func ShowHome(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	stats, err := model.GetStats(ctx.Config.RestURL)
 //fmt.Printf("%+v\n",stats)
