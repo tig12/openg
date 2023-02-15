@@ -74,6 +74,7 @@ type PersonGroup struct {
 }
 
 // ************************** slug - names *******************************
+
 // map group slug => group name
 var groupSlugNames = make(map[string]string)
 
@@ -173,6 +174,28 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 **/
 func GetAllGroups(restURL string) (groups []*Group, err error) {
 	url := restURL + "/groop"
+	response, err := http.Get(url)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil, werr.Wrapf(err, "Error decoding groups data")
+	}
+	groups = []*Group{}
+	if err = json.Unmarshal(responseData, &groups); err != nil {
+		return nil, werr.Wrapf(err, "Error json Unmarshal groups data\n"+string(responseData)+"\n")
+	}
+	return groups, nil
+}
+
+/**
+    Returns all the groups of a given type.
+    @param  type "history" or "occu"
+    ======== NOT USED ========
+**/
+func GetGroupsByType(restURL, groupType string) (groups []*Group, err error) {
+	url := restURL + "/groop?type=eq."+groupType
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)

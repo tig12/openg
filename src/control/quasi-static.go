@@ -67,14 +67,14 @@ type detailsHistory struct {
 }
 
 func ShowHistory(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
-	//
+    //
 	ctx.TemplateName = "history.html"
 	//
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
 			Title: "Historical datasets",
 			CSSFiles: []string{
-				"static/css/pages/historical.css",
+				"static/css/pages/history.css",
 			},
 		},
 		Details: detailsHistory{

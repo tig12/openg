@@ -115,9 +115,27 @@ div.anchor {
     border-radius:2px;
 }
 /* ================ Particular pages ================ */
+/*  For css specific to pages, see static/css/pages/ */
 .error404{
     position:relative;
     top:3rem;
+}
+
+/* Downloads - used in several pages */
+li.download{
+    display:flex;
+    align-items:center
+}
+.download-image{
+    display:inline-block;
+    background:#dbf1b1;
+    border:1px solid grey;
+    padding:0 8px;
+    margin-right:.5rem;
+}
+.caption{
+    display:block;
+    font-size:.8rem;
 }
 
 /* ================ Particular elements ================ */

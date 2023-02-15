@@ -20,8 +20,9 @@
 .historical li.datagroup{
     padding-top:.8rem;
 }
-.historical span.datagroup{
-    font-size:1.2rem;
+.historical span.datagroup-title{
+    font-size:1.1rem;
+    font-weight:bold;
 }
 
 .historical ul.datalist>li{

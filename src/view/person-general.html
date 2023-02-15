@@ -287,6 +287,18 @@
 <!-- ======== col 2 ======== -->
 <div class="col2">
 
+    <!-- ***************** Occupations ******************** -->
+    {{if .Occus}}
+    <div class="groups margin-bottom">
+        <h3>Occupations</h3>
+        <ul class="naked">
+            {{range .Occus}}
+            <li itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></li>
+            {{end}}
+        </ul>
+    </div>
+    {{end}}
+
     <!-- ***************** Identifiers ******************** -->
     <div class="admin">
     <h3>Identifiers</h3>
@@ -312,15 +324,6 @@
     <!-- ***************** Groups ******************** -->
     {{if (or .Occus $.Details.BelongsToHistoricalGroups)}}
         <div class="groups margin-top">
-        {{if .Occus}}
-            <h3>Occupations</h3>
-            <ul class="naked">
-                {{range .Occus}}
-                <li itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></li>
-                {{end}}
-            </ul>
-        {{end}}
-        
         {{if $.Details.BelongsToHistoricalGroups}}
             <h3>Groups to which this person belongs</h3>
             <ul class="naked">
@@ -334,9 +337,15 @@
         </div>
     {{end}}
 
+</div><!-- ======== end col 2 ======== -->
+
+
+<!-- ======== col 3 ======== -->
+<div class="col3">
+
     <!-- ***************** Sources ******************** -->
     {{if .Ids_in_sources}}
-        <div class="sources margin-top">
+        <div class="sources margin-top inline-block">
             <h3>Information sources</h3>
             <ul class="naked">
                 {{range $key, $value := .Ids_in_sources}}
@@ -346,15 +355,9 @@
         </div>
     {{end}}
 
-</div><!-- ======== end col 2 ======== -->
-
-
-<!-- ======== col 3 ======== -->
-<div class="col3">
-
     <!-- ***************** Issues ******************** -->
     {{if .Issues}}
-        <div class="issues">
+        <div class="issues" style="width:30rem;">
             <h3>
                 <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
                 Issues

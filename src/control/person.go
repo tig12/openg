@@ -12,7 +12,7 @@ import (
 	"net/http"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/model"
-"fmt"
+//"fmt"
 )
 
 type detailsPerson struct {
@@ -78,8 +78,6 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
             return err
         }
     }
-fmt.Printf("wikiProjects = %+v\n",wikiProjects)
-
 	ctx.TemplateName = "person.html"
 	ctx.Page = &ctxt.Page{
 		Header: ctxt.Header{
