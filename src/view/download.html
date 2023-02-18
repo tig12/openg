@@ -8,25 +8,71 @@
     <br>You can also generate the database from scratch on your own machine, see <a href="https://tig12.github.io/g5">gauquelin5 program</a>.
 </div>
 
+The downloadable CSV files are provided in two different formats :
+<ul>
+    <li class="download">
+        <div class="download-image">
+            <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, date fields in ISO format">
+            <span class="caption">ISO</span>
+        </div>
+        <div class="inline-block">The column separator is semicolon (;), and the dates are expressed using ISO 8601 format (YYYY-MM-DD HH:MM)</div>
+    </li>
+    <li class="download" style="margin-top:3px;">
+        <div class="download-image">
+            <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, date fields in separated columns">
+            <span class="caption">SEP</span>
+        </div>
+        <div class="inline-block">The column separator is comma (,), and the dates are expressed in separate columns: on column for year, one column for month etc.</div>
+    </li>
+</ul>
+
 <!-- ********************************************************************************* -->
 <h2>Download full database</h2>
 
 <ul>
     {{/* file name specified in g5 class commands/db/export/pgdump */}}
-    <li><a href="/download/ogdb-pg-dump.zip">Postgresql dump</a> - to run opengauquelin on your local machine, see <a href="install">page INSTALL</a></li>
+    <li class="padding-bottom05"><a href="/download/ogdb-pg-dump.zip">Postgresql dump</a> - to run opengauquelin on your local machine, see <a href="install">page INSTALL</a></li>
     {{/* file names specified in g5 class commands/db/export/allpersons */}}
-    <li><a href="/download/ogdb-time.csv.zip">CSV export - Timed data</a></li>
-    <li><a href="/download/ogdb-all.csv.zip">CSV export - Timed and untimed data</a></li>
+    
+    <li>
+        <div class="download-image">
+            <a href="{{.Details.DownloadBase}}/ogdb-time-sep.csv.zip" title="Download CSV, date fields in separated columns">
+                <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, date fields in separated columns">
+                <span class="caption">SEP</span>
+            </a>
+        </div>
+        <div class="download-image">
+            <a href="{{.Details.DownloadBase}}/ogdb-time.csv.zip" title="Download CSV, dates in ISO format">
+                <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, dates in ISO format">
+                <span class="caption">ISO</span>
+            </a>
+        </div>
+        CSV export - Timed data
+    </li>
+    <li>
+        <div class="download-image">
+            <a href="{{.Details.DownloadBase}}/ogdb-all-sep.csv.zip" title="Download CSV, date fields in separated columns">
+                <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, date fields in separated columns">
+                <span class="caption">SEP</span>
+            </a>
+        </div>
+        <div class="download-image">
+            <a href="{{.Details.DownloadBase}}/ogdb-all.csv.zip" title="Download CSV, dates in ISO format">
+                <img class="vertical-align-bottom" src="/static/img/download.png" alt="Download CSV, dates in ISO format">
+                <span class="caption">ISO</span>
+            </a>
+        </div>
+        CSV export - Timed and untimed data
+    </li>
 </ul>
 
 <!-- ********************************************************************************* -->
 <h2>Download historical datasets</h2>
-Files coming from the history of statistical tests on astrology can be downloaded from <a href="/history">page Historical datasets</a>.
-<br>Click on the download icon <img class="padding-right padding-left" src="/static/img/download.png" alt="Download"> of the corresponding list.
+Files coming from the history of statistical tests on astrology can be downloaded from page <a href="/history">Historical datasets</a>.
 
 <!-- ********************************************************************************* -->
 <h2>Download CSV lists by occupation</h2>
-See page <a href="/occupations">Lists by occupation</a> and click on the download icon <img class="padding-right padding-left" src="/static/img/download.png" alt="Download"> of the corresponding list.
+See page <a href="/occupations">Lists by occupation</a>.
 
 <!-- ********************************************************************************* -->
 <h2>Other downloads</h2>
@@ -51,7 +97,7 @@ The downloadable CSV files do not all have the same format. For example, outputs
     <tr><td colspan="2" class="paragraph">Identifiers</td></tr>
     
     <tr>
-        <td>OGDBID</td>
+        <td>OGID</td>
         <td>
             <b>Open Gauquelin Database unique id</b>
             <br>Looks like <code>alard-pierre-1937-09-17</code>.
@@ -90,7 +136,7 @@ The downloadable CSV files do not all have the same format. For example, outputs
         <td>ERID</td>
         <td>
             <b>Ertel unique id</b>
-            <br>Looks like <code>S-326</code> ; concerns only sportspersons.
+            <br>Looks like <code>ES-326</code> ; concerns only sportspersons.
             <br>See <a href="https://tig12.github.io/g5/ertel.html#ertel-unique-id">the definition of Ertel unique id</a>.
         </td>
     </tr>
@@ -99,17 +145,16 @@ The downloadable CSV files do not all have the same format. For example, outputs
         <td>CSID</td>
         <td>
             <b>CSICOP unique id</b>
-            <br>Looks like <code>153</code> ; concerns only sportspersons.
+            <br>Looks like <code>CS-153</code> ; concerns only sportspersons.
             <br>See <a href="https://tig12.github.io/g5/csicop.html#csicop-unique-id">The definition of CSICOP unique id</a>.
         </td>
     </tr>
     
-<!-- 
     <tr>
         <td>CPID</td>
         <td>
             <b>Comité Para unique id</b>
-            <br>Looks like <code>153</code> or <code>* 56</code> ; concerns only sportspersons.
+            <br>Looks like <code>CP-153</code> or <code>* 56</code> ; concerns only sportspersons.
             <br>See <a href="https://tig12.github.io/g5/comite-para.html#comite-para-unique-id">The definition of Comit Para unique id</a>.
         </td>
     </tr>
@@ -118,11 +163,10 @@ The downloadable CSV files do not all have the same format. For example, outputs
         <td>CFID</td>
         <td>
             <b>CFEPP unique id</b>
-            <br>Looks like <code>153</code> ; concerns only sportspersons.
+            <br>Looks like <code>CF-153</code> ; concerns only sportspersons.
             <br>See <a href="https://tig12.github.io/g5/cfepp.html#cfepp-unique-id">The definition of CFEPP unique id</a>.
         </td>
     </tr>
--->
     
     <!-- ************************************* -->
     <tr><td colspan="2" class="paragraph">Names</td></tr>
@@ -263,6 +307,13 @@ The downloadable CSV files do not all have the same format. For example, outputs
             <b>Occupation codes</b>, as listed in <a href="/occupations">page listing persons by occupation</a>.
             <br>When a person has more than one occupation code, the codes are separated by "+".
             Ex : politician+writer means that the person is identified as a politician and a writer.
+        </td>
+    </tr>
+    
+    <tr>
+        <td>EM</td>
+        <td>
+            <b>Eminence</b> ; this notion is important but not yet integrated in OGDB. The only eminence indicator currently present comes from Ertel's work on athletes published in 1988.
         </td>
     </tr>
     
