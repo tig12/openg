@@ -142,25 +142,27 @@
     </table>
         
     <!-- ***************** Birth time details ******************** -->
-    {{if and .Birth.Date .Birth.DateUT}}
     <h3 class="margin-top2">Birth time details</h3>
     <table class="table-pres">
+        {{if .Birth.Date}}
         <tr>
             <td>Legal time</td>
             <td>{{.Birth.Date}}</td>
         </tr>
-        
+        {{end}}
+        {{if .Birth.DateUT}}
         <tr>
             <td>Universal time</td>
             <td>{{.Birth.DateUT}}</td>
         </tr>
-        
+        {{end}}
+        {{if .Birth.TZO}}
         <tr>
             <td>Timezone offset</td>
             <td>{{.Birth.TZO}}</td>
         </tr>
+        {{end}}
     </table>
-    {{end}}
     
     <!-- ***************** Birth place details ******************** -->
     <h3 class="margin-top2">Birth place details</h3>
