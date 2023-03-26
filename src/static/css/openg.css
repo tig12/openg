@@ -15,9 +15,104 @@
     }
 }
 
+:root {
+    --main-bg-color:linear-gradient(90deg, rgba(181,139,50,1) 0%, rgba(164,203,58,1) 100%);
+}
+
+
 body{
     font-family:Verdana, Geneva, sans-serif;
     background:#dbdbdb;
+}
+
+/* shift anchors by menu height */
+:target{
+   position: relative;
+   border-top: 52px solid transparent;
+   margin: -30px 0 0;
+   background-clip: padding-box;
+}
+:target:before {
+   content: "";
+   position: absolute;
+   top: 30px;
+   left: 0;
+   right: 0;
+}
+
+
+/* ================ HTML tags ================ */
+a{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:underline;
+}
+h1{
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    margin-bottom:2rem;
+}
+h1 .subtitle{
+    font-size:.8em;
+}
+h3{
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+}
+pre{
+    white-space:pre-wrap;
+    margin:1rem;
+    background:lightgrey;
+    padding:.5rem;
+    border-radius:5px;
+    border:1px solid #717a9f;
+}
+pre.normal{
+    background:none;
+}
+
+/* ================ Top header ================ */
+/*
+    Used for local anchors in a page.
+    Introduces an offset corresponding to the size of the fixed header.
+*/
+div.anchor {
+    display:block;
+    position:relative;
+    top:-50px;
+    visibility:hidden;
+}
+.top-header{
+    position:fixed;
+    top:0;
+    width:100%;
+    background:linear-gradient(to left, #5d9cba, #aadff7);
+    border-bottom:1px solid grey;
+    z-index:100;
+    box-shadow: 3px 3px 5px #888888;
+}
+.top-nav{
+    padding-left:4rem;
+    padding-bottom:5px;
+}
+.top-nav a{
+    padding:.1rem .5rem;
+    background:lightblue;
+    border-radius:2px;
+    border:1px solid black;
+    box-shadow: -5px 5px 10px 0px rgba(0,0,0,0.25);
+}
+.top-right{
+    float:right;
+    padding-right:1rem;
+}
+.search{
+    display:inline;
+}
+.search input[type=text]{
+    border-radius:7px;
 }
 
 /* ================ Semantic ================ */
@@ -74,46 +169,7 @@ body{
 .trust4{background-color:#fda05c;}
 .trust5{background-color:#f8726b;}
 
-/* ================ Top header ================ */
-/*
-    Used for local anchors in a page.
-    Introduces an offset corresponding to the size of the fixed header.
-*/
-div.anchor {
-    display:block;
-    position:relative;
-    top:-50px;
-    visibility:hidden;
-}
-.top-header{
-    position:fixed;
-    top:0;
-    width:100%;
-    background:linear-gradient(to left, #5d9cba, #aadff7);
-    border-bottom:1px solid grey;
-    z-index:100;
-    box-shadow: 3px 3px 5px #888888;
-}
-.top-right{
-    float:right;
-    padding-right:1rem;
-}
-.search{
-    display:inline;
-}
-.search input[type=text]{
-    border-radius:7px;
-}
-.top-nav{
-    padding-left:4rem;
-    padding-bottom:5px;
-}
-.top-nav a{
-    padding-left:.5rem;
-    padding-right:.5rem;
-    background:lightblue;
-    border-radius:2px;
-}
+
 /* ================ Particular pages ================ */
 /*  For css specific to pages, see static/css/pages/ */
 .error404{
@@ -156,37 +212,6 @@ https://cssgenerator.org/box-shadow-css-generator.html
 https://colorpicker.me
 https://cssgradient.io/
 */
-
-a{
-    text-decoration:none;
-}
-a:hover{
-    text-decoration:underline;
-}
-h1{
-    margin-left:auto;
-    margin-right:auto;
-    text-align:center;
-    margin-bottom:4rem;
-}
-h1 .subtitle{
-    font-size:.8em;
-}
-h3{
-    margin-top:0.5rem;
-    margin-bottom:0.5rem;
-}
-pre{
-    white-space:pre-wrap;
-    margin:1rem;
-    background:lightgrey;
-    padding:.5rem;
-    border-radius:5px;
-    border:1px solid #717a9f;
-}
-pre.normal{
-    background:none;
-}
 .hr-big{
     width:50%;
     margin:auto;

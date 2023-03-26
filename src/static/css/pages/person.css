@@ -21,9 +21,10 @@
 .person .notes,
 .person .issues,
 .person .admin{
+    padding:1rem;
     border:1px solid grey;
     border-radius:4px;
-    padding:1rem;
+    box-shadow: -5px 5px 10px 0px rgba(0,0,0,0.25);
 }
 
 .person .general-summary,
@@ -43,6 +44,8 @@
 
 .person .issues{
     background:#f7a7a3;
+    margin-top:2rem;
+    margin-left:2rem;
 }
 
 .person .groups li{

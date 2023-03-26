@@ -7,12 +7,12 @@
 package model
 
 import (
+	"openg.local/openg/generic/wilk/werr"
+	"sort"
     "strconv"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"openg.local/openg/generic/wilk/werr"
-//	"fmt"
 )
 
 type WikiProject struct {
@@ -23,6 +23,7 @@ type WikiProject struct {
 	Description string
 	// Not in database
 	Persons     []*WikiProjectPerson
+	Issues      []*Issue  
 }
 
 /** 
@@ -38,7 +39,8 @@ type WikiProjectPerson struct {
 // ************************** Get one *******************************
 
 /**
-    Loads a wiki project from database
+    Loads a wiki project from database.
+    Loads only the fields present in table wikiproject.
 **/
 func GetWikiProjectFromSlug(restURL, slug string) (project *WikiProject, err error) {
 	url := restURL + "/wikiproject?slug=eq." + slug
@@ -62,23 +64,22 @@ func GetWikiProjectFromSlug(restURL, slug string) (project *WikiProject, err err
 }
 
 /**
-    Computes the wiki projects related to a birth certificate.
+    Computes a wiki project with its fields Issues and Persons.
 **/
-func ComputeBCWikiProjects(restURL string, bc *BC) (result []*WikiProject, err error) {
-    if bc.OpenGauquelin == nil {
-        return result, nil // empty
-    }
-    if bc.OpenGauquelin.WikiProjects == nil {
-        return result, nil // empty
-    }
-    for _, wpSlug := range(*bc.OpenGauquelin.WikiProjects){
-        wikiproject, err := GetWikiProjectFromSlug(restURL, wpSlug)
-        if err != nil {
-            return []*WikiProject{}, werr.Wrapf(err, "Error calling GetWikiProjectFromSlug("+wpSlug+")\n")
-        }
-        result = append(result, wikiproject)
-    }
-	return result, nil
+func GetWikiProjectFullFromSlug(restURL, slug string) (project *WikiProject, err error) {
+    project, err = GetWikiProjectFromSlug(restURL, slug)
+	if err != nil {
+		return project, werr.Wrapf(err, "Error calling GetWikiProjectFromSlug()")
+	}
+    err = project.ComputePersons(restURL)
+	if err != nil {
+		return project, werr.Wrapf(err, "Error calling project.ComputePersons()")
+	}
+    err = project.ComputeIssues(restURL)
+	if err != nil {
+		return project, werr.Wrapf(err, "Error calling project.ComputeIssues()")
+	}
+    return project, nil
 }
 
 // ************************** Get many *******************************
@@ -97,6 +98,26 @@ func GetActiveWikiProjects(restURL string) (result []*WikiProject, err error) {
 		return result, werr.Wrapf(err, "Error json Unmarshal wiki projects\n"+string(responseData)+"\n")
 	}
     return result, nil
+}
+
+/**
+    Returns the wiki projects related to a birth certificate.
+**/
+func GetWikiProjectsOfBC(restURL string, bc *BC) (result []*WikiProject, err error) {
+    if bc.OpenGauquelin == nil {
+        return result, nil // empty
+    }
+    if bc.OpenGauquelin.WikiProjects == nil {
+        return result, nil // empty
+    }
+    for _, wpSlug := range(*bc.OpenGauquelin.WikiProjects){
+        wikiproject, err := GetWikiProjectFromSlug(restURL, wpSlug)
+        if err != nil {
+            return result, werr.Wrapf(err, "Error calling GetWikiProjectFromSlug("+wpSlug+")\n") // empty
+        }
+        result = append(result, wikiproject)
+    }
+	return result, nil
 }
 
 // ************************** Instance methods *******************************
@@ -120,3 +141,39 @@ func (wp *WikiProject) ComputePersons(restURL string) error {
     return nil
 }    
 
+/**
+    Computes the issues related to a wiki project.
+**/
+func (wp *WikiProject) ComputeIssues(restURL string) (err error) {
+	url := restURL + "/view_wikiproject_issue?project_id=eq." + strconv.Itoa(wp.Id)
+	response, err := http.Get(url)
+	if err != nil {
+		return werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return werr.Wrapf(err, "Error decoding wiki project persons data "+wp.Slug)
+	}
+	if err = json.Unmarshal(responseData, &wp.Issues); err != nil {
+		return werr.Wrapf(err, "Error json Unmarshal wiki project issues data "+wp.Slug+"\n"+string(responseData)+"\n")
+	}
+	for _, issue := range(wp.Issues) {
+	    err = issue.ComputePersonFromSlug() // hack see comment of ComputePersonFromSlug()
+        if err != nil {
+            return werr.Wrapf(err, "Error calling issue.ComputePersonFromSlug() ")
+        }
+	}
+	sortedIssues := make(issueSlice, 0, len(wp.Issues))
+	for _, elt := range wp.Issues {
+		sortedIssues = append(sortedIssues, elt)
+	}
+    sort.Sort(sortedIssues)
+    wp.Issues = sortedIssues
+    return nil
+}    
+
+// Auxiliaries of ComputeIssues() to sort issues by person slug
+type issueSlice []*Issue
+func (issues issueSlice) Len() int           { return len(issues) }
+func (issues issueSlice) Less(i, j int) bool { return issues[i].PersonSlug < issues[j].PersonSlug }
+func (issues issueSlice) Swap(i, j int)      { issues[i], issues[j] = issues[j], issues[i] }

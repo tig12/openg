@@ -34,7 +34,7 @@ type Person struct {
 	Trust          string
 	Acts           *Acts `json:"acts"`
 	History        []PersonHistoryEntry
-	Issues         []string
+	Issues         []*PersonIssue
 	Notes          []string
 	// not stored in table person
 	Groups []*PersonGroup
@@ -51,8 +51,8 @@ type PartialPerson struct {
 	Slug           string
 	Sex            string
 	Name           *PersonName
+//	Occus          []string
 	Occus          map[string]string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
-//	Occus          []string // obliged to have a map because of go unmarshalling / php json_encode(JSON_FORCE_OBJECT)
 	Birth          *Event
 	Death          *Event
 	Ids_in_sources interface{} // map[string]string
@@ -111,6 +111,13 @@ var Partial_ids_labels = map[string]string{
 	"g55-book": "Gauquelin 1955",
 	"g55":      "Gauquelin 1955", // to delete when new import of priests and minor painters is integrated
 	"wd":       "Wikidata",
+}
+
+// to decode view_issue_person
+type PersonIssue struct {
+    Slug        string  `json:"issue_slug"`
+    Type        string  `json:"issue_type"`
+    Description string  `json:"issue_description"`
 }
 
 // ************************** PersonName *******************************
@@ -178,7 +185,7 @@ func GetPerson(url string) (person *Person, err error) {
 	}
 	if len(persons) == 0 {
 		// do not return error because should be handled as 404 by caller
-		return nil, werr.New("Zero person found at url"+url)
+		return nil, werr.New("Person not found at url"+url)
 	}
 	return &persons[0], nil
 }
@@ -227,7 +234,7 @@ func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err e
 
 /** Computes field 'Groups' of a person **/
 func (p *Person) ComputeGroups(restURL string) (err error) {
-	url := restURL + "/view_persongroop?person_id=eq." + strconv.Itoa(p.Id)
+	url := restURL + "/view_person_groop?person_id=eq." + strconv.Itoa(p.Id)
 	response, err := http.Get(url)
 	if err != nil {
 		return werr.Wrapf(err, "Error calling postgres API: "+url)
@@ -238,6 +245,24 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 	}
 	if err = json.Unmarshal(responseData, &p.Groups); err != nil {
 		return werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal PersonGroups\n%s\n", string(responseData)))
+	}
+	return nil
+}
+
+
+/** Computes field 'Isues' of a person **/
+func (p *Person) ComputeIssues(restURL string) (err error) {
+	url := restURL + "/view_person_issue?person_id=eq." + strconv.Itoa(p.Id)
+	response, err := http.Get(url)
+	if err != nil {
+		return werr.Wrapf(err, "Error calling postgres API: "+url)
+	}
+	responseData, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return werr.Wrapf(err, "Error decoding PersonGroup data"+string(responseData)+"\n")
+	}
+	if err = json.Unmarshal(responseData, &p.Issues); err != nil {
+		return werr.Wrapf(err, fmt.Sprintf("Error json Unmarshal Issues\n%s\n", string(responseData)))
 	}
 	return nil
 }

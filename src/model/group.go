@@ -55,7 +55,7 @@ type GroupMember struct {
 }
 
 /**
-    Structure to store data of view view_persongroop
+    Structure to store data of view view_person_groop
     TODO Used nowher, suppress ?
 **/
 type PersonGroup struct {
@@ -145,7 +145,7 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 		page = pagemax
 	}
 	offset := (page - 1) * limit
-	url = restURL + "/view_persongroop" +
+	url = restURL + "/view_person_groop" +
 		"?group_slug=eq." + slug +
 		"&order=person_slug" +
 		"&limit=" + strconv.Itoa(limit) +

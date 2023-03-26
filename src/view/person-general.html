@@ -6,10 +6,8 @@
 
 {{with .Details.Person}}
 
-<div class="flex-wrap">
-
 <!-- ======== col 1 ======== -->
-<div class="col1">
+<div class="col1 float-left">
     <!-- ***************** General summary ******************** -->
     <table class="table-pres general-summary">
     
@@ -65,6 +63,26 @@
             <td itemprop="deathPlace">{{.Death.Place.String}}</td>
         </tr>
         {{end}}
+        <!-- ***************** Occupations ******************** -->
+        {{if .Occus}}
+        <tr>
+            <td>Occupations</td>
+            <td itemprop="hasOccupation">
+                {{range .Occus}}
+                    <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+                {{end}}
+            </td>
+        </tr>
+        {{end}}
+        <tr><td colspan="2"><hr></td></tr>
+        <tr>
+            <td>
+                <a href="/#data-reliability" title='See paragraph "Data Reliability" for a definition of trust level'>Trust level</a>
+            </td>
+            <td>
+                {{.Trust}}
+            </td>
+        </tr>
         {{if .Birth.Notime}}
         <tr>
             <td colspan="2" class="padding05 border" style="text-align:left; background:#dbe599;">
@@ -283,22 +301,28 @@
         {{end}}
     </table>
     {{end}}
-</div><!-- ======== end col 1 ======== -->
+</div>
+<!-- ======== end col 1 ======== -->
 
-
+<div class="float-left">{{/* contains col 2 and 3 */}}
 <!-- ======== col 2 ======== -->
-<div class="col2">
+<div class="col2 float-left">
 
-    <!-- ***************** Occupations ******************** -->
-    {{if .Occus}}
-    <div class="groups margin-bottom">
-        <h3>Occupations</h3>
-        <ul class="naked">
-            {{range .Occus}}
-            <li itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></li>
-            {{end}}
-        </ul>
-    </div>
+
+    <!-- ***************** Groups ******************** -->
+    {{if (or .Occus $.Details.BelongsToHistoricalGroups)}}
+        <div class="groups margin-bottom">
+        {{if $.Details.BelongsToHistoricalGroups}}
+            <h3>Groups to which this person belongs</h3>
+            <ul class="naked">
+                {{range .Groups}}
+                    {{if eq .GroupType "history"}}
+                    <li><a href="/group/{{.GroupSlug}}">{{.GroupName}}</a></li>
+                    {{end}}
+                {{end}}
+            </ul>
+        {{end}}
+        </div>
     {{end}}
 
     <!-- ***************** Identifiers ******************** -->
@@ -318,32 +342,14 @@
             </tr>
         {{end}}
     </table>
-    
-    <!-- ************************************* -->
-    <h3 class="margin-top2"><a href="/#data-reliability" title='See paragraph "Data Reliability" for a definition of trust level'>Trust level: {{.Trust}}</a></h3>
     </div>
     
-    <!-- ***************** Groups ******************** -->
-    {{if (or .Occus $.Details.BelongsToHistoricalGroups)}}
-        <div class="groups margin-top">
-        {{if $.Details.BelongsToHistoricalGroups}}
-            <h3>Groups to which this person belongs</h3>
-            <ul class="naked">
-                {{range .Groups}}
-                    {{if eq .GroupType "history"}}
-                    <li><a href="/group/{{.GroupSlug}}">{{.GroupName}}</a></li>
-                    {{end}}
-                {{end}}
-            </ul>
-        {{end}}
-        </div>
-    {{end}}
-
-</div><!-- ======== end col 2 ======== -->
+</div>
+<!-- ======== end col 2 ======== -->
 
 
 <!-- ======== col 3 ======== -->
-<div class="col3">
+<div class="col3 float-left">
 
     <!-- ***************** Sources ******************** -->
     {{if .Ids_in_sources}}
@@ -357,21 +363,6 @@
         </div>
     {{end}}
 
-    <!-- ***************** Issues ******************** -->
-    {{if .Issues}}
-        <div class="issues" style="width:30rem;">
-            <h3>
-                <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
-                Issues
-            </h3>
-            <ul>
-            {{ range .Issues }}
-                <li>{{. | safeHTML}}</li>
-            {{end}}
-            </ul>
-        </div>
-    {{end}}
-    
     <!-- ***************** Notes ******************** -->
     {{if .Notes}}
         <div class="notes margin-top">
@@ -384,6 +375,24 @@
     
 </div><!-- ======== end col 3 ======== -->
 
-</div><!-- end flex-wrap -->
+<!-- ***************** Issues ******************** -->
+{{if .Issues}}
+    <br class="clear-left">
+    <div class="issues">
+        <h3>
+            <img src="/static/img/warning.png" alt="WARNING" class="vertical-align-middle"/>
+            Issues
+        </h3>
+        {{ range .Issues }}
+            <div class="padding-bottom">
+                <div class="bold">{{.Slug}}</div>
+                {{.Description | safeHTML}}
+            </div>
+        {{end}}
+    </div>
+{{end}}
+
+
+</div>{{/* end contains col 2 and 3 */}}
 
 {{end}} {{/* with .Details.Person */}}

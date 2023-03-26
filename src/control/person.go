@@ -50,6 +50,11 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 		return err
 	}
 
+	err = p.ComputeIssues(ctx.Config.RestURL)
+	if err != nil {
+		return err
+	}
+
 	groupSlugNames, err := model.GetGroupSlugNames(ctx.Config.RestURL)
 	if err != nil {
 		return err
@@ -73,7 +78,7 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 	wikiProjects := []*model.WikiProject{}
 	if hasBC {
         bcImageURLs = model.ComputeBCImageURLs(p, ctx.Config.Paths.WikiDataDir)
-        wikiProjects, err = model.ComputeBCWikiProjects(ctx.Config.RestURL, p.Acts.Birth)
+        wikiProjects, err = model.GetWikiProjectsOfBC(ctx.Config.RestURL, p.Acts.Birth)
         if err != nil {
             return err
         }

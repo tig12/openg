@@ -1,4 +1,6 @@
 
+    {{template "group-nav.html" $ }}
+
 <h1>
     {{.Header.Title}}
     <div class="subtitle">N = {{numberFormat .Details.Group.N}}</div>
@@ -6,11 +8,11 @@
 
 {{with .Details.Group}}
 
-<div class="big2 margin margin-top0 bold">
+<div class="big2 margin bold">
     <div>{{.Description | safeHTML}}</div>
 </div>
 
-<div class="big1 margin bold">
+<div class="big1 margin bold margin-bottom3">
     <div class="">
         {{if .ParentSlugs}}
             Parent groups:
@@ -40,8 +42,6 @@
 
 
 {{if gt .N 0}} {{/* ==== non empty group ==== */}}
-
-{{ template "group-nav.html" $ }}
 
 <table class="datatable alternate">
 <thead>

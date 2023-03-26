@@ -47,11 +47,7 @@ type detailsWikiProject struct {
 func ShowWikiProject(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error {
 	vars := mux.Vars(r)
 	slug := vars["slug"]
-	project, err := model.GetWikiProjectFromSlug(ctx.Config.RestURL, slug)
-	if err != nil {
-		return err
-	}
-	err = project.ComputePersons(ctx.Config.RestURL)
+	project, err := model.GetWikiProjectFullFromSlug(ctx.Config.RestURL, slug)
 	if err != nil {
 		return err
 	}

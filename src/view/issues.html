@@ -18,7 +18,8 @@ Current page shows {{.Details.NIssues}} potential individual problematic cases i
         <th title="Country">Cy</th>
         <th>Ids</th>
         <th>Occupations</th>
-        <th>Issues</th>
+        <th>Issue<br>type</th>
+        <th>Issue</th>
     </tr>
 </thead>
 <tbody>
@@ -33,7 +34,7 @@ Current page shows {{.Details.NIssues}} potential individual problematic cases i
             {{.PersonBirth.Place.Cy}}
         </td>
         <td>
-            {{range $source, $id := .IdsPartial}}
+            {{range $source, $id := .PersonIdsPartial}}
                 <div>{{$id}}</div>
             {{end}}
         </td>
@@ -42,10 +43,15 @@ Current page shows {{.Details.NIssues}} potential individual problematic cases i
             <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
             {{end}}
         </td>
+        {{/* 
+        <td><a href="/issues/{{.IssueType}}">{{.IssueType}}</a></td>
+        */}}
         <td>
-            {{range .Values}}
-                <div>{{. | safeHTML}}</div>
-            {{end}}
+            <a href="/wiki/project/{{.WPSlug}}">{{.WPName}}</a>
+        </td>
+        <td>
+            <div>{{.IssueDescription | safeHTML}}</div>
+            <div>Issue unique id: <b>{{.IssueSlug}}</b></div>
         </td>
     </tr>
 {{end}}
