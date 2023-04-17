@@ -46,18 +46,17 @@ func main() {
 	r.HandleFunc("/about", H(control.ShowAbout))
 	r.HandleFunc("/install", H(control.ShowInstall))
 
-	r.HandleFunc("/wiki", H(control.ShowWiki))
-	r.HandleFunc("/wiki/project/{slug:[a-z0-9\\-]+}", H(control.ShowWikiProject))
-	r.HandleFunc("/wiki/{url:[a-z0-9\\/\\.\\-]+}", H(control.ShowStaticPage)) // see ShowStaticPage() for further routing
-
 	r.HandleFunc("/downloads", H(control.ShowDownloads))
 	r.HandleFunc("/downloads2", H(control.ShowDownloads2))
 
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
 
-	r.HandleFunc("/issues", H(control.ShowIssues))
-	r.HandleFunc("/issues/{page:[1-9][0-9]*}", H(control.ShowIssues))
+	r.HandleFunc("/wiki", H(control.ShowWiki))
+	r.HandleFunc("/wiki/project/{slug:[a-z0-9\\-]+}", H(control.ShowWikiProject))
+	r.HandleFunc("/wiki/issues", H(control.ShowIssues))
+	r.HandleFunc("/wiki/issues/{page:[1-9][0-9]*}", H(control.ShowIssues))
+	r.HandleFunc("/wiki/{url:[a-z0-9\\/\\.\\-]+}", H(control.ShowStaticPage)) // see ShowStaticPage() for further routing
 
 	r.HandleFunc("/stats", H(control.ShowStats))
 	r.HandleFunc("/sources", H(control.ShowSources))

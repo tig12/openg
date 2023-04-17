@@ -1,14 +1,14 @@
 
 <h1>
-Issues (questionable data)
-<br>Open Gauquelin database
+Issues in Open Gauquelin database
 </h1>
 
 <div class="intro">
-Current page shows {{.Details.NIssues}} potential individual problematic cases in Open Gauquelin database.
+Issues are potential individual problematic cases
+<br>Current page shows <b>{{.Details.NIssues}}</b> potential individual problematic cases in Open Gauquelin database.
 </div>
 
-{{ template "issues-nav.html" $ }}
+{{ template "wiki-issues-nav.html" $ }}
 
 
 <table class="datatable alternate">
@@ -17,8 +17,7 @@ Current page shows {{.Details.NIssues}} potential individual problematic cases i
         <th>Person</th>
         <th title="Country">Cy</th>
         <th>Ids</th>
-        <th>Occupations</th>
-        <th>Issue<br>type</th>
+        <th>Related<br>wiki project</th>
         <th>Issue</th>
     </tr>
 </thead>
@@ -29,33 +28,31 @@ Current page shows {{.Details.NIssues}} potential individual problematic cases i
             <b><a itemprop="name" href="/person/{{.PersonSlug}}">{{.PersonName.DisplayedName}}</a></b>
             {{if .PersonBirth.Date}}<div itemprop="birthDate">{{.PersonBirth.Date}}</div>{{end}}
             {{if and (not .PersonBirth.Date) .PersonBirth.DateUT}}<div itemprop="birthDate">{{.PersonBirth.DateUT}}</div>{{end}}
+            <div>
+                {{range .PersonOccus}}
+                <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+            </div>
+            {{end}}
         </td>
         <td>
             {{.PersonBirth.Place.Cy}}
         </td>
-        <td>
+        <td class="whitespace-nowrap">
             {{range $source, $id := .PersonIdsPartial}}
-                <div>{{$id}}</div>
+                <div>{{$source}} {{$id}}</div>
             {{end}}
         </td>
-        <td>
-            {{range .PersonOccus}}
-            <div itemprop="hasOccupation"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-            {{end}}
-        </td>
-        {{/* 
-        <td><a href="/issues/{{.IssueType}}">{{.IssueType}}</a></td>
-        */}}
         <td>
             <a href="/wiki/project/{{.WPSlug}}">{{.WPName}}</a>
         </td>
         <td>
-            <div>{{.IssueDescription | safeHTML}}</div>
             <div>Issue unique id: <b>{{.IssueSlug}}</b></div>
+            <div>Issue type: <b>{{index $.Details.IssueTypeLabels .IssueType}}</b></div>
+            <div>{{.IssueDescription | safeHTML}}</div>
         </td>
     </tr>
 {{end}}
 </tbody>
 </table>
 
-{{ template "issues-nav.html" $ }}
+{{ template "wiki-issues-nav.html" $ }}

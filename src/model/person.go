@@ -108,8 +108,7 @@ var Partial_ids_labels = map[string]string{
 	"csicop":   "CSICOP",
 	"cfepp":    "CFEPP",
 	"ertel":    "Ertel",
-	"g55-book": "Gauquelin 1955",
-	"g55":      "Gauquelin 1955", // to delete when new import of priests and minor painters is integrated
+	"g55":      "Gauquelin 1955",
 	"wd":       "Wikidata",
 }
 
@@ -252,7 +251,7 @@ func (p *Person) ComputeGroups(restURL string) (err error) {
 
 /** Computes field 'Isues' of a person **/
 func (p *Person) ComputeIssues(restURL string) (err error) {
-	url := restURL + "/view_person_issue?person_id=eq." + strconv.Itoa(p.Id)
+	url := restURL + "/view_issue?person_id=eq." + strconv.Itoa(p.Id)
 	response, err := http.Get(url)
 	if err != nil {
 		return werr.Wrapf(err, "Error calling postgres API: "+url)

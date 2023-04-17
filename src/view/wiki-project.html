@@ -7,35 +7,36 @@
 
 <div class="intro">{{.Description}}</div>
 
+
+<div class="flex-wrap">
 {{with .Issues}}
-<div class="float-left">
-Problems needing to be fixed within this project
-<table>
-    {{range .}}
-    <tr>
-        <td><a class="bold" href="/person/{{.PersonSlug}}">{{.PersonName.Usual}}</a></td>
-        <td><a href="/person/{{.PersonSlug}}">{{.PersonBirth.Date}}</a></td>
-    </tr>
-    {{end}}
-</table>
-</div>
+    <div class="margin-right">
+        Problems needing to be fixed within this project
+        <table class="margin-top">
+            {{range .}}
+            <tr>
+                <td><a class="bold" href="/person/{{.PersonSlug}}">{{.PersonName.Usual}}</a></td>
+                <td><a href="/person/{{.PersonSlug}}">{{.PersonBirth.Date}}</a></td>
+            </tr>
+            {{end}}
+        </table>
+    </div>
 {{end}}
 
+
 {{with .Persons}}
-<div class="float-left">
-Persons already associated to a birth certificate
-<table>
-{{printf "%+v" .}}
-    {{range .}}
-{{/* 
-    <tr>
-        <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
-        <td>{{.Birth.Date}}</td>
-    </tr>
-*/}}
-    {{end}}
-</table>
-</div>
+    <div class="margin-left">
+        Persons already associated to a birth certificate
+        <table class="margin-top">
+        {{range .}}
+            <tr>
+                <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
+                <td>{{.Birth.Date}}</td>
+            </tr>
+        {{end}}
+        </table>
+    </div>
 {{end}}
+</div><!-- end class="flex-wrap" -->
 
 {{end}} {{/* end with .Details.Project */}}

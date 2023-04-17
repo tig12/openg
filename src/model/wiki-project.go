@@ -32,8 +32,8 @@ type WikiProject struct {
 type WikiProjectPerson struct {
     Id      int     `json:"person_id"`
     Slug    string  `json:"person_slug"`
-	Name    *PersonName `json:"name"`
-	Birth   *Event `json:"birth"`
+	Name    *PersonName `json:"person_name"`
+	Birth   *Event `json:"person_birth"`
 }
 
 // ************************** Get one *******************************
@@ -71,9 +71,9 @@ func GetWikiProjectFullFromSlug(restURL, slug string) (project *WikiProject, err
 	if err != nil {
 		return project, werr.Wrapf(err, "Error calling GetWikiProjectFromSlug()")
 	}
-    err = project.ComputePersons(restURL)
+    err = project.ComputeActs(restURL)
 	if err != nil {
-		return project, werr.Wrapf(err, "Error calling project.ComputePersons()")
+		return project, werr.Wrapf(err, "Error calling project.ComputeActs()")
 	}
     err = project.ComputeIssues(restURL)
 	if err != nil {
@@ -125,8 +125,8 @@ func GetWikiProjectsOfBC(restURL string, bc *BC) (result []*WikiProject, err err
 /**
     Computes the persons related to a wiki project.
 **/
-func (wp *WikiProject) ComputePersons(restURL string) error {
-	url := restURL + "/view_wikiproject_person?project_id=eq." + strconv.Itoa(wp.Id)
+func (wp *WikiProject) ComputeActs(restURL string) error {
+	url := restURL + "/view_wikiproject_act?project_id=eq." + strconv.Itoa(wp.Id)
 	response, err := http.Get(url)
 	if err != nil {
 		return werr.Wrapf(err, "Error calling postgres API: "+url)

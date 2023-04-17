@@ -32,8 +32,13 @@ type Issue struct {
 	WPSlug              string              `json:"wp_slug"`
 }
 
-
-// ************************** Get many *******************************
+func GetIssueTypeLabels() map[string]string{
+    return map[string]string{
+        "date": "Date or time problem",
+        "name": "Problem in the name of the person",
+        "tzo": "Timezone offset (Universal Time computation) problem",
+    }
+}
 
 func GetNbIssues(restURL string) (int, error) {
 	url := restURL + "/stats?select=n_issues"
@@ -56,6 +61,8 @@ func GetNbIssues(restURL string) (int, error) {
 	return tmp[0]["n_issues"], nil
 }
 
+// ************************** Get many *******************************
+
 /**
     Returns all issues for a given page, sorted by name.
     @param  page    Current page of the issues to load
@@ -65,7 +72,6 @@ func GetNbIssues(restURL string) (int, error) {
             pagemax Max nb of pages (used for navigation)
 **/
 func GetIssues(restURL string, page, limit int) (issues []*Issue, nIssues, pagemax int, err error) {
-
 	nIssues, err = GetNbIssues(restURL)
 	if err != nil {
 		return nil, 0, 0, werr.Wrapf(err, "Cannot compute nIssues")
