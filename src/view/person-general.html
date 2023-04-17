@@ -65,6 +65,7 @@
         {{end}}
         <!-- ***************** Occupations ******************** -->
         {{if .Occus}}
+        <tr><td colspan="2"><hr></td></tr>
         <tr>
             <td>Occupations</td>
             <td itemprop="hasOccupation">
@@ -310,7 +311,7 @@
 
 
     <!-- ***************** Groups ******************** -->
-    {{if (or .Occus $.Details.BelongsToHistoricalGroups)}}
+    {{if $.Details.BelongsToHistoricalGroups}}
         <div class="groups margin-bottom">
         {{if $.Details.BelongsToHistoricalGroups}}
             <h3>Groups to which this person belongs</h3>

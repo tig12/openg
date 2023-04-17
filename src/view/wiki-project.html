@@ -11,8 +11,8 @@
 <div class="flex-wrap">
 {{with .Issues}}
     <div class="margin-right">
-        Problems needing to be fixed within this project
-        <table class="margin-top">
+        <div class="big1 bold">Problems needing to be fixed within this project</div>
+        <table class="margin-top2">
             {{range .}}
             <tr>
                 <td><a class="bold" href="/person/{{.PersonSlug}}">{{.PersonName.Usual}}</a></td>
@@ -26,8 +26,8 @@
 
 {{with .Persons}}
     <div class="margin-left">
-        Persons already associated to a birth certificate
-        <table class="margin-top">
+        <div class="big1 bold">Persons already fixed (associated to a birth certificate)</div>
+        <table class="margin-top2">
         {{range .}}
             <tr>
                 <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
