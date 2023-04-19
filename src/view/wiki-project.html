@@ -5,10 +5,16 @@
     Wiki project : {{.Name}}
 </h1>
 
-<div class="intro">{{.Description}}</div>
+<div class="intro">{{.Description | safeHTML}}</div>
 
+<style>
+    .wikiproject-container{
+        justify-content:space-around;
+        margin-top:3rem;
+    }
+</style>
 
-<div class="flex-wrap">
+<div class="flex-wrap wikiproject-container">
 {{with .Issues}}
     <div class="margin-right">
         <div class="big1 bold">Problems needing to be fixed within this project</div>
