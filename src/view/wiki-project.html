@@ -15,10 +15,10 @@
 </style>
 
 <div class="flex-wrap wikiproject-container">
-{{with .Issues}}
-    <div class="margin-right">
-        <div class="big1 bold">Problems needing to be fixed within this project</div>
-        <table class="margin-top2">
+<div class="margin-right">
+    <div class="big1 bold margin-bottom2">Problems needing to be fixed within this project</div>
+    {{with .Issues}}
+        <table>
             {{range .}}
             <tr>
                 <td><a class="bold" href="/person/{{.PersonSlug}}">{{.PersonName.Usual}}</a></td>
@@ -26,23 +26,28 @@
             </tr>
             {{end}}
         </table>
-    </div>
-{{end}}
+    {{else}}
+        <div class="big1">No problem associated with this project</div>
+    {{end}}
+</div>
 
 
-{{with .Persons}}
+
     <div class="margin-left">
-        <div class="big1 bold">Persons already fixed (associated to a birth certificate)</div>
-        <table class="margin-top2">
-        {{range .}}
-            <tr>
-                <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
-                <td>{{.Birth.Date}}</td>
-            </tr>
-        {{end}}
+        <div class="big1 bold margin-bottom2">Persons already fixed (associated to a birth certificate)</div>
+        {{with .Persons}}
+        <table>
+            {{range .}}
+                <tr>
+                    <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
+                    <td>{{.Birth.Date}}</td>
+                </tr>
+            {{end}}
         </table>
+        {{else}}
+            <div class="big1">No birth certificate associated with this project</div>
+        {{end}}
     </div>
-{{end}}
 </div><!-- end class="flex-wrap" -->
 
 {{end}} {{/* end with .Details.Project */}}
