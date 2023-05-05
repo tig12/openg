@@ -59,7 +59,7 @@
 
 {{range .Members}}
 <tr>
-    <td class="trust{{.Trust}} center"><a href="/#data-reliability">{{.Trust}}</a></td>
+    <td class="trust{{.Trust}} center"><a href="/#data-reliability" title="{{.Trust | trustDescription}}">{{.Trust}}</a></td>
     <td>
     {{range $key, $value := .Partial_ids}}
         <div>{{index $.Details.Partial_ids_labels $key}}: {{$value}}</div>

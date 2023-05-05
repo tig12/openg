@@ -12,17 +12,16 @@
     </div>
 </h1>
 
-{{if $.Details.HasBC}}
-<div style="
-    position:absolute;
-    top:85px; left:-45px;
-    transform: rotate(-45deg);
-    padding:3px 50px;
-    background:#dbe599;
-    border:1px solid blue;
-">Verified data</div>
 
-
+{{if lt $.Details.Person.Trust "3"}}
+    <div style="
+        position:absolute;
+        top:85px; left:-45px;
+        transform: rotate(-45deg);
+        padding:3px 50px;
+        background:#dbe599;
+        border:1px solid blue;
+    ">Verified data</div>
 {{end}}
 
 

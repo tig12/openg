@@ -44,7 +44,7 @@ Successive commands issued with Gauquelin5 program to build this person, and cor
                     </tr>
                     {{else}}
                     <tr>
-                        <td>{{$curHistory.Raw | prettyPrint}}</td>
+                        <td>{{$curHistory.Raw | prettyPrint | safeHTML}}</td>
                     </tr>
                     {{end}}
                 </table>

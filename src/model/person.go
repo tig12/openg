@@ -145,7 +145,7 @@ func (n *PersonName) DisplayedName() string {
 	}
 	if fam != "" {
 		if n.Fame.Given != "" {
-			return fam + " " + n.Fame.Given
+			return n.Fame.Given + " " + fam
 		}
 	}
 	if n.Given == "" {
@@ -184,7 +184,7 @@ func GetPerson(url string) (person *Person, err error) {
 	}
 	if len(persons) == 0 {
 		// do not return error because should be handled as 404 by caller
-		return nil, werr.New("Person not found at url"+url)
+		return nil, werr.New("Person not found at url "+url)
 	}
 	return &persons[0], nil
 }

@@ -106,7 +106,7 @@
                 {{if .Name.Fame.Full}}
                     {{.Name.Fame.Full}}
                 {{else }}
-                    {{.Name.Fame.Family}} {{.Name.Fame.Given}}
+                    {{.Name.Fame.Given}} {{.Name.Fame.Family}}
                 {{end}}
             </td>
         </tr>
@@ -357,6 +357,9 @@
         <div class="sources margin-bottom inline-block">
             <h3>Information sources</h3>
             <ul class="naked">
+                {{if .HasBC}}
+                    <li>Birth certificate</li>
+                {{end}}
                 {{range $key, $value := .Ids_in_sources}}
                     <li><a href="/sources#{{$key}}">{{index $.Details.SourceSlugNames $key}}</a></li>
                 {{end}}

@@ -36,6 +36,7 @@ func init() {
 		"groupNameFromSlug":     groupNameFromSlug,
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"rawPersonSortedFields": rawPersonSortedFields,
+		"trustDescription":      trustDescription,
 	}
 	tmpl = template.
 		Must(template.
@@ -75,7 +76,12 @@ func numberFormat(x interface{}) template.HTML {
 func prettyPrint(v interface{}) string {
 	b, err := json.MarshalIndent(v, "", "  ")
 	if err == nil {
-		return string(b)
+	    str := string(b)
+	    // dirty hack to have a href link in person's history raw value (person-build.html)
+	    str = strings.Replace(str, "\\u003c", "<", -1)
+	    str = strings.Replace(str, "\\u003e", ">", -1)
+	    str = strings.Replace(str, "\\\"", "\"", -1)
+		return str
 	}
 	return ""
 }
@@ -99,25 +105,43 @@ func whiteSpace2nbsp(t string) template.HTML {
 
 // ************************* Pipelines related to current program ********************************
 
-/**
-    Returns the name of an information source from its slug
-**/
+// Returns the name of an information source from its slug
 func sourceNameFromSlug(slug string) template.HTML {
 	name, _ := model.GetSourceNameFromSlug(config.RestURL, slug)
 	return template.HTML(name)
 }
 
-/**
-    Returns the name of a group from its slug
-**/
+// Returns the name of a group from its slug
 func groupNameFromSlug(slug string) template.HTML {
 	name, _ := model.GetGroupNameFromSlug(config.RestURL, slug)
 	return template.HTML(name)
 }
 
-/**
-    Returns the fields of a person for a given source
-**/
+// Returns the fields of a person for a given source
 func rawPersonSortedFields(sourceSlug string) []string {
 	return model.GetRawPersonSortedFields(sourceSlug)
+}
+
+// Returns the meaning of a trust level 
+// @param  str  The trus level, a string between "1" to "5".
+func trustDescription(str string) template.HTML {
+    var res string
+	switch str {
+	case "1":
+		res = "1 = Related to a Hospital Certificate - reliable"
+    break
+	case "2":
+		res = "2 = Related to a Birth Certificate - reliable"
+    break
+	case "3":
+		res = "3 = Related to a Birth Record - may contain mistakes"
+    break
+	case "4":
+		res = "4 = Related to an official document ; birth time missing or needing to be checked"
+    break
+	case "5":
+		res = "5 = To check - not related to an official document"
+    break
+    }
+	return template.HTML(res)
 }

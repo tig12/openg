@@ -16,7 +16,7 @@
 
 <div class="flex-wrap wikiproject-container">
 <div class="margin-right">
-    <div class="big1 bold margin-bottom2">Problems needing to be fixed within this project</div>
+    <div class="big1 bold margin-bottom2">Persons needing to be fixed within this project</div>
     {{with .Issues}}
         <table>
             {{range .}}
@@ -40,7 +40,7 @@
             {{range .}}
                 <tr>
                     <td><a class="bold" href="/person/{{.Slug}}">{{.Name.Given}} {{.Name.Family}}</a></td>
-                    <td>{{.Birth.Date}}</td>
+                    <td class="padding-left">{{.Birth.Date}}</td>
                 </tr>
             {{end}}
         </table>
