@@ -185,3 +185,8 @@ ul.simple{
 .width20{width:20em;}
 .width25{width:25em;}
 .width30{width:30em;}
+
+/* ================ Cursor ================ */
+.cursor-default {cursor:default;}
+.cursor-pointer {cursor:pointer;}
+.cursor-help {cursor:help;}

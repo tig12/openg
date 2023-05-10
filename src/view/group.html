@@ -46,7 +46,7 @@
 <table class="datatable alternate">
 <thead>
     <tr>
-        <th class="help" title="Reliability of the birth time"><center>?</center></th>
+        <th class="cursor-help"><center><a href="/#data-reliability" title="Reliability of the birth time">?</a></center></th>
         <th>Ids</th>
         <th>Name</th>
         <th>Birth date</th>
@@ -59,7 +59,7 @@
 
 {{range .Members}}
 <tr>
-    <td class="trust{{.Trust}} center"><a href="/#data-reliability" title="{{.Trust | trustDescription}}">{{.Trust}}</a></td>
+    <td class="trust{{.Trust}} center"><span class="cursor-help" title="{{.Trust | trustDescription}}">{{.Trust}}</span></td>
     <td>
     {{range $key, $value := .Partial_ids}}
         <div>{{index $.Details.Partial_ids_labels $key}}: {{$value}}</div>

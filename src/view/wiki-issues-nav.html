@@ -1,8 +1,8 @@
 
 <nav class="datatable-links">
-    <a href="/issues/{{$.Details.PrevPage}}">Previous</a>
+    <a href="/wiki/issues/{{$.Details.PrevPage}}">Previous</a>
     {{range $.Details.Pages}}
-        <a href="/issues/{{.}}"{{if eq . $.Details.CurrentPage}} class="current"{{end}}>{{.}}</a>
+        <a href="/wiki/issues/{{.}}"{{if eq . $.Details.CurrentPage}} class="current"{{end}}>{{.}}</a>
     {{end}}
-    <a href="/issues/{{$.Details.NextPage}}">Next</a>
+    <a href="/wiki/issues/{{$.Details.NextPage}}">Next</a>
 </nav>

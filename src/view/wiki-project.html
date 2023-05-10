@@ -16,7 +16,7 @@
 
 <div class="flex-wrap wikiproject-container">
 <div class="margin-right">
-    <div class="big1 bold margin-bottom2">Persons needing to be fixed within this project</div>
+    <div class="big1 bold margin-bottom2">{{len .Issues}} persons needing to be fixed within this project</div>
     {{with .Issues}}
         <table>
             {{range .}}
@@ -34,7 +34,7 @@
 
 
     <div class="margin-left">
-        <div class="big1 bold margin-bottom2">Persons already fixed (associated to a birth certificate)</div>
+        <div class="big1 bold margin-bottom2">Persons already fixed (associated with a birth certificate)</div>
         {{with .Persons}}
         <table>
             {{range .}}

@@ -81,7 +81,7 @@
                 <a href="/#data-reliability" title='See paragraph "Data Reliability" for a definition of trust level'>Trust level</a>
             </td>
             <td>
-                {{.Trust}}
+                <span class="cursor-help" title="{{.Trust | trustDescription}}">{{.Trust}}</span>
             </td>
         </tr>
         {{if .Birth.Notime}}
