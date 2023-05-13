@@ -65,7 +65,7 @@ table#global-stats td:nth-child(2){
 <h2>Repartition by country</h2>
 
 {{$i := 0}}
-{{$mod := 12}} {{/* Change when nb of contries changes */}}
+{{$mod := 13}} {{/* Change when nb of contries changes */}}
 
 {{range $cy, $n := .Countries}}
     {{if eq 0 (modulo $i $mod)}}

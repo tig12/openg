@@ -32,6 +32,7 @@ func init() {
 		"MA": "Morroco",
 		"MC": "Monaco",
 		"MQ": "Martinique",
+		"MU": "Mauritius",
 		"NL": "Netherlands",
 		"PL": "Poland",
 		"RU": "Russia",

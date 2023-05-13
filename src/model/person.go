@@ -151,7 +151,7 @@ func (n *PersonName) DisplayedName() string {
 	if n.Given == "" {
 		return fam
 	}
-	return fam + " " + n.Given
+	return n.Given + " " + fam
 }
 
 // ************************** Get one *******************************
