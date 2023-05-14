@@ -176,11 +176,11 @@ div.anchor {
 }
 
 /* Downloads - used in several pages */
-li.download{
+.download{
     display:flex;
     align-items:center
 }
-li.download-multiline{
+.download-multiline{
     display:flex;
     align-items:flex-start;
 }

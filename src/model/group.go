@@ -14,6 +14,7 @@ import (
 	"net/http"
 	"openg.local/openg/generic/wilk/werr"
 	"strconv"
+	"strings"
 )
 
 const GROUP_TYPE_OCCU = "occu"
@@ -28,6 +29,7 @@ type Group struct {
 	Type          string
 	Description   string
 	Download      string
+	DownloadSep   string     // not stored in database - link to the csv using the "separated" format
 	SourceSlugs   []string `json:"sources"`
 	ParentSlugs   []string `json:"parents"`
 	ChildrenSlugs []string `json:"children"`
@@ -71,6 +73,28 @@ type PersonGroup struct {
 	Name           PersonName
 	Occus          []string
 	Birth          Event
+}
+
+// ************************** Instance *******************************
+
+func (g *Group) String() string {
+	return g.Name
+}
+
+// Computes field DownloadSep
+func (g *Group) ComputeDownloadSep() {
+    if g.Download != "" {
+        g.DownloadSep = strings.ReplaceAll(g.Download, ".csv.zip", "-sep.csv.zip")
+    }
+}
+
+/**
+    Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
+    If Birth.Date exists, uses it.
+    Otherwise uses field Birth.DateUT
+**/
+func (p *GroupMember) GetBirthDate() string {
+	return GetLegalOrUTDate(p.Birth.Date, p.Birth.DateUT)
 }
 
 // ************************** slug - names *******************************
@@ -132,6 +156,7 @@ func GetGroupBySlug(restURL, slug string, page, limit int) (group *Group, err er
 	}
 	group = tmp[0]
 	group.Limit = limit
+	group.ComputeDownloadSep()
 
 	// get the members of the group
 
@@ -211,17 +236,3 @@ func GetGroupsByType(restURL, groupType string) (groups []*Group, err error) {
 	return groups, nil
 }
 
-// ************************** Get fields *******************************
-
-func (g *Group) String() string {
-	return g.Name
-}
-
-/**
-    Returns a person's birth date (day and time), format YYYY-MM-DD HH:MM:SS
-    If Birth.Date exists, uses it.
-    Otherwise uses field Birth.DateUT
-**/
-func (p *GroupMember) GetBirthDate() string {
-	return GetLegalOrUTDate(p.Birth.Date, p.Birth.DateUT)
-}
