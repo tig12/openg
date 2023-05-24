@@ -73,7 +73,14 @@
     <td class="trust{{.Trust}} center"><span class="cursor-help" title="{{.Trust | trustDescription}}">{{.Trust}}</span></td>
     <td>
     {{range $key, $value := .Partial_ids}}
-        <div>{{index $.Details.Partial_ids_labels $key}}: {{$value}}</div>
+        <div>
+            {{index $.Details.Partial_ids_labels $key}}:
+            {{if eq $key "wd"}}
+                <a href="https://www.wikidata.org/wiki/{{$value}}">{{$value}}</a>
+            {{else}}
+                {{$value}}
+            {{end}}
+        </div>
     {{end}}
     </td>
     <td>

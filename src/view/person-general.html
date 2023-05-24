@@ -80,8 +80,8 @@
             <td>
                 <a href="/#data-reliability" title='See paragraph "Data Reliability" for a definition of trust level'>Trust level</a>
             </td>
-            <td>
-                <span class="cursor-help" title="{{.Trust | trustDescription}}">{{.Trust}}</span>
+            <td class="cursor-help" title="{{.Trust | trustDescription}}">
+                <span>{{.Trust}}</span>
             </td>
         </tr>
         {{if .Birth.Notime}}
@@ -338,7 +338,11 @@
             <tr>
                 <td>{{index $.Details.Partial_ids_labels $key}}</td>
                 <td>
-                    {{$value}}
+                    {{if eq $key "wd"}}
+                        <a href="https://www.wikidata.org/wiki/{{$value}}">{{$value}}</a>
+                    {{else}}
+                        {{$value}}
+                    {{end}}
                 </td>
             </tr>
         {{end}}

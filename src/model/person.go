@@ -66,11 +66,13 @@ type PersonName struct {
 	Usual     string
 	Given     string
 	Family    string
-	Spouse    string
+//	Spouse    []string
+	Spouse    interface{}
 	Official  *OfficialName
 	Fame      *FameName
 	Nicknames []string
-	Alter     []string
+//	Alter     []string
+	Alter     interface{}
 	Nobl      string
 }
 
@@ -129,29 +131,39 @@ func (p *Person) String() string {
     Returns a string representing a person name
 **/
 func (n *PersonName) DisplayedName() string {
-	if n.Usual != "" {
-		return n.Usual
-	}
 	if n.Fame.Full != "" {
 		return n.Fame.Full
 	}
-	fam := n.Family
-	if n.Nobl != "" {
-		if string(n.Nobl[len(n.Nobl)-1]) == "'" {
-			fam = n.Nobl + fam
-		} else {
-			fam = n.Nobl + " " + fam
-		}
+	if n.Fame.Given != "" && n.Fame.Family != "" {
+		return n.Fame.Given + " " + n.Fame.Family
 	}
-	if fam != "" {
-		if n.Fame.Given != "" {
-			return n.Fame.Given + " " + fam
-		}
+	//
+	var family string
+	if n.Fame.Family != "" {
+	    family = n.Fame.Family
+	} else {
+        family = n.Family
+        if n.Nobl != "" {
+            if string(n.Nobl[len(n.Nobl)-1]) == "'" {
+                family = n.Nobl + family
+            } else {
+                family = n.Nobl + " " + family
+            }
+        }
 	}
-	if n.Given == "" {
-		return fam
+	//
+	var given string
+	if n.Fame.Given != "" {
+	    given = n.Fame.Given
+	} else {
+	    given = n.Given
 	}
-	return n.Given + " " + fam
+	//
+	if given == "" {
+	    // happens for Gauquelin persons with name not correctly restored
+	    return family
+	}
+    return given + " " + family
 }
 
 // ************************** Get one *******************************
