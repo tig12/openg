@@ -22,7 +22,6 @@ type detailsPerson struct {
 	WikidataEntityURL         string
 	GroupSlugNames            map[string]string
 	SourceSlugNames           map[string]string
-	CountryCodesNames         map[string]string
 	BelongsToHistoricalGroups bool
 	HasBC                     bool // HasBirthCertificate
 	BCImageURLs               []string
@@ -99,7 +98,6 @@ func ShowPerson(ctx *ctxt.Context, w http.ResponseWriter, r *http.Request) error
 			Partial_ids_labels:        model.Partial_ids_labels,
 			GroupSlugNames:            groupSlugNames,
 			SourceSlugNames:           sourceSlugNames,
-			CountryCodesNames:         model.CountryCodesNames,
 			BelongsToHistoricalGroups: belongsToHistoricalGroups,
 			HasBC:                     hasBC,
 			BCImageURLs:               bcImageURLs,

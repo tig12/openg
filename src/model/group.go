@@ -103,16 +103,17 @@ func (p *GroupMember) GetBirthDate() string {
 var groupSlugNames = make(map[string]string)
 
 func GetGroupSlugNames(restURL string) (map[string]string, error) {
-	// lazy loading
-	if len(groupSlugNames) == 0 {
-		groups, err := GetAllGroups(restURL)
-		if err != nil {
-			return nil, werr.Wrapf(err, "Error calling GetAllGroups()")
-		}
-		for _, group := range groups {
-			groupSlugNames[group.Slug] = group.Name
-		}
+	if len(groupSlugNames) != 0 {
+	    // use the cache if present
+	    return groupSlugNames, nil
 	}
+    groups, err := GetAllGroups(restURL)
+    if err != nil {
+        return nil, werr.Wrapf(err, "Error calling GetAllGroups()")
+    }
+    for _, group := range groups {
+        groupSlugNames[group.Slug] = group.Name
+    }
 	return groupSlugNames, nil
 }
 

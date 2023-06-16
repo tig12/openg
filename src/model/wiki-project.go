@@ -126,7 +126,7 @@ func GetWikiProjectsOfBC(restURL string, bc *BC) (result []*WikiProject, err err
     Computes the persons related to a wiki project.
 **/
 func (wp *WikiProject) ComputeActs(restURL string) error {
-	url := restURL + "/view_wikiproject_act?project_id=eq." + strconv.Itoa(wp.Id)
+	url := restURL + "/view_wikiproject_person?project_id=eq." + strconv.Itoa(wp.Id)
 	response, err := http.Get(url)
 	if err != nil {
 		return werr.Wrapf(err, "Error calling postgres API: "+url)

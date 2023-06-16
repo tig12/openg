@@ -27,9 +27,9 @@
 
 <div class="tab">
     <button class="tablinks defaultOpen" onclick="openTab(event, 'tab-general');" id="general">General</button>
-    {{/*if $.Details.HasBC}}
+    {{if $.Details.HasBC}}
         <button class="tablinks" onclick="openTab(event, 'tab-acts');" id="acts">Birth certificate</button>
-    {{end*/}}
+    {{end}}
     <button class="tablinks" onclick="openTab(event, 'tab-build');" id="build">Build history</button>
 </div>
 
@@ -39,13 +39,13 @@
     </p>
 </div>
 
-{{/* if $.Details.HasBC}}
+{{if $.Details.HasBC}}
 <div id="tab-acts" class="tabcontent">
     <p>
         {{ template "person-bc.html" $ }}
     </p>
 </div>
-{{end */}}
+{{end}}
 
 <div id="tab-build" class="tabcontent">
     <p>

@@ -33,6 +33,7 @@ func init() {
 		"ucFirst":         ucFirst,
 		"whiteSpace2nbsp": whiteSpace2nbsp,
 		// Pipelines related to current program
+		"countryLabel":          countryLabel,
 		"groupNameFromSlug":     groupNameFromSlug,
 		"sourceNameFromSlug":    sourceNameFromSlug,
 		"rawPersonSortedFields": rawPersonSortedFields,
@@ -104,6 +105,17 @@ func whiteSpace2nbsp(t string) template.HTML {
 }
 
 // ************************* Pipelines related to current program ********************************
+
+// Returns the name of an information source from its slug
+func countryLabel(countryCode string) template.HTML {
+    var name string
+    if _, ok := model.CountryCodesNames[countryCode]; ok {
+        name = model.CountryCodesNames[countryCode]
+    } else {
+        name = "???"
+    }
+	return template.HTML(name)
+}
 
 // Returns the name of an information source from its slug
 func sourceNameFromSlug(slug string) template.HTML {

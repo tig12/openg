@@ -97,11 +97,11 @@
             <h2>OGDB integration</h2>
             The addition of this birth certificate in opengauquelin database is part of the following <a href="/wiki">wiki projects</a>: 
             <ul class="margin-top0">
-                {{range . }}
-                    <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
-                {{end}}
-            </ul>
+            {{range . }}
+                <li><a href="/wiki/project/{{.Slug}}">{{.Name}}</a></li>
+            {{end}}
         {{end}}
+        </ul>
     {{end}}
 </div>
 
@@ -120,13 +120,11 @@
 
 <!-- ************************************* -->
 <h3>History of this document</h3>
-{{if $bc.Header.History}}
-{{with $bc.Header.History}}
+{{if $bc.Header.History}}{{with $bc.Header.History}}
     <ul class="margin-top0">
     {{ range $key, $value := . }}
         <li>{{.Date}}, {{.Actor}}: {{.Action}} </li>
     {{end}}
     </ul>
-{{end}}
-{{end}}
+{{end}}{{end}}
 

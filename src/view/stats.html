@@ -77,7 +77,7 @@ table#global-stats td:nth-child(2){
     {{end}}
     <tr>
         <td>{{$cy}}
-        <td>{{index $.Details.CountryNames $cy}}</td>
+        <td>{{$cy | countryLabel}}</td>
         <td>{{numberFormat $n}}</td>
     </tr>    
     {{$i = add $i 1}}

@@ -1,0 +1,67 @@
+
+<h1>
+Open Gauquelin Database
+<br>Future developments
+</h1>
+
+<div class="margin-bottom">
+Notation: <b>g5</b>: Program used to build the ogdb.
+</div>
+
+From <a href="https://tig12.github.io/gauquelin5">tig12.github.io/gauquelin5</a>:
+<ol class="simple margin-top0">
+    <li>Gather the historical data, check them, correct them, and merge them in a single database.</li>
+    <li>Connect the historical data to standard datasets like Wikidata and complete birth times to build larger groups.</li>
+    <li>Build new eminence indicators and sort famous persons by eminence.</li>
+</ol>
+Current state of the code only deals with step 1.
+
+<br>The purpose is to have a 1.0 version <b>with a complete restoration of mars effect data</b>, to permit a reproduction of Suitbert Ertel's analysis contained in the book <b>"The Tenacious Mars Effect"</b>.
+
+
+<!-- ********************************************************************************* -->
+<h2>Towards version 1.0</h2>
+<ul class="spaced">
+    <li>
+        <div class="bold">Clean / finish draft code</div>
+        Revisit imports, check notes, issues, update doc.
+        <br>Have data as clean as possible to prepare the merge with wikidata.
+    </li>
+    <li>
+        <div class="bold">Relate the persons to their birth certificates</div>
+        See preparatory work on <a href="https://tig12.github.io/gauquelin5/acts.html">g5 page about acts</a>.
+    </li>
+    <li>
+        <div class="bold">Turn the database to a wiki</div>
+        To permit collaborative building of verifiable timed data.
+    </li>
+    <li>
+        <div class="bold">Manage eminence</div>
+        To start, use Ertel citation count ranking for sporstmen, contained in file <a href="/group/ertel-4384-sport">Ertel 4384 sportsmen</a>.
+        <br>See <a href="https://tig12.github.io/gauquelin5/eminence.html">g5 page about eminence</a>.
+    </li>
+    <li>
+        <div class="bold">Person issues</div>
+        Page <a href="/issues">"Persons' issues"</a> lists birth dates with problems to fix.
+        <br>Issues need a better management to be able to browse them by issue type.
+    </li>
+    <li>
+        <b>Timezone offset computation</b> is partial and need to be completed. Handle at least IT, DE.
+    </li>
+    <li>
+        <div class="bold">Fields C1 C2 C3 of places</div>
+        C1 C2 C3 = Administrative division level 1, 2 or 3.
+        <br>Original files sometimes contain such informations. Some of them are converted to geonames.org, but not all.
+    </li>
+</ul>
+
+<!-- ********************************************************************************* -->
+<h2>After version 1.0</h2>
+
+<ul class="spaced">
+    <li>
+        <div class="bold">Match ogdb with wikidata</div>
+        Use Gauquelin data as a basis to build larger groups.
+        <br>See preparatory work on <a href="https://tig12.github.io/gauquelin5/geonames.html">tig12.github.io</a>
+    </li>
+</ul>

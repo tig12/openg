@@ -1,0 +1,68 @@
+{{/* 
+    Called by person.html
+    . of current template corresponds to . of person.html
+*/}}
+
+{{with .Details.Person}}
+
+Successive commands issued with Gauquelin5 program to build this person, and corresponding retained values.
+{{range .History}}
+    {{$curHistory := .}}
+    {{$sourceSlug := .Source}}
+    <h2 class="margin-top2">Command: <code>{{.Command}}</code></h2>
+    
+    <table class="table-pres margin-bottom">
+        <tr>
+            <td>
+                Information source
+            </td>
+            <td>
+                {{if .Source | sourceNameFromSlug}}
+                <a href="/sources#{{.Source}}">{{.Source | sourceNameFromSlug}}</a>
+                {{else}}
+                    {{.Source}}
+                {{end}}
+            </td>
+        </tr>
+        <tr>
+            <td>Execution date</td>
+            <td>{{.Date}}</td>
+        </tr>
+    </table>
+
+    
+    <div class="flex-wrap">
+        <div class="margin-right">
+            Raw data:
+            {{with .Raw}}
+                {{$value := .}}
+                <table class="raw alternate">
+                    {{range $sourceSlug | rawPersonSortedFields}}
+                    <tr>
+                        <td>{{.}}</td>
+                        <td>{{index $value .}}</td>
+                    </tr>
+                    {{else}}
+                    <tr>
+                        <td>{{$curHistory.Raw | prettyPrint | safeHTML}}</td>
+                    </tr>
+                    {{end}}
+                </table>
+            {{end}}
+        </div>
+            
+        <div class="margin-right">
+            New values:
+            <table class="new">
+                <tr>
+                    <td>{{.New | prettyPrint}}</td>
+                </tr>
+            </table>
+        </div>
+    </div> <!-- end class="flex-wrap" -->
+    
+    <hr class="hr-big">
+
+{{end}}
+
+{{end}} {{/* with .Details.Person */}}

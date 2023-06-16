@@ -1,0 +1,36 @@
+
+<span class="warning">--- DRAFT - Under development ---</span>
+
+
+<!-- ************************************* -->
+<div class="tab">
+  <button class="tablinks defaultOpen"  onclick="openTab('tab-home');"          id="home">Home</button>
+  <button class="tablinks"              onclick="openTab('tab-history');"       id="history">Historical data</button>
+  <button class="tablinks"              onclick="openTab('tab-occus');"         id="occus">Professional groups</button>
+  <button class="tablinks"              onclick="openTab('tab-wiki');"          id="wiki">Wiki</button>
+  <button class="tablinks"              onclick="openTab('tab-candidates');"    id="candidates">Data candidates</button>
+</div>
+
+
+/* list on the right */
+.sitelinks{
+    /* 
+    position:fixed;
+    top:100px;
+    right:2rem;
+    */
+    float:right;
+    background-color:#dbe599;
+    padding:1rem;
+    border:1px solid grey;
+    border-radius:4px;
+    box-shadow:5px 5px 5px grey;
+    
+}
+.sitelinks>div{
+    margin-top:0;
+    font-size:1.2rem;
+    line-height:2rem;
+    font-weight:bold;
+    /* background:#bac1c4; */
+}

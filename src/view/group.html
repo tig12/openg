@@ -7,28 +7,27 @@
 
 {{with .Details.Group}}
 
-<div class="big2 margin">
+<div class="big1 margin">
     <div>{{.Description | safeHTML}}</div>
 </div>
 
-<div class="big1 margin bold margin-bottom">
-    <div class="">
-        {{if .ParentSlugs}}
-            Parent groups:
-        {{end}}
-        {{range .ParentSlugs}}
-            <span class="padding-right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
+{{with .ParentSlugs}}
+    <div class="margin-left">
+        <div class="big1 bold">Parent groups:</div>
+        {{range .}}
+            <span class="margin-left bold"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
         {{end}}
     </div>
-    <div class="">
-        {{if .ChildrenSlugs}}
-            Subgroups:
-        {{end}}
-        {{range .ChildrenSlugs}}
-            <span class="padding-right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></span>
+{{end}}
+
+{{with .ChildrenSlugs}}
+    <div class="margin-left">
+        <div class="big1 bold">Subgroups:</div>
+        {{range .}}
+            <div class="margin-left bold"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
         {{end}}
     </div>
-</div>
+{{end}}
 
 {{if .Download}}
 <div class="download margin-left">
@@ -91,7 +90,7 @@
         {{.Birth.Place.Name}}
         {{if .Birth.Place.C2}} ({{.Birth.Place.C2}}){{end}}
     </td>
-    <td>{{index $.Details.CountryCodesNames .Birth.Place.Cy}}</td>
+    <td>{{.Birth.Place.Cy | countryLabel}}</td>
     <td>
         {{range .Occus}}
             <div><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>

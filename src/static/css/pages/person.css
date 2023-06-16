@@ -19,6 +19,7 @@
 .person .groups,
 .person .sources,
 .person .notes,
+.person .wikiprojects,
 .person .issues,
 .person .admin{
     padding:1rem;
@@ -27,9 +28,14 @@
     box-shadow: -5px 5px 10px 0px rgba(0,0,0,0.25);
 }
 
-.person .general-summary,
+.person .general-summary{
+    background:lightgoldenrodyellow;
+}
+.person .general-summary td:nth-child(2){
+    padding-left:1rem;
+}
 .person .groups,
-.person .sources,
+.person .wikiprojects,
 .person .notes{
     background:#c5e1f7;
 }
@@ -38,18 +44,13 @@
     background:#fffacd;
 }
 
+.person .sources,
 .person .admin{
     background:lightgrey;
 }
 
 .person .issues{
     background:#f7a7a3;
-    margin-top:2rem;
-    margin-left:2rem;
-}
-
-.person .groups li{
-    font-weight:bold;
 }
 
 /* Tab "Build history" - Table showing raw values of a person */
