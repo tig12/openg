@@ -2,7 +2,6 @@ package ajax
 
 import (
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 	"openg.local/openg/ctxt"
@@ -16,7 +15,7 @@ func PersonsAutocomplete(ctx *ctxt.Context, w http.ResponseWriter, r *http.Reque
 
 	vars := mux.Vars(r)
 	str := vars["str"]
-	fmt.Println("=== control/ajax PersonsAutocomplete str = " + str + " ===")
+	//fmt.Println("=== control/ajax PersonsAutocomplete str = " + str + " ===")
 
 	var err error
 	persons, err := model.GetPersonsAutocomplete(ctx.Config.RestURL, str)
@@ -24,7 +23,7 @@ func PersonsAutocomplete(ctx *ctxt.Context, w http.ResponseWriter, r *http.Reque
 		return err
 	}
 	json, err := json.Marshal(persons)
-	fmt.Printf("%+v\n", string(json))
+	//fmt.Printf("%+v\n", string(json))
 	if err != nil {
 		return err
 	}

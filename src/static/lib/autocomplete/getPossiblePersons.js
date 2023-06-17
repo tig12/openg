@@ -15,8 +15,7 @@ async function getPossiblePersons(inputField){
     }
     response = await response.json();
     response.forEach(function(item) {
-console.log(item);
-        result.push(item.name);
+        result.push(item);
     });
     return result;
 }

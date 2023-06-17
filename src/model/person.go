@@ -225,8 +225,7 @@ func GetPersons(restURL string) (p []*Person, err error) {
     Used by ajax
 **/
 func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err error) {
-	url := restURL + "/search?slug=like." + str + "*"
-	fmt.Println("=== model.GetPersonsAutocomplete url = " + url)
+	url := restURL + "/search?slug=like." + str + "*&order=slug"
 	response, err := http.Get(url)
 	if err != nil {
 		return nil, werr.Wrapf(err, "Error calling postgres API: "+url)
