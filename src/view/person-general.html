@@ -34,14 +34,14 @@
             <!-- ***************** Name ******************** -->
             {{if .Name.Spouse}}
             <tr>
-                <td>Spouse name</td>
+                <td><b>Spouse name</b></td>
                 <td>{{.Name.Spouse}}</td>
             </tr>
             {{end}}
             
             {{if or .Name.Official.Family .Name.Official.Given}}
                 <tr>
-                    <td colspan="2">Official name</td>
+                    <td colspan="2"><b>Official name</b></td>
                 </tr>
                 {{if .Name.Official.Family}}
                     <tr>
@@ -73,7 +73,7 @@
                     {{$gender = "https://schema.org/Female"}}
                 {{end}}
                 <tr>
-                    <td>Gender</td>
+                    <td><b>Gender</b></td>
                     <td itemprop="gender" content="{{$gender}}">{{.Sex}}</td>
                 </tr>
             {{end}}
@@ -81,7 +81,7 @@
             <!-- ***************** Birth date ******************** -->
             {{if .Birth.Date}}
                 <tr>
-                    <td colspan="2">Birth</td>
+                    <td colspan="2"><b>Birth</b></td>
                 </tr>
                 <tr>
                     <td class="padding-left">Date</td>
@@ -163,91 +163,95 @@
                 </tr>
             {{end}}
             
-            <!-- ***************** Death ******************** -->
+            <!-- ***************** Death date ******************** -->
             {{if .Death.Date}}
                 <tr>
-                    <td colspan="2">Birth</td>
+                    <td colspan="2"><b>Death</b></td>
                 </tr>
                 <tr>
-                    <td>Death date</td>
+                    <td class="padding-left">Date</td>
                     <td itemprop="deathDate">{{.Death.Date}}</td>
                 </tr>
             {{end}}
             
+            {{if .Death.DateUT}}
+                <tr>
+                    <td class="padding-left">Date UTC</td>
+                    <td itemprop="deathDate">{{.Death.DateUT}}</td>
+                </tr>
+            {{end}}
+            {{if .Death.TZO}}
+                <tr>
+                    <td class="padding-left">Timezone offset</td>
+                    <td>{{.Death.TZO}}</td>
+                </tr>
+            {{end}}
+            
+            <!-- ***************** Death place ******************** -->
             {{if .Death.Place.String}}
-            <tr>
-                <td>Place</td>
-                <td itemprop="deathPlace">{{.Death.Place.String}}</td>
-            </tr>
+                <tr>
+                    <td class="padding-left">Place</td>
+                    <td itemprop="deathPlace">{{.Death.Place.Name}}</td>
+                </tr>
             {{end}}
             
             
-            {{if .Birth.Notime}}
-            <tr>
-                <td colspan="2" class="padding05 border" style="text-align:left; background:#dbe599;">
-                    It is probably <b>not possible</b> to know
-                    <br>the birth time of this person
-                </td>
-            </tr>
+            {{if .Death.Place.Cy}}
+                <tr>
+                    <td class="padding-left">Country</td>
+                    <td>
+                        <span itemprop="containedIn" itemscope itemtype="https://schema.org/Country">
+                            {{.Death.Place.Cy | countryLabel}}
+                        </span>
+                    </td>  
+                </tr>
             {{end}}
+            
+            {{if .Death.Place.C1}}
+                <tr>
+                    <td class="padding-left">Admin level 1</td>
+                    <td>{{.Death.Place.C1}}</td>  
+                </tr>
+            {{end}}
+            
+            {{if .Death.Place.C2}}
+                <tr>
+                    <td class="padding-left">Admin level 2</td>
+                    <td>{{.Death.Place.C2}}</td>  
+                </tr>
+            {{end}}
+            
+            {{if .Death.Place.C3}}
+                <tr>
+                    <td class="padding-left">Admin level 3</td>
+                    <td>{{.Death.Place.C3}}</td>  
+                </tr>
+            {{end}}
+            
+            {{if and .Death.Place.Lat .Death.Place.Lg}}
+                <tbody itemprop="geo" itemscope itemtype="https://schema.org/GeoCoordinates">
+                    <tr>
+                        <td class="padding-left">Longitude</td>
+                        <td itemprop="longitude">{{.Death.Place.Lg}}</td>  
+                    </tr>
+                    <tr>
+                        <td class="padding-left">Latitude</td>
+                        <td itemprop="latitude">{{.Death.Place.Lat}}</td>  
+                    </tr>
+                </tbody>
+            {{end}}
+            
+            {{if .Death.Place.Geoid}}
+                <tr>
+                    <td class="padding-left">Geonames ID</td>
+                    <td><a href="http://www.geonames.org/{{printf "%.f" .Death.Place.Geoid}}">{{printf "%.f" .Death.Place.Geoid}}</a></td>
+                </tr>
+            {{end}}
+            
             
         </table>
     </div><!-- end class="general-summary" -->
     
-    <!-- ***************** Death place details ******************** -->
-    {{if .Death.Place.Name}}
-    <h3 class="margin-top2">Death place details</h3>
-    <table class="table-pres">
-        {{if .Death.Place.Name}}
-        <tr>
-            <td>Name</td>
-            <td>{{.Death.Place.Name}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.Cy}}
-        <tr>
-            <td>Country</td>
-            <td>{{.Death.Place.Cy | countryLabel}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.C1}}
-        <tr>
-            <td>Admin level 1</td>
-            <td>{{.Death.Place.C1}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.C2}}
-        <tr>
-            <td>Admin level 2</td>
-            <td>{{.Death.Place.C2}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.C3}}
-        <tr>
-            <td>Admin level 3</td>
-            <td>{{.Death.Place.C3}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.Lg}}
-        <tr>
-            <td>Longitude</td>
-            <td>{{.Death.Place.Lg}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.Lg}}
-        <tr>
-            <td>Latitude</td>
-            <td>{{.Death.Place.Lat}}</td>  
-        </tr>
-        {{end}}
-        {{if .Death.Place.Geoid}}
-        <tr>
-            <td>Geonames ID</td>
-            <td><a href="http://www.geonames.org/{{printf "%.f" .Death.Place.Geoid}}">{{printf "%.f" .Death.Place.Geoid}}</a></td>
-        </tr>
-        {{end}}
-    </table>
-    {{end}}
 </div>
 <!-- ======== end col 1 ======== -->
 

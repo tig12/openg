@@ -10,6 +10,7 @@ import (
 	"openg.local/openg/generic/wilk/werr"
 	"fmt"
 	"strconv"
+	"strings"
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
@@ -225,6 +226,10 @@ func GetPersons(restURL string) (p []*Person, err error) {
     Used by ajax
 **/
 func GetPersonsAutocomplete(restURL, str string) (p []*AutocompletePerson, err error) {
+    /////////// TODO replace by slugify ///////////
+    str = strings.ReplaceAll(str, " ", "-")
+    str = strings.ToLower(str)
+    /////////// end TODO replace by slugify ///////////
 	url := restURL + "/search?slug=like." + str + "*&order=slug"
 	response, err := http.Get(url)
 	if err != nil {
