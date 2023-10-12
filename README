@@ -1,10 +1,9 @@
 
+Code running https://opengauquelin.org
 
-Web application to browse and download data produced by Gauquelin5 program (https://github.com/tig12/gauquelin5).
+Web application to browse and download data produced by Gauquelin5 program (https://github.com/tig12/g5).
 
 Uses Postgrest (https://postgrest.org).
-
-Status: under development, not yet in production.
 
 Licence, for code and doc : choose between
 - GPL : General Public Licence (https://www.gnu.org/licenses/gpl.html)
