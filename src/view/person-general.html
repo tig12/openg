@@ -31,18 +31,31 @@
 
         <table class="margin-top05">
         
-            <!-- ***************** Name ******************** -->
-            {{if .Name.Spouse}}
-            <tr>
-                <td><b>Spouse name</b></td>
-                <td>{{.Name.Spouse}}</td>
-            </tr>
+            <!-- ***************** Gender ******************** -->
+            {{if .Sex}}
+                {{$gender := "" }}
+                {{if eq .Sex "M"}}
+                    {{$gender = "https://schema.org/Male"}}
+                {{else}}
+                    {{$gender = "https://schema.org/Female"}}
+                {{end}}
+                <tr>
+                    <td><b>Gender</b></td>
+                    <td itemprop="gender" content="{{$gender}}">{{.Sex}}</td>
+                </tr>
             {{end}}
             
-            {{if or .Name.Official.Family .Name.Official.Given}}
+            <!-- ***************** Name ******************** -->
+            {{if or .Name.Official.Family .Name.Official.Given .Name.Nobl}}
                 <tr>
                     <td colspan="2"><b>Official name</b></td>
                 </tr>
+                {{if .Name.Nobl}}
+                    <tr>
+                        <td class="padding-left">Nobiliary particle</td>
+                        <td>{{.Name.Nobl}}</td>
+                    </tr>
+                {{end}}
                 {{if .Name.Official.Family}}
                     <tr>
                         <td class="padding-left">Family</td>
@@ -57,25 +70,15 @@
                 {{end}}
             {{end}}
             
-            {{if .Name.Nobl}}
+            {{with .Name.Spouse}}
             <tr>
-                <td class="padding-left">Nobiliary particle</td>
-                <td>{{.Name.Nobl}}</td>
+                <td><b>Spouse name</b></td>
+                <td>
+                    {{range .}}
+                        <div>{{.}}</div>
+                    {{end}}
+                </td>
             </tr>
-            {{end}}
-            
-            <!-- ***************** Gender ******************** -->
-            {{if .Sex}}
-                {{$gender := "" }}
-                {{if eq .Sex "M"}}
-                    {{$gender = "https://schema.org/Male"}}
-                {{else}}
-                    {{$gender = "https://schema.org/Female"}}
-                {{end}}
-                <tr>
-                    <td><b>Gender</b></td>
-                    <td itemprop="gender" content="{{$gender}}">{{.Sex}}</td>
-                </tr>
             {{end}}
             
             <!-- ***************** Birth date ******************** -->
@@ -397,7 +400,7 @@
     
         <div class="padding-right2 border-right">
             <!-- ********************************************************************************* -->
-            <h3>Transcription</h3>
+            <h3>Transcription of birth certificate</h3>
             <table class="table-pres">
                 <tr>
                     <td>Official family name</td>
