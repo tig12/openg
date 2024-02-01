@@ -22,13 +22,6 @@
             <span class="cursor-help" title="{{.Trust | trustDescription}}">{{.Trust}}</span>
         </div>
         
-        <div class="bold big1 margin-top05">
-            <!-- ***************** Occupations ******************** -->
-            {{range .Occus}}
-                <div itemprop="hasOccupation" class="right"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
-            {{end}}
-        </div>
-
         <table class="margin-top05">
         
             <!-- ***************** Gender ******************** -->
@@ -262,8 +255,15 @@
 <!-- ======== col 2 ======== -->
 <div class="col2 float-left">
 
-    {{if $.Details.BelongsToHistoricalGroups}}
+    <!-- ***************** Occupations ******************** -->
+    <div class="general-summary bold big1 margin-bottom05">
+        {{range .Occus}}
+            <div itemprop="hasOccupation" class="center"><a href="/group/{{.}}">{{index $.Details.GroupSlugNames .}}</a></div>
+        {{end}}
+    </div>
+        
     <!-- ***************** Historical groups ******************** -->
+    {{if $.Details.BelongsToHistoricalGroups}}
     <div class="groups margin-bottom">
         <table>
             <tr>
@@ -305,8 +305,8 @@
         </table>
     </div>
     
+    <!-- ***************** Sources ******************** -->
     <div class="sources">
-        <!-- ***************** Sources ******************** -->
         {{if .Ids_in_sources}}
         <div class="bold big4">Information sources</div>
         <ul class="naked margin-top0">

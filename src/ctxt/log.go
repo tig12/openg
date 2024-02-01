@@ -33,6 +33,7 @@ func LogError(theError error) {
 		werr.Print(theError)
 		return
 	}
+	// mode prod
 	logfile := ctx.Config.Paths.Log + string(os.PathSeparator) + "error.log"
 	osfile, err := os.OpenFile(logfile, os.O_APPEND|os.O_WRONLY, 0644)
 	defer osfile.Close()
@@ -42,7 +43,11 @@ func LogError(theError error) {
 			panic(err)
 		}
 	}
+	// print in error.log
 	_, err = fmt.Fprintf(osfile, "\n======================= %s =======================\n%s\n", now, err)
+	// print in console
+    fmt.Printf("\n======================= %s =======================\n", now)
+    werr.Print(theError)
 	if err != nil {
 		panic(err)
 	}
