@@ -7,14 +7,14 @@
     </div>
 </h1>
 
-<div class="intro">
-The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>verifiable</b> database of famous persons, <b>with their birth time</b>.
-</div>
-<br class="clear-both">
 
 <div class="float-right margin padding margin-top0 padding-top0">
 
     <div class="right-box">
+        <b><a href="#credits">Credits</a></b>
+    </div>
+    
+    <div class="right-box margin-top2">
         {{with .Details.Stats}}
         OGDB currently contains <b>{{numberFormat .N}}</b> persons
         <br><b>{{numberFormat .N_time}}</b> with birth time
@@ -28,15 +28,6 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
         </div>
         <a href="/stats">See more database statistics</a>
         {{end}}
-    </div>
-    
-    <div class="right-box margin-top2">
-        <b>Other data</b>
-        <br>OGDB also provides downloads to data
-        <br>not included in the database
-        <br>but usable for astro-stat research
-        <br>(in particular data from <b>Didier Castille</b>).
-        <br>See <b><a href="/other-data">Other data</a></b>
     </div>
     
     {{if .Details.Recents}}
@@ -55,6 +46,15 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
     {{end}}
     
     <div class="right-box margin-top2">
+        <b>Other data</b>
+        <br>OGDB also provides downloads to data
+        <br>not included in the database
+        <br>but usable for astro-stat research
+        <br>(in particular data from <b>Didier Castille</b>).
+        <br>See <b><a href="/other-data">Other data</a></b>
+    </div>
+    
+    <div class="right-box margin-top2">
         Checking the coherence of the different
         <br><a href="/sources">sources of information</a> permitted
         <br>to identify potential errors in data.
@@ -62,6 +62,11 @@ The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>v
     </div>
     
 </div><!-- end class="float-right" -->
+
+<div class="intro">
+The purpose of this site is to build a <b>complete</b>, <b>reliable</b> and <b>verifiable</b> database of famous persons,
+<br><b>with their birth time</b>.
+</div>
 
 <div>
     The initial version of the database contains the data used to perform <a href="https://tig12.github.io/g5/historical-tests.html">statistical tests on astrology</a>, between 1955 and 1996 (see <a href="/history"><b>historical data</b></a>).
@@ -115,14 +120,17 @@ Trust level is indicating data reliability.
     <li>
         <div class="bold">1 - Hospital Certificate (HC)</div>
         For births happening in a hospital. Birth date is noted by the medical staff.
+        <br>A priori precision of one minute.
     </li>
     <li>
         <div class="bold">2 - Birth Certificate (BC)</div>
         Official document attesting the birth. Birth time is declared by the parents or witnesses to the officer.
+        <br>Impossible to verify effective birth date. Birth rounded to one hour in France until the 1920s.
     </li>
     <li>
         <div class="bold">3 - Birth Record (BR)</div>
         Copy of the BC by an officer.
+        <br>Can introduce errors.
     </li>
     <li>
         <div class="bold">4 - Other documents</div>
@@ -153,56 +161,112 @@ Most births that occured in the 19th and early 20th century do not have Hospital
 </ul>
 
 <!-- ********************************************************************************* -->
-<!-- 
 <h2>Credits</h2>
-
+Credits for the historical part of the database should of course go first to the original authors : Michel and Françoise Gauquelin, Arno Müller, Suitbert Ertel and the three groups of skeptics (Comité Para, CSICOP, CFEPP).
+<br>The reconstitution of the historical data sets would'nt have been possible without the help of the persons listed below.
+<br>A big thanks to all of them.
 <style>
-    .credits td{
+    .list-credits td{
         padding:3px;
     }
+    .list-credits td:nth-child(1){
+        white-space:nowrap;
+        font-weight:bold;
+    }
 </style>
-<table class="credits wikitable margin05">
+<table id="credits" class="list-credits wikitable margin05">
     <tr>
-        <td><b><a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a> by Patrice Guinard</b></td>
+        <td id="#credit-PG">
+            Patrice Guinard
+        </td>
         <td>
-            21 469 dates - Gauquelin LERRCP
+            Author <a href="http://cura.free.fr/gauq/17archg.html">cura.free.fr</a>, Patrice Guinard didn't contribute directly to opengauquelin, but the database benefited from the consequent amount of work which was needed to publish the data on cura.free.fr : Françoise Gauquelin gave to Patrice Guinard the data published by the Gauquelin laboratory LERRCP, asking him to put them available online. This involved months of work and regular updates over the years which provided a good departure point to build opengauquelin. <b>21 469</b> persons coming from cura.free.fr were used to build the groups
+            <a href="/group/a1">A1</a>,
+            <a href="/group/a2">A2</a>,
+            <a href="/group/a3">A3</a>,
+            <a href="/group/a4">A4</a>,
+            <a href="/group/a5">A5</a>,
+            <a href="/group/a6">A6</a>,
+            <a href="/group/d6">D6</a>,
+            <a href="/group/d10">D10</a>,
+            <a href="/group/e1">E1</a> and
+            <a href="/group/e3">E3</a>,
+            representing 87 % of the timed historical data <!-- 21469*100/24516 = 87.57 --> (The Gauquelins are by far the most important data collectors).
+            <br>Opengauquelin uses version 5 of the data (<a href="https://web.archive.org/web/20200916073026/http://cura.free.fr/gauq/17archg.html">link on archive.org</a>). A version 6 was published in november 2020 but the database became a paid service, not usable by opengauquelin because not open.
         </td>
     </tr>
     <tr>
-        <td>Müller 5, Ertel</td>
-        <td><a href="https://newalchemypress.com/gauquelin/index.php">newalchemypress.com</a>, by <b>Nick Kollerstrom</b></td>
+        <td id="#credit-NK">Nick Kollerstrom</td>
+        <td>
+            Author of <a href="https://newalchemypress.com/gauquelin/index.php">newalchemypress.com</a>, Nick Kollerstrom provided most of the missing data to complete historical tests.
+            <br>Special thanks for his questions, remarks, explanations and enthousiasm, which has motivated the development of opengauquelin since 2019.
+            <ul>
+                <li>
+                    From newalchemypress.com :
+                    <ul>
+                        <li>
+                            file <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/3a_sports.txt">3a_sports.txt</a>, used to restore the group <a href="/group/ertel-4384-sport"><b>4384 athletes</b></a> gathered by Suitbert Ertel.
+                            <br>This file is central in the restoration process, as it permits to relate several groups to each other.
+                            <br>Build details on <a href="https://tig12.github.io/g5/ertel-4391-sport.html">tig12.github.io</a>
+                        </li>
+                        <li>
+                            File <a href="https://newalchemypress.com/gauquelin/gauquelin_docs/5muller_writers.xlsx">5muller_writers.xlsx</a>, used to restore group <a href="/group/muller-afd1-writers">1991 Müller 1, <b>402 Italian writers</b></a>. 
+                            <br>Build details on <a href="https://tig12.github.io/g5/muller1-402-writers.html">tig12.github.io</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                <li>
+                    From personal communication : 
+                    <ul>
+                        <li>
+                            Scans of Arno Müller Astro-Forschungs-Daten volume 1, 402 Italian writers, containing
+                            <ul>
+                                <li><b>100 supplementary writers</b> with birth day but without birth time.</li>
+                                <li>A list of 22 writers for which Müller noted a difference with Gauquelin data.</li>
+                            </ul>
+                            Scans downloadable from <a href="https://github.com/tig12/g5-aux/tree/main/1991-muller1-writers">github.com/tig12/g5-aux</a>                    
+                        </li>
+                        <li>
+                            Scans of Arno Müller Astro-Forschungs-Daten volume 2, used to build the group <a href="/group/muller-afd2-men">622 famous men</a>.
+                            <br>Scans downloadable from <a href="https://github.com/tig12/g5-aux/tree/main/1992-muller2-men">github.com/tig12/g5-aux</a>.
+                        </li>
+                        <li>
+                            Scans of Arno Müller Astro-Forschungs-Daten volume 3, used to build the group <a href="/group/muller-afd2-men">234 famous women</a>.
+                            <br>Scans downloadable from  <a href="https://github.com/tig12/g5-aux/tree/main/1993-muller3-women">github.com/tig12/g5-aux</a>.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            
+        </td>
     </tr>
     <tr>
-        <td>Müller 5, Ertel</td>
-        <td><a href="https://newalchemypress.com/gauquelin/index.php">newalchemypress.com</a>, by <b>Nick Kollerstrom</b></td>
+        <td id="#credit-KI">Kenneth Irving</td>
+        <td>
+            Kenneth Irving sent the file which permitted to include <a href="/group/csicop">the CSICOP test</a> in the database. And gave the authorization to publish it as open data.
+            <br>Without his help, the restoration of this group wouldn't have been possible (the only known published list, in The Skeptical Inquier vol. 4.2 is almost impossile to use).         
+        </td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
+        <td id="#credit-JWN">Jan Wilhem Nienhuys</td>
+        <td>
+            Jan Willem Nienhuys indicates in one of his articles, "<a href="https://skepsis.nl/mars-effect">The Mars Effect in Retrospect</a>", that data concerning <a href="/group/cfepp">the CFEPPP test</a> can be obtained upon request. He sent several files and gave the authorization to use one of them for inclusion in opengauquelin.
+        </td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
+        <td id="#credit-GD">Graham Douglas</td>
+        <td>
+            Graham Douglas sent a file containing the data he recieved from Christian Ertel (Suibert Ertel's son) with the authorization to re-use it.
+            <br>This file is not yet included in the database.
+        </td>
     </tr>
     <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
+        <td id="#credit-TG">Thierry Graff</td>
+        <td>
+            Author of opengauquelin.org, Thierry Graff scanned and OCRed the lists published in "Les hommes et les astres", the first book by Michel Gauquelin book in 1955.
+        </td>
     </tr>
 </table>
-<ul>
-    <li><a href="">CSICOP file</a> sent by <b>Kenneth Irving</b>.</li>
-    <li><a href="">CFEPP file</a> sent by <b>Jan Willem Nienhuys</b>.</li>
-    <li><a href="">Müller 4 file</a> sent by <b>Graham Douglas</b>.</li>
-    <li>Gauquelin 1955 original book scanned by <b>Thierry Graff</b></li>
-</ul>
--->
 
 </div><!-- end class="home" -->
