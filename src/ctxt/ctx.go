@@ -1,5 +1,5 @@
 /******************************************************************************
-    Context, contains variables usable by all pages pages
+    Context, contains variables usable by all pages
 
     @license    GPL
     @history    2021-07-13 23:37:37+02:00, Thierry Graff : Creation
