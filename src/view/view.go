@@ -10,5 +10,5 @@ import (
 	"embed"
 )
 
-//go:embed *
+//go:embed * admin/*
 var ViewFiles embed.FS

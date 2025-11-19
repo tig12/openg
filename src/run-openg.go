@@ -13,10 +13,10 @@ import (
 	"net/http"
 	"openg.local/openg/control"
 	"openg.local/openg/control/ajax"
+	"openg.local/openg/control/admin"
 	"openg.local/openg/ctxt"
 	"openg.local/openg/static"
 	"openg.local/openg/view"
-//	"openg.local/openg/view/wiki"
 	"path/filepath"
 	"time"
 )
@@ -34,6 +34,8 @@ func main() {
 	r := mux.NewRouter()
 	ctx := ctxt.NewContext()
 
+    ctxt.LogError(fmt.Errorf("Started openg application on port " + ctx.Config.Run.Port))
+    
 	// ajax
 	r.HandleFunc("/ajax/autocomplete/persons/{str}", Hajax(ajax.PersonsAutocomplete))
 	r.HandleFunc("/ajax/download/{what}/{firstLineNames}/{sep}/{fieldDate}", Hajax(ajax.Download))
@@ -52,6 +54,11 @@ func main() {
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}", H(control.ShowGroup))
 	r.HandleFunc("/group/{slug:[a-z0-9\\-]+}/{page:[1-9][0-9]*}", H(control.ShowGroup))
 
+	// wiki, logged user part
+	r.HandleFunc("/admin/bc", H(admin.ShowWikiBC))
+	r.HandleFunc("/admin/bc/{slug:[a-z0-9\\-]+}", H(admin.ShowWikiBC))
+	
+	// wiki, public part (=> to deprecate)
 	r.HandleFunc("/wiki", H(control.ShowWiki))
 	r.HandleFunc("/wiki/project/{slug:[a-z0-9\\-]+}", H(control.ShowWikiProject))
 	r.HandleFunc("/wiki/issues", H(control.ShowIssues))
@@ -65,7 +72,6 @@ func main() {
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.FS(static.StaticFiles))))
 
-//	r.PathPrefix("/view/wiki").Handler(http.StripPrefix("/view/wiki/", http.FileServer(http.FS(wiki.ViewWikiFiles))))
 	r.PathPrefix("/view/").Handler(http.StripPrefix("/view/", http.FileServer(http.FS(view.ViewFiles))))
 
 	r.PathPrefix("/wiki-data").Handler(http.StripPrefix("/wiki-data/", http.FileServer(http.Dir(ctx.Config.Paths.WikiDataDir))))

@@ -1,0 +1,227 @@
+{{/* 
+    Form to transcribe an image of a birth certificate to a yaml file
+*/}}
+
+{{with .Details}}
+
+<h1>
+    Birth certificate transcription
+    <br>{{.Subtitle}}
+</h1>
+
+<style>
+table#bc-form{
+    width:100%;
+}
+table#bc-form th{
+    text-align:center;
+    font-weight:bold;
+}
+table#bc-form td{
+    background:lightblue;
+    vertical-align:top;
+}
+fieldset>legend{
+    font-weight:bold;
+}
+/* Field alignment - 2 fields per line */
+.grid2-form {
+    display:grid;
+    grid-template-columns:max-content 1fr;
+    grid-gap:1em;
+}
+.grid2-form label{
+    text-align:right;
+    font-weight:bold;
+}
+.grid2-form label.optional{
+    font-weight:normal;
+    color:green;
+}
+.grid2-form label.normal{
+    font-weight:normal;
+}
+.grid2-form label.left{
+    text-align:left;
+}
+.grid2-form.normal{
+    font-weight:normal;
+}
+</style>
+
+<table id="bc-form">
+    <tr>
+        <th>Image</th>
+        <th>Transcription</th>
+    </tr>
+    <tr>
+        <td>
+            {{if .BCImageURLs}}
+                {{range .BCImageURLs}}
+                    <div><img
+                        class="margin05 border"
+                        style="max-width:90%; height:auto; width:auto;"
+                        src="{{.}}" alt="Original birth certificate">
+                    </div>
+                {{end}}
+            {{else}}
+                Upload image
+            {{end}}
+        </td>
+        <td>
+            <form>
+                <fieldset>
+                    <legend>History of this transcription</legend>
+                    <input type="button" name="add-history-entry" value="Add history entry" onClick="">
+                    <!--
+                    header:
+                      history:
+                        -
+                          actor: Thierry Graff
+                          date: '2023-05-02' # 21:17:23+02:00
+                          action: Locate and download the act
+                        -
+                          actor: Thierry Graff
+                          date: '2023-05-08' # 14:46:47+02:00
+                          action: Add to opengauquelin.org
+                    -->
+                </fieldset>
+                
+                    <!-- 
+                    #
+                    # 2 - Optional information related to opengauquelin database integration
+                    #
+                    opengauquelin:
+                      projects:
+                        - french-math
+                    -->
+                <fieldset>
+                    <!-- 
+                    #
+                    # 3 - Informations about the act
+                    #
+                    source:
+                      civil-registry:
+                        name: '1 E 329 - Naissances : actes n° 761 à 1740 (23/02/1905 au 11/05/1905)'
+                        place:
+                          name: Strasbourg
+                          cy: FR
+                          c2: '67'
+                        web:
+                          url: https://archives.strasbourg.eu/...
+                          page: 376 / 493
+                      notes: |
+                        Birth time needs to be confirmed by someone able to read German.
+                    -->
+                    <legend>About the birth certificate</legend>
+                    <div>1 - Civil registry</div>
+                    <div class="grid2-form margin-left2">
+                        <div>Name</div>
+                        <input type="text" name="civil-registry-name" id="civil-registry-name" value="">
+                        <div>Country</div>
+                        <input type="text" name="civil-registry-country" id="civil-registry-country" value="">
+                        <div>Place</div>
+                        <input type="text" name="civil-registry-place" id="civil-registry-place" value="">
+                        <div>c1</div>
+                        <input type="text" name="civil-registry-c1" id="civil-registry-c1" value="">
+                        <div>c2</div>
+                        <input type="text" name="civil-registry-c2" id="civil-registry-c2" value="">
+                        <div>c3</div>
+                        <input type="text" name="civil-registry-c3" id="civil-registry-c3" value="">
+                    </div>
+                    <div class="margin-top2">2 - Web</div>
+                    <div class="grid2-form margin-left2">
+                        <div>URL</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Page</div>
+                        <div>
+                            <input type="text" size="3" name="" id="" value=""> / <input type="text" size="3" name="" id="" value="">
+                        </div>
+                    </div>
+                    <div class="margin-top2">3 - Notes</div>
+                    <textarea rows="6" cols="50" class="margin-left2"></textarea>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Transcription</legend>
+                    <!-- 
+                    transcription:
+                      name:
+                        official:
+                          given: Karl
+                          family: Ehresmann
+                      sex: M
+                      birth:
+                        date: '1905-04-19 17:00'
+                        place:
+                          name: Strasbourg
+                          cy: FR
+                          c2: '67'
+                    -->
+                    <div class="grid2-form margin-left2">
+                        <div>Official family name</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Official given name</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Gender</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Birth date</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Birth Place</div><div></div>
+                        <div class="padding-left2">Country</div>
+                        <input type="text" name="" id="" value="">
+                        <div class="padding-left2">Place</div>
+                        <input type="text" name="" id="" value="">
+                        <div class="padding-left2">c1</div>
+                        <input type="text" name="" id="" value="">
+                        <div class="padding-left2">c2</div>
+                        <input type="text" name="" id="" value="">
+                        <div class="padding-left2">c3</div>
+                        <input type="text" name="" id="" value="">
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend>Supplementary informations</legend>
+                    <!-- 
+                    #
+                    # 5 - Supplementary informations concerning the new born person,
+                    #     but not present in the birth certificate
+                    #
+                    extras:
+                      name:
+                        given: Charles
+                      occus: 
+                        - mathematician
+                      partial-ids:
+                        wd: Q304712
+                      ids-in-sources:
+                        wd: Q304712
+                    -->
+                    <div class="grid2-form margin-left2">
+                        <div>Common family name</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Common given name</div>
+                        <input type="text" name="" id="" value="">
+                        <div>Wikidata id</div>
+                        <input type="text" size="3" name="" id="" value="">
+                        <div>Occupation</div>
+                        <div>
+                            <input type="button" name="add-history-entry" value="Add occupation" onClick="">
+                        </div>
+                    </div>
+                </fieldset>
+                
+                <div class="margin-top big4 bold">
+                    <div class="float-right margin-right">
+                        <input type="button" class="bold padding05" name="cancel" value="Cancel" onClick="window.history.back();">
+                        <input type="submit" class="margin-left bold padding05" value="Validate">
+                    </div>
+                </div>
+                
+            </form>
+        </td>
+    </tr>
+</table>
+
+{{end}} {{/* end with .Details */}}

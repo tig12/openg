@@ -11,7 +11,8 @@ import (
 	"html/template"
 	"openg.local/openg/generic/tiglib"
 	"openg.local/openg/model"
-	"path/filepath"
+	"openg.local/openg/view"
+	//"path/filepath"
 	"strings"
 	"time"
 	"unicode"
@@ -43,9 +44,10 @@ func init() {
 		Must(template.
 			New("").
 			Funcs(fmap).
-			ParseGlob(filepath.Join("view", "*.html"))).
-		Option("missingkey=error")
-//		template.Must(template.ParseGlob(filepath.Join("view", "wiki", "*.html")))
+//			ParseGlob(filepath.Join("view", "*.html"))).
+			ParseFS(view.ViewFiles, "*.html", "admin/*.html")).
+            Option("missingkey=error")
+//		template.Must(template.ParseGlob(filepath.Join("view", "admin", "*.html")))
 }
 
 // ************************* Generic pipelines ********************************
