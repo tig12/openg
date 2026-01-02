@@ -74,6 +74,17 @@
             </tr>
             {{end}}
             
+            {{with .Name.Alter}}
+            <tr>
+                <td><b>Alternative names</b></td>
+                <td>
+                    {{range .}}
+                        <div>{{.}}</div>
+                    {{end}}
+                </td>
+            </tr>
+            {{end}}
+            
             <!-- ***************** Birth date ******************** -->
             {{if .Birth.Date}}
                 <tr>

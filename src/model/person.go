@@ -132,15 +132,16 @@ func (p *Person) String() string {
     Returns a string representing a person name
 **/
 func (n *PersonName) DisplayedName() string {
-	if n.Fame.Full != "" {
+//fmt.Printf("%+v\n",n)
+	if n.Fame != nil && n.Fame.Full != "" {
 		return n.Fame.Full
 	}
-	if n.Fame.Given != "" && n.Fame.Family != "" {
+	if n.Fame != nil && n.Fame.Given != "" && n.Fame.Family != "" {
 		return n.Fame.Given + " " + n.Fame.Family
 	}
 	//
 	var family string
-	if n.Fame.Family != "" {
+	if n.Fame != nil && n.Fame.Family != "" {
 	    family = n.Fame.Family
 	} else {
         family = n.Family
@@ -154,7 +155,7 @@ func (n *PersonName) DisplayedName() string {
 	}
 	//
 	var given string
-	if n.Fame.Given != "" {
+	if n.Fame != nil && n.Fame.Given != "" {
 	    given = n.Fame.Given
 	} else {
 	    given = n.Given
