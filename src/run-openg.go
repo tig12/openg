@@ -77,12 +77,14 @@ func main() {
 
 	r.Use(ctxt.LogRequest) // middleware
 
+	addr := ctx.Config.Run.URL + ":" + ctx.Config.Run.Port
 	srv := &http.Server{
 		Handler:      r,
-		Addr:         ctx.Config.Run.URL + ":" + ctx.Config.Run.Port,
+		Addr:         addr,
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
+	log.Printf("Listen %s", addr)
 
 	log.Fatal(srv.ListenAndServe())
 }
